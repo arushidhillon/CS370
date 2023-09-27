@@ -29,8 +29,17 @@ function SavePhoto(e)
 document.getElementById("addSkill").onclick  = function() {
 
     var node = document.createElement("Li");
-    var text = document.getElementById("user_input").value; 
+    var text = document.getElementById("Skill_input").value; 
     var textnode=document.createTextNode(text);
     node.appendChild(textnode);
-    document.getElementById("list_item").appendChild(node);
+    document.getElementById("Skill_item").appendChild(node);
+}
+
+document.getElementById("addCourse").onclick  = function() {
+
+    var node = document.createElement("Li");
+    var text = document.getElementById("Course_input").value; 
+    var textnode=document.createTextNode(text);
+    node.appendChild(textnode);
+    document.getElementById("Course_item").appendChild(node);
 }
