@@ -85,7 +85,7 @@ header {
 }
 
 .moveslider2 {
-    left: 300px;
+    left: 280px;
 }
 
 .form-section {
@@ -141,7 +141,19 @@ header {
     padding-left: 30px;
     font-size: 18px;
 }
-
+.clkbtn2{
+    display:inline;
+    height: 80px;
+    width: 190px;
+    border-radius: 50px;
+    background-image: linear-gradient(to right,
+            rgb(144, 174, 237),
+            rgb(27, 108, 248));
+    font-size: 22px;
+    border: none;
+    cursor: pointer;
+    
+}
 .clkbtn {
     height: 60px;
     width: 150px;
