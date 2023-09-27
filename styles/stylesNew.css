@@ -3,12 +3,11 @@
 :root {
   font-size: 14px;
   font-family: "Poppins", sans-serif;
-  --text-primary: rgb(255, 255, 255);
-  --text-secondary: #ececec;
-  --bg-primary: rgb(63, 108, 255);
-  --bg-secondary: rgb(48, 82, 192);
-  --fa-primary-hover: white;
-  --fa-secondary-hover: gold;
+  --color-text1: rgb(255, 255, 255);
+  --color-text2: #ececec;
+  --color-bg-1: rgb(63, 108, 255);
+  --color-bg-2: rgb(48, 82, 192);
+  --color-hover: white;
   --color-accent: purple;
 
   --scrollbar-thumb-color: grey;
@@ -27,7 +26,7 @@ body::-webkit-scrollbar {
   width: 0.25rem;
 }
 body::-webkit-scrollbar-track {
-  background: var(--bg-primary);
+  background: var(--color-bg-1);
 }
 body::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb-color);
@@ -43,7 +42,7 @@ main {
   height: 5rem;
   width: 100vw;
   position: fixed;
-  background-color: var(--bg-primary);
+  background-color: var(--color-bg-1);
   transition: 200ms ease;
 }
 .navbar:hover .link-text {
@@ -53,14 +52,10 @@ main {
   display: block;
 }
 .navbar #selected {
-  background-color: var(--bg-secondary);
+  background-color: var(--color-bg-2);
 }
-.fa-primary {
-  color: var(--fa-primary-hover);
-  transition: var(--transition-speed);
-}
-.fa-secondary {
-  color: var(--fa-secondary-hover);
+.transition-primary {
+  color: var(--color-hover);
   transition: var(--transition-speed);
 }
 .navbar-nav {
@@ -76,14 +71,14 @@ main {
   display: flex;
   align-items: center;
   height: 5rem;
-  color: var(--text-primary);
+  color: var(--color-text1);
   text-decoration: none;
   filter: grayscale(10%) opacity(0.7);
   transition: var(--transition-speed);
 }
 .nav-link:hover {
   filter: grayscale(0%) opacity(1);
-  color: var(--text-secondary);
+  color: var(--color-text2);
 }
 .link-text {
   display: none;
@@ -98,8 +93,8 @@ main {
 .logo {
   font-weight: bold;
   text-align: center;
-  color: var(--text-secondary);
-  background: var(--bg-primary);
+  color: var(--color-text2);
+  background: var(--color-bg-1);
   font-size: 1.5rem;
   width: 100%;
 }
@@ -152,7 +147,7 @@ main {
   border-radius: 40px;
   border-width: 0.25em;
   border-style: solid;
-  border-color: var(--bg-primary);
+  border-color: var(--color-bg-1);
   box-shadow: 8px 8px 20px rgb(128, 128, 128);
   padding: 1rem;
 }
@@ -186,8 +181,8 @@ main {
   font-family: "Poppins", sans-serif;
   background-color: var(--bg-color);
   border: 3px solid transparent;
-  border-color: var(--bg-primary);
-  border-radius: 1rem; /*linear-gradient(45deg, var(--color-accent), var(--bg-primary)) 1;*/
+  border-color: var(--color-bg-1);
+  border-radius: 1rem; /*linear-gradient(45deg, var(--color-accent), var(--color-bg-1)) 1;*/
 }
 .matchTitle {
   grid-row: span 2;
