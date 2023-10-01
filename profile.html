@@ -133,29 +133,74 @@
     </nav>
 
     <div class="FourBoxLayout">
-      <div class="Identity">
-        <img src="Eli on Jury Duty.jpeg" alt="Eli" class="StudentPicture" />
+      <h1 style="padding-left: 3%">Welcome Back!</h1>
+
+      <!-- Identity -->
+      <div class="ProfileBox">
         <div class="Identityinfo">
           <h2 class="StudentName">Eli Dhillon</h2>
+          <img
+            src="assets/placeholderImages/Eli on Jury Duty.jpeg"
+            alt="Eli"
+            class="StudentPicture"
+          />
+        </div>
+        <div class="Identityinfo" id="inputs">
           <div class="tags">
             <span class="tag"> GPA: 3.9</span>
-            <span class="tag"> Biology</span>
-            <span class="tag"> Anthropology</span>
-            <span class="tag"> Biology</span>
+            <div id="Skill_item"></div>
+          </div>
+          <div style="justify-self: last">
+            <input type="text" id="Skill_input" />
+            <input type="button" id="addSkill" value="Add New Interest" />
           </div>
         </div>
       </div>
 
-      <div class="Documents"></div>
-
-      <div class="Biography">
-        <label for="Bio">About Me:</label>
-        <input type="text" id="Bio" name="Bio" placeholder="I am..." />
+      <!-- Biography -->
+      <div class="ProfileBox">
+        <h2>About Me</h2>
+        <div class="Margins" id="target"></div>
+        <form class="Biographyform">
+          <p class="Margins">Help Labs Get To Know You:</p>
+          <textarea
+            id="bio"
+            name="biotext"
+            rows="8"
+            cols="20"
+            placeholder="Hello, I am..."
+          ></textarea>
+          <button type="submit" name="biographysubmit">Submit!</button>
+        </form>
       </div>
 
-      <div class="Courses">
-        <p>courses</p>
+      <!-- Documents -->
+      <div class="ProfileBox">
+        <h2 class="Margins">My Documents</h2>
+        <p class="Margins">Upload a new document:</p>
+        <input
+          id="image-file"
+          type="file"
+          onchange="SavePhoto(this)"
+          class="Margins"
+        />
+        <p class="Margins">My Files:</p>
+        <br /><br />
+      </div>
+
+      <!-- Courses -->
+      <div class="ProfileBox">
+        <h2 class="Margins">Courses I've Taken</h2>
+        <div class="Margins" id="target2"></div>
+        <form class="Courseform">
+          <div id="Course_item"></div>
+          <p class="Margins">Add a course:</p>
+
+          <input type="text" id="Course_input" />
+          <input type="button" id="addCourse" value="Add New Course" />
+        </form>
       </div>
     </div>
+    <script src="scripts/Profile.js"></script>
   </body>
 </html>

@@ -212,3 +212,41 @@ main {
   margin: 0;
   color: black;
 }
+
+/* Profile CSS */
+.FourBoxLayout {
+  padding-top: 5rem;
+  display: flex;
+  flex-direction: column;
+}
+.ProfileBox {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 40px;
+  border-width: 0.25em;
+  border-style: solid;
+  border-color: var(--color-bg-1);
+  box-shadow: 8px 8px 20px rgb(128, 128, 128);
+  padding: 0rem 2rem 2rem 2rem;
+  margin: 2%;
+}
+.ProfileBox h2 {
+  margin: 0;
+  margin-top: 2rem;
+}
+#Skill_item {
+  display: flex;
+}
+#Skill_item li {
+  width: 100%;
+}
+.IdentityInfo #inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.StudentPicture {
+  width: 100px;
+}
