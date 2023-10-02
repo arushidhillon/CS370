@@ -164,6 +164,9 @@ main {
   border-color: white;
   padding-right: 1rem;
   padding-left: 1rem;
+  object-fit: cover;
+  width: 15rem;
+  height: 15rem;
 }
 .matchButtonsDiv {
   grid-row: 2;
@@ -252,15 +255,27 @@ main {
   border-radius: 50;
 }
 
-.FourBoxLayout { /*For the student page*/
+.FourBoxLayout {
+  /*For the student page*/
   display: grid;
   grid-template-columns: 50% 50%;
   gap: 50px;
 }
 
 /* Roles */
+.MatchesFlex {
+  padding-top: 5rem;
+  display: flex;
+  flex-direction: column;
+}
 .Labinfo {
   max-height: 15rem;
+}
+.Labinfo #desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
 }
 .Labinfo img {
   object-fit: cover;
