@@ -250,3 +250,25 @@ main {
 .StudentPicture {
   width: 100px;
 }
+
+/* Roles */
+.Labinfo {
+  max-height: 15rem;
+}
+.Labinfo img {
+  object-fit: cover;
+  width: 10rem;
+  height: 10rem;
+}
+.Labinfo .Info {
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+.tag {
+  color: var(--color-text1);
+  background-color: var(--color-bg-1);
+  font-size: 1rem;
+  padding: 0 10px 0 10px;
+}
