@@ -249,4 +249,11 @@ main {
 }
 .StudentPicture {
   width: 100px;
+  border-radius: 50;
+}
+
+.FourBoxLayout { /*For the student page*/
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 50px;
 }
