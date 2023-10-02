@@ -151,7 +151,7 @@
             <div id="Skill_item"></div>
           </div>
           <div style="justify-self: last">
-            <form action=”tags.php” method=”post”>
+            <form action=”StudentProfile.php” method=”post”>
             <input type="text" id="Skill_input" />
             <input type="button" id="addSkill" value="Add New Interest" />
           </form>
@@ -164,6 +164,7 @@
         <h2>About Me</h2>
         <div class="Margins" id="target"></div>
         <form class="Biographyform">
+          <form action=”StudentProfile.php” method=”post”>
           <p class="Margins">Help Labs Get To Know You:</p>
           <textarea
             id="bio"
@@ -195,12 +196,14 @@
         <h2 class="Margins">Courses I've Taken</h2>
         <div class="Margins" id="target2"></div>
         <form class="Courseform">
+          <form action=”StudentProfile.php” method=”post”>
           <div id="Course_item"></div>
           <p class="Margins">Add a course:</p>
 
           <input type="text" id="Course_input" />
           <input type="button" id="addCourse" value="Add New Course" />
         </form>
+      </form>
       </div>
     </div>
     <script src="scripts/Profile.js"></script>
