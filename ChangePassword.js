@@ -11,3 +11,5 @@ function validatePassword() {
     return true;
   }
 }
+
+/*Add password requirements*/
