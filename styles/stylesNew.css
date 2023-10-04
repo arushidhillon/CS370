@@ -269,13 +269,13 @@ main {
 /* Roles */
 .MatchesFlex {
   padding-top: 5rem;
+  padding-bottom: 5rem;
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
 }
 .Labinfo {
   max-height: 15rem;
-  padding-bottom: 1rem;
 }
 .Labinfo #desc {
   display: flex;
@@ -286,7 +286,7 @@ main {
 .Labinfo img {
   object-fit: cover;
   width: 10rem;
-  height: 10rem;
+  height: 8rem;
 }
 .Labinfo .Info {
   display: flex;
