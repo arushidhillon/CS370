@@ -133,7 +133,7 @@
     </nav>
 
     <div class="FourBoxLayout">
-      <h1 style="padding-left: 3%; margin-bottom: 0">Welcome Back!</h1>
+      <h1 style="padding-left: 2rem; margin-bottom: 0">Welcome Back!</h1>
       <br />
       <!-- Identity -->
       <div class="ProfileBox">
@@ -145,7 +145,17 @@
             class="StudentPicture"
           />
         </div>
-        <div class="Identityinfo" id="inputs">
+        <div
+          class="Identityinfo"
+          id="inputs"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            margin-left: 2rem;
+          "
+        >
           <div class="tags">
             <span class="tag"> GPA: 3.9</span>
             <div id="Skill_item"></div>
@@ -158,7 +168,7 @@
       </div>
 
       <!-- Biography -->
-      <div class="ProfileBox">
+      <div class="ProfileBox" style="margin-left: 0">
         <h2>About Me</h2>
         <div class="Margins" id="target"></div>
         <form class="Biographyform">
@@ -189,7 +199,7 @@
       </div>
 
       <!-- Courses -->
-      <div class="ProfileBox">
+      <div class="ProfileBox" style="margin-left: 0">
         <h2 class="Margins">Courses I've Taken</h2>
         <div class="Margins" id="target2"></div>
         <form class="Courseform">
