@@ -27,8 +27,7 @@
                      <button class="signup">Signup</button>
               </div>
 
-              <!-- Form section that contains the
-       login and the signup form -->
+              <!-- Form section that contains the login and the signup form -->
               <div class="form-section">
 
                      <!-- login form -->
@@ -48,14 +47,19 @@
 
                      <!-- signup form -->
                      <div class="signup-box">
-                            <input type="text" class="name ele" placeholder="Enter your name">
-                            <input type="email" class="email ele" placeholder="email@emory.edu">
-                            <input type="password" class="password ele" placeholder="password">
-                            <input type="password" class="password ele" placeholder="Confirm password">
-                            <button class="clkbtn2" onclick="window.location.href = 'StudentMain.html';">Signup as a Student</button>
+                            
+                            <input type="text" id=firstname class="name ele" placeholder="Enter your first name">
+                            <input type="text" id=lastname class="name ele" placeholder="Enter your last name">
+                            <input type="email" class="email ele" id = "email" placeholder="email@emory.edu" onkeyup="validateEmail()">
+                            <span id="email-error" class="emailError"></span>
+                            <input type="password" id=password class="password ele" placeholder="password">
+                            <input type="password" class="password ele"  placeholder="Confirm password">
+                           <button class="clkbtn2">Signup as a Student</button> 
                             <button class="clkbtn2" onclick="window.location.href = 'LabProfileMain.html';">Signup as a Lab</button>
                      </div>
+              
               </div>
        </div>
        <script src="index.js"></script>
+       
 </body>
