@@ -8,46 +8,12 @@
   <meta name="viewport" content="width=device-width,
                    initial-scale=1.0">
   <title>StudentProfile</title>
-<<<<<<< Updated upstream:research_match/profilepage/templates/StudentMain.html
-  <link rel="stylesheet" href="{% static 'Profile.css' %}">
-  <!-- <link rel="stylesheet" href="Profile.css"> -->
-=======
-  <link rel="stylesheet" href="styles/stylesNew.css" />
->>>>>>> Stashed changes:StudentMain.html
+  <link rel="stylesheet" href="{% static '/style.css' %}">
 
 </head>
 
 <body>
 
-<<<<<<< Updated upstream:research_match/profilepage/templates/StudentMain.html
-  <nav class="menubar">
-
-    <div class="container">
-      <a class='logo'>Research Match</a>
-
-      <p class="topBar">
-        <button class="clkbtn" onclick="window.location.href = 'StudentMain.html';">Profile Page</button>
-        <button class="clkbtn" onclick="window.location.href = 'Opportunities.html';">Opportunities</button>
-        <button class="clkbtn" onclick="window.location.href = 'Matches.html';">Matches</button>
-        <button class="clkbtn" onclick="window.location.href = 'MyRoles.html';">My Roles</button>
-
-      </p>
-
-    </div>
-
-  </nav>
-
-  <header>
-    <!-- <h1 class="heading">Student Profile</h1> -->
-    <h2 class="title">Welcome Back!</h2>
-  </header>
-
-  <div class="FourBoxLayout">
-
-
-    <div class="Identity">
-      <img src="{% static 'Eli.jpeg' %}" alt="Eli" class="StudentPicture">
-=======
     <nav class="navbar">
       <ul class="navbar-nav">
         <!-- Logo -->
@@ -74,7 +40,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="StudentMain.html" class="nav-link">
+          <a href="#" class="nav-link" id="selected">
             <span class="link-text">Profile</span>
             <svg
               aria-hidden="true"
@@ -98,7 +64,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="MyRoles.html" class="nav-link">
+          <a href="#" class="nav-link"> <!-- TODO: Link page-->
             <span class="link-text">Matches</span>
             <svg
               aria-hidden="true"
@@ -122,7 +88,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="opportunities.html" class="nav-link">
+          <a href="{% url 'opportunities' %}" class="nav-link"> <!-- TODO: Link page-->
             <span class="link-text">Opportunities</span>
             <svg
               aria-hidden="true"
@@ -167,72 +133,92 @@
         </li>
       </ul>
     </nav>
-    <div class="main">
-      <div style="grid-row: 1; height: 5rem;"></div>
-      <h1>Welcome Back!</h1>
-      
-      <div class="Identity">
-      <img src="Eli on Jury Duty.jpeg" alt="Eli" class="StudentPicture">
->>>>>>> Stashed changes:StudentMain.html
-      <div class="Identityinfo">
-        <h2 class="StudentName">Eli Dhillon</h2>
-        <div class="tags">
-          <span class="tag"> GPA: 3.9</span>
-          <div id="Skill_item">
-          </div>
+
+    <div class="FourBoxLayout">
+      <h1 style="padding-left: 2rem; margin-bottom: 0">Welcome Back!</h1>
+      <br />
+      <!-- Identity -->
+      <div class="ProfileBox">
+        <div class="Identityinfo">
+          <h2 class="StudentName">Eli Dhillon</h2>
+          <img
+            src="{% static '/Eli.jpeg' %}"
+            alt="Eli"
+            class="StudentPicture"
+          />
         </div>
-        <form action="/profilepage/" method="post">
+        <div
+          class="Identityinfo"
+          id="inputs"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            margin-left: 2rem;
+          "
+        >
+          <div class="tags">
+            <span class="tag"> GPA: 3.9</span>
+            <div id="Skill_item"></div>
+          </div>
+          <div style="justify-self: last">
+            <form action="/profilepage/" method="post">
           {% csrf_token %}
           <label for="Skill_input">Skills: </label>
         <input type='text' id='Skill_input' />
-        <input type="submit" id="addSkill" value="Add New Intrest">
+        <input type="submit" id="addSkill" value="Add New Interest">
+      </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Biography -->
+      <div class="ProfileBox" style="margin-left: 0">
+        <h2>About Me</h2>
+        <div class="Margins" id="target"></div>
+        <form class="Biographyform">
+          <p class="Margins">Help Labs Get To Know You:</p>
+          <textarea
+            id="bio"
+            name="biotext"
+            rows="8"
+            cols="20"
+            placeholder="Hello, I am..."
+          ></textarea>
+          <button type="submit" name="biographysubmit">Submit!</button>
+        </form>
+      </div>
+
+      <!-- Documents -->
+      <div class="ProfileBox">
+        <h2 class="Margins">My Documents</h2>
+        <p class="Margins">Upload a new document:</p>
+        <input
+          id="image-file"
+          type="file"
+          onchange="SavePhoto(this)"
+          class="Margins"
+        />
+        <p class="Margins">My Files:</p>
+        <br /><br />
+      </div>
+
+      <!-- Courses -->
+      <div class="ProfileBox" style="margin-left: 0">
+        <h2 class="Margins">Courses I've Taken</h2>
+        <div class="Margins" id="target2"></div>
+        <form class="Courseform">
+          <div id="Course_item"></div>
+          <p class="Margins">Add a course:</p>
+
+          <input type="text" id="Course_input" />
+          <input type="button" id="addCourse" value="Add New Course" />
+        </form>
       </form>
       </div>
-      <div class="Documents">
-        <h2 class="Margins">My Documents:</h2>
-        <p class="Margins"> Upload a new document: </p>
-        <input id="image-file" type="file" onchange="SavePhoto(this)" class="Margins">
-        <p class="Margins"> My Files:</p>
-        <br><br>
     </div>
-    </div>
-    
 
-
-
-    <div class="Biography">
-      <h2 class="Margins">About Me:</h2>
-      <div class="Margins" id="target"> </div>
-      <form class="Biographyform">
-        <p class="Margins">Help Labs Get To Know You: </p>
-        <textarea id="bio" name="biotext" rows="8" cols="20" placeholder="Hello, I am..."></textarea>
-        <button type="submit" name="biographysubmit">Submit!</button>
-      </form>
-
-    
-
-    <div class="Courses">
-      <h2 class="Margins">Courses I've taken:</h2>
-      <div class="Margins" id="target2"> </div>
-      <form class="Courseform">
-
-        <div id="Course_item">
-        </div>
-        <p class="Margins">Add a course: </p>
-
-        <input type='text' id='Course_input' />
-        <input type="button" id="addCourse" value="Add New Course">
-    </div>
-<<<<<<< Updated upstream:research_match/profilepage/templates/StudentMain.html
-
-  </div>
-
-  <!-- <script src="Profile.js"> </script> -->
-  <script src="{% static 'Profile.js' %}"></script>
-  <body>
-=======
-
-  <script src="Profile.js"> </script>
-
+  <script src="{% static '/Profile.js' %}"> </script>
 </body>
->>>>>>> Stashed changes:StudentMain.html
+</html>

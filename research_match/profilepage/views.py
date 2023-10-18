@@ -11,6 +11,10 @@ def hi(request):
     template = loader.get_template('StudentMain.html')
     return HttpResponse(template.render())
 
+def opportunities(request):
+    template = loader.get_template('opportunities.html')
+    return HttpResponse(template.render())
+
 from .forms import SkillForm
 
 
