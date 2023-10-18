@@ -10,7 +10,18 @@
        <link rel="stylesheet" href="{% static 'Style.css' %}">
 </head>
 
+
 <body>
+       {% csrf_token%}
+    
+                     {% for message in messages %}
+                     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                         <strong>Message:</strong> {{ message }}
+                         <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                         <span aria-hidden="true">&times;</span>
+                     </button>
+                     </div>
+                     {% endfor %}
        <header>
               <h1 class="heading">Research Match</h1>
               <h3 class="title">Login or Signup to access Research Match</h3>
@@ -28,13 +39,13 @@
                      <button class="signup">Signup</button>
               </div>
 
+              
               <!-- Form section that contains the login and the signup form -->
               <div class="form-section">
 
                      <!-- login form -->
                     <form action="/studentlogin">
                      <div class="student-box">
-                            {% csrf_token%}
                             <input type="email" name="email" class="email ele" placeholder="email@emory.edu" Required>
                             <input type="password" name="password" class="password ele" placeholder="password" required>
 
@@ -63,8 +74,8 @@
                             <input type="text" id="lastname" name="lastname" class="name ele" placeholder="Enter Your Last Name" required>
                             <input type="email" class="email ele" id = "email" name="email" placeholder="email@emory.edu" onkeyup="validateEmail()" required>
                          <!--   <span id="email-error" class="emailError"></span>-->
-                            <input type="password" id="password" name="password" class="password ele" placeholder="Create a Password" required>
-                            <input type="password" class="password ele"  placeholder="Confirm Your Password" required>
+                            <input type="password" id="password" name="pass1" class="password ele" placeholder="Create a Password" required>
+                            <input type="password" name = "pass2" class="password ele"  placeholder="Confirm Your Password" required>
                            <button class="clkbtn2" name="studentbtn" type="submit">Signup as a Student</button> 
                             <button class="clkbtn2" name="labbtn" type="submit">Signup as a Lab</button>
                      </div>
