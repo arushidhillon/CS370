@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,6 +38,12 @@
     <h2 class="title">Welcome Back!</h2>
   </header>
 
+  <!-- 
+  
+  
+  <h3>Hello {{ firstname}}</h3>
+  <h4>You're successfully logged in.</h4> -->
+
   <div class="FourBoxLayout">
 
 
@@ -46,15 +53,28 @@
         <h2 class="StudentName">Eli Dhillon</h2>
         <div class="tags">
           <span class="tag"> GPA: 3.9</span>
-          <div id="Skill_item">
+          <!-- <div id="Skill_item">
+          </div> -->
+          <div>
+            {% for x in Skills %}
+            <tr>
+              <td>{{ x.skill }}</td>
+            </tr>
+          {% endfor %}
+
+          </div>
+
           </div>
         </div>
-        <form action="/profilepage/" method="post">
-          <label for="Skill_input">Skills: </label>
-        <input type='text' id='Skill_input' />
-        <input type="submit" id="addSkill" value="Add New Intrest">
-      </form>
+        <form action="" method="POST">
+          <!-- <label for="Skill_input">Skills: </label> -->
+          <!-- <input type='text' id='Skill_input' /> -->
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit" id="addSkill" value="Add New Intrest">
+        </form>
       </div>
+      
     </div>
 
     <div class="Documents">
@@ -92,6 +112,8 @@
 
   </div>
 
+
   <!-- <script src="Profile.js"> </script> -->
   <script src="{% static 'Profile.js' %}"></script>
+
   <body>
