@@ -36,7 +36,7 @@ def get_skill(request):
     else:
         form = SkillForm()
 
-    return render(request, "StudentMain.html", {"form": form})
+    return render(request, "skill.html", {"form": form})
 
 
 def get_skills(request):
