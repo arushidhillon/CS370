@@ -1,53 +1,17 @@
-{% load static %}
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+                   initial-scale=1.0"
+    />
+    <title>labname</title>
+    <link rel="stylesheet" href="styles/stylesNew.css" />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,
-                   initial-scale=1.0">
-  <title>StudentProfile</title>
-<<<<<<< Updated upstream:research_match/profilepage/templates/StudentMain.html
-  <link rel="stylesheet" href="{% static 'Profile.css' %}">
-  <!-- <link rel="stylesheet" href="Profile.css"> -->
-=======
-  <link rel="stylesheet" href="styles/stylesNew.css" />
->>>>>>> Stashed changes:StudentMain.html
-
-</head>
-
-<body>
-
-<<<<<<< Updated upstream:research_match/profilepage/templates/StudentMain.html
-  <nav class="menubar">
-
-    <div class="container">
-      <a class='logo'>Research Match</a>
-
-      <p class="topBar">
-        <button class="clkbtn" onclick="window.location.href = 'StudentMain.html';">Profile Page</button>
-        <button class="clkbtn" onclick="window.location.href = 'Opportunities.html';">Opportunities</button>
-        <button class="clkbtn" onclick="window.location.href = 'Matches.html';">Matches</button>
-        <button class="clkbtn" onclick="window.location.href = 'MyRoles.html';">My Roles</button>
-
-      </p>
-
-    </div>
-
-  </nav>
-
-  <header>
-    <!-- <h1 class="heading">Student Profile</h1> -->
-    <h2 class="title">Welcome Back!</h2>
-  </header>
-
-  <div class="FourBoxLayout">
-
-
-    <div class="Identity">
-      <img src="{% static 'Eli.jpeg' %}" alt="Eli" class="StudentPicture">
-=======
+  <body>
     <nav class="navbar">
       <ul class="navbar-nav">
         <!-- Logo -->
@@ -167,72 +131,28 @@
         </li>
       </ul>
     </nav>
-    <div class="main">
-      <div style="grid-row: 1; height: 5rem;"></div>
-      <h1>Welcome Back!</h1>
-      
-      <div class="Identity">
-      <img src="Eli on Jury Duty.jpeg" alt="Eli" class="StudentPicture">
->>>>>>> Stashed changes:StudentMain.html
-      <div class="Identityinfo">
-        <h2 class="StudentName">Eli Dhillon</h2>
-        <div class="tags">
-          <span class="tag"> GPA: 3.9</span>
-          <div id="Skill_item">
-          </div>
-        </div>
-        <form action="/profilepage/" method="post">
-          {% csrf_token %}
-          <label for="Skill_input">Skills: </label>
-        <input type='text' id='Skill_input' />
-        <input type="submit" id="addSkill" value="Add New Intrest">
-      </form>
+    <div class="lab">
+      <div class="name">
+        <h1>XYZ Research Lab</h1>
+        <h2>XYZresearchlab@emory.edu</h2>
+        <p>
+          Welcome to the exciting world of the XYZ Research Lab, where
+          innovation knows no bounds and curiosity fuels our quest for
+          knowledge! Our cutting-edge lab is currently seeking passionate and
+          driven students to join our dynamic research team. Nestled at the
+          forefront of scientific discovery, our lab is dedicated to pushing the
+          boundaries of human understanding in fields such as biotechnology,
+          artificial intelligence, and environmental science. As a student
+          researcher here, you'll have the opportunity to work alongside
+          world-class scientists, engage in groundbreaking experiments, and
+          contribute to projects that have the potential to change the world.
+          Whether you're a budding biologist, a tech enthusiast, or an
+          environmental advocate, our lab offers a diverse range of
+          opportunities to explore, learn, and grow. Join us on this thrilling
+          journey of exploration, innovation, and discovery, and be part of a
+          team that is shaping the future of science.
+        </p>
       </div>
-      <div class="Documents">
-        <h2 class="Margins">My Documents:</h2>
-        <p class="Margins"> Upload a new document: </p>
-        <input id="image-file" type="file" onchange="SavePhoto(this)" class="Margins">
-        <p class="Margins"> My Files:</p>
-        <br><br>
     </div>
-    </div>
-    
-
-
-
-    <div class="Biography">
-      <h2 class="Margins">About Me:</h2>
-      <div class="Margins" id="target"> </div>
-      <form class="Biographyform">
-        <p class="Margins">Help Labs Get To Know You: </p>
-        <textarea id="bio" name="biotext" rows="8" cols="20" placeholder="Hello, I am..."></textarea>
-        <button type="submit" name="biographysubmit">Submit!</button>
-      </form>
-
-    
-
-    <div class="Courses">
-      <h2 class="Margins">Courses I've taken:</h2>
-      <div class="Margins" id="target2"> </div>
-      <form class="Courseform">
-
-        <div id="Course_item">
-        </div>
-        <p class="Margins">Add a course: </p>
-
-        <input type='text' id='Course_input' />
-        <input type="button" id="addCourse" value="Add New Course">
-    </div>
-<<<<<<< Updated upstream:research_match/profilepage/templates/StudentMain.html
-
-  </div>
-
-  <!-- <script src="Profile.js"> </script> -->
-  <script src="{% static 'Profile.js' %}"></script>
-  <body>
-=======
-
-  <script src="Profile.js"> </script>
-
-</body>
->>>>>>> Stashed changes:StudentMain.html
+  </body>
+</html>

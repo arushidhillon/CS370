@@ -216,6 +216,7 @@ main {
   color: black;
 }
 
+<<<<<<< Updated upstream
 /* Profile CSS */
 .FourBoxLayout {
   padding-top: 5rem;
@@ -296,4 +297,33 @@ main {
   background-color: var(--color-bg-1);
   font-size: 1rem;
   padding: 0 10px 0 10px;
+=======
+/* Student Main */
+.main {
+  margin: 0;
+  padding: 0;
+  display: grid;
+}
+.main h1 {
+  grid-row: 2;
+}
+.identity {
+  grid-row: 3;
+  grid-column: 1;
+  max-width: 1fr;
+}
+.documents {
+  grid-row: 3;
+  grid-column: 2;
+  max-width: 1fr;
+}
+
+/* Lab */
+.lab {
+  display: grid;
+}
+.lab .name {
+  margin-top: 5rem;
+  grid-row: 1;
+>>>>>>> Stashed changes
 }
