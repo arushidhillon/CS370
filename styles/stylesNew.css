@@ -221,9 +221,10 @@ main {
   padding-top: 5rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
 }
 .ProfileBox {
-  width: 90%;
+  width: 80%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -233,7 +234,10 @@ main {
   border-color: var(--color-bg-1);
   box-shadow: 8px 8px 20px rgb(128, 128, 128);
   padding: 0rem 2rem 2rem 2rem;
-  margin: 2%;
+  margin: 0;
+  margin-right: 5%;
+  margin-left: 5%;
+  overflow: hidden;
 }
 .ProfileBox h2 {
   margin: 0;
@@ -254,12 +258,11 @@ main {
   width: 100px;
   border-radius: 50;
 }
-
 .FourBoxLayout {
   /*For the student page*/
   display: grid;
   grid-template-columns: 50% 50%;
-  gap: 50px;
+  gap: 1rem;
 }
 
 /* Roles */
