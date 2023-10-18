@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from .models import Skills
 
 from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
@@ -24,6 +25,10 @@ def get_skill(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
+            skill_input = form.cleaned_data['skill']
+            p = Skills(skill=skill_input)
+            p.save()
+
             return HttpResponseRedirect("/thanks/")
 
     # if a GET (or any other method) we'll create a blank form
