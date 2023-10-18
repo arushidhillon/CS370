@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,7 +10,7 @@
                    initial-scale=1.0"
     />
     <title>Settings</title>
-    <link rel="stylesheet" href="styles/stylesNew.css" />
+    <link rel="stylesheet" href="{% static '/style.css' %}" />
   </head>
 
   <body>
@@ -38,7 +40,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="StudentMain.html" class="nav-link">
+          <a href="{% url 'profilepage' %}" class="nav-link">
             <span class="link-text">Profile</span>
             <svg
               aria-hidden="true"
@@ -62,7 +64,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="MyRoles.html" class="nav-link">
+          <a href="{% url 'matches' %}" class="nav-link">
             <span class="link-text">Matches</span>
             <svg
               aria-hidden="true"
@@ -86,7 +88,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="opportunities.html" class="nav-link">
+          <a href="{% url 'opportunities' %}" class="nav-link">
             <span class="link-text">Opportunities</span>
             <svg
               aria-hidden="true"
@@ -131,14 +133,14 @@
         </li>
       </ul>
     </nav>
+    <div class="settings">
+      <div class="account">
+        <h2>Account Settings</h2>
+      </div>
+      <br />
+      <div class="notifications">
+        <h2>Notification Settings</h2>
+      </div>
+    </div>
   </body>
-  <div class="settings">
-    <div class="account">
-      <h2>Account Settings</h2>
-    </div>
-    <br />
-    <div class="notifications">
-      <h2>Notification Settings</h2>
-    </div>
-  </div>
 </html>

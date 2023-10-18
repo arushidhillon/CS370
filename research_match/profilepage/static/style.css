@@ -321,8 +321,22 @@ main {
 /* Lab */
 .lab {
   display: grid;
+  margin-right: 5rem;
+  margin-left: 5rem;
 }
 .lab .name {
   margin-top: 5rem;
   grid-row: 1;
+}
+
+/* Settings */
+.settings {
+  display: grid;
+  margin-right: 5rem;
+  margin-left: 5rem;
+}
+.account {
+  margin-top: 5rem;
+}
+.notifications {
 }
