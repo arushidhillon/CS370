@@ -34,13 +34,23 @@ def signup(request):
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
 
+        #Tests if email is @emory.edu
+        mail = email.lower()
+        at_index = mail.find('@')+1
+        domain = mail[at_index:]
+        if domain != 'emory.edu':
+            messages.error(request, "Please enter @emory.edu email")
+            return redirect('signup')
+
+        #checks for email duplicates in system
         if User.objects.filter(email=email):
             messages.error(request, "Email already exists! Please try some other email")
-            return redirect('home')
+            return redirect('signup')
         
+        #makes sure password and confirmation password match
         if pass1 != pass2:
             messages.error(request, "Passwords didn't match!")
-
+            return redirect('signup')
         
         
         myuser = User.objects.create_user(email, email, pass1)
@@ -54,7 +64,7 @@ def signup(request):
 
         # Welcome Email
         subject = "Welcome to Research Match Login!"
-        message = "Hello " + myuser.first_name + "!! \n" + "Welcome to Research Match! \n Thank you for visiting our website \n We have also sent you a confirmation email, please confirm your email address in order to activate your account. \n\n Thanking you \n Deadline Tech"
+        message = "Hello " + myuser.first_name + "!! \n" + "Welcome to Research Match! \n Thank you for visiting our website. \n We have also sent you a confirmation email, please confirm your email address in order to activate your account. \n\n Thank you, \n Deadline Tech"
         from_email = settings.EMAIL_HOST_USER
         to_list = [myuser.email]
         send_mail(subject, message, from_email, to_list, fail_silently=True)
@@ -106,17 +116,46 @@ def activate(request, uidb64, token):
 
 def studentlogin(request):
 
-
     if request.method == 'POST':
         email = request.POST['email']
-        password = request.POST['pass1']
+        password = request.POST['password']
 
         user = authenticate(username=email, password=password)
 
         if user is not None:
-            login(request, user)
-            firstname = user.first_name
-            return render(request, "profile.html", {'firstname': firstname})
+            if user.is_active:
+                login(request, user)
+                firstname = user.first_name
+                return render(request, "profile.html", {'firstname': firstname})
+            
+            else:
+                messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
+                return redirect('home')
+
+        else:
+            messages.error(request, "Bad Credentials!")
+            return redirect('home')
+
+
+    return render(request, "registration/loginpage.html")
+
+def lablogin(request):
+
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+
+        user = authenticate(username=email, password=password)
+
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                firstname = user.first_name
+                return render(request, "profile.html", {'firstname': firstname})
+            
+            else:
+                messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
+                return redirect('home')
 
         else:
             messages.error(request, "Bad Credentials!")
