@@ -4,7 +4,7 @@ import django
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, reverse
 from . import views
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -126,7 +126,7 @@ def studentlogin(request):
             if user.is_active:
                 login(request, user)
                 firstname = user.first_name
-                return render(request, "profile.html", {'firstname': firstname})
+                return render(request, reverse('profilepage'), {'firstname': firstname})
             
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
