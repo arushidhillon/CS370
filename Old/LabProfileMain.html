@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+                   initial-scale=1.0"
+    />
+    <title>LaboratoryProfile</title>
+    <link rel="stylesheet" href="styles/Profile.css" />
+  </head>
+
+  <body>
+    <nav class="menubar">
+      <div class="container">
+        <a class="logo">Research Match</a>
+
+        <p class="topBar">
+          <button
+            class="clkbtn"
+            onclick="window.location.href = 'LabProfileMain.html';"
+          >
+            Profile Page
+          </button>
+          <button
+            class="clkbtn"
+            onclick="window.location.href = 'Opportunities.html';"
+          >
+            Student Profiles
+          </button>
+          <button
+            class="clkbtn"
+            onclick="window.location.href = 'Matches.html';"
+          >
+            Matches
+          </button>
+          <button
+            class="clkbtn"
+            onclick="window.location.href = 'MyLabMembers.html';"
+          >
+            My Laboratory Members
+          </button>
+        </p>
+      </div>
+    </nav>
+
+    <header>
+      <!-- <h1 class="heading">Student Profile</h1> -->
+      <h2 class="title">Welcome Back, Eli Lab!</h2>
+    </header>
+
+    <div class="FourBoxLayout">
+      <div class="Identity">
+        <img
+          src="assets/placeholderImages/LaboratoryProfileImage.jpeg"
+          alt="LabProfile"
+          class="StudentPicture"
+        />
+        <div class="Identityinfo">
+          <h2 class="StudentName">Eli Laboratory</h2>
+          <div class="tags">
+            <span class="tag"> Microbiology</span>
+            <span class="tag"> Biology</span>
+            <span class="tag"> Anthropology</span>
+            <span class="tag"> Biosynthesis</span>
+            <br />
+          </div>
+          <br />
+        </div>
+      </div>
+
+      <div class="Documents">
+        <p>Upload any documents you would like to include in your profile:</p>
+        <form action="/action_page.php">
+          <input type="file" id="myFile" name="filename" />
+          <input type="submit" />
+        </form>
+        <p>Uploaded documents:</p>
+      </div>
+
+      <div class="Biography">
+        <label for="Bio">About the Eli Lab:</label>
+        <textarea id="Bio" name="Bio"> The Eli Lab...</textarea>
+      </div>
+
+      <div class="Courses">
+        <p>Requirements/Prerequisites:</p>
+        <label for="Requirements">Our lab requires the following:</label>
+        <textarea id="freeform" name="freeform" rows="4" cols="50">
+ Please enter your requirements here. </textarea
+        >
+      </div>
+    </div>
+  </body>
+</html>
