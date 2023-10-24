@@ -126,7 +126,7 @@ def studentlogin(request):
             if user.is_active:
                 login(request, user)
                 firstname = user.first_name
-                return render(request, reverse('profilepage'), {'firstname': firstname})
+                return render(request, 'profile:profilepage', {'firstname': firstname})
             
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
