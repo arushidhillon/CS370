@@ -33,11 +33,13 @@
 
   <header>
     <!-- <h1 class="heading">Student Profile</h1> -->
-    <h2 class="title">Welcome Back!</h2>
+    
   </header>
 
     <div class="FourBoxLayout">
-      <h1 style="padding-left: 2rem; margin-bottom: 0">Welcome Back!</h1>
+      {% if user.is_authenticated %}
+      <h1 style="padding-left: 2rem; margin-bottom: 0">Welcome Back, {{ firstname }}!</h1>
+      {% endif %}
       <br />
       <!-- Identity -->
       <div class="ProfileBox">

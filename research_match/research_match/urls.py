@@ -21,23 +21,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from profilepage.views import (
-    hi,
-    opportunities,
-    settings,
-    matches,
-)
-
-from loginpage.views import (
-    home,
-    signup,
-    studentlogin,
-    lablogin,
-    signout,
-)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', include("loginpage.urls")),
-    path('profile',include("profilepage.urls")),
+    path('',include("profilepage.urls")),
 ]
