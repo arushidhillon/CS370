@@ -1,4 +1,5 @@
 
+from django.forms import ValidationError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -21,6 +22,7 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_str, force_bytes
 from . tokens import generate_token
+from django.contrib.auth.password_validation import validate_password
 
 from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
@@ -32,6 +34,7 @@ def home(request):
 def signup(request):
 
     if request.method == "POST":
+        # Requests information inputted
         firstname = request.POST['firstname']
         lastname = request.POST['lastname']
         email = request.POST['email']
@@ -51,12 +54,19 @@ def signup(request):
             messages.error(request, "Email already exists! Please try some other email")
             return redirect('signup')
         
+        #checks to make sure password is 8 characters long
+        if validate_password(pass1) is not None:
+           messages.error(request, "Password must be 8 characters long. They cannot be entirely numerical/alphabetical.")
+           
+
         #makes sure password and confirmation password match
         if pass1 != pass2:
             messages.error(request, "Passwords didn't match!")
             return redirect('signup')
         
         
+        
+        # stores information in django using create_user function
         myuser = User.objects.create_user(email, email, pass1)
         myuser.first_name = firstname
         myuser.last_name = lastname
@@ -130,7 +140,10 @@ def studentlogin(request):
             if user.is_active:
                 login(request, user)
                 firstname = user.first_name
-                return render(request, 'StudentMain.html', {'firstname': firstname})
+                if 'next' in request.POST:
+                    return redirect(request.POST.get('next'))
+                else:
+                    return render(request, "StudentMain.html", {'firstname': firstname})
             
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
@@ -143,6 +156,7 @@ def studentlogin(request):
 
     return render(request, "registration/loginpage.html")
 
+#same code as student login, doesn't lead to lab profile page or stores in different table for now
 def lablogin(request):
 
     if request.method == 'POST':
@@ -155,7 +169,10 @@ def lablogin(request):
             if user.is_active:
                 login(request, user)
                 firstname = user.first_name
-                return render(request, "profile.html", {'firstname': firstname})
+                if 'next' in request.POST:
+                    return redirect(request.POST.get('next'))
+                else:
+                    return render(request, "StudentMain.html", {'firstname': firstname})
             
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
@@ -172,6 +189,9 @@ def signout(request):
     logout(request)
     messages.success(request, "Logged Out Successfully!")
     return redirect('home')
+
+def passwordchange(request):
+    pass
 
 def studenthomepage(request):
     return render(request, "StudentMain.html")
