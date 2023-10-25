@@ -1,4 +1,4 @@
-
+/*
 document.querySelector("form.Biographyform").addEventListener("submit", function(event) {
     event.preventDefault();
     document.getElementById("target").innerText = document.getElementById("bio").value;
@@ -42,4 +42,12 @@ document.getElementById("addCourse").onclick  = function() {
     var textnode=document.createTextNode(text);
     node.appendChild(textnode);
     document.getElementById("Course_item").appendChild(node);
-}
+}*/
+
+document.getElementById("addSkill").onclick = function () {
+  var node = document.createElement("Li");
+  var text = document.getElementById("Skill_input").value;
+  var textnode = document.createTextNode(text);
+  node.appendChild(textnode);
+  document.getElementById("Skill_item").appendChild(node);
+};

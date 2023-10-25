@@ -1,19 +1,19 @@
 {% load static %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+                   initial-scale=1.0"
+    />
+    <title>StudentProfile</title>
+    <link rel="stylesheet" href="{% static '/style.css' %}" />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,
-                   initial-scale=1.0">
-  <title>StudentProfile</title>
-  <link rel="stylesheet" href="{% static '/style.css' %}">
-
-</head>
-
-<body>
-
+  <body>
     <nav class="navbar">
       <ul class="navbar-nav">
         <!-- Logo -->
@@ -64,7 +64,8 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'matches' %}" class="nav-link"> <!-- TODO: Link page-->
+          <a href="{% url 'matches' %}" class="nav-link">
+            <!-- TODO: Link page-->
             <span class="link-text">Matches</span>
             <svg
               aria-hidden="true"
@@ -88,7 +89,8 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'opportunities' %}" class="nav-link"> <!-- TODO: Link page-->
+          <a href="{% url 'opportunities' %}" class="nav-link">
+            <!-- TODO: Link page-->
             <span class="link-text">Opportunities</span>
             <svg
               aria-hidden="true"
@@ -134,10 +136,77 @@
       </ul>
     </nav>
 
-    <div class="FourBoxLayout">
+    <div class="wrapper">
+      <div class="pagetitle">
+        <h3>Welcome Back!</h3>
+      </div>
+      <div class="gridBox">
+        <h3>Eli Dhillon</h3>
+        <img src="{% static '/Eli.jpeg' %}" class="profilePicture" />
+        <div class="tags-wrapper">
+          <form class="skills-box" action="/profilepage/" method="post">
+            <label for="Skill_input">Skills: </label>
+            {% csrf_token %} {{ form }}
+            <div id="Skill_item"></div>
+            <div>
+              <input
+                type="text"
+                id="Skill_input"
+                name="Skill_input"
+                value="{{ curr_skill_input}}"
+              />
+              <input type="submit" id="addSkill" value="Add New Interest" />
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="gridBox">
+        <h3>About Me</h3>
+        <div class="tags-wrapper">
+          <form class="Biographyform">
+            <textarea
+              id="bio"
+              name="biotext"
+              placeholder="Hello, I am..."
+            ></textarea>
+            <button type="submit" name="biographysubmit">Submit!</button>
+          </form>
+        </div>
+      </div>
+      <div class="gridBox">
+        <h3>Courses</h3>
+        <form class="skills-box" action="/profilepage/" method="post">
+            <label for="Skill_input"> </label>
+            {% csrf_token %} {{ form }}
+            <div id="Skill_item"></div>
+            <div>
+              <input
+                type="text"
+                id="Skill_input"
+                name="Skill_input"
+                value="{{ curr_skill_input}}"
+              />
+              <input type="submit" id="addSkill" value="Add New Course" />
+            </div>
+          </form>
+      </form>
+      </div>
+      <div class="gridBox">
+        <h3>My Documents</h3>
+        <p class="Margins">Upload a new document:</p>
+        <input
+          id="image-file"
+          type="file"
+          onchange="SavePhoto(this)"
+          class="Margins"
+        />
+        <p class="Margins">My Files:</p>
+        <br /><br />
+      </div>
+    </div>
+    <!--<div class="FourBoxLayout">
       <h1 style="padding-left: 2rem; margin-bottom: 0">Welcome Back!</h1>
       <br />
-      <!-- Identity -->
       <div class="ProfileBox">
         <div class="Identityinfo">
           <h2 class="StudentName">Eli Dhillon</h2>
@@ -173,7 +242,6 @@
         </div>
       </div>
 
-      <!-- Biography -->
       <div class="ProfileBox" style="margin-left: 0">
         <h2>About Me</h2>
         <div class="Margins" id="target"></div>
@@ -190,7 +258,6 @@
         </form>
       </div>
 
-      <!-- Documents -->
       <div class="ProfileBox">
         <h2 class="Margins">My Documents</h2>
         <p class="Margins">Upload a new document:</p>
@@ -204,7 +271,6 @@
         <br /><br />
       </div>
 
-      <!-- Courses -->
       <div class="ProfileBox" style="margin-left: 0">
         <h2 class="Margins">Courses I've Taken</h2>
         <div class="Margins" id="target2"></div>
@@ -217,8 +283,8 @@
         </form>
       </form>
       </div>
-    </div>
+    </div>-->
 
-  <script src="{% static '/Profile.js' %}"> </script>
-</body>
+    <script src="{% static '/Profile.js' %}"></script>
+  </body>
 </html>
