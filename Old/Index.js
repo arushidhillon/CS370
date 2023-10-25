@@ -27,3 +27,8 @@ lab.addEventListener("click", () => {
 /*get login and password and authenticate it*/
 
 /*get new signup password and username, add to database (make php file?) Add password requirements (ex. must be 8 characters long)*/
+var email = document.getElementById("email");
+
+function validateEmail(email) {
+    const regex = /^[^\s@]+@emory.edu$/;
+}
