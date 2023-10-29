@@ -224,7 +224,7 @@ def skill(request):
         return redirect(skill)
   return render(request, 'skill.html', {'form': SkillForm})
 
-<<<<<<< HEAD
+
 from .models import *
 from django.shortcuts import render
 
@@ -232,7 +232,7 @@ def skillsview(request):
     data = Skill.objects.all()
     if data: print('working')
     return render(request, 'skillsdisplay.html', {'data': data})
-=======
+
 def get_skill(request):
     # if this is a POST request we need to process the form data
     if request.method == "POST":
@@ -268,4 +268,4 @@ def get_skills(request):
     } 
 
     return render(request, 'StudentMain.html', allskills)
->>>>>>> 1d91ccb14ba3b661f77659dcf7ff672f718cbb44
+
