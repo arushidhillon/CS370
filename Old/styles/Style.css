@@ -230,6 +230,7 @@ header {
     }
 }
 
+
 @media screen and (max-width: 320px) {
     .container {
         height: 600px;
@@ -286,6 +287,15 @@ header {
         width: 220px;
         font-size: 15px;
     }
+
+    .email-Error {
+    position: absolute;
+    top: 100%;
+    left: 2px;
+    font-size:16px;
+    font-weight: 400;
+    color: red;
+}
 
     .clkbtn {
         height: 50px;
