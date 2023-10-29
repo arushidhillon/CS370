@@ -3,14 +3,20 @@ from . import views
 
 
 
+
 urlpatterns = [
     path('', views.home, name="home"),
     path('signup', views.signup, name="signup"),
     path('studentlogin', views.studentlogin, name="studentlogin"),
     path('signout', views.signout, name ="signout"),
     path('activate/<uidb64>/<token>', views.activate, name="activate"),
-    path('profilepage/', views.studenthomepage, name='profilepage'),
+    path('studenthomepage/', views.studenthomepage, name='studenthomepage'),
+    path('studentedit/', views.studentedit, name='studentedit'),
     path('opportunities/', views.opportunities, name='opportunities'),
     path('settings/', views.settings, name='settings'),
     path('matches/', views.matches, name='matches'),
+    path('skill/', views.skill, name='skill'),
+    path('skillsview/', views.skillsview, name='skillsview'),
+    path('skillsdisplay/', views.skillsdisplay, name='skillsdisplay'),
+
 ]

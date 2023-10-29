@@ -185,23 +185,27 @@ def settings(request):
 def matches(request):
     return render(request, "matches.html")
 
+def studentedit(request):
+    return render(request, "StudentMainEdit.html")
+
+def skillsdisplay(request):
+    return render(request, "skillsdisplay.html")
+
 from .forms import SkillForm
+from .models import Skill
 
+def skill(request):
+  if request.POST:
+    form = SkillForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect(skill)
+  return render(request, 'skill.html', {'form': SkillForm})
 
-def get_skill(request):
-    # if this is a POST request we need to process the form data
-    if request.method == "POST":
-        # create a form instance and populate it with data from the request:
-        form = SkillForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect("/thanks/")
+from .models import *
+from django.shortcuts import render
 
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = SkillForm()
-
-    return render(request, "skill.html", {"form": form})
+def skillsview(request):
+    data = Skill.objects.all()
+    if data: print('working')
+    return render(request, 'skillsdisplay.html', {'data': data})
