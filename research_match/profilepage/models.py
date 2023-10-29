@@ -2,7 +2,7 @@ from django.db import models
 from django.db import models
 
 
-<<<<<<< HEAD
+
 class Skill(models.Model):
   #firstname = models.CharField(max_length=255)
   #lastname = models.CharField(max_length=255)
@@ -14,7 +14,6 @@ class Skill(models.Model):
 class Skills(models.Model):
   skill = models.CharField(max_length=100)
 
-=======
 class User(models.Model):
     username = models.CharField(max_length=70)
     email = models.CharField(max_length=70)
@@ -49,4 +48,4 @@ class Mentor(User):
     biography = models.TextField()
     def __str__(self):
         return self.mentor_text
->>>>>>> 30b002d9199936c0a7bff8ceb7ec87c830da5d64
+
