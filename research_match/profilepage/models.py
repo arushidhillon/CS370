@@ -1,24 +1,25 @@
 from django.db import models
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
-
-class Skill(models.Model):
+#class Skill(models.Model):
   #firstname = models.CharField(max_length=255)
   #lastname = models.CharField(max_length=255)
-  skill=models.CharField(max_length=255)
-  
-  def __str__(self):
-		  return self.skill
+#  skill=models.CharField(max_length=255)
 
-class Skills(models.Model):
-  skill = models.CharField(max_length=100)
+#  def __str__(self):
+#		  return self.skill
 
-class User(models.Model):
-    username = models.CharField(max_length=70)
+#class Skills(models.Model):
+#  skill = models.CharField(max_length=100)
+
+class User(AbstractUser):
+    username = models.CharField(max_length=40, unique=True)
     email = models.CharField(max_length=70)
-    firstname = models.CharField(max_length=70)
-    lastname = models.CharField(max_length=70)
+    #firstname = models.CharField(max_length=70)
+    #lastname = models.CharField(max_length=70)
+
     BACKGROUND = [
         ("S","Student"),
         ("M","Mentor")
@@ -35,12 +36,14 @@ class User(models.Model):
         ("OTHE", "Other")
     ]
     subject =  models.CharField(max_length=4,choices =SUBJECT)
-    skill = models.CharField(max_length=255)
+    USERNAME_FIELD = "username"
+    EMAIL_FIELD = "email"
 
 
 class Student(User):
     gpa = models.IntegerField(default=0)
     documents = models.IntegerField(default=0)
+    skill = models.CharField(max_length=255)
     def __str__(self):
         return self.student_text
 
