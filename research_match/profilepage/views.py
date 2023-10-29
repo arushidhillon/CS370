@@ -64,6 +64,10 @@ def signup(request):
             messages.error(request, "Passwords didn't match!")
             return redirect('signup')
         
+       # if 'stdbtn' in request.POST:
+       # if 'labbtn' in request.POST:
+
+        
         
         
         # stores information in django using create_user function
