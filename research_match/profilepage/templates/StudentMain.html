@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,6 +37,15 @@
 
   </header>
 
+<<<<<<< HEAD
+=======
+  <!-- 
+  
+  
+  <h3>Hello {{ firstname}}</h3>
+  <h4>You're successfully logged in.</h4> -->
+
+>>>>>>> 1d91ccb14ba3b661f77659dcf7ff672f718cbb44
   <div class="FourBoxLayout">
     {% if user.is_authenticated %}
     <h1 style="padding-left: 2rem; margin-bottom: 0">Welcome Back, {{ firstname }}!</h1>
@@ -56,6 +66,7 @@
           ">
         <div class="tags">
           <span class="tag"> GPA: 3.9</span>
+<<<<<<< HEAD
           <div id="Skill_item"></div>
         </div>
         <div style="justify-self: last">
@@ -66,7 +77,30 @@
         <input type="submit" id="addSkill" value="Add New Interest">
       </form> -->
         </div>
+=======
+          <!-- <div id="Skill_item">
+          </div> -->
+          <div>
+            {% for x in Skills %}
+            <tr>
+              <td>{{ x.skill }}</td>
+            </tr>
+          {% endfor %}
+
+          </div>
+
+          </div>
+        </div>
+        <form action="" method="POST">
+          <label for="Skill_input">Skills: </label> 
+          <input type='char' id='Skill_input' />
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit" id="addSkill" value="Add New Intrest">
+        </form>
+>>>>>>> 1d91ccb14ba3b661f77659dcf7ff672f718cbb44
       </div>
+      
     </div>
 
     <!-- Biography -->
@@ -104,6 +138,7 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <div class="editButtons" style="margin-left: 0">
     <a href="{% url 'studentedit' %}">Edit</a>
 
@@ -111,3 +146,10 @@
 </body>
 
 </html>
+=======
+
+  <!-- <script src="Profile.js"> </script> -->
+  <script src="{% static 'Profile.js' %}"></script>
+
+  <body>
+>>>>>>> 1d91ccb14ba3b661f77659dcf7ff672f718cbb44
