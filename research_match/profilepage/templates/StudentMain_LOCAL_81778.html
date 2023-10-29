@@ -9,7 +9,7 @@
       content="width=device-width,
                    initial-scale=1.0"
     />
-    <title>Settings</title>
+    <title>StudentProfile</title>
     <link rel="stylesheet" href="{% static '/style.css' %}" />
   </head>
 
@@ -40,7 +40,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'profilepage' %}" class="nav-link">
+          <a href="{% url 'profilepage' %}" class="nav-link" id="selected">
             <span class="link-text">Profile</span>
             <svg
               aria-hidden="true"
@@ -65,6 +65,7 @@
         </li>
         <li class="nav-item">
           <a href="{% url 'matches' %}" class="nav-link">
+            <!-- TODO: Link page-->
             <span class="link-text">Matches</span>
             <svg
               aria-hidden="true"
@@ -89,6 +90,7 @@
         </li>
         <li class="nav-item">
           <a href="{% url 'opportunities' %}" class="nav-link">
+            <!-- TODO: Link page-->
             <span class="link-text">Opportunities</span>
             <svg
               aria-hidden="true"
@@ -110,7 +112,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link" id="selected">
+          <a href="{% url 'settings' %}" class="nav-link">
             <span class="link-text">Settings</span>
             <svg
               aria-hidden="true"
@@ -133,48 +135,78 @@
         </li>
       </ul>
     </nav>
+
     <div class="wrapper">
-      <div class="account">
-        <h1>Account Settings</h1>
-        <form class="settings-wrapper">
-          <label for="fname">First Name</label>
-          <input type="text" id="fname" name="fname" /><br />
-          <label for="mname">Middle Name (optional)</label>
-          <input type="text" id="mname" name="mname" /><br />
-          <label for="lname">Last Name</label>
-          <input type="text" id="lname" name="lname" /><br />
-          <label for="lname">School Year</label>
-          <select name="school-year" id="school-year">
-            <option value="fyear">Freshman</option>
-            <option value="syear">Sophomore</option>
-            <option value="jyear">Junior</option>
-            <option value="syear">Senior</option></select
-          ><br />
-          <br />
-        </form>
+      <div class="pagetitle">
+        {% if user.is_authenticated %}
+        <h3>Welcome Back, {{ firstname }}!</h3>
+      {% endif %}
+        
       </div>
-      <br />
-      <div class="notifications">
-        <h1>Notification Settings</h1>
-        <form class="settings-wrapper">
-          <div>
-            <label for="email_notifications">Messages </label>
-            <input
-              type="checkbox"
-              id="email_notifications"
-              name="email_notifications"
-            />
-          </div>
-          <div>
-            <label for="email_notifications">Matches </label>
-            <input
-              type="checkbox"
-              id="email_notifications"
-              name="email_notifications"
-            />
-          </div>
-        </form>
+      <div class="gridBox">
+        <h3>Eli Dhillon</h3>
+        <img src="{% static '/Eli.jpeg' %}" class="profilePicture" />
+        <div class="tags-wrapper">
+          <form class="skills-box" action="/profilepage/" method="post">
+            <label for="Skill_input">Skills: </label>
+            {% csrf_token %} {{ form }}
+            <div id="Skill_item"></div>
+            <div>
+              <input
+                type="text"
+                id="Skill_input"
+                name="Skill_input"
+                value="{{ curr_skill_input}}"
+              />
+              <input type="submit" id="addSkill" value="Add New Interest" />
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="gridBox">
+        <h3>About Me</h3>
+        <div class="tags-wrapper">
+          <form class="Biographyform">
+            <textarea
+              id="bio"
+              name="biotext"
+              placeholder="Hello, I am..."
+            ></textarea>
+            <button type="submit" name="biographysubmit">Submit!</button>
+          </form>
+        </div>
+      </div>
+      <div class="gridBox">
+        <h3>Courses</h3>
+        <form class="skills-box" action="/profilepage/" method="post">
+            <label for="Skill_input"> </label>
+            {% csrf_token %} {{ form }}
+            <div id="Skill_item"></div>
+            <div>
+              <input
+                type="text"
+                id="Skill_input"
+                name="Skill_input"
+                value="{{ curr_skill_input}}"
+              />
+              <input type="submit" id="addSkill" value="Add New Course" />
+            </div>
+          </form>
+      </form>
+      </div>
+      <div class="gridBox">
+        <h3>My Documents</h3>
+        <p class="Margins">Upload a new document:</p>
+        <input
+          id="image-file"
+          type="file"
+          onchange="SavePhoto(this)"
+          class="Margins"
+        />
+        <p class="Margins">My Files:</p>
+        <br /><br />
       </div>
     </div>
+    <script src="{% static '/Profile.js' %}"></script>
   </body>
 </html>

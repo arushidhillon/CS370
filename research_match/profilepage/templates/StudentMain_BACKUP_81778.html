@@ -1,6 +1,11 @@
 {% load static %}
 
+<<<<<<< HEAD
 <!doctype html>
+=======
+
+<!DOCTYPE html>
+>>>>>>> skills
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -9,7 +14,7 @@
       content="width=device-width,
                    initial-scale=1.0"
     />
-    <title>Settings</title>
+    <title>StudentProfile</title>
     <link rel="stylesheet" href="{% static '/style.css' %}" />
   </head>
 
@@ -40,7 +45,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'profilepage' %}" class="nav-link">
+          <a href="{% url 'profilepage' %}" class="nav-link" id="selected">
             <span class="link-text">Profile</span>
             <svg
               aria-hidden="true"
@@ -65,6 +70,7 @@
         </li>
         <li class="nav-item">
           <a href="{% url 'matches' %}" class="nav-link">
+            <!-- TODO: Link page-->
             <span class="link-text">Matches</span>
             <svg
               aria-hidden="true"
@@ -89,6 +95,7 @@
         </li>
         <li class="nav-item">
           <a href="{% url 'opportunities' %}" class="nav-link">
+            <!-- TODO: Link page-->
             <span class="link-text">Opportunities</span>
             <svg
               aria-hidden="true"
@@ -110,7 +117,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link" id="selected">
+          <a href="{% url 'settings' %}" class="nav-link">
             <span class="link-text">Settings</span>
             <svg
               aria-hidden="true"
@@ -133,48 +140,222 @@
         </li>
       </ul>
     </nav>
+
+<<<<<<< HEAD
     <div class="wrapper">
-      <div class="account">
-        <h1>Account Settings</h1>
-        <form class="settings-wrapper">
-          <label for="fname">First Name</label>
-          <input type="text" id="fname" name="fname" /><br />
-          <label for="mname">Middle Name (optional)</label>
-          <input type="text" id="mname" name="mname" /><br />
-          <label for="lname">Last Name</label>
-          <input type="text" id="lname" name="lname" /><br />
-          <label for="lname">School Year</label>
-          <select name="school-year" id="school-year">
-            <option value="fyear">Freshman</option>
-            <option value="syear">Sophomore</option>
-            <option value="jyear">Junior</option>
-            <option value="syear">Senior</option></select
-          ><br />
-          <br />
-        </form>
+      <div class="pagetitle">
+        {% if user.is_authenticated %}
+        <h3>Welcome Back, {{ firstname }}!</h3>
+      {% endif %}
+        
       </div>
-      <br />
-      <div class="notifications">
-        <h1>Notification Settings</h1>
-        <form class="settings-wrapper">
-          <div>
-            <label for="email_notifications">Messages </label>
-            <input
-              type="checkbox"
-              id="email_notifications"
-              name="email_notifications"
-            />
-          </div>
-          <div>
-            <label for="email_notifications">Matches </label>
-            <input
-              type="checkbox"
-              id="email_notifications"
-              name="email_notifications"
-            />
-          </div>
-        </form>
+      <div class="gridBox">
+        <h3>Eli Dhillon</h3>
+        <img src="{% static '/Eli.jpeg' %}" class="profilePicture" />
+        <div class="tags-wrapper">
+          <form class="skills-box" action="/profilepage/" method="post">
+            <label for="Skill_input">Skills: </label>
+            {% csrf_token %} {{ form }}
+            <div id="Skill_item"></div>
+            <div>
+              <input
+                type="text"
+                id="Skill_input"
+                name="Skill_input"
+                value="{{ curr_skill_input}}"
+              />
+              <input type="submit" id="addSkill" value="Add New Interest" />
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="gridBox">
+        <h3>About Me</h3>
+        <div class="tags-wrapper">
+          <form class="Biographyform">
+            <textarea
+              id="bio"
+              name="biotext"
+              placeholder="Hello, I am..."
+            ></textarea>
+            <button type="submit" name="biographysubmit">Submit!</button>
+          </form>
+        </div>
+      </div>
+      <div class="gridBox">
+        <h3>Courses</h3>
+        <form class="skills-box" action="/profilepage/" method="post">
+            <label for="Skill_input"> </label>
+            {% csrf_token %} {{ form }}
+            <div id="Skill_item"></div>
+            <div>
+              <input
+                type="text"
+                id="Skill_input"
+                name="Skill_input"
+                value="{{ curr_skill_input}}"
+              />
+              <input type="submit" id="addSkill" value="Add New Course" />
+            </div>
+          </form>
+      </form>
+      </div>
+      <div class="gridBox">
+        <h3>My Documents</h3>
+        <p class="Margins">Upload a new document:</p>
+        <input
+          id="image-file"
+          type="file"
+          onchange="SavePhoto(this)"
+          class="Margins"
+        />
+        <p class="Margins">My Files:</p>
+        <br /><br />
       </div>
     </div>
+    <script src="{% static '/Profile.js' %}"></script>
   </body>
+=======
+</head>
+
+<body>
+
+  <nav class="menubar">
+
+    <div class="container">
+      <a class='logo'>Research Match</a>
+
+      <p class="topBar">
+        <button class="clkbtn" onclick="window.location.href = 'StudentMain.html';">Profile Page</button>
+        <button class="clkbtn" onclick="window.location.href = 'Opportunities.html';">Opportunities</button>
+        <button class="clkbtn" onclick="window.location.href = 'Matches.html';">Matches</button>
+        <button class="clkbtn" onclick="window.location.href = 'MyRoles.html';">My Roles</button>
+
+      </p>
+
+    </div>
+
+  </nav>
+
+  <header>
+    <!-- <h1 class="heading">Student Profile</h1> -->
+
+  </header>
+
+<<<<<<< HEAD
+=======
+  <!-- 
+  
+  
+  <h3>Hello {{ firstname}}</h3>
+  <h4>You're successfully logged in.</h4> -->
+
+>>>>>>> 1d91ccb14ba3b661f77659dcf7ff672f718cbb44
+  <div class="FourBoxLayout">
+    {% if user.is_authenticated %}
+    <h1 style="padding-left: 2rem; margin-bottom: 0">Welcome Back, {{ firstname }}!</h1>
+    {% endif %}
+    <br />
+    <!-- Identity -->
+    <div class="ProfileBox">
+      <div class="Identityinfo">
+        <h2 class="StudentName">Eli Dhillon</h2>
+        <img src="{% static '/Eli.jpeg' %}" alt="Eli" class="StudentPicture" />
+      </div>
+      <div class="Identityinfo" id="inputs" style="
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            margin-left: 2rem;
+          ">
+        <div class="tags">
+          <span class="tag"> GPA: 3.9</span>
+<<<<<<< HEAD
+          <div id="Skill_item"></div>
+        </div>
+        <div style="justify-self: last">
+          <!-- <form action="/profilepage/" method="post">
+          {% csrf_token %}
+          <label for="Skill_input">Skills: </label>
+        <input type='text' id='Skill_input' />
+        <input type="submit" id="addSkill" value="Add New Interest">
+      </form> -->
+        </div>
+=======
+          <!-- <div id="Skill_item">
+          </div> -->
+          <div>
+            {% for x in Skills %}
+            <tr>
+              <td>{{ x.skill }}</td>
+            </tr>
+          {% endfor %}
+
+          </div>
+
+          </div>
+        </div>
+        <form action="" method="POST">
+          <label for="Skill_input">Skills: </label> 
+          <input type='char' id='Skill_input' />
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit" id="addSkill" value="Add New Intrest">
+        </form>
+>>>>>>> 1d91ccb14ba3b661f77659dcf7ff672f718cbb44
+      </div>
+      
+    </div>
+
+    <!-- Biography -->
+    <div class="ProfileBox" style="margin-left: 0">
+      <h2>About Me</h2>
+      <div class="Margins" id="target"></div>
+      <form class="Biographyform">
+        <p class="Margins">Help Labs Get To Know You:</p>
+        <textarea id="bio" name="biotext" rows="8" cols="20" placeholder="Hello, I am..."></textarea>
+        <button type="submit" name="biographysubmit">Submit!</button>
+      </form>
+    </div>
+
+    <!-- Documents -->
+    <div class="ProfileBox">
+      <h2 class="Margins">My Documents</h2>
+      <p class="Margins">Upload a new document:</p>
+      <input id="image-file" type="file" onchange="SavePhoto(this)" class="Margins" />
+      <p class="Margins">My Files:</p>
+      <br /><br />
+    </div>
+
+    <!-- Courses -->
+    <div class="ProfileBox" style="margin-left: 0">
+      <h2 class="Margins">Courses I've Taken</h2>
+      <div class="Margins" id="target2"></div>
+      <form class="Courseform">
+        <div id="Course_item"></div>
+        <p class="Margins">Add a course:</p>
+
+        <input type="text" id="Course_input" />
+        <input type="button" id="addCourse" value="Add New Course" />
+      </form>
+      </form>
+    </div>
+  </div>
+
+<<<<<<< HEAD
+  <div class="editButtons" style="margin-left: 0">
+    <a href="{% url 'studentedit' %}">Edit</a>
+
+    <script src="{% static '/Profile.js' %}"> </script>
+</body>
+
+>>>>>>> skills
 </html>
+=======
+
+  <!-- <script src="Profile.js"> </script> -->
+  <script src="{% static 'Profile.js' %}"></script>
+
+  <body>
+>>>>>>> 1d91ccb14ba3b661f77659dcf7ff672f718cbb44
