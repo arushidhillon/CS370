@@ -42,6 +42,8 @@ class Student(User):
     gpa = models.IntegerField(default=0)
     documents = models.IntegerField(default=0)
     skill = models.CharField(max_length=255)
+    course=models.CharField(max_length=255)
+    biography=models.CharField(max_length=500)
     # def __str__(self):
     #     return self.objects
 
