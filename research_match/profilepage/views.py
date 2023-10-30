@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from .models import Skills
+from .models import Student
 from .forms import SkillForm
 
 from email.message import EmailMessage
@@ -214,7 +214,7 @@ def skillsdisplay(request):
     return render(request, "skillsdisplay.html")
 
 from .forms import SkillForm
-from .models import Skill
+from .models import Student
 
 def skill(request):
   if request.POST:
@@ -229,7 +229,7 @@ from .models import *
 from django.shortcuts import render
 
 def skillsview(request):
-    data = Skill.objects.all()
+    data = Student.objects.all()
     if data: print('working')
     return render(request, 'skillsdisplay.html', {'data': data})
 
@@ -244,7 +244,7 @@ def get_skill(request):
             # ...
             # redirect to a new URL:
         skill_input = form.cleaned_data['skill']
-        p = Skills(skill_input)
+        p = Student(skill_input)
         p.save()
 
             # return HttpResponseRedirect("/thanks/")
@@ -258,7 +258,7 @@ def get_skill(request):
 
 def get_skills(request):
 
-    all_Skills = Skills.objects.all() #for all the records 
+    all_Skills = Student.objects.all() #for all the records 
     # one_data = userdetails.objects.get(pk=1) # 1 will return the first item change it depending on the data you want 
     allskills={
        

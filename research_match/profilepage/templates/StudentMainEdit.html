@@ -112,8 +112,9 @@
           <div id="Skill_item"></div>
         </div>
         <div style="justify-self: last">
-          <form action="/studenthomepage/" method="post">
+          <form action="{% url 'skill'%}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            {{form}}
             <label for="Skill_input">Skills: </label>
             <input type='text' id='Skill_input' />
             <input type="submit" id="addSkill" value="Add New Interest">
@@ -158,7 +159,7 @@
   </div>
 
   <div class="editButtons" style="margin-left: 0">
-    <a href="{% url 'studenthomepage' %}">Edit</a>
+    <a href="{% url 'studenthomepage' %}">Return Home</a>
     
     <svg aria-hidden="true" focusable="false" data-prefix="fad" data-icon="angle-double-right" role="img"
       xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">

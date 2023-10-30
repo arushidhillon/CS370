@@ -41,7 +41,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'profilepage' %}" class="nav-link" id="selected">
+          <a href="{% url 'studenthomepage' %}" class="nav-link" id="selected">
             <span class="link-text">Profile</span>
             <svg
               aria-hidden="true"
@@ -173,7 +173,7 @@
             <div id="Skill_item"></div>
           </div>
           <div style="justify-self: last">
-            <form action="/profilepage/" method="post">
+            <form action="/studenthomepage/" method="post">
           {% csrf_token %}
           <label for="Skill_input">Skills: </label>
         <input type='text' id='Skill_input' />
@@ -229,13 +229,16 @@
       </div>
     </div>
 
+    <div class="editButtons" style="margin-left: 0">
+      <a href="{% url 'studentedit' %}">Edit</a>
+
   <script src="{% static '/Profile.js' %}"> </script>
 </body>
 </html>
-=======
+
 
   <!-- <script src="Profile.js"> </script> -->
   <script src="{% static 'Profile.js' %}"></script>
 
   <body>
->>>>>>> 1d91ccb14ba3b661f77659dcf7ff672f718cbb44
+
