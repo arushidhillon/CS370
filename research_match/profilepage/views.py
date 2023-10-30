@@ -4,6 +4,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from .models import Student
+from .forms import SkillForm
 
 from email.message import EmailMessage
 import django
@@ -209,8 +211,31 @@ def settings(request):
 def matches(request):
     return render(request, "matches.html")
 
-from .forms import SkillForm
+def studentedit(request):
+    return render(request, "StudentMainEdit.html")
 
+def skillsdisplay(request):
+    return render(request, "skillsdisplay.html")
+
+from .forms import SkillForm
+from .models import Student
+
+def skill(request):
+  if request.POST:
+    form = SkillForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect(skill)
+  return render(request, 'skill.html', {'form': SkillForm})
+
+
+from .models import *
+from django.shortcuts import render
+
+def skillsview(request):
+    data = Student.objects.all()
+    if data: print('working')
+    return render(request, 'skillsdisplay.html', {'data': data})
 
 def get_skill(request):
     # if this is a POST request we need to process the form data
@@ -218,14 +243,33 @@ def get_skill(request):
         # create a form instance and populate it with data from the request:
         form = SkillForm(request.POST)
         # check whether it's valid:
-        if form.is_valid():
+        # if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            return HttpResponseRedirect("/thanks/")
+        skill_input = form.cleaned_data['skill']
+        p = Student(skill_input)
+        p.save()
+
+            # return HttpResponseRedirect("/thanks/")
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = SkillForm()
 
     return render(request, "skill.html", {"form": form})
+
+
+def get_skills(request):
+
+    all_Skills = Student.objects.all() #for all the records 
+    # one_data = userdetails.objects.get(pk=1) # 1 will return the first item change it depending on the data you want 
+    allskills={
+       
+      'skills':all_Skills,
+    #   'one_data':one_data,
+    
+    } 
+
+    return render(request, 'StudentMain.html', allskills)
+
