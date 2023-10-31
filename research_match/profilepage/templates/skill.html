@@ -1,4 +1,23 @@
+
+<div class="container">
+    <form method="POST">
+      <fieldset>
+        <legend>Add Skills</legend>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </fieldset>
+    </form>
+</div>
+
+<!-- <form action="/profilepage/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
 <form action="skill/" method="post">
   {% csrf_token %} {{ form }}
   <input type="submit" value="Submit" />
-</form>
+</form> -->
+
