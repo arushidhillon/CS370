@@ -1,2 +1,1 @@
-release: python manage.py migrate
-web: gunicorn research_match.wsgi
+web: python manage.py runserver 0.0.0.0:\$PORT
