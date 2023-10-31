@@ -14,7 +14,7 @@ from pathlib import Path
 import mimetypes
 mimetypes.add_type("text/css", ".css", True)
 from . info import *
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,12 +31,13 @@ EMAIL_PORT = EMAIL_PORT
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9h#qg6t@pxdf3&nypr1k%!a!8myas-g)26*&!bo#wy#3#-85)h'
+SECRET_KEY = os.environ.get('SECRET_KEY')
+#SECRET_KEY = 'django-insecure-9h#qg6t@pxdf3&nypr1k%!a!8myas-g)26*&!bo#wy#3#-85)h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["research-match.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'research_match.urls'
@@ -130,9 +132,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 
-STATICFILES_DIRS = []
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+#Media files
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

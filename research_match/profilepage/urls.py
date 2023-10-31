@@ -34,4 +34,4 @@ urlpatterns = [
     path('skillsview/', views.skillsview, name='skillsview'),
     path('skillsdisplay/', views.skillsdisplay, name='skillsdisplay'),
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
