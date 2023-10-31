@@ -6,7 +6,6 @@ gunicorn==21.2.0
 packaging==23.2
 psycopg==3.1.12
 psycopg-binary==3.1.12
-psycopg2 @ file:///home/conda/feedstock_root/build_artifacts/psycopg2-split_1697059291784/work
 psycopg2-binary==2.9.9
 setuptools==68.2.2
 six==1.16.0
