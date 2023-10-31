@@ -3,11 +3,11 @@ from .models import Student
 
 
 class SkillForm(forms.ModelForm):
-    skill = forms.TextInput()
+    # skill = forms.TextInput()
     class Meta:
     # your_skill = forms.CharField(label="Skill_input", max_length=100)
         model = Student
-        fields = ['skill']
+        fields = ['skill','course','biography']
 
 # class SkillForm(forms.Form):
 #     skill_input = forms.CharField(max_length=100)
