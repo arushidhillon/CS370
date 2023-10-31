@@ -196,9 +196,6 @@ def signout(request):
     messages.success(request, "Logged Out Successfully!")
     return redirect('home')
 
-def passwordchange(request):
-    pass
-
 def studenthomepage(request):
     return render(request, "StudentMain.html")
 
