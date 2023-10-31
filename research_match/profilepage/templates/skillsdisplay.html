@@ -1,18 +1,10 @@
 {% block content %}
-  <h1>Skill List</h1>
-  {% if data %}
-  <ul>
-{% for skill in data %}
 
-{{ skill.skill }}
+{% for x in my_data %}
+
+  {{x.skill }}
 {% endfor %}
 
-
-{% else %}
-<p>There are no breeds in the library.</p>
-{% endif %}
-
 {% endblock content %}
-
 
 
