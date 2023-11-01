@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from .models import Student
+from .models import StudentProfile
 from .forms import SkillForm
 
 from email.message import EmailMessage
@@ -52,13 +52,13 @@ def signup(request):
             return redirect('signup')
 
         #checks for email duplicates in system
-        if User.objects.filter(email=email):
+        if User.objects.filter(email=email).exists():
             messages.error(request, "Email already exists! Please try some other email")
             return redirect('signup')
         
         #checks to make sure password is 8 characters long
-        if validate_password(pass1) is not None:
-           messages.error(request, "Password must be 8 characters long. They cannot be entirely numerical/alphabetical.")
+        # if validate_password(pass1) is not None:
+        #    messages.error(request, "Password must be 8 characters long. They cannot be entirely numerical/alphabetical.")
            
 
         #makes sure password and confirmation password match
@@ -68,8 +68,6 @@ def signup(request):
         
        # if 'stdbtn' in request.POST:
        # if 'labbtn' in request.POST:
-
-        
         
         
         # stores information in django using create_user function
@@ -216,14 +214,14 @@ def skillsdisplay(request):
 
 from .forms import SkillForm
 
-from .models import Student
+from .models import StudentProfile
 
 def skill(request):
   if request.POST:
     form = SkillForm(request.POST) #form= and form.save will create a new student object.
     if form.is_valid():
         form.save()
-        return redirect(studenthomepage)
+        return redirect('studenthomepage')
   return render(request, 'skill.html', {'form': SkillForm})
 
 
@@ -231,7 +229,7 @@ from .models import *
 from django.shortcuts import render
 
 def skillsview(request):
-    data = Student.objects.all()
+    data = StudentProfile.objects.all()
     if data: print('working')
     return render(request, 'skillsdisplay.html', {'data': data})
 
