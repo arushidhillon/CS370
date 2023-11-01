@@ -84,7 +84,7 @@ def signup(request):
         # Welcome Email
         subject = "Welcome to Research Match Login!"
         message = "Hello " + myuser.first_name + "!! \n" + "Welcome to Research Match! \n Thank you for visiting our website. \n We have also sent you a confirmation email, please confirm your email address in order to activate your account. \n\n Thank you, \n Deadline Tech"
-        from_email = settings.EMAIL_HOST_USER
+        from_email = 'researchmatchdemo@gmail.com'
         to_list = [myuser.email]
         send_mail(subject, message, from_email, to_list, fail_silently=True)
 
@@ -103,7 +103,7 @@ def signup(request):
         email = EmailMessage(
             email_subject,
             message2,
-            settings.EMAIL_HOST_USER,
+            "researchdemo@gmail.com",
             [myuser.email],
         )
         email.fail_silently = True
@@ -219,28 +219,29 @@ from .models import StudentProfile
 
 def studentprofile(request):
     if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
+       # u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, 
                                    request.FILES, 
                                    instance=request.user.studentprofile)
         
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
+        # if u_form.is_valid() and p_form.is_valid():
+        if p_form.is_valid():
+           # u_form.save()
             p_form.save()
             messages.success(request, f'Your account has been updated!')
             return redirect('studenthomepage')
 
 
     else:
-        u_form = UserUpdateForm(instance=request.user)
+       # u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.studentprofile)
 
 
     context = {
-        'u_form': u_form,
+       # 'u_form': u_form,
         'p_form': p_form
     }
-    return render(request, 'profiledemo.html', context)
+    return render(request, 'skill.html', context)
 
 # def skill(request):
 #   if request.POST:
