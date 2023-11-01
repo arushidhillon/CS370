@@ -30,8 +30,9 @@ urlpatterns = [
     path('opportunities/', views.opportunities, name='opportunities'),
     path('settings/', views.settings, name='settings'),
     path('matches/', views.matches, name='matches'),
-    path('skill/', views.skill, name='skill'),
-    path('skillsview/', views.skillsview, name='skillsview'),
-    path('skillsdisplay/', views.skillsdisplay, name='skillsdisplay'),
+    path('studentprofile', views.studentprofile, name='studentprofile')
+    # path('skill/', views.skill, name='skill'),
+    # path('skillsview/', views.skillsview, name='skillsview'),
+    #path('skillsdisplay/', views.skillsdisplay, name='skillsdisplay'),
 
 ]

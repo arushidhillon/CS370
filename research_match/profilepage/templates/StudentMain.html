@@ -233,9 +233,9 @@
     </div>
 
     <div class="editButtons" style="margin-left: 0">
-      <form action="{% url 'skill'%}" method="post" enctype="multipart/form-data">
+      <form action="{% url 'studentprofile'%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{form}}
+        {{ form }}
         <input type="submit" id="addSkill" value="Edit My Profile">
 
   <script src="{% static '/Profile.js' %}"> </script>

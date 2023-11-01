@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import StudentProfile
-from .forms import SkillForm
+# from .forms import SkillForm
 
 from email.message import EmailMessage
 import django
@@ -25,6 +25,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_str, force_bytes
 from . tokens import generate_token
 from django.contrib.auth.password_validation import validate_password
+from .forms import UserUpdateForm, ProfileUpdateForm
 
 from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
@@ -212,26 +213,51 @@ def studentedit(request):
 def skillsdisplay(request):
     return render(request, "skillsdisplay.html")
 
-from .forms import SkillForm
+# from .forms import SkillForm
 
 from .models import StudentProfile
 
-def skill(request):
-  if request.POST:
-    form = SkillForm(request.POST) #form= and form.save will create a new student object.
-    if form.is_valid():
-        form.save()
-        return redirect('studenthomepage')
-  return render(request, 'skill.html', {'form': SkillForm})
+def studentprofile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, 
+                                   request.FILES, 
+                                   instance=request.user.studentprofile)
+        
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('studenthomepage')
 
 
-from .models import *
-from django.shortcuts import render
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.studentprofile)
 
-def skillsview(request):
-    data = StudentProfile.objects.all()
-    if data: print('working')
-    return render(request, 'skillsdisplay.html', {'data': data})
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'profiledemo.html', context)
+
+# def skill(request):
+#   if request.POST:
+#     form = SkillForm(request.POST) #form= and form.save will create a new student object.
+#     if form.is_valid():
+#         form.save()
+#         return redirect('studenthomepage')
+#   return render(request, 'skill.html', {'form': SkillForm})
+
+
+# from .models import *
+# from django.shortcuts import render
+
+# def skillsview(request):
+#     data = StudentProfile.objects.all()
+#     if data: print('working')
+#     return render(request, 'skillsdisplay.html', {'data': data})
 
 # def get_skill(request):
 #     # if this is a POST request we need to process the form data
