@@ -42,7 +42,7 @@
        the login or signup form -->
       <div class="slider"></div>
       <div class="btn">
-        <button class="student">Student</button>
+        <button class="student" id="selected">Student</button>
         <button class="lab">Lab</button>
         <button class="signup">Signup</button>
       </div>
@@ -73,17 +73,6 @@
             <button class="clkbtn" type="submit">Student</button>
             <!-- <button class="clkbtn">Student</button> -->
 
-                            <button class="clkbtn" type="submit">Student</button>
-                            <!-- <button class="clkbtn">Student</button> -->
-                           
-                                   <div class="d-flex justify-content-center links">
-                                          Forgot Password? <a href="{% url 'reset_password' %}" class="m1-2"> Reset Password</a>
-                                   </div>
-                            
-                     
-                     
-              </form>
-
             <div class="d-flex justify-content-center links">
               Forgot Password?
               <a href="{% url 'reset_password' %}" class="m1-2">
@@ -93,17 +82,24 @@
           </div>
         </form>
 
-              <form action="/lablogin" method="POST">
-                     <div class="lab-box">
-                            
-                            <input type="email" class="email ele" placeholder="email@emory.edu">
-                            <input type="password" class="password ele" placeholder="password">
-                            <button class="clkbtn" onclick="window.location.href = 'LabProfileMain.html';">Lab</button>
-                    
-                            <div class="d-flex justify-content-center links">
-                                   Forgot Password? <a href="{% url 'reset_password' %}" class="m1-2"> Reset Password</a>
-                            </div>
-                     </div>
+        <form action="/lablogin" method="POST">
+          <div class="lab-box">
+            <input
+              type="email"
+              class="email ele"
+              placeholder="email@emory.edu"
+            />
+            <input
+              type="password"
+              class="password ele"
+              placeholder="password"
+            />
+            <button
+              class="clkbtn"
+              onclick="window.location.href = 'LabProfileMain.html';"
+            >
+              Lab
+            </button>
 
             <div class="d-flex justify-content-center links">
               Forgot Password?
@@ -111,6 +107,7 @@
                 Reset Password</a
               >
             </div>
+          </div>
         </form>
 
         <form action="/signup" method="post">
@@ -156,12 +153,14 @@
               placeholder="Confirm Your Password"
               required
             />
-            <button class="clkbtn2" name="studentbtn" type="submit">
-              Signup as a Student
-            </button>
-            <button class="clkbtn2" name="labbtn" type="submit">
-              Signup as a Lab
-            </button>
+            <div style="display: flex; gap: 1rem">
+              <button class="clkbtn2" name="studentbtn" type="submit">
+                Signup as Student
+              </button>
+              <button class="clkbtn2" name="labbtn" type="submit">
+                Signup as Lab
+              </button>
+            </div>
           </div>
         </form>
       </div>
