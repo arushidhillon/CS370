@@ -145,10 +145,10 @@
     <div class="wrapper">
       <div class="pagetitle">
         {% if user.is_authenticated %}
-        <h3>Welcome Back, {{ firstname }}!</h3>
+        <h3>Welcome Back, {{  user.studentprofile.firstname }}!</h3>
         {%endif%}
         
-      </div>
+<!--       </div>
       <div class="gridBox">
         {% csrf_token %}
         <h3>{{ firstname }} {{ lastname }}</h3>
@@ -156,11 +156,46 @@
         <div class="tags-wrapper">
           <form class="skills-box" action="/profilepage/" method="post">
             {% csrf_token %}
-            <label for="Skill_input">Skills: </label>
+            <label for="Skill_input">Skills: </label> -->
             
+  <header>
+    <!-- <h1 class="heading">Student Profile</h1> -->
+    
+  </header>
+
+    <div class="FourBoxLayout">
+<!--       {% if user.is_authenticated %}
+      <h1 style="padding-left: 2rem; margin-bottom: 0">Welcome Back, {{ user.studentprofile.firstname }} {{user.studentprofile.lastname}}!</h1>
+      {% endif %}
+      <br /> -->
+      <!-- Identity -->
+      <div class="ProfileBox">
+        <div class="Identityinfo">
+          <h2 class="StudentName">{{user.studentprofile.firstname }} {{user.studentprofile.lastname}}</h2>
+          <img
+            src="{{ user.studentprofile.profile_pic.url }}"
+            alt="Eli"
+            class="StudentPicture"
+          />
+        </div>
+        <div
+          class="Identityinfo"
+          id="inputs"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            margin-left: 2rem;
+          "
+        >
+          <div class="tags">
+            <span class="tag"> GPA: {{user.studentprofile.gpa}}</span>
+
             <div id="Skill_item"></div>
           </div>
           <div style="justify-self: last">
+            <span> {{ user.studentprofile.skill}} </span>
             <!-- <form action="/studenthomepage/" method="post">
           {% csrf_token %}
           <label for="Skill_input">Skills: </label>
@@ -175,17 +210,18 @@
       <div class="ProfileBox" style="margin-left: 0">
         <h2>About Me</h2>
         <div class="Margins" id="target"></div>
-        <!-- <form class="Biographyform">
-          <p class="Margins">Help Labs Get To Know You:</p>
-          <textarea
+        
+         <form class="Biographyform">
+           <!-- <p class="Margins"></p> -->
+          <p
             id="bio"
             name="biotext"
             rows="8"
             cols="20"
             placeholder="Hello, I am..."
-          ></textarea>
-          <button type="submit" name="biographysubmit">Submit!</button>
-        </form> -->
+          >{{ user.studentprofile.biography}}</p>
+          {% comment %} <button type="submit" name="biographysubmit">Submit!</button> {% endcomment %}
+        </form> 
       </div>
 
       <!-- Documents -->
@@ -206,20 +242,22 @@
       <div class="ProfileBox" style="margin-left: 0">
         <h2 class="Margins">Courses I've Taken</h2>
         <div class="Margins" id="target2"></div>
-        <!-- <form class="Courseform">
+        
+         <form class="Courseform">
           <div id="Course_item"></div>
-          <p class="Margins">Add a course:</p>
+          <p id="Course_input"/> {{user.studentprofile.course}}</p>
+          {% comment %} <p class="Margins">Add a course:</p> {% endcomment %}
 
-          <input type="text" id="Course_input" />
-          <input type="button" id="addCourse" value="Add New Course" />
-      </form> -->
+          {% comment %} <input type="text" id="Course_input" />
+          <input type="button" id="addCourse" value="Add New Course" /> {% endcomment %}
+      </form>
       </div>
     </div>
 
     <div class="editButtons" style="margin-left: 0">
-      <form action="{% url 'skill'%}" method="post" enctype="multipart/form-data">
+      <form action="{% url 'studentprofile'%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{form}}
+        {{ form }}
         <input type="submit" id="addSkill" value="Edit My Profile">
 
   <script src="{% static '/Profile.js' %}"> </script>

@@ -4,8 +4,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from .models import Student
-from .forms import SkillForm
+from .models import StudentProfile
+# from .forms import SkillForm
 
 from email.message import EmailMessage
 import django
@@ -25,6 +25,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_str, force_bytes
 from . tokens import generate_token
 from django.contrib.auth.password_validation import validate_password
+from .forms import UserUpdateForm, ProfileUpdateForm
 
 from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
@@ -52,13 +53,13 @@ def signup(request):
             return redirect('signup')
 
         #checks for email duplicates in system
-        if User.objects.filter(email=email):
+        if User.objects.filter(email=email).exists():
             messages.error(request, "Email already exists! Please try some other email")
             return redirect('signup')
         
         #checks to make sure password is 8 characters long
-        if validate_password(pass1) is not None:
-           messages.error(request, "Password must be 8 characters long. They cannot be entirely numerical/alphabetical.")
+        # if validate_password(pass1) is not None:
+        #    messages.error(request, "Password must be 8 characters long. They cannot be entirely numerical/alphabetical.")
            
 
         #makes sure password and confirmation password match
@@ -68,8 +69,6 @@ def signup(request):
         
        # if 'stdbtn' in request.POST:
        # if 'labbtn' in request.POST:
-
-        
         
         
         # stores information in django using create_user function
@@ -85,7 +84,7 @@ def signup(request):
         # Welcome Email
         subject = "Welcome to Research Match Login!"
         message = "Hello " + myuser.first_name + "!! \n" + "Welcome to Research Match! \n Thank you for visiting our website. \n We have also sent you a confirmation email, please confirm your email address in order to activate your account. \n\n Thank you, \n Deadline Tech"
-        from_email = settings.EMAIL_HOST_USER
+        from_email = 'researchmatchdemo@gmail.com'
         to_list = [myuser.email]
         send_mail(subject, message, from_email, to_list, fail_silently=True)
 
@@ -104,7 +103,7 @@ def signup(request):
         email = EmailMessage(
             email_subject,
             message2,
-            settings.EMAIL_HOST_USER,
+            "researchdemo@gmail.com",
             [myuser.email],
         )
         email.fail_silently = True
@@ -214,26 +213,52 @@ def studentedit(request):
 def skillsdisplay(request):
     return render(request, "skillsdisplay.html")
 
-from .forms import SkillForm
+# from .forms import SkillForm
 
-from .models import Student
+from .models import StudentProfile
 
-def skill(request):
-  if request.POST:
-    form = SkillForm(request.POST) #form= and form.save will create a new student object.
-    if form.is_valid():
-        form.save()
-        return redirect(studenthomepage)
-  return render(request, 'skill.html', {'form': SkillForm})
+def studentprofile(request):
+    if request.method == 'POST':
+       # u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, 
+                                   request.FILES, 
+                                   instance=request.user.studentprofile)
+        
+        # if u_form.is_valid() and p_form.is_valid():
+        if p_form.is_valid():
+           # u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('studenthomepage')
 
 
-from .models import *
-from django.shortcuts import render
+    else:
+       # u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.studentprofile)
 
-def skillsview(request):
-    data = Student.objects.all()
-    if data: print('working')
-    return render(request, 'skillsdisplay.html', {'data': data})
+
+    context = {
+       # 'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'skill.html', context)
+
+# def skill(request):
+#   if request.POST:
+#     form = SkillForm(request.POST) #form= and form.save will create a new student object.
+#     if form.is_valid():
+#         form.save()
+#         return redirect('studenthomepage')
+#   return render(request, 'skill.html', {'form': SkillForm})
+
+
+# from .models import *
+# from django.shortcuts import render
+
+# def skillsview(request):
+#     data = StudentProfile.objects.all()
+#     if data: print('working')
+#     return render(request, 'skillsdisplay.html', {'data': data})
 
 # def get_skill(request):
 #     # if this is a POST request we need to process the form data
