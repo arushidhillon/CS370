@@ -10,6 +10,11 @@
       content="width=device-width,
                    initial-scale=1.0"
     />
+    {% if user.is_authenticated %}
+
+    {%else%}
+    <meta http-equiv="refresh" content="0; /signup" />
+    {%endif%}
     <title>StudentProfile</title>
     <link rel="stylesheet" href="{% static '/style.css' %}" />
   </head>
@@ -19,7 +24,7 @@
       <ul class="navbar-nav">
         <!-- Logo -->
         <li class="logo" style="margin-left: auto">
-          <a href="https://github.com/arushidhillon/CS370" class="nav-link">
+          <a href="/" class="nav-link">
             <span class="link-text">Research Match</span>
             <svg
               aria-hidden="true"
@@ -137,16 +142,32 @@
       </ul>
     </nav>
 
+    <div class="wrapper">
+      <div class="pagetitle">
+        {% if user.is_authenticated %}
+        <h3>Welcome Back, {{  user.studentprofile.firstname }}!</h3>
+        {%endif%}
+        
+<!--       </div>
+      <div class="gridBox">
+        {% csrf_token %}
+        <h3>{{ firstname }} {{ lastname }}</h3>
+        <img src="{% static '/Eli.jpeg' %}" class="profilePicture" />
+        <div class="tags-wrapper">
+          <form class="skills-box" action="/profilepage/" method="post">
+            {% csrf_token %}
+            <label for="Skill_input">Skills: </label> -->
+            
   <header>
     <!-- <h1 class="heading">Student Profile</h1> -->
     
   </header>
 
     <div class="FourBoxLayout">
-      {% if user.is_authenticated %}
+<!--       {% if user.is_authenticated %}
       <h1 style="padding-left: 2rem; margin-bottom: 0">Welcome Back, {{ user.studentprofile.firstname }} {{user.studentprofile.lastname}}!</h1>
       {% endif %}
-      <br />
+      <br /> -->
       <!-- Identity -->
       <div class="ProfileBox">
         <div class="Identityinfo">
@@ -170,6 +191,7 @@
         >
           <div class="tags">
             <span class="tag"> GPA: {{user.studentprofile.gpa}}</span>
+
             <div id="Skill_item"></div>
           </div>
           <div style="justify-self: last">

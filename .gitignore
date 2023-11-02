@@ -3,6 +3,10 @@
 # python cache
 __pycache__/
 *.py[cod]
+*.pyc
+lib/
+bin/
+*.cfg
 
 # Logs
 

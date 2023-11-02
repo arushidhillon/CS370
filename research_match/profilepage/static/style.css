@@ -507,3 +507,33 @@ textarea {
 .settings-wrapper #notifications {
   display: none;
 }
+
+/* Landing Page */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.homeTitle {
+  text-align: center;
+  font-size: 5rem;
+  animation: fadeIn 1.5s;
+}
+.homeButtonsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+.homeButtonsWrapper button {
+  width: 10rem;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-color);
+  border: 3px solid transparent;
+  border-color: var(--color-bg-1);
+  border-radius: 1rem;
+  cursor: pointer;
+}
