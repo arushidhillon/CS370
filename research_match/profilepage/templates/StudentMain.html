@@ -1,6 +1,5 @@
 {% load static %}
 
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,9 +9,7 @@
       content="width=device-width,
                    initial-scale=1.0"
     />
-    {% if user.is_authenticated %}
-
-    {%else%}
+    {% if user.is_authenticated %} {%else%}
     <meta http-equiv="refresh" content="0; /signup" />
     {%endif%}
     <title>StudentProfile</title>
@@ -144,22 +141,20 @@
 
     <div class="wrapper">
       <div class="pagetitle">
-        {% if user.is_authenticated %}
-        <h3>Welcome Back, {{ firstname }}!</h3>
-        {%endif%}
-        
+        <h3>Welcome Back, {{ user }}!</h3>
       </div>
+      <p style="align-self: right"><a href="{% url 'skill' %}"> hi</a></p>
       <div class="gridBox">
         {% csrf_token %}
-        <h3>{{ firstname }} {{ lastname }}</h3>
+        <h3>{{ email }} {{ lastname }}</h3>
         <img src="{% static '/Eli.jpeg' %}" class="profilePicture" />
         <div class="tags-wrapper">
           <form class="skills-box" action="/profilepage/" method="post">
             {% csrf_token %}
             <label for="Skill_input">Skills: </label>
-            
+
             <div id="Skill_item"></div>
-          </div>
+          </form>
           <div style="justify-self: last">
             <!-- <form action="/studenthomepage/" method="post">
           {% csrf_token %}
@@ -217,18 +212,17 @@
     </div>
 
     <div class="editButtons" style="margin-left: 0">
-      <form action="{% url 'skill'%}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" id="addSkill" value="Edit My Profile">
-
-  <script src="{% static '/Profile.js' %}"> </script>
-</body>
+      <p><a href="{% url 'skill' %}"> hi</a></p>
+      <form action="{% url 'skill' %}" method="post">
+        <input type="submit" id="addSkill" value="Edit My Profile" />
+        {% csrf_token %} {{form}}
+      </form>
+    </div>
+    <script src="{% static '/Profile.js' %}"></script>
+  </body>
 </html>
 
+<!-- <script src="Profile.js"> </script> -->
+<script src="{% static 'Profile.js' %}"></script>
 
-  <!-- <script src="Profile.js"> </script> -->
-  <script src="{% static 'Profile.js' %}"></script>
-
-  <body>
-
+<body></body>

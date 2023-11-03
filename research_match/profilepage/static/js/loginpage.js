@@ -5,6 +5,7 @@ let slider = document.querySelector(".slider");
 let formSection = document.querySelector(".form-section");
 
 signup.addEventListener("click", () => {
+  // Change text color if selected
   if (lab.hasAttribute("id")) {
     lab.removeAttribute("id");
   }
@@ -12,6 +13,7 @@ signup.addEventListener("click", () => {
     student.removeAttribute("id");
   }
   signup.setAttribute("id", "selected");
+
   if (slider.classList.contains("moveslider")) {
     slider.classList.remove("moveslider");
   }
@@ -20,6 +22,7 @@ signup.addEventListener("click", () => {
 });
 
 student.addEventListener("click", () => {
+  // Change text color if selected
   if (lab.hasAttribute("id")) {
     lab.removeAttribute("id");
   }
@@ -27,6 +30,7 @@ student.addEventListener("click", () => {
     signup.removeAttribute("id");
   }
   student.setAttribute("id", "selected");
+
   slider.classList.remove("moveslider");
   slider.classList.remove("moveslider2");
   formSection.classList.remove("form-section-move");
@@ -34,6 +38,7 @@ student.addEventListener("click", () => {
 });
 
 lab.addEventListener("click", () => {
+  // Change text color if selected
   if (student.hasAttribute("id")) {
     student.removeAttribute("id");
   }
@@ -41,6 +46,7 @@ lab.addEventListener("click", () => {
     signup.removeAttribute("id");
   }
   lab.setAttribute("id", "selected");
+
   slider.classList.add("moveslider");
   slider.classList.remove("moveslider2");
   formSection.classList.add("form-section-move");
