@@ -1,4 +1,6 @@
+
 from django.db import models
+from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractBaseUser, UserManager
 
 
@@ -14,11 +16,23 @@ from django.contrib.auth.models import AbstractBaseUser, UserManager
 # class Skills(models.Model):
 #   skill = models.CharField(max_length=100)
 
-class User(models.Model):
-    username = models.CharField(max_length=70)
-    email = models.CharField(max_length=70)
+
+    
+class StudentProfile(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    email = models.EmailField(blank=True, default='', unique=True)
     firstname = models.CharField(max_length=70)
     lastname = models.CharField(max_length=70)
+
+    profile_pic = models.ImageField(default='default.png', upload_to='profile_pics')
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+
+    gpa = models.IntegerField(default=0)
+    documents = models.IntegerField(default=0)
+    skill = models.CharField(max_length=255)
+    course=models.CharField(max_length=255)
+    biography=models.CharField(max_length=500)
+
     BACKGROUND = [
         ("S","Student"),
         ("M","Mentor")
@@ -33,21 +47,14 @@ class User(models.Model):
         ("PSYC", "Psychology"),
         ("HIST", "History"),
         ("OTHE", "Other")
-    ]
-    subject =  models.CharField(max_length=4,choices =SUBJECT)
-    objects = UserManager()
+    ] 
+
+    def __str__(self):
+        return f'{self.user.username} StudentProfile'
 
 
-class Student(User):
-    gpa = models.IntegerField(default=0)
-    documents = models.IntegerField(default=0)
-    skill = models.CharField(max_length=255)
-    course=models.CharField(max_length=255)
-    biography=models.CharField(max_length=500)
-    # def __str__(self):
-    #     return self.objects
 
-class Mentor(User):
+class Mentor(models.Model):
     biography = models.TextField()
     # def __str__(self):
     #     return self.objects
