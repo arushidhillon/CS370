@@ -1,5 +1,5 @@
 from django.db import models
-from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, UserManager
 
 
 
@@ -35,7 +35,7 @@ class User(models.Model):
         ("OTHE", "Other")
     ]
     subject =  models.CharField(max_length=4,choices =SUBJECT)
-    
+    objects = UserManager()
 
 
 class Student(User):
