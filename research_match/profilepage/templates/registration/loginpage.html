@@ -42,11 +42,12 @@
        the login or signup form -->
       <div class="slider"></div>
       <div class="btn">
-        <button class="student">Student</button>
+        <button class="student" id="selected">Student</button>
         <button class="lab">Lab</button>
         <button class="signup">Signup</button>
       </div>
-
+      <br />
+      <br />
       <!-- Form section that contains the login and the signup form -->
       <div class="form-section">
         <!-- login form -->
@@ -72,11 +73,6 @@
 
             <button class="clkbtn" type="submit">Student</button>
             <!-- <button class="clkbtn">Student</button> -->
-
-            <div class="d-flex justify-content-center links">
-              Don't have an account?
-              <a href="{% url 'signup' %}" class="m1-2"> Sign Up</a>
-            </div>
 
             <div class="d-flex justify-content-center links">
               Forgot Password?
@@ -105,11 +101,6 @@
             >
               Lab
             </button>
-
-            <div class="d-flex justify-content-center links">
-              Don't have an account?
-              <a href="{% url 'signup' %}" class="m1-2"> Sign Up</a>
-            </div>
 
             <div class="d-flex justify-content-center links">
               Forgot Password?
@@ -163,15 +154,18 @@
               placeholder="Confirm Your Password"
               required
             />
-            <button class="clkbtn2" name="studentbtn" type="submit">
-              Signup as a Student
-            </button>
-            <button class="clkbtn2" name="labbtn" type="submit">
-              Signup as a Lab
-            </button>
+            <div style="display: flex; gap: 1rem">
+              <button class="clkbtn2" name="studentbtn" type="submit">
+                Signup as Student
+              </button>
+              <button class="clkbtn2" name="labbtn" type="submit">
+                Signup as Lab
+              </button>
+            </div>
           </div>
         </form>
       </div>
+      <br />
     </div>
     <br />
     <script src="{% static 'js/loginpage.js' %}"></script>
