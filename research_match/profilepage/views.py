@@ -31,8 +31,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
 
 def home(request):
-    
-    return render(request, "registration/loginpage.html")
+    return render(request, "home.html")
 
 def signup(request):
 
@@ -140,7 +139,7 @@ def studentlogin(request):
         password = request.POST['password']
 
         user = authenticate(username=email, password=password)
-
+        print(user)
         if user is not None:
             if user.is_active:
                 login(request, user)
@@ -152,11 +151,11 @@ def studentlogin(request):
             
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
-                return redirect('home')
+                return redirect('signup')
 
         else:
             messages.error(request, "Bad Credentials!")
-            return redirect('home')
+            return redirect('signup')
 
 
     return render(request, "registration/loginpage.html")
@@ -181,11 +180,11 @@ def lablogin(request):
             
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
-                return redirect('home')
+                return redirect('signup')
 
         else:
             messages.error(request, "Bad Credentials!")
-            return redirect('home')
+            return redirect('signup')
 
 
     return render(request, "registration/loginpage.html")

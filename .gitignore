@@ -8,6 +8,9 @@ lib/
 bin/
 *.cfg
 
+# SQL
+db.sqlite3
+
 # Logs
 
 logs
@@ -167,6 +170,7 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 
 .vscode-test
+.vscode
 
 # yarn v2
 

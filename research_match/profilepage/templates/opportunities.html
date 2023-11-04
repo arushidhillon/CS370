@@ -26,7 +26,7 @@
       <ul class="navbar-nav">
         <!-- Logo -->
         <li class="logo" style="margin-left: auto">
-          <a href="https://github.com/arushidhillon/CS370" class="nav-link">
+          <a href="{% url 'home' %}" class="nav-link">
             <span class="link-text">Research Match</span>
             <svg
               aria-hidden="true"
@@ -48,7 +48,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'profilepage' %}" class="nav-link">
+          <a href="{% url 'studenthomepage' %}" class="nav-link">
             <span class="link-text">Profile</span>
             <svg
               aria-hidden="true"

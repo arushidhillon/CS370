@@ -1,6 +1,5 @@
 {% load static %}
 
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,9 +9,7 @@
       content="width=device-width,
                    initial-scale=1.0"
     />
-    {% if user.is_authenticated %}
-
-    {%else%}
+    {% if user.is_authenticated %} {%else%}
     <meta http-equiv="refresh" content="0; /signup" />
     {%endif%}
     <title>StudentProfile</title>
@@ -151,7 +148,7 @@
 <!--       </div>
       <div class="gridBox">
         {% csrf_token %}
-        <h3>{{ firstname }} {{ lastname }}</h3>
+        <h3>{{ email }} {{ lastname }}</h3>
         <img src="{% static '/Eli.jpeg' %}" class="profilePicture" />
         <div class="tags-wrapper">
           <form class="skills-box" action="/profilepage/" method="post">
@@ -193,7 +190,7 @@
             <span class="tag"> GPA: {{user.studentprofile.gpa}}</span>
 
             <div id="Skill_item"></div>
-          </div>
+          </form>
           <div style="justify-self: last">
             <span> {{ user.studentprofile.skill}} </span>
             <!-- <form action="/studenthomepage/" method="post">
@@ -259,14 +256,12 @@
         {% csrf_token %}
         {{ form }}
         <input type="submit" id="addSkill" value="Edit My Profile">
-
+        </form>
   <script src="{% static '/Profile.js' %}"> </script>
 </body>
 </html>
 
+<!-- <script src="Profile.js"> </script> -->
+<script src="{% static 'Profile.js' %}"></script>
 
-  <!-- <script src="Profile.js"> </script> -->
-  <script src="{% static 'Profile.js' %}"></script>
-
-  <body>
-
+<body></body>
