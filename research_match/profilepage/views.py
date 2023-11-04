@@ -30,9 +30,11 @@ from .forms import UserUpdateForm, ProfileUpdateForm
 from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
 
+# This function leads the user to the homepage of Research Match.
 def home(request):
     return render(request, "home.html")
 
+# This function registers the user and stores their information.
 def signup(request):
 
     if request.method == "POST":
@@ -44,12 +46,12 @@ def signup(request):
         pass2 = request.POST['pass2']
 
         #Tests if email is @emory.edu
-        mail = email.lower()
-        at_index = mail.find('@')+1
-        domain = mail[at_index:]
-        if domain != 'emory.edu':
-            messages.error(request, "Please enter @emory.edu email")
-            return redirect('signup')
+        # mail = email.lower()
+        # at_index = mail.find('@')+1
+        # domain = mail[at_index:]
+        # if domain != 'emory.edu':
+        #     messages.error(request, "Please enter @emory.edu email")
+        #     return redirect('signup')
 
         #checks for email duplicates in system
         if User.objects.filter(email=email).exists():
@@ -78,11 +80,11 @@ def signup(request):
 
         myuser.save()
 
-        messages.success(request,"Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account")
+        messages.success(request,"Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
 
         # Welcome Email
         subject = "Welcome to Research Match Login!"
-        message = "Hello " + myuser.first_name + "!! \n" + "Welcome to Research Match! \n Thank you for visiting our website. \n We have also sent you a confirmation email, please confirm your email address in order to activate your account. \n\n Thank you, \n Deadline Tech"
+        message = "Hello " + myuser.first_name + "! \n" + "Welcome to Research Match! \n Thank you for visiting our website. We hope you find the research opportunities you're looking for. \n We have also sent you a confirmation email, please confirm your email address in order to activate your account. This may be located in the spam folder. \n\n Thank you, \n Deadline Tech"
         from_email = 'researchmatchdemo@gmail.com'
         to_list = [myuser.email]
         send_mail(subject, message, from_email, to_list, fail_silently=True)
@@ -114,6 +116,7 @@ def signup(request):
 
     return render(request, "registration/loginpage.html")
 
+# This function activates a user's registered account by using a customized token that verifies the user's email address.
 def activate(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -126,12 +129,12 @@ def activate(request, uidb64, token):
         myuser.is_active = True
         myuser.save()
         login(request, myuser)
-        return redirect('home')
+        return redirect('studentlogin')
     
     else: 
         return render(request, 'activation_failed.html')
     
-
+# This function logs the user in after they activate their account.
 def studentlogin(request):
 
     if request.method == 'POST':
@@ -143,19 +146,23 @@ def studentlogin(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                firstname = user.first_name
+                # This redirects the user to the login page if they aren't loggged in and are in a different page.
                 if 'next' in request.POST:
                     return redirect(request.POST.get('next'))
                 else:
-                    return render(request, "StudentMain.html", {'firstname': firstname})
+                    return render(request, "StudentMain.html")
             
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
-                return redirect('signup')
+                return redirect('studentlogin')
 
         else:
-            messages.error(request, "Bad Credentials!")
-            return redirect('signup')
+            if User.objects.filter(email=email).exists():
+                messages.error(request, "The Password you entered is incorrect. Please try again or reset password.")
+                return redirect('studentlogin')
+            else:
+                messages.error(request, "The email you entered does not match our records. Please double-check and try again.")
+                return redirect('studentlogin')
 
 
     return render(request, "registration/loginpage.html")

@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractBaseUser, UserManager
-
+from django.db.models.signals import post_save
 
 
 # class Skill(models.Model):
@@ -51,7 +51,14 @@ class StudentProfile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} StudentProfile'
+    
+# Create Profile when New User signs up
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        user_profile = StudentProfile(user=instance)
+        user_profile.save()
 
+post_save.connect(create_profile, sender=User)
 
 
 class Mentor(models.Model):
