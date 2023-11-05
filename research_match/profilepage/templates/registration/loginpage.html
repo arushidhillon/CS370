@@ -8,11 +8,13 @@
                    initial-scale=1.0"
     />
     <title>Research Match</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{% static 'css/Style.css' %}" />
   </head>
 
   <body>
-    {% csrf_token%} {% for message in messages %}
+    {% comment %} {% csrf_token%} {% for message in messages %}
     <div
       class="alert alert-{{ message.tags }} alert-dismissible fade show"
       role="alert"
@@ -28,7 +30,17 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    {% endfor %}
+    {% endfor %} {% endcomment %}
+    {% for message in messages %}
+<div class="container-fluid p-0">
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+      <span aria-hidden="True">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
 
     <header>
       <br />

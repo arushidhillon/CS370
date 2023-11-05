@@ -19,11 +19,11 @@ from .models import StudentProfile
 #     Skill_input = forms.CharField(label="Your skill", max_length=100)
 
 class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
+   # email = forms.EmailField()
 
     class Meta:
         model = User
-        fields = ['first_name','last_name']
+        fields = ['first_name', 'last_name']
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
