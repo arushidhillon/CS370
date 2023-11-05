@@ -25,9 +25,9 @@ class Migration(migrations.Migration):
             name='StudentProfile',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('email', models.EmailField(blank=True, default='', max_length=254, unique=True)),
-                ('firstname', models.CharField(max_length=70)),
-                ('lastname', models.CharField(max_length=70)),
+                # ('email', models.EmailField(blank=True, default='', max_length=254, unique=True)),
+                # ('firstname', models.CharField(max_length=70)),
+                # ('lastname', models.CharField(max_length=70)),
                 ('profile_pic', models.ImageField(default='default.png', upload_to='profile_pics')),
                 ('date_created', models.DateTimeField(auto_now_add=True, null=True)),
                 ('gpa', models.IntegerField(default=0)),

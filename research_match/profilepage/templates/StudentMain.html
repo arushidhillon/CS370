@@ -142,7 +142,7 @@
     <div class="wrapper">
       <div class="pagetitle">
         {% if user.is_authenticated %}
-        <h3>Welcome Back, {{  user.studentprofile.firstname }}!</h3>
+        <h3>Welcome Back, {{  user.first_name }}!</h3>
         {%endif%}
         
 <!--       </div>
@@ -168,7 +168,7 @@
       <!-- Identity -->
       <div class="ProfileBox">
         <div class="Identityinfo">
-          <h2 class="StudentName">{{user.studentprofile.firstname }} {{user.studentprofile.lastname}}</h2>
+          <h2 class="StudentName">{{user.first_name }} {{user.last_name}}</h2>
           <img
             src="{{ user.studentprofile.profile_pic.url }}"
             alt="Eli"

@@ -46,12 +46,12 @@ def signup(request):
         pass2 = request.POST['pass2']
 
         #Tests if email is @emory.edu
-        # mail = email.lower()
-        # at_index = mail.find('@')+1
-        # domain = mail[at_index:]
-        # if domain != 'emory.edu':
-        #     messages.error(request, "Please enter @emory.edu email")
-        #     return redirect('signup')
+        mail = email.lower()
+        at_index = mail.find('@')+1
+        domain = mail[at_index:]
+        if domain != 'emory.edu':
+            messages.error(request, "Please enter @emory.edu email")
+            return redirect('signup')
 
         #checks for email duplicates in system
         if User.objects.filter(email=email).exists():
@@ -225,26 +225,26 @@ from .models import StudentProfile
 
 def studentprofile(request):
     if request.method == 'POST':
-       # u_form = UserUpdateForm(request.POST, instance=request.user)
+        u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, 
                                    request.FILES, 
                                    instance=request.user.studentprofile)
         
-        # if u_form.is_valid() and p_form.is_valid():
-        if p_form.is_valid():
-           # u_form.save()
+        if u_form.is_valid() and p_form.is_valid():
+       # if p_form.is_valid():
+            u_form.save()
             p_form.save()
             messages.success(request, f'Your account has been updated!')
             return redirect('studenthomepage')
 
 
     else:
-       # u_form = UserUpdateForm(instance=request.user)
+        u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.studentprofile)
 
 
     context = {
-       # 'u_form': u_form,
+        'u_form': u_form,
         'p_form': p_form
     }
     return render(request, 'skill.html', context)
