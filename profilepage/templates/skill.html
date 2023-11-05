@@ -4,8 +4,9 @@
       <fieldset>
         <legend>Add Skills</legend>
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Submit</button>
+        {{ u_form }} 
+        {{ p_form }}
+        <button type="submit" class="btn btn-primary">Update</button>
       </fieldset>
     </form>
 </div>
