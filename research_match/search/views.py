@@ -14,7 +14,7 @@ def search_labs(request):
                 Q(firstname__icontains=result) |
                 Q(lastname__icontains=result)
             ).exclude(username=request.user.username)
-            return render(request, 'inbox/list_searchuser.html', {'users': users})
+            return render(request, 'search/list_searchlabs.html', {'users': users})
         else:
             return HttpResponse('Please enter a valid search.')
     else:
