@@ -1,14 +1,16 @@
-from django.shortcuts import render
-from django.http import HttpResponse, Http404
 from django.db.models import Q
-from profile.models import User
-from .models import *
+from django.http import HttpResponse
+from django.shortcuts import render
+from .models import SearchQuery
 
 def search_labs(request):
     if request.htmx:
-        result = request.GET.get('search_labs')
-        if len(result) > 0:
-            # Search by background, first name, or last name
+        result = request.GET.get('search_user', '').strip()
+        if result:
+            # Log the search query
+            SearchQuery.objects.create(user=request.user, query=result)
+
+            # Perform the search
             users = User.objects.filter(
                 Q(background__icontains=result) |
                 Q(firstname__icontains=result) |
@@ -16,6 +18,6 @@ def search_labs(request):
             ).exclude(username=request.user.username)
             return render(request, 'search/list_searchlabs.html', {'users': users})
         else:
-            return HttpResponse('Please enter a valid search.')
+            return HttpResponse('Please enter a valid search query.')
     else:
-        raise Http404()
+        return HttpResponse('This endpoint only responds to HTMX requests.')
