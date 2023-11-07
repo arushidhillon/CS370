@@ -1,0 +1,173 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+                   initial-scale=1.0"
+    />
+    <title>Research Match</title>
+    <link rel="stylesheet" href="{% static 'css/Style.css' %}" />
+  </head>
+
+  <body>
+    {% csrf_token%} {% for message in messages %}
+    <div
+      class="alert alert-{{ message.tags }} alert-dismissible fade show"
+      role="alert"
+    >
+      <strong>Message:</strong> {{ message }}
+      <button
+        type="button"
+        class="close"
+        data-bs-dismiss="alert"
+        aria-label="close"
+        onclick="window.open('', '_self', ''); window.close();"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+
+    <header>
+      <br />
+      <h1 class="heading">Research Match</h1>
+      <h3 class="title">Login or Signup to access Research Match</h3>
+    </header>
+
+    <!-- container div -->
+    <div class="container">
+      <!-- upper button section to select
+       the login or signup form -->
+      <div class="slider"></div>
+      <div class="btn">
+        <button class="student">Student</button>
+        <button class="lab">Lab</button>
+        <button class="signup">Signup</button>
+      </div>
+
+      <!-- Form section that contains the login and the signup form -->
+      <div class="form-section">
+        <!-- login form -->
+        <form action="/studentlogin" method="post">
+          <div class="student-box">
+            {% if request.GET.next%}
+            <input type="hidden" name="next" value="{{request.GET.next}}" />
+            {% endif %}
+            <input
+              type="email"
+              name="email"
+              class="email ele"
+              placeholder="email@emory.edu"
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              class="password ele"
+              placeholder="password"
+              required
+            />
+
+            <button class="clkbtn" type="submit">Student</button>
+            <!-- <button class="clkbtn">Student</button> -->
+
+                            <button class="clkbtn" type="submit">Student</button>
+                            <!-- <button class="clkbtn">Student</button> -->
+                           
+                                   <div class="d-flex justify-content-center links">
+                                          Forgot Password? <a href="{% url 'reset_password' %}" class="m1-2"> Reset Password</a>
+                                   </div>
+                            
+                     </div>
+                     
+              </form>
+
+            <div class="d-flex justify-content-center links">
+              Forgot Password?
+              <a href="{% url 'reset_password' %}" class="m1-2">
+                Reset Password</a
+              >
+            </div>
+          </div>
+        </form>
+
+              <form action="/lablogin" method="POST">
+                     <div class="lab-box">
+                            
+                            <input type="email" class="email ele" placeholder="email@emory.edu">
+                            <input type="password" class="password ele" placeholder="password">
+                            <button class="clkbtn" onclick="window.location.href = 'LabProfileMain.html';">Lab</button>
+                    
+                            <div class="d-flex justify-content-center links">
+                                   Forgot Password? <a href="{% url 'reset_password' %}" class="m1-2"> Reset Password</a>
+                            </div>
+                     </div>
+
+            <div class="d-flex justify-content-center links">
+              Forgot Password?
+              <a href="{% url 'reset_password' %}" class="m1-2">
+                Reset Password</a
+              >
+            </div>
+          </div>
+        </form>
+
+        <form action="/signup" method="post">
+          <!-- signup form -->
+          <div class="signup-box">
+            <input
+              type="text"
+              id="firstname"
+              name="firstname"
+              class="name ele"
+              placeholder="Enter Your First Name"
+              required
+            />
+            <input
+              type="text"
+              id="lastname"
+              name="lastname"
+              class="name ele"
+              placeholder="Enter Your Last Name"
+              required
+            />
+            <input
+              type="email"
+              class="email ele"
+              id="email"
+              name="email"
+              placeholder="email@emory.edu"
+              required
+            />
+            <!--   <span id="email-error" class="emailError"></span>-->
+            <input
+              type="password"
+              id="password"
+              name="pass1"
+              class="password ele"
+              placeholder="Create a Password"
+              required
+            />
+            <input
+              type="password"
+              name="pass2"
+              class="password ele"
+              placeholder="Confirm Your Password"
+              required
+            />
+            <button class="clkbtn2" name="studentbtn" type="submit">
+              Signup as a Student
+            </button>
+            <button class="clkbtn2" name="labbtn" type="submit">
+              Signup as a Lab
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <br />
+    <script src="{% static 'js/loginpage.js' %}"></script>
+  </body>
+</html>

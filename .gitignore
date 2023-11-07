@@ -1,5 +1,5 @@
 # Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
-
+.env
 # python cache
 __pycache__/
 *.py[cod]
@@ -7,6 +7,10 @@ __pycache__/
 lib/
 bin/
 *.cfg
+lib/
+bin/
+.cfg
+
 
 # SQL
 db.sqlite3
