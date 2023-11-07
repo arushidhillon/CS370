@@ -17,13 +17,6 @@ from django.dispatch import receiver
 # class Skills(models.Model):
 #   skill = models.CharField(max_length=100)
 
-
-
-#class UserManager(AbstractUserManager):
- # pass
-
-#class User(AbstractUser):
- #   objects = UserManager()
     
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
@@ -56,6 +49,15 @@ class StudentProfile(models.Model):
         ("HIST", "History"),
         ("OTHE", "Other")
     ] 
+
+    # Splits Student Profile tags with comma for display in profile page
+    def skill_list(self):
+        return self.skill.split(',')
+    
+    # Splits Student Profile courses with comma for display in profile page
+    def course_list(self):
+        return self.course.split(',')
+    
     def __str__(self):
         return f'{self.user.username} StudentProfile'
 
