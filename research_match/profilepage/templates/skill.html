@@ -1,11 +1,11 @@
 
 <div class="container">
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
       <fieldset>
-        <legend>Add Skills</legend>
+        <legend>Update Your Profile</legend>
         {% csrf_token %}
-        {{ u_form }} 
-        {{ p_form }}
+        {{ u_form.as_p }} 
+        {{ p_form.as_p }}
         <button type="submit" class="btn btn-primary">Update</button>
       </fieldset>
     </form>

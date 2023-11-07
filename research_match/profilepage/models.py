@@ -28,7 +28,7 @@ class StudentProfile(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     gpa = models.IntegerField(default=0)
-    documents = models.IntegerField(default=0)
+    documents = models.FileField(upload_to='documents')
     skill = models.CharField(max_length=255)
     course=models.CharField(max_length=255)
     biography=models.CharField(max_length=500)
