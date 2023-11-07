@@ -28,4 +28,5 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = StudentProfile
-        fields = [ 'skill', 'course', 'biography']
+        fields = ['profile_pic', 'skill', 'course', 'biography','documents']
+    
