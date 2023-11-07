@@ -277,6 +277,7 @@ main {
   max-height: 8rem;
 }
 .matchButtons {
+  transition: 0.25s;
   height: 2rem;
   width: 10rem;
   font-family: "Poppins", sans-serif;
@@ -284,6 +285,12 @@ main {
   border: 3px solid transparent;
   border-color: var(--color-bg-1);
   border-radius: 1rem; /*linear-gradient(45deg, var(--color-accent), var(--color-bg-1)) 1;*/
+  cursor: pointer;
+}
+
+.matchButtons:hover {
+  color: white;
+  background: var(--color-bg-1);
 }
 .matchTitle {
   grid-row: span 2;
@@ -358,13 +365,19 @@ main {
 #Skill_item li {
   width: 100%;
 }
+.Identityinfo {
+  width: 25rem;
+  min-height: 20rem;
+}
 .IdentityInfo #inputs {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 25rem;
+  min-height: 20rem;
 }
 .StudentPicture {
-  width: 100px;
+  width: 10rem;
   border-radius: 50;
 }
 .FourBoxLayout {
@@ -372,6 +385,12 @@ main {
   display: grid;
   grid-template-columns: 50% 50%;
   gap: 1rem;
+}
+.StudentName {
+  margin-bottom: 0.5rem;
+}
+.Headline {
+  margin-top: 0;
 }
 
 /* Roles */
@@ -442,14 +461,15 @@ main {
 .wrapper {
   display: grid;
   padding-top: 5rem;
-  margin-right: 13rem;
-  margin-left: 13rem;
+  margin-right: 16rem;
+  margin-left: 16rem;
   gap: 2rem;
+  margin-bottom: 5rem;
 }
 .gridBox {
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 1rem;
   border-radius: 40px;
   border-width: 0.25em;
   border-style: solid;
@@ -457,6 +477,12 @@ main {
   box-shadow: 8px 8px 20px rgb(128, 128, 128);
   padding: 2rem;
   overflow: hidden;
+}
+#about {
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 0;
 }
 .profilePicture {
   max-height: 15rem;

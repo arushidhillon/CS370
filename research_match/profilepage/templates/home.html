@@ -141,7 +141,7 @@
       </div>
       <div class="homeButtonsWrapper">
         {% if user.is_authenticated %} {% csrf_token %}
-        <p>Welcome back, {{user}}!</p>
+        <p>Welcome back, {{user.first_name}}!</p>
         <button
           onclick="window.location.href='/opportunities';"
           style="animation: fadeIn 2s"
