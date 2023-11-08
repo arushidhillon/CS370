@@ -12,6 +12,7 @@ urlpatterns = [
     path('signout', views.signout, name ="signout"),
     path('activate/<uidb64>/<token>', views.activate, name="activate"),
     path('studenthomepage/', views.studenthomepage, name='studenthomepage'),
+    path('labhomepage/',views.labhomepage, name='labhomepage'),
 
     path('reset_password', auth_views.PasswordResetView.as_view(
         template_name="password-reset/password_reset.html"
@@ -26,10 +27,12 @@ urlpatterns = [
         template_name="password-reset/password_reset_done.html"
         ), name="password_reset_complete"),
 
-    path('studentedit/', views.studentedit, name='studentedit'),
     path('opportunities/', views.opportunities, name='opportunities'),
+    path('students/', views.students, name='students'),
     path('settings/', views.settings, name='settings'),
     path('matches/', views.matches, name='matches'),
+    path('matchedstudents/', views.matchedstudents, name='matchedstudents'),
+    path('labprofile', views.labprofile, name='labprofile'),
     path('studentprofile', views.studentprofile, name='studentprofile')
     # path('skill/', views.skill, name='skill'),
     # path('skillsview/', views.skillsview, name='skillsview'),

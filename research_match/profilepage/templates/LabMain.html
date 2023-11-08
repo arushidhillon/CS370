@@ -12,7 +12,7 @@
     {% if user.is_authenticated %} {%else%}
     <meta http-equiv="refresh" content="0; /signup" />
     {%endif%}
-    <title>StudentProfile</title>
+    <title>LabProfile</title>
     <link rel="stylesheet" href="{% static '/style.css' %}" />
   </head>
 
@@ -43,7 +43,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'studenthomepage' %}" class="nav-link" id="selected">
+          <a href="{% url 'labhomepage' %}" class="nav-link" id="selected">
             <span class="link-text">Profile</span>
             <svg
               aria-hidden="true"
@@ -67,9 +67,9 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'matches' %}" class="nav-link">
+          <a href="{% url 'matchedstudents' %}" class="nav-link">
             <!-- TODO: Link page-->
-            <span class="link-text">Matches</span>
+            <span class="link-text">Matched Students</span>
             <svg
               aria-hidden="true"
               focusable="false"
@@ -92,9 +92,9 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'opportunities' %}" class="nav-link">
+          <a href="{% url 'students' %}" class="nav-link">
             <!-- TODO: Link page-->
-            <span class="link-text">Opportunities</span>
+            <span class="link-text">Students</span>
             <svg
               aria-hidden="true"
               focusable="false"
@@ -168,9 +168,9 @@
       <!-- Identity -->
       <div class="ProfileBox">
         <div class="Identityinfo">
-          <h2 class="StudentName">{{user.first_name }} {{user.last_name}}</h2>
+          <h2 class="StudentName">My name is: {{user.first_name }} {{user.last_name}} and I am a part of the {{user.model.labname}} Lab!</h2>
           <img
-            src="{{ user.studentprofile.profile_pic.url }}"
+            src="{{ user.mentor.profile_pic.url }}"
             alt="Eli"
             class="StudentPicture"
           />
@@ -187,12 +187,12 @@
           "
         >
           <div class="tags">
-            <span class="tag"> GPA: {{user.studentprofile.gpa}}</span>
 
             <div id="Skill_item"></div>
           </form>
           <div style="justify-self: last">
-            <span> {{ user.studentprofile.skill}} </span>
+            <!-- <h2>Skills Required</h2> -->
+            <span> {{ user.mentor.skill}} </span>
             <!-- <form action="/studenthomepage/" method="post">
           {% csrf_token %}
           <label for="Skill_input">Skills: </label>
@@ -216,7 +216,7 @@
             rows="8"
             cols="20"
             placeholder="Hello, I am..."
-          >{{ user.studentprofile.biography}}</p>
+          >{{ user.mentor.biography}}</p>
           {% comment %} <button type="submit" name="biographysubmit">Submit!</button> {% endcomment %}
         </form> 
       </div>
@@ -242,8 +242,8 @@
         
          <form class="Courseform">
           <div id="Course_item"></div>
-          <p id="Course_input"/> {{user.studentprofile.course}}</p>
-          {% comment %} <p class="Margins">My course:</p> {% endcomment %}
+          <p id="Course_input"> {{user.mentor.course}}</p>
+          {% comment %} <p class="Margins">Required course:</p> {% endcomment %}
 
           {% comment %} <input type="text" id="Course_input" />
           <input type="button" id="addCourse" value="Add New Course" /> {% endcomment %}
@@ -252,7 +252,7 @@
     </div>
 
     <div class="editButtons" style="margin-left: 0">
-      <form action="{% url 'studentprofile'%}" method="post" enctype="multipart/form-data">
+      <form action="{% url 'labprofile'%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         <input type="submit" id="addSkill" value="Edit My Profile">

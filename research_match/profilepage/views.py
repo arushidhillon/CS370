@@ -5,7 +5,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import StudentProfile
-# from .forms import SkillForm
 
 from email.message import EmailMessage
 import django
@@ -25,7 +24,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_str, force_bytes
 from . tokens import generate_token
 from django.contrib.auth.password_validation import validate_password
-from .forms import UserUpdateForm, ProfileUpdateForm
+from .forms import UserUpdateForm, ProfileUpdateForm, LabUpdateForm
 
 from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
@@ -183,7 +182,7 @@ def lablogin(request):
                 if 'next' in request.POST:
                     return redirect(request.POST.get('next'))
                 else:
-                    return render(request, "StudentMain.html", {'firstname': firstname})
+                    return render(request, "LabMain.html", {'firstname': firstname})
             
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
@@ -216,8 +215,14 @@ def matches(request):
 def studentedit(request):
     return render(request, "StudentMainEdit.html")
 
-def skillsdisplay(request):
-    return render(request, "skillsdisplay.html")
+def labhomepage(request):
+    return render(request, "LabMain.html")
+
+def students(request):
+    return render(request, "students.html")
+
+def matchedstudents(request):
+    return render(request, "matchedstudents.html")
 
 # from .forms import SkillForm
 
@@ -248,6 +253,31 @@ def studentprofile(request):
         'p_form': p_form
     }
     return render(request, 'skill.html', context)
+
+def labprofile(request):
+     if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = LabUpdateForm(request.POST, 
+                                   request.FILES, 
+                                   instance=request.user.studentprofile)
+        
+        if u_form.is_valid() and p_form.is_valid():
+       # if p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('studenthomepage')
+
+        else:
+            u_form = UserUpdateForm(instance=request.user)
+            p_form = LabUpdateForm(instance=request.user.studentprofile)
+
+
+        context = {
+            'u_form': u_form,
+            'p_form': p_form
+        }
+        return render(request, 'skill.html', context)
 
 # def skill(request):
 #   if request.POST:
