@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import mimetypes
 mimetypes.add_type("text/css", ".css", True)
+from django.contrib.messages import constants as messages
 from . info import *
 import os
 import dj_database_url
@@ -34,6 +35,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'profilepage',
     'whitenoise.runserver_nostatic',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'profilepage',
+    'crispy_forms',
 ]
 class WhiteNoiseStaticFilesStorage(CompressedManifestStaticFilesStorage):
     manifest_strict = False
@@ -44,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 ROOT_URLCONF = 'research_match.urls'
 # Database
@@ -82,3 +92,38 @@ LOGGING = {
         },
     },
 }
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "OPTIONS" : {
+            "min_length": 8,
+        },
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+# Internationalization
+# https://docs.djangoproject.com/en/4.2/topics/i18n/
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_TZ = True
