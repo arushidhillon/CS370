@@ -181,7 +181,6 @@ def lablogin(request):
                     return redirect(request.POST.get('next'))
                 else:
                     return render(request, "LabMain.html", {'firstname': firstname})
-
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
                 return redirect('signup')
@@ -218,18 +217,14 @@ def matches(request):
 def studentedit(request):
     return render(request, "StudentMainEdit.html")
 
-
 def labhomepage(request):
     return render(request, "LabMain.html")
-
 
 def students(request):
     return render(request, "students.html")
 
-
 def matchedstudents(request):
     return render(request, "matchedstudents.html")
-
 
 # from .forms import SkillForm
 
@@ -263,14 +258,14 @@ def studentprofile(request):
 
 
 def labprofile(request):
-    if request.method == 'POST':
+     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = LabUpdateForm(request.POST,
-                               request.FILES,
-                               instance=request.user.studentprofile)
-
+        p_form = LabUpdateForm(request.POST, 
+                                   request.FILES, 
+                                   instance=request.user.studentprofile)
+        
         if u_form.is_valid() and p_form.is_valid():
-            # if p_form.is_valid():
+       # if p_form.is_valid():
             u_form.save()
             p_form.save()
             messages.success(request, f'Your account has been updated!')
