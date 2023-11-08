@@ -91,7 +91,7 @@ def signup(request):
             myuser.groups.add(group)
 
         if 'labbtn' in request.POST:
-            group = Group.objects.get(name='mentor')
+            group = Group.objects.get(name='lab')
             myuser.groups.add(group)
 
         messages.success(request,"Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
@@ -152,7 +152,7 @@ def activate(request, uidb64, token):
 @allowed_users(allowed_roles=['student'])
 def studentlogin(request):
 
-    if request.method == 'POST':
+    if 'studentlog' in request.POST:
         email = request.POST['email']
         password = request.POST['password']
 
@@ -183,12 +183,12 @@ def studentlogin(request):
     return render(request, "registration/loginpage.html")
 
 #same code as student login, doesn't lead to lab profile page or stores in different table for now
-@allowed_users(allowed_roles=['mentor'])
+@allowed_users(allowed_roles=['lab'])
 def lablogin(request):
 
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
+    if 'lablog' in request.POST:
+        email = request.POST.get('email')
+        password = request.POST.get('password')
 
         user = authenticate(username=email, password=password)
 
@@ -221,27 +221,36 @@ def signout(request):
     messages.success(request, "Logged Out Successfully!")
     return redirect('home')
 
+@allowed_users(allowed_roles=['student'])
 def studenthomepage(request):
     return render(request, "StudentMain.html")
 
+
+@allowed_users(allowed_roles=['student'])
 def opportunities(request):
     return render(request, "Opportunities.html")
 
+@allowed_users(allowed_roles=['student'])
 def settings(request):
     return render(request, "Settings.html")
 
+@allowed_users(allowed_roles=['student'])
 def matches(request):
     return render(request, "matches.html")
 
+@allowed_users(allowed_roles=['student'])
 def studentedit(request):
     return render(request, "StudentMainEdit.html")
 
+@allowed_users(allowed_roles=['lab'])
 def labhomepage(request):
     return render(request, "LabMain.html")
 
+@allowed_users(allowed_roles=['lab'])
 def students(request):
     return render(request, "students.html")
 
+@allowed_users(allowed_roles=['lab'])
 def matchedstudents(request):
     return render(request, "matchedstudents.html")
 
