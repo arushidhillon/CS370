@@ -68,16 +68,13 @@ def signup(request):
     
                 for error in e.error_list:
                     messages.error(request, error)
-
-            return redirect('signup')
+                if e.error_list is not None:
+                    return redirect('signup')
 
         #makes sure password and confirmation password match
         if pass1 != pass2:
             messages.error(request, "Passwords didn't match!")
             return redirect('signup')
-        
-
-       # if 'labbtn' in request.POST:
         
         
         # stores information in django using create_user function
@@ -88,13 +85,13 @@ def signup(request):
 
         myuser.save()
 
-        # if 'stdbtn' in request.POST:
-        #     group = Group.objects.get(name='student')
-        #     myuser.groups.add(group)
+        if 'stdbtn' in request.POST:
+            group = Group.objects.get(name='student')
+            myuser.groups.add(group)
 
-        # if 'labbtn' in request.POST:
-        #     group = Group.objects.get(name='mentor')
-        #     myuser.groups.add(group)
+        if 'labbtn' in request.POST:
+            group = Group.objects.get(name='mentor')
+            myuser.groups.add(group)
 
         messages.success(request,"Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
 
