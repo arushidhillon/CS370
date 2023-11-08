@@ -140,4 +140,4 @@ TEMPLATES = [
         },
     },
 ]
-AUTH_USER_MODEL = 'profilepage.User'
+#AUTH_USER_MODEL = 'profilepage.User'
