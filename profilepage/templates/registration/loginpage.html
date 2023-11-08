@@ -8,11 +8,13 @@
                    initial-scale=1.0"
     />
     <title>Research Match</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{% static 'css/Style.css' %}" />
   </head>
 
   <body>
-    {% csrf_token%} {% for message in messages %}
+    {% comment %} {% csrf_token%} {% for message in messages %}
     <div
       class="alert alert-{{ message.tags }} alert-dismissible fade show"
       role="alert"
@@ -28,7 +30,17 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    {% endfor %}
+    {% endfor %} {% endcomment %}
+    {% for message in messages %}
+<div class="container-fluid p-0">
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+      <span aria-hidden="True">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
 
     <header>
       <br />
@@ -42,11 +54,12 @@
        the login or signup form -->
       <div class="slider"></div>
       <div class="btn">
-        <button class="student">Student</button>
+        <button class="student" id="selected">Student</button>
         <button class="lab">Lab</button>
         <button class="signup">Signup</button>
       </div>
-
+      <br />
+      <br />
       <!-- Form section that contains the login and the signup form -->
       <div class="form-section">
         <!-- login form -->
@@ -73,17 +86,6 @@
             <button class="clkbtn" type="submit">Student</button>
             <!-- <button class="clkbtn">Student</button> -->
 
-                            <button class="clkbtn" type="submit">Student</button>
-                            <!-- <button class="clkbtn">Student</button> -->
-                           
-                                   <div class="d-flex justify-content-center links">
-                                          Forgot Password? <a href="{% url 'reset_password' %}" class="m1-2"> Reset Password</a>
-                                   </div>
-                            
-                     </div>
-                     
-              </form>
-
             <div class="d-flex justify-content-center links">
               Forgot Password?
               <a href="{% url 'reset_password' %}" class="m1-2">
@@ -93,17 +95,24 @@
           </div>
         </form>
 
-              <form action="/lablogin" method="POST">
-                     <div class="lab-box">
-                            
-                            <input type="email" class="email ele" placeholder="email@emory.edu">
-                            <input type="password" class="password ele" placeholder="password">
-                            <button class="clkbtn" onclick="window.location.href = 'LabProfileMain.html';">Lab</button>
-                    
-                            <div class="d-flex justify-content-center links">
-                                   Forgot Password? <a href="{% url 'reset_password' %}" class="m1-2"> Reset Password</a>
-                            </div>
-                     </div>
+        <form action="/lablogin" method="POST">
+          <div class="lab-box">
+            <input
+              type="email"
+              class="email ele"
+              placeholder="email@emory.edu"
+            />
+            <input
+              type="password"
+              class="password ele"
+              placeholder="password"
+            />
+            <button
+              class="clkbtn"
+              onclick="window.location.href = 'LabProfileMain.html';"
+            >
+              Lab
+            </button>
 
             <div class="d-flex justify-content-center links">
               Forgot Password?
@@ -157,15 +166,18 @@
               placeholder="Confirm Your Password"
               required
             />
-            <button class="clkbtn2" name="studentbtn" type="submit">
-              Signup as a Student
-            </button>
-            <button class="clkbtn2" name="labbtn" type="submit">
-              Signup as a Lab
-            </button>
+            <div style="display: flex; gap: 1rem">
+              <button class="clkbtn2" name="studentbtn" type="submit">
+                Signup as Student
+              </button>
+              <button class="clkbtn2" name="labbtn" type="submit">
+                Signup as Lab
+              </button>
+            </div>
           </div>
         </form>
       </div>
+      <br />
     </div>
     <br />
     <script src="{% static 'js/loginpage.js' %}"></script>
