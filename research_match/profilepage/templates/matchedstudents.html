@@ -12,7 +12,7 @@
     {% if user.is_authenticated %} {%else%}
     <meta http-equiv="refresh" content="0; /signup" />
     {%endif%}
-    <title>Matches</title>
+    <title>LabProfile</title>
     <link rel="stylesheet" href="{% static '/style.css' %}" />
   </head>
 
@@ -21,7 +21,7 @@
       <ul class="navbar-nav">
         <!-- Logo -->
         <li class="logo" style="margin-left: auto">
-          <a href="{% url 'home' %}" class="nav-link">
+          <a href="/" class="nav-link">
             <span class="link-text">Research Match</span>
             <svg
               aria-hidden="true"
@@ -43,7 +43,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'studenthomepage' %}" class="nav-link">
+          <a href="{% url 'labhomepage' %}" class="nav-link" id="selected">
             <span class="link-text">Profile</span>
             <svg
               aria-hidden="true"
@@ -67,8 +67,9 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'matches' %}" class="nav-link" id="selected">
-            <span class="link-text">Matches</span>
+          <a href="{% url 'matchedstudents' %}" class="nav-link">
+            <!-- TODO: Link page-->
+            <span class="link-text">Matched Students</span>
             <svg
               aria-hidden="true"
               focusable="false"
@@ -91,8 +92,9 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'opportunities' %}" class="nav-link">
-            <span class="link-text">Opportunities</span>
+          <a href="{% url 'students' %}" class="nav-link">
+            <!-- TODO: Link page-->
+            <span class="link-text">Students</span>
             <svg
               aria-hidden="true"
               focusable="false"
@@ -139,14 +141,14 @@
 
     <div id="matches-current">
       <div class="pagetitle">
-        <h3>Current Labs</h3>
+        <h3>Current Students</h3>
       </div>
     </div>
     <div id="matches-past">
       <div class="pagetitle">
-        <h3>Past Labs</h3>
+        <h3>Past Students</h3>
       </div>
     </div>
-    <script src="{% static '/Matches.js' %}"></script>
+    <script src="{% static '/matchedstudents.js' %}"></script>
   </body>
 </html>
