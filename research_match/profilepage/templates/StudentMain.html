@@ -223,29 +223,28 @@
         <h2>My Files</h2>
       </div>
 
-<<<<<<< HEAD
       <!-- Courses -->
-      <div class="ProfileBox" style="margin-left: 0">
+      <!-- <div class="ProfileBox" style="margin-left: 0">
         <h2 class="Margins">Courses I've Taken</h2>
         <div class="Margins" id="target2"></div>
         
          <form class="Courseform">
           <div id="Course_item"></div>
-          <p id="Course_input"/> {{user.studentprofile.course}}</p>
+          <p id="Course_input"> {{user.studentprofile.course}}</p>
           {% comment %} <p class="Margins">My course:</p> {% endcomment %}
 
           {% comment %} <input type="text" id="Course_input" />
           <input type="button" id="addCourse" value="Add New Course" /> {% endcomment %}
       </form>
       </div>
-    </div>
-
+    </div> -->
+<!-- 
     <div class="editButtons" style="margin-left: 0">
       <form action="{% url 'studentprofile'%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
-        <input type="submit" id="addSkill" value="Edit My Profile">
-=======
+        <input type="submit" id="addSkill" value="Edit My Profile"> -->
+
       <!-- Edit Profile -->
       <div style="display: flex; justify-content: end">
         <form
@@ -255,7 +254,6 @@
         >
           {% csrf_token %} {{ form }}
           <input class="matchButtons" type="submit" id="addSkill" value="Edit Profile" />
->>>>>>> ea5b34f025d32fc612e2a94c08d611f63c877fab
         </form>
       </div>
     </div>  
