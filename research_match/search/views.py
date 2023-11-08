@@ -2,6 +2,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import SearchQuery
+from profilepage.models import User
 
 def search_labs(request):
     if request.htmx:
