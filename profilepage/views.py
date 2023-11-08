@@ -1,11 +1,9 @@
-
 from django.forms import ValidationError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import StudentProfile
-# from .forms import SkillForm
 
 from email.message import EmailMessage
 import django
@@ -23,20 +21,21 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_str, force_bytes
-from . tokens import generate_token
+from .tokens import generate_token
 from django.contrib.auth.password_validation import validate_password
-from .forms import UserUpdateForm, ProfileUpdateForm
+from .forms import UserUpdateForm, ProfileUpdateForm, LabUpdateForm
 
 from django.views.decorators.csrf import ensure_csrf_cookie
-@ensure_csrf_cookie
 
+
+@ensure_csrf_cookie
 # This function leads the user to the homepage of Research Match.
 def home(request):
     return render(request, "home.html")
 
+
 # This function registers the user and stores their information.
 def signup(request):
-
     if request.method == "POST":
         # Requests information inputted
         firstname = request.POST['firstname']
@@ -45,33 +44,31 @@ def signup(request):
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
 
-        #Tests if email is @emory.edu
+        # Tests if email is @emory.edu
         mail = email.lower()
-        at_index = mail.find('@')+1
+        at_index = mail.find('@') + 1
         domain = mail[at_index:]
         if domain != 'emory.edu':
             messages.error(request, "Please enter @emory.edu email")
             return redirect('signup')
 
-        #checks for email duplicates in system
+        # checks for email duplicates in system
         if User.objects.filter(email=email).exists():
             messages.error(request, "Email already exists! Please try some other email")
             return redirect('signup')
-        
-        #checks to make sure password is 8 characters long
+
+        # checks to make sure password is 8 characters long
         # if validate_password(pass1) is not None:
         #    messages.error(request, "Password must be 8 characters long. They cannot be entirely numerical/alphabetical.")
-           
 
-        #makes sure password and confirmation password match
+        # makes sure password and confirmation password match
         if pass1 != pass2:
             messages.error(request, "Passwords didn't match!")
             return redirect('signup')
-        
-       # if 'stdbtn' in request.POST:
-       # if 'labbtn' in request.POST:
-        
-        
+
+        # if 'stdbtn' in request.POST:
+        # if 'labbtn' in request.POST:
+
         # stores information in django using create_user function
         myuser = User.objects.create_user(email, email, pass1)
         myuser.first_name = firstname
@@ -80,7 +77,8 @@ def signup(request):
 
         myuser.save()
 
-        messages.success(request,"Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
+        messages.success(request,
+                         "Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
 
         # Welcome Email
         subject = "Welcome to Research Match Login!"
@@ -93,8 +91,8 @@ def signup(request):
 
         current_site = get_current_site(request)
         email_subject = "Confirm your email @ Research Match Login!"
-        message2 = render_to_string('email_confirmation.html',{
-            
+        message2 = render_to_string('email_confirmation.html', {
+
             'name': myuser.first_name,
             'domain': current_site.domain,
             'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
@@ -112,9 +110,8 @@ def signup(request):
 
         return redirect('studentlogin')
 
-
-
     return render(request, "registration/loginpage.html")
+
 
 # This function activates a user's registered account by using a customized token that verifies the user's email address.
 def activate(request, uidb64, token):
@@ -130,13 +127,13 @@ def activate(request, uidb64, token):
         myuser.save()
         login(request, myuser)
         return redirect('studentlogin')
-    
-    else: 
+
+    else:
         return render(request, 'activation_failed.html')
-    
+
+
 # This function logs the user in after they activate their account.
 def studentlogin(request):
-
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -151,7 +148,7 @@ def studentlogin(request):
                     return redirect(request.POST.get('next'))
                 else:
                     return render(request, "StudentMain.html")
-            
+
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
                 return redirect('studentlogin')
@@ -161,15 +158,15 @@ def studentlogin(request):
                 messages.error(request, "The Password you entered is incorrect. Please try again or reset password.")
                 return redirect('studentlogin')
             else:
-                messages.error(request, "The email you entered does not match our records. Please double-check and try again.")
+                messages.error(request,
+                               "The email you entered does not match our records. Please double-check and try again.")
                 return redirect('studentlogin')
-
 
     return render(request, "registration/loginpage.html")
 
-#same code as student login, doesn't lead to lab profile page or stores in different table for now
-def lablogin(request):
 
+# same code as student login, doesn't lead to lab profile page or stores in different table for now
+def lablogin(request):
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -183,8 +180,8 @@ def lablogin(request):
                 if 'next' in request.POST:
                     return redirect(request.POST.get('next'))
                 else:
-                    return render(request, "StudentMain.html", {'firstname': firstname})
-            
+                    return render(request, "LabMain.html", {'firstname': firstname})
+
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
                 return redirect('signup')
@@ -193,45 +190,61 @@ def lablogin(request):
             messages.error(request, "Bad Credentials!")
             return redirect('signup')
 
-
     return render(request, "registration/loginpage.html")
+
 
 def signout(request):
     logout(request)
     messages.success(request, "Logged Out Successfully!")
     return redirect('home')
 
+
 def studenthomepage(request):
     return render(request, "StudentMain.html")
+
 
 def opportunities(request):
     return render(request, "Opportunities.html")
 
+
 def settings(request):
     return render(request, "Settings.html")
+
 
 def matches(request):
     return render(request, "matches.html")
 
+
 def studentedit(request):
     return render(request, "StudentMainEdit.html")
 
-def skillsdisplay(request):
-    return render(request, "skillsdisplay.html")
+
+def labhomepage(request):
+    return render(request, "LabMain.html")
+
+
+def students(request):
+    return render(request, "students.html")
+
+
+def matchedstudents(request):
+    return render(request, "matchedstudents.html")
+
 
 # from .forms import SkillForm
 
 from .models import StudentProfile
 
+
 def studentprofile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, 
-                                   request.FILES, 
+        p_form = ProfileUpdateForm(request.POST,
+                                   request.FILES,
                                    instance=request.user.studentprofile)
-        
+
         if u_form.is_valid() and p_form.is_valid():
-       # if p_form.is_valid():
+            # if p_form.is_valid():
             u_form.save()
             p_form.save()
             messages.success(request, f'Your account has been updated!')
@@ -242,12 +255,36 @@ def studentprofile(request):
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.studentprofile)
 
-
     context = {
         'u_form': u_form,
         'p_form': p_form
     }
     return render(request, 'skill.html', context)
+
+
+def labprofile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = LabUpdateForm(request.POST,
+                               request.FILES,
+                               instance=request.user.studentprofile)
+
+        if u_form.is_valid() and p_form.is_valid():
+            # if p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('studenthomepage')
+
+        else:
+            u_form = UserUpdateForm(instance=request.user)
+            p_form = LabUpdateForm(instance=request.user.studentprofile)
+
+        context = {
+            'u_form': u_form,
+            'p_form': p_form
+        }
+        return render(request, 'skill.html', context)
 
 # def skill(request):
 #   if request.POST:
@@ -291,14 +328,13 @@ def studentprofile(request):
 
 # def get_skills(request):
 
-#     all_Skills = Student.objects.all() #for all the records 
-#     # one_data = userdetails.objects.get(pk=1) # 1 will return the first item change it depending on the data you want 
+#     all_Skills = Student.objects.all() #for all the records
+#     # one_data = userdetails.objects.get(pk=1) # 1 will return the first item change it depending on the data you want
 #     allskills={
-       
+
 #       'skills':all_Skills,
 #     #   'one_data':one_data,
-    
-#     } 
+
+#     }
 
 #     return render(request, 'StudentMain.html', allskills)
-
