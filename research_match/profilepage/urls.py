@@ -34,9 +34,8 @@ urlpatterns = [
     path('matches/', views.matches, name='matches'),
     path('matchedstudents/', views.matchedstudents, name='matchedstudents'),
     path('labprofile', views.labprofile, name='labprofile'),
-    path('studentprofile', views.studentprofile, name='studentprofile')
+    path('studentprofile', views.studentprofile, name='studentprofile'),
+]
     # path('skill/', views.skill, name='skill'),
     # path('skillsview/', views.skillsview, name='skillsview'),
     #path('skillsdisplay/', views.skillsdisplay, name='skillsdisplay'),
-
-]

@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import StudentProfile
+from django.views.generic.list import ListView
 
 from email.message import EmailMessage
 import django
@@ -308,6 +309,7 @@ def labprofile(request):
             'p_form': p_form
         }
         return render(request, 'skill.html', context)
+     
 
 # def skill(request):
 #   if request.POST:
