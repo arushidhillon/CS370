@@ -16,8 +16,6 @@ from django.dispatch import receiver
 
 # class Skills(models.Model):
 #   skill = models.CharField(max_length=100)
-
-
     
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
@@ -28,12 +26,12 @@ class StudentProfile(models.Model):
     
     profile_pic = models.ImageField(default='default.png', upload_to='profile_pics')
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-
-    gpa = models.IntegerField(default=0)
-    documents = models.IntegerField(default=0)
+    gpa = models.FloatField(default=0)
+    documents = models.FileField(upload_to='documents')
     skill = models.CharField(max_length=255)
     course=models.CharField(max_length=255)
     biography=models.CharField(max_length=500)
+    labname=models.CharField(max_length=255)
 
     BACKGROUND = [
         ("S","Student"),
@@ -50,13 +48,28 @@ class StudentProfile(models.Model):
         ("HIST", "History"),
         ("OTHE", "Other")
     ] 
+
+    # Splits Student Profile tags with comma for display in profile page
+    def skill_list(self):
+        return self.skill.split(',')
+    
+    # Splits Student Profile courses with comma for display in profile page
+    def course_list(self):
+        return self.course.split(',')
+    
     def __str__(self):
         return f'{self.user.username} StudentProfile'
 
 
-
-class Mentor(models.Model):
-    biography = models.TextField()
-    # def __str__(self):
-    #     return self.objects
+# class Mentor(models.Model):
+#     user2 = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+#     biography = models.TextField()
+#     profile_pic = models.ImageField(default='default.png', upload_to='profile_pics')
+#     date_created = models.DateTimeField(auto_now_add=True, null=True)
+#     documents = models.FileField(upload_to='documents')
+#     labname=models.CharField(max_length=255)
+#     skill = models.CharField(max_length=255)
+#     requiredcourse=models.CharField(max_length=255)
+#     # def __str__(self):
+#     #     return self.objects
 

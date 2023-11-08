@@ -18,73 +18,68 @@
   </head>
 
   <body>
-    {% comment %} This block connects the navigation bar to the profile page. {% endcomment %}
+      {% comment %} This block connects the navigation bar to the profile page. {% endcomment %}
    {% block content%}
    {% include 'navbar.html' %}
    {% endblock content%}
 
-   
     <div class="wrapper">
       <div class="pagetitle">
-        {% if user.is_authenticated %}
-        <h3>Welcome Back, {{  user.first_name }}!</h3>
-        {%endif%}
+        <header>
+          {% if user.is_authenticated %}
+          <h3>Welcome Back, {{ user.first_name }}!</h3>
+          {%endif%}
+        </header>
       </div>
-        
-<!--       </div>
-      <div class="gridBox">
-        {% csrf_token %}
-        <h3>{{ email }} {{ lastname }}</h3>
-        <img src="{% static '/Eli.jpeg' %}" class="profilePicture" />
-        <div class="tags-wrapper">
-          <form class="skills-box" action="/profilepage/" method="post">
-            {% csrf_token %}
-            <label for="Skill_input">Skills: </label> -->
-            
-  <header>
-    <!-- <h1 class="heading">Student Profile</h1> -->
-    
-  </header>
 
-    <div class="FourBoxLayout">
-<!--       {% if user.is_authenticated %}
-      <h1 style="padding-left: 2rem; margin-bottom: 0">Welcome Back, {{ user.studentprofile.firstname }} {{user.studentprofile.lastname}}!</h1>
-      {% endif %}
-      <br /> -->
       <!-- Identity -->
-      <div class="ProfileBox">
+      <div class="gridBox" style="justify-content: space-between;">
         <div class="Identityinfo">
-          <h2 class="StudentName">{{user.first_name }} {{user.last_name}}</h2>
           <img
             src="{{ user.studentprofile.profile_pic.url }}"
-            alt="Eli"
             class="StudentPicture"
           />
+          <h2 class="StudentName">{{user.first_name }} {{user.last_name}}</h2>
+          <p class="Headline">biology major at emory</p>
+          <div class="child"> GPA: {{user.studentprofile.gpa}} </div>
         </div>
+        <!-- Skills -->
         <div
           class="Identityinfo"
           id="inputs"
           style="
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            width: 100%;
+            justify-content: start;
             margin-left: 2rem;
           "
         >
-          <div class="tags">
-            <span class="tag"> GPA: {{user.studentprofile.gpa}}</span>
-
-            <div id="Skill_item"></div>
-          </form>
-          <div style="justify-self: last">
-            <span> {{ user.studentprofile.skill}} </span>
-            <!-- <form action="/studenthomepage/" method="post">
-          {% csrf_token %}
-          <label for="Skill_input">Skills: </label>
-        <input type='text' id='Skill_input' />
-        <input type="submit" id="addSkill" value="Add New Interest">
-      </form> -->
+          <h2 style="margin-top: 0;">Skills</h2>
+          <div class="tagscluster">
+            
+            <!-- Split items in skill -->
+            {% for i in user.studentprofile.skill_list %}
+              <div class="child"> {{ i.strip }} </div>
+            {% endfor %}
+          </div>
+        </div>
+        <!-- Completed Courses -->
+        <div
+          class="Identityinfo"
+          id="inputs"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            margin-left: 2rem;
+          "
+        >
+          <h2 style="margin-top: 0;">Completed Courses</h2>
+          <div class="tagscluster">
+            <!-- Split items in courses -->
+            {% for i in user.studentprofile.course_list %}
+              <div class="child"> {{ i.strip }} </div>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -92,65 +87,63 @@
     
 
       <!-- Biography -->
-      <div class="ProfileBox" style="margin-left: 0">
+      <div class="gridBox" id="about">
         <h2>About Me</h2>
         <div class="Margins" id="target"></div>
-        
-         <form class="Biographyform">
-           <!-- <p class="Margins"></p> -->
+
+        <form class="Biographyform">
           <p
             id="bio"
             name="biotext"
             rows="8"
             cols="20"
             placeholder="Hello, I am..."
-          >{{ user.studentprofile.biography}}</p>
-          {% comment %} <button type="submit" name="biographysubmit">Submit!</button> {% endcomment %}
-        </form> 
+          >
+            {{ user.studentprofile.biography}}
+          </p>
+        </form>
       </div>
 
       <!-- Documents -->
-      <div class="ProfileBox">
-        <!-- <h2 class="Margins">My Documents</h2>
-        <p class="Margins">Upload a new document:</p> -->
-        <!-- <input
-          id="image-file"
-          type="file"
-          onchange="SavePhoto(this)"
-          class="Margins"
-        /> -->
-        <p class="Margins">My Files:</p>
-        <br /><br />
+      <div class="gridBox" id="about">
+        <h2>My Files</h2>
       </div>
 
       <!-- Courses -->
-      <div class="ProfileBox" style="margin-left: 0">
+      <!-- <div class="ProfileBox" style="margin-left: 0">
         <h2 class="Margins">Courses I've Taken</h2>
         <div class="Margins" id="target2"></div>
         
          <form class="Courseform">
           <div id="Course_item"></div>
-          <p id="Course_input"/> {{user.studentprofile.course}}</p>
-          {% comment %} <p class="Margins">Add a course:</p> {% endcomment %}
+          <p id="Course_input"> {{user.studentprofile.course}}</p>
+          {% comment %} <p class="Margins">My course:</p> {% endcomment %}
 
           {% comment %} <input type="text" id="Course_input" />
           <input type="button" id="addCourse" value="Add New Course" /> {% endcomment %}
       </form>
       </div>
-    </div>
-
+    </div> -->
+<!-- 
     <div class="editButtons" style="margin-left: 0">
       <form action="{% url 'studentprofile'%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
-        <input type="submit" id="addSkill" value="Edit My Profile">
+        <input type="submit" id="addSkill" value="Edit My Profile"> -->
+
+      <!-- Edit Profile -->
+      <div style="display: flex; justify-content: end">
+        <form
+          action="{% url 'studentprofile'%}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form }}
+          <input class="matchButtons" type="submit" id="addSkill" value="Edit Profile" />
         </form>
-  <script src="{% static '/Profile.js' %}"> </script>
-</body>
+      </div>
+    </div>  
+    
+    <script src="{% static '/Profile.js' %}"></script>
+  </body>
 </html>
-
-<!-- <script src="Profile.js"> </script> -->
-<script src="{% static 'Profile.js' %}"></script>
-
-<body></body>
-

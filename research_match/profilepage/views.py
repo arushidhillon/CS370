@@ -5,7 +5,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import StudentProfile
-# from .forms import SkillForm
 
 from email.message import EmailMessage
 import django
@@ -29,6 +28,8 @@ from .forms import UserUpdateForm, ProfileUpdateForm
 from .decorators import allowed_users, unauthenticated_user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from .forms import UserUpdateForm, ProfileUpdateForm, LabUpdateForm
+
 from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
 
@@ -235,8 +236,14 @@ def matches(request):
 def studentedit(request):
     return render(request, "StudentMainEdit.html")
 
-def skillsdisplay(request):
-    return render(request, "skillsdisplay.html")
+def labhomepage(request):
+    return render(request, "LabMain.html")
+
+def students(request):
+    return render(request, "students.html")
+
+def matchedstudents(request):
+    return render(request, "matchedstudents.html")
 
 # from .forms import SkillForm
 
@@ -267,6 +274,31 @@ def studentprofile(request):
         'p_form': p_form
     }
     return render(request, 'skill.html', context)
+
+def labprofile(request):
+     if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = LabUpdateForm(request.POST, 
+                                   request.FILES, 
+                                   instance=request.user.studentprofile)
+        
+        if u_form.is_valid() and p_form.is_valid():
+       # if p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('studenthomepage')
+
+        else:
+            u_form = UserUpdateForm(instance=request.user)
+            p_form = LabUpdateForm(instance=request.user.studentprofile)
+
+
+        context = {
+            'u_form': u_form,
+            'p_form': p_form
+        }
+        return render(request, 'skill.html', context)
 
 # def skill(request):
 #   if request.POST:
