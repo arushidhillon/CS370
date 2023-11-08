@@ -1,7 +1,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractBaseUser, UserManager
+from django.contrib.auth.models import AbstractUser, UserManager as AbstractUserManager
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -18,6 +18,12 @@ from django.dispatch import receiver
 #   skill = models.CharField(max_length=100)
 
 
+
+class UserManager(AbstractUserManager):
+  pass
+
+class User(AbstractUser):
+    objects = UserManager()
     
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
