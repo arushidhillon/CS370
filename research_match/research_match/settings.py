@@ -12,19 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
-from django.contrib.messages import constants as messages
+
 import mimetypes
 mimetypes.add_type("text/css", ".css", True)
 
 from . info import *
-
-MESSAGE_TAGS = {
-        messages.DEBUG: 'alert-secondary',
-        messages.INFO: 'alert-info',
-        messages.SUCCESS: 'alert-success',
-        messages.WARNING: 'alert-warning',
-        messages.ERROR: 'alert-danger',
- }
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -48,7 +40,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-CRISPY_TEMPLATE_PACK = 'uni_form'
 # Application definition
 
 INSTALLED_APPS = [
@@ -59,7 +50,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'profilepage',
-    'crispy_forms',
 ]
 
 MIDDLEWARE = [

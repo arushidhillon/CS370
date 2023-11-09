@@ -60,6 +60,15 @@ class StudentProfile(models.Model):
     def __str__(self):
         return f'{self.user.username} StudentProfile'
 
+    # These two properties will check if the user is a lab or student
+    @property
+    def is_student(self):
+        return self.groups.filter(name='student').exists()
+    
+    @property
+    def is_lab(self):
+        return self.groups.filter(name='lab').exists()
+
 
 # class Mentor(models.Model):
 #     user2 = models.OneToOneField(User, null=True, on_delete=models.CASCADE)

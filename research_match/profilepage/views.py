@@ -25,6 +25,10 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_str, force_bytes
 from . tokens import generate_token
 from django.contrib.auth.password_validation import validate_password
+from .forms import UserUpdateForm, ProfileUpdateForm
+from .decorators import allowed_users, unauthenticated_user
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 from .forms import UserUpdateForm, ProfileUpdateForm, LabUpdateForm
 
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -58,18 +62,21 @@ def signup(request):
             messages.error(request, "Email already exists! Please try some other email")
             return redirect('signup')
         
-        #checks to make sure password is 8 characters long
-        # if validate_password(pass1) is not None:
-        #    messages.error(request, "Password must be 8 characters long. They cannot be entirely numerical/alphabetical.")
-           
+        #checks to make sure password is 8 characters long, not entirely numerical/alphabetical, or too common
+        if pass1 is not None:
+            try:
+                validate_password(pass1)
+            except ValidationError as e:
+    
+                for error in e.error_list:
+                    messages.error(request, error)
+                if e.error_list is not None:
+                    return redirect('signup')
 
         #makes sure password and confirmation password match
         if pass1 != pass2:
             messages.error(request, "Passwords didn't match!")
             return redirect('signup')
-        
-       # if 'stdbtn' in request.POST:
-       # if 'labbtn' in request.POST:
         
         
         # stores information in django using create_user function
@@ -79,6 +86,14 @@ def signup(request):
         myuser.is_active = False
 
         myuser.save()
+
+        if 'stdbtn' in request.POST:
+            group = Group.objects.get(name='student')
+            myuser.groups.add(group)
+
+        if 'labbtn' in request.POST:
+            group = Group.objects.get(name='lab')
+            myuser.groups.add(group)
 
         messages.success(request,"Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
 
@@ -135,14 +150,15 @@ def activate(request, uidb64, token):
         return render(request, 'activation_failed.html')
     
 # This function logs the user in after they activate their account.
+@allowed_users(allowed_roles=['student'])
 def studentlogin(request):
 
-    if request.method == 'POST':
+    if 'studentlog' in request.POST:
         email = request.POST['email']
         password = request.POST['password']
 
         user = authenticate(username=email, password=password)
-        print(user)
+       
         if user is not None:
             if user.is_active:
                 login(request, user)
@@ -168,30 +184,35 @@ def studentlogin(request):
     return render(request, "registration/loginpage.html")
 
 #same code as student login, doesn't lead to lab profile page or stores in different table for now
+@allowed_users(allowed_roles=['lab'])
 def lablogin(request):
 
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
+    if 'lablog' in request.POST:
+        email = request.POST.get('email')
+        password = request.POST.get('password')
 
         user = authenticate(username=email, password=password)
 
         if user is not None:
             if user.is_active:
                 login(request, user)
-                firstname = user.first_name
+                # This redirects the user to the login page if they aren't loggged in and are in a different page.
                 if 'next' in request.POST:
                     return redirect(request.POST.get('next'))
                 else:
-                    return render(request, "LabMain.html", {'firstname': firstname})
+                    return render(request, "LabMain.html")
             
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
-                return redirect('signup')
+                return redirect('lablogin')
 
         else:
-            messages.error(request, "Bad Credentials!")
-            return redirect('signup')
+            if User.objects.filter(email=email).exists():
+                messages.error(request, "The Password you entered is incorrect. Please try again or reset password.")
+                return redirect('lablogin')
+            else:
+                messages.error(request, "The email you entered does not match our records. Please double-check and try again.")
+                return redirect('lablogin')
 
 
     return render(request, "registration/loginpage.html")
@@ -201,27 +222,36 @@ def signout(request):
     messages.success(request, "Logged Out Successfully!")
     return redirect('home')
 
+@allowed_users(allowed_roles=['student'])
 def studenthomepage(request):
     return render(request, "StudentMain.html")
 
+
+@allowed_users(allowed_roles=['student'])
 def opportunities(request):
     return render(request, "Opportunities.html")
 
+@allowed_users(allowed_roles=['student'])
 def settings(request):
     return render(request, "Settings.html")
 
+@allowed_users(allowed_roles=['student'])
 def matches(request):
     return render(request, "matches.html")
 
+@allowed_users(allowed_roles=['student'])
 def studentedit(request):
     return render(request, "StudentMainEdit.html")
 
+@allowed_users(allowed_roles=['lab'])
 def labhomepage(request):
     return render(request, "LabMain.html")
 
+@allowed_users(allowed_roles=['lab'])
 def students(request):
     return render(request, "students.html")
 
+@allowed_users(allowed_roles=['lab'])
 def matchedstudents(request):
     return render(request, "matchedstudents.html")
 
