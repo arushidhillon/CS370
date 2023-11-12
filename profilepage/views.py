@@ -61,12 +61,6 @@ def signup(request):
         if User.objects.filter(email=email).exists():
             messages.error(request, "Email already exists! Please try some other email")
             return redirect('signup')
-<<<<<<< HEAD:profilepage/views.py
-
-        # checks to make sure password is 8 characters long
-        # if validate_password(pass1) is not None:
-        #    messages.error(request, "Password must be 8 characters long. They cannot be entirely numerical/alphabetical.")
-=======
         
         #checks to make sure password is 8 characters long, not entirely numerical/alphabetical, or too common
         if pass1 is not None:
@@ -78,21 +72,13 @@ def signup(request):
                     messages.error(request, error)
                 if e.error_list is not None:
                     return redirect('signup')
->>>>>>> main:research_match/profilepage/views.py
 
         # makes sure password and confirmation password match
         if pass1 != pass2:
             messages.error(request, "Passwords didn't match!")
             return redirect('signup')
-<<<<<<< HEAD:profilepage/views.py
-
-        # if 'stdbtn' in request.POST:
-        # if 'labbtn' in request.POST:
-
-=======
         
         
->>>>>>> main:research_match/profilepage/views.py
         # stores information in django using create_user function
         myuser = User.objects.create_user(email, email, pass1)
         myuser.first_name = firstname
@@ -101,10 +87,6 @@ def signup(request):
 
         myuser.save()
 
-<<<<<<< HEAD:profilepage/views.py
-        messages.success(request,
-                         "Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
-=======
         if 'stdbtn' in request.POST:
             group = Group.objects.get(name='student')
             myuser.groups.add(group)
@@ -114,7 +96,6 @@ def signup(request):
             myuser.groups.add(group)
 
         messages.success(request,"Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
->>>>>>> main:research_match/profilepage/views.py
 
         # Welcome Email
         subject = "Welcome to Research Match Login!"
@@ -171,12 +152,8 @@ def activate(request, uidb64, token):
 # This function logs the user in after they activate their account.
 @allowed_users(allowed_roles=['student'])
 def studentlogin(request):
-<<<<<<< HEAD:profilepage/views.py
-    if request.method == 'POST':
-=======
 
     if 'studentlog' in request.POST:
->>>>>>> main:research_match/profilepage/views.py
         email = request.POST['email']
         password = request.POST['password']
 
@@ -206,14 +183,6 @@ def studentlogin(request):
 
     return render(request, "registration/loginpage.html")
 
-<<<<<<< HEAD:profilepage/views.py
-
-# same code as student login, doesn't lead to lab profile page or stores in different table for now
-def lablogin(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-=======
 #same code as student login, doesn't lead to lab profile page or stores in different table for now
 @allowed_users(allowed_roles=['lab'])
 def lablogin(request):
@@ -221,7 +190,6 @@ def lablogin(request):
     if 'lablog' in request.POST:
         email = request.POST.get('email')
         password = request.POST.get('password')
->>>>>>> main:research_match/profilepage/views.py
 
         user = authenticate(username=email, password=password)
 
@@ -232,12 +200,8 @@ def lablogin(request):
                 if 'next' in request.POST:
                     return redirect(request.POST.get('next'))
                 else:
-<<<<<<< HEAD:profilepage/views.py
-                    return render(request, "LabMain.html", {'firstname': firstname})
-=======
                     return render(request, "LabMain.html")
             
->>>>>>> main:research_match/profilepage/views.py
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
                 return redirect('lablogin')
@@ -258,29 +222,11 @@ def signout(request):
     messages.success(request, "Logged Out Successfully!")
     return redirect('home')
 
-<<<<<<< HEAD:profilepage/views.py
-
-=======
 @allowed_users(allowed_roles=['student'])
->>>>>>> main:research_match/profilepage/views.py
 def studenthomepage(request):
     return render(request, "StudentMain.html")
 
 
-<<<<<<< HEAD:profilepage/views.py
-def opportunities(request):
-    return render(request, "Opportunities.html")
-
-
-def settings(request):
-    return render(request, "Settings.html")
-
-
-def matches(request):
-    return render(request, "matches.html")
-
-
-=======
 @allowed_users(allowed_roles=['student'])
 def opportunities(request):
     return render(request, "Opportunities.html")
@@ -294,7 +240,6 @@ def matches(request):
     return render(request, "matches.html")
 
 @allowed_users(allowed_roles=['student'])
->>>>>>> main:research_match/profilepage/views.py
 def studentedit(request):
     return render(request, "StudentMainEdit.html")
 
