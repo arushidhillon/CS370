@@ -45,8 +45,3 @@ urlpatterns = [
     # path('skill/', views.skill, name='skill'),
     # path('skillsview/', views.skillsview, name='skillsview'),
     #path('skillsdisplay/', views.skillsdisplay, name='skillsdisplay'),
-<<<<<<< HEAD:profilepage/urls.py
-
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-=======
->>>>>>> main:research_match/profilepage/urls.py
