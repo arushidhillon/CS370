@@ -33,4 +33,11 @@ def list_profiles(request):
 #Function to display the details of the profile
 def profile_detail(request):
     StudentProfile = get_object_or_404(StudentProfile, id=id)
-    return render(request, 'StudentMain.html', {'StudentProfile': StudentProfile})
+
+    #Check the type of profile and redirect it accordingly
+    if StudentProfile.StudentProfile_BACKGROUND == "Student":
+        return render(request, 'StudentMain.html', {'StudentProfile': StudentProfile})
+    elif StudentProfile.StudentProfile_BACKGROUND == "Mentor":
+        return render(request, 'LabMain.html', {'StudentProfile': StudentProfile})
+    else: 
+        return Http404()
