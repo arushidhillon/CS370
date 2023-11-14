@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
 from django.db.models import Q
-from users.models import Profile
+from profilepage.models import User
 from cryptography.fernet import Fernet
 from django.conf import settings
 from .forms import InboxNewMessageForm
@@ -32,7 +32,7 @@ def search_users(request):
     if request.htmx:
         letters = request.GET.get('search_user')
         if len(letters) > 0:
-            profiles = Profile.objects.filter(realname__icontains=letters)
+            profiles = User.objects.filter(firstname__icontains=letters)
             users_id = profiles.values_list('user', flat=True)
             users = User.objects.filter(
                 Q(username__icontains=letters) | Q(id__in=users_id)
