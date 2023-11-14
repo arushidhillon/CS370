@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'profilepage',
-    'search'
+    'search',
 ]
 
 MIDDLEWARE = [
