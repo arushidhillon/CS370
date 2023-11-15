@@ -345,7 +345,7 @@ def labprofile(request):
             'u_form': u_form,
             'p_form': p_form
         }
-        return render(request, 'skill.html', context)
+        return render(request, 'mentoredit.html', context)
      
 
 def profile(request, pk):
