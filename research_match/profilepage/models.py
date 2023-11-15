@@ -1,9 +1,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractBaseUser, UserManager
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+
 
 
 # class Skill(models.Model):
@@ -19,11 +17,7 @@ from django.dispatch import receiver
     
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-  #  email = models.EmailField(blank=True, unique=True)
-    # email = User.email
-    # firstname = models.CharField(max_length=70)
-    # lastname = models.CharField(max_length=70)
-    
+    matches = models.ManyToManyField("self", related_name='matched_by', symmetrical=False, blank=True)
     profile_pic = models.ImageField(default='default.png', upload_to='profile_pics')
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     gpa = models.FloatField(default=0)
@@ -63,13 +57,23 @@ class StudentProfile(models.Model):
     # These two properties will check if the user is a lab or student
     @property
     def is_student(self):
-        return self.groups.filter(name='student').exists()
+        return self.user.groups.filter(name='student').exists()
     
     @property
     def is_lab(self):
-        return self.groups.filter(name='lab').exists()
+        return self.user.groups.filter(name='lab').exists()
+    
+    def get_user_name(self):
+        return self.user.email.split('@')[0]
 
 
+
+# class Matched(models.Model):
+#     follower = models.CharField(max_length=100)
+#     user = models.CharField(max_length=100)
+
+#     def __str__(self):
+#         return self.user
 # class Mentor(models.Model):
 #     user2 = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
 #     biography = models.TextField()
