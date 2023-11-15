@@ -15,9 +15,11 @@
 
   <body>
 
+  {% if user.is_authenticated %}
   {% block content%}
    {% include 'navbar.html' %}
    {% endblock content%}
+   {%endif%}
 
     <div class="wrapper">
       <div class="pagetitle">
@@ -25,25 +27,25 @@
       </div>
       <div class="homeButtonsWrapper">
         {% if user.is_authenticated %} {% csrf_token %}
-        <p>Welcome back, {{user.first_name}}!</p>
-        {% if user.is_student %}
-        <button >
-          <p><a href="{% url 'opportunities' %}">Find Research Opportunities</a></p>
-        </button>
-        {% else %}
-        <button >
-          <p><a href="{% url 'labhomepage' %}">Go back to homepage</a></p>
-        </button>
-        {% endif %}
-          <p><a href="{% url 'signout' %}">Log out</a></p>
-        </button>
+          <p>Welcome back, {{user.first_name}}!</p>
+            {% if user.studentprofile.is_student %}
+              <button >
+                <p><a href="{% url 'opportunities' %}">Find Research Opportunities</a></p>
+              </button>
+            {% else %}
+              <button >
+                <p><a href="{% url 'profile' request.user.studentprofile.get_user_name %}">Go back to homepage</a></p>
+              </button>
+            {% endif %}
+              <p><a href="{% url 'signout' %}">Log out</a></p>
+            </button>
         {%else%}
-        <button>
-          <p><a href="{% url 'signup' %}">Sign Up</a></p>
-        </button>
-        <button>
-        <p><a href="{% url 'studentlogin' %}">Log In</a></p>
-        </button>
+          <button>
+            <p><a href="{% url 'signup' %}">Sign Up</a></p>
+          </button>
+          <button>
+          <p><a href="{% url 'studentlogin' %}">Log In</a></p>
+          </button>
         {%endif%}
       </div>
     </div>

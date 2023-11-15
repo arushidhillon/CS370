@@ -32,7 +32,7 @@ urlpatterns = [
     path('students/', views.students, name='students'),
     path('settings/', views.settings, name='settings'),
     path('matches/<str:pk>', views.matches, name='matches'),
-    path('matchedstudents/', views.matchedstudents, name='matchedstudents'),
+    path('matchedstudents/<str:pk>', views.matchedstudents, name='matchedstudents'),
     path('labprofile', views.labprofile, name='labprofile'),
     path('studentprofile', views.studentprofile, name='studentprofile'),
 

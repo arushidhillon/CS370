@@ -63,8 +63,15 @@ class StudentProfile(models.Model):
     def is_lab(self):
         return self.user.groups.filter(name='lab').exists()
     
+    #These functions get the user's information from Django's User model.
     def get_user_name(self):
         return self.user.email.split('@')[0]
+    def get_first_name(self):
+        return self.user.first_name
+    def get_last_name(self):
+        return self.user.last_name
+    def get_email(self):
+        return self.user.email
 
 
 

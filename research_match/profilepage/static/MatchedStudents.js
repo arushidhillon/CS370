@@ -64,36 +64,36 @@ function addMatchElement(imgSrc, header, subtitle, tags, desc, section) {
   section.appendChild(matchDiv);
 }
 
-var test = "{% static '/placeholder/lab1.jpeg' %}";
-const tags1 = ["Biotechnology", "Biology", "Environmental Science"];
-const tags2 = [
-  "Computer Science",
-  "Artificial Intelligence",
-  "Machine Learning",
-];
-// Some examples
-// Descriptions generated using ChatGPT
-addMatchElement(
-  test,
-  "Name",
-  "Student@emory.edu",
-  tags1,
-  "Student Bio.",
-  current
-);
-addMatchElement(
-  "{% static '/placeholder/lab2.jpeg' %}",
-  "Name",
-  "Name@emory.edu",
-  tags1,
-  "I am a biology student who likes to eat cheese!.",
-  past
-);
+// var test = "{% static '/placeholder/lab1.jpeg' %}";
+// const tags1 = ["Biotechnology", "Biology", "Environmental Science"];
+// const tags2 = [
+//   "Computer Science",
+//   "Artificial Intelligence",
+//   "Machine Learning",
+// ];
+// // Some examples
+// // Descriptions generated using ChatGPT
 // addMatchElement(
-//   "{% static '/placeholder/lab3.jpg' %}",
-//   "Dooley's CS Lab",
-//   "dooleylab@emory.edu",
-//   tags2,
-//   "Welcome to Dooley's CS Lab, where innovation meets computation in the heart of our digital realm. Named after the legendary computer scientist, Dooley's Lab is a sanctuary for the curious minds of the tech world. With a dazzling array of cutting-edge hardware and software, our lab serves as a launchpad for coding enthusiasts, aspiring AI researchers, and cybernetic pioneers alike. Our mission is to push the boundaries of computer science through rigorous experimentation and collaboration. From machine learning and data analytics to cybersecurity and software engineering, our diverse range of projects will challenge and inspire you. Join us in the pursuit of ones and zeros as we explore the infinite possibilities of the digital age within the welcoming confines of Dooley's CS Lab.",
+//   test,
+//   "Name",
+//   "Student@emory.edu",
+//   tags1,
+//   "Student Bio.",
+//   current
+// );
+// addMatchElement(
+//   "{% static '/placeholder/lab2.jpeg' %}",
+//   "Name",
+//   "Name@emory.edu",
+//   tags1,
+//   "I am a biology student who likes to eat cheese!.",
 //   past
 // );
+// // addMatchElement(
+// //   "{% static '/placeholder/lab3.jpg' %}",
+// //   "Dooley's CS Lab",
+// //   "dooleylab@emory.edu",
+// //   tags2,
+// //   "Welcome to Dooley's CS Lab, where innovation meets computation in the heart of our digital realm. Named after the legendary computer scientist, Dooley's Lab is a sanctuary for the curious minds of the tech world. With a dazzling array of cutting-edge hardware and software, our lab serves as a launchpad for coding enthusiasts, aspiring AI researchers, and cybernetic pioneers alike. Our mission is to push the boundaries of computer science through rigorous experimentation and collaboration. From machine learning and data analytics to cybersecurity and software engineering, our diverse range of projects will challenge and inspire you. Join us in the pursuit of ones and zeros as we explore the infinite possibilities of the digital age within the welcoming confines of Dooley's CS Lab.",
+// //   past
+// // );
