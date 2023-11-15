@@ -40,6 +40,14 @@
           <h2 class="StudentName">{{user.first_name }} {{user.last_name}}</h2>
           <!-- <p class="Headline">biology major at emory</p> -->
           <!-- <div class="child"> GPA: {{user.studentprofile.gpa}} </div> -->
+          <form
+          action="{% url 'labpictureupdate'%}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form }}
+          <input class="matchButtons" type="submit" id="addSkill" value="Change Profile Picture" />
+        </form>
         </div>
         <!-- Skills -->
         <div

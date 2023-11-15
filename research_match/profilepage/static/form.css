@@ -2,12 +2,11 @@
     --color1: rgb(63, 108, 255);
     --color2: rgb(63, 108, 255);
   }
-
 .form-control {
     width: 100%;
     padding: 8px;
     margin: 5px 0;
-    border: 1px solid #ccc;
+    border: 5px solid var(--color1);
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 16px;
@@ -22,15 +21,13 @@
 
 /* Style submit buttons */
 .btn {
-    height: 120%;
-    width: 90%;
-    border-radius: 50px;
-    background-image: linear-gradient(to right,
-            rgb(200, 200, 200),
-            rgb(255, 255, 255));
-    font-size: 20px;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 /* Add hover effect to buttons */
@@ -42,31 +39,5 @@
 /* Example: Style the biography field differently */
 #id_biography {
     height: 150px; /* Adjust the height as needed */
+    width: 300px;
 }
-
-.container {
-    border-radius: 50px;
-    height: 1000px;
-    width: 500px;
-    background-color: white;
-    box-shadow: 8px 8px 20px rgb(128, 128, 128);
-    position: relative;
-    overflow: hidden;
-    border-width: 0.25em;
-    border-style: solid;
-    border-color: var(--color1);
-  }  
-
-
-body {
-    min-height: 870px;
-    height: 100%;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 30px;
-    background-color: white;
-    overflow-x: hidden;
-  }

@@ -29,9 +29,18 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = StudentProfile
         fields = ['profile_pic', 'gpa', 'skill', 'course', 'biography','documents']
+
+class Picform(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['profile_pic']
     
 class LabUpdateForm(forms.ModelForm):
     class Meta:
         model = StudentProfile
         fields = ['profile_pic', 'skill', 'course', 'biography','documents']
+        help_texts = {
+            'skill': ('Separate skills with a comma.'),
+            'course': ('Separate courses with a comma.'),
+        }
     

@@ -37,8 +37,7 @@ urlpatterns = [
     path('matchedstudents/', views.matchedstudents, name='matchedstudents'),
     path('labprofile', views.labprofile, name='labprofile'),
     path('studentprofile', views.studentprofile, name='studentprofile'),
-
-
+    path('labpictureupdate', views.labpictureupdate, name='labpictureupdate'),
     path('profile/<str:pk>', views.profile, name='profile')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # path('skill/', views.skill, name='skill'),
