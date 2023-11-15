@@ -1,6 +1,5 @@
 {% load static %}
 
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -27,7 +26,8 @@
       <div class="pagetitle">
         <header>
           {% if user.is_authenticated %}
-          <h3>Welcome Back, {{ user.first_name }}!</h3>
+          {% comment %} <h3>Welcome Back, {{ user.first_name }}!</h3> {% endcomment %}
+          <h3>Welcome Back, {{ user_object.first_name }}!</h3>
           {%endif%}
         </header>
       </div>
@@ -83,7 +83,7 @@
           </div>
         </div>
       </div>
-    </div>
+    
     
 
       <!-- Biography -->
@@ -132,6 +132,7 @@
         <input type="submit" id="addSkill" value="Edit My Profile"> -->
 
       <!-- Edit Profile -->
+        {% if request.user == user%}
       <div style="display: flex; justify-content: end">
         <form
           action="{% url 'studentprofile'%}"
@@ -142,6 +143,7 @@
           <input class="matchButtons" type="submit" id="addSkill" value="Edit Profile" />
         </form>
       </div>
+{%endif%}
     </div>  
     
     <script src="{% static '/Profile.js' %}"></script>

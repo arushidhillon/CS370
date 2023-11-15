@@ -1,9 +1,11 @@
 
+from itertools import chain
 from django.forms import ValidationError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from django.views import View
 from .models import StudentProfile
 from django.views.generic.list import ListView
 
@@ -30,6 +32,8 @@ from .decorators import allowed_users, unauthenticated_user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from .forms import UserUpdateForm, ProfileUpdateForm, LabUpdateForm
+from django.views.generic import ListView
+import random
 
 from django.views.decorators.csrf import ensure_csrf_cookie
 @ensure_csrf_cookie
@@ -48,6 +52,7 @@ def signup(request):
         email = request.POST['email']
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
+        
 
         #Tests if email is @emory.edu
         mail = email.lower()
@@ -166,14 +171,15 @@ def studentlogin(request):
                 if 'next' in request.POST:
                     return redirect(request.POST.get('next'))
                 else:
-                    return render(request, "StudentMain.html")
+                    myuser = user.studentprofile.get_user_name()
+                    return redirect('/profile/'+myuser)
             
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
                 return redirect('studentlogin')
 
         else:
-            if User.objects.filter(email=email).exists():
+            if User.objects.filter(username=email).exists():
                 messages.error(request, "The Password you entered is incorrect. Please try again or reset password.")
                 return redirect('studentlogin')
             else:
@@ -200,7 +206,8 @@ def lablogin(request):
                 if 'next' in request.POST:
                     return redirect(request.POST.get('next'))
                 else:
-                    return render(request, "LabMain.html")
+                    myuser = user.get_username()
+                    return redirect('/profile/'+myuser)
             
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
@@ -236,8 +243,34 @@ def settings(request):
     return render(request, "Settings.html")
 
 @allowed_users(allowed_roles=['student'])
-def matches(request):
-    return render(request, "matches.html")
+def matches(request, pk):
+    pk += '@emory.edu'
+    user_object = User.objects.get(username=pk)
+    user_profile = StudentProfile.objects.get(user=user_object)
+
+    matches = user_profile.matches.all()
+    for match in matches:
+        if match == request.user:
+            is_matching = True
+            break
+        else:
+            is_matching = False
+
+    context = {
+        'user_object': user_object,
+        'user_profile': user_profile,
+        'is_matching': is_matching
+    }
+
+    # if request.user.username is pk:
+
+    return render(request, 'matches.html', context)
+    # else:
+    #     messages.error(request, ("That's not your Page."))
+    #     return redirect('home')
+
+    # return render(request, 'matches.html', context)
+
 
 @allowed_users(allowed_roles=['student'])
 def studentedit(request):
@@ -259,6 +292,7 @@ def matchedstudents(request):
 
 from .models import StudentProfile
 
+@allowed_users(allowed_roles=['student'])
 def studentprofile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
@@ -285,19 +319,22 @@ def studentprofile(request):
     }
     return render(request, 'skill.html', context)
 
+@allowed_users(allowed_roles=['lab'])
 def labprofile(request):
      if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = LabUpdateForm(request.POST, 
                                    request.FILES, 
                                    instance=request.user.studentprofile)
-        
+       # if request.FILES.get('profile_pic') is None:
+
+
         if u_form.is_valid() and p_form.is_valid():
        # if p_form.is_valid():
             u_form.save()
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('studenthomepage')
+            return redirect('labhomepage')
 
         else:
             u_form = UserUpdateForm(instance=request.user)
@@ -311,9 +348,81 @@ def labprofile(request):
         return render(request, 'skill.html', context)
      
 
+def profile(request, pk):
+    pk += '@emory.edu'
+    user_object = User.objects.get(username=pk)
+    user_profile = StudentProfile.objects.get(user=user_object)
+
+    context = {
+        'user_object': user_object,
+        'user_profile': user_profile,
+    }
+
+    if user_profile.is_student:
+        return render(request, 'StudentMain.html', context)
+    elif user_profile.is_lab:
+        return render(request, 'LabMain.html', context)
+    else:
+        return render(request, 'home.html', context)
+
+# def match(request):
+#     if request.method == 'POST':
+#         follower = request.POST['follower']
+#         user = request.POST['user']
+
+#         if Matched.objects.filter(follower=follower, user=user).first():
+#             delete_follower = Matched.objects.get(follower=follower, user=user)
+#             delete_follower.delete()
+#             return redirect('/profile/'+user)
+#         else:
+#             new_follower = Matched.objects.create(follower=follower, user=user)
+#             new_follower.save()
+#             return redirect('profile/'+user)
+
+#     else:
+#         return redirect('/')
+
+
+# def index(request):
+#     myuser = User.objects.get(email=request.user.email)
+#     user_profile = StudentProfile.objects.get(user=myuser)
+
+#     user_matching_list = []
+#     matchLabs = []
+
+#     user_matching = Matched.objects.filter(follower=request.user.username)
+
+
+#     # lab suggestion starts
+#     all_labs = User.objects.all()
+#     user_matching_all = []
+
+#     for user in user_matching_list:
+#         user_list = User.objects.get(username=user.user)
+#         user_matching_all.append(user_list)
+
+#     new_suggestions_list = [ x for x in list(all_labs) if (x not in list(user_matching_all()))]
+#     current_user = User.objects.filter(username=request.user.username)
+#     final_suggestions_list =[ x for x in list(new_suggestions_list) if (x not in list(current_user)) ]
+#     random.shuffle(final_suggestions_list)
+
+#     username_profile = []
+#     username_profile_list = []
+
+#     for users in final_suggestions_list:
+#         username_profile.append(users.id)
+
+#     for ids in username_profile:
+#         profile_lists = StudentProfile.objects.filter(id_user=ids)
+#         username_profile_list.append(profile_lists)
+
+#     suggestions_username_profile_lists = list(chain(*username_profile_list))
+
+#     return render(request, 'opportunities.html', {'user_profile': user_profile})
+
 # def skill(request):
 #   if request.POST:
-#     form = SkillForm(request.POST) #form= and form.save will create a new student object.
+#     form = SkillForm(request.POST) #form= and forsm.save will create a new student object.
 #     if form.is_valid():
 #         form.save()
 #         return redirect('studenthomepage')
