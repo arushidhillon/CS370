@@ -1,8 +1,12 @@
+:root {
+    --color1: rgb(63, 108, 255);
+    --color2: rgb(63, 108, 255);
+  }
 .form-control {
     width: 100%;
     padding: 8px;
     margin: 5px 0;
-    border: 1px solid #ccc;
+    border: 5px solid var(--color1);
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 16px;
@@ -35,4 +39,5 @@
 /* Example: Style the biography field differently */
 #id_biography {
     height: 150px; /* Adjust the height as needed */
+    width: 300px;
 }

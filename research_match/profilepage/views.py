@@ -31,7 +31,7 @@ from .forms import UserUpdateForm, ProfileUpdateForm
 from .decorators import allowed_users, unauthenticated_user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
-from .forms import UserUpdateForm, ProfileUpdateForm, LabUpdateForm
+from .forms import UserUpdateForm, ProfileUpdateForm, LabUpdateForm, Picform
 from django.views.generic import ListView
 import random
 
@@ -262,9 +262,9 @@ def matches(request, pk):
     #     return redirect('home')
 
 
-@allowed_users(allowed_roles=['student'])
-def studentedit(request):
-    return render(request, "StudentMainEdit.html")
+@allowed_users(allowed_roles=['lab'])
+def labpicedit(request):
+    return render(request, "editprofilepic.html")
 
 @allowed_users(allowed_roles=['lab'])
 def labhomepage(request):
@@ -346,8 +346,32 @@ def labprofile(request):
             'u_form': u_form,
             'p_form': p_form
         }
-        return render(request, 'skill.html', context)
+        return render(request, 'mentoredit.html', context)
      
+@allowed_users(allowed_roles=['lab'])
+def labpictureupdate(request):
+     if request.method == 'POST':
+       
+        p_form = Picform(request.POST, 
+                                   request.FILES, 
+                                   instance=request.user.studentprofile)
+       # if request.FILES.get('profile_pic') is None:
+
+
+        if p_form.is_valid():
+       # if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('labhomepage')
+
+        else:
+            p_form = Picform(instance=request.user.studentprofile)
+
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
 
 def profile(request, pk):
     pk += '@emory.edu'

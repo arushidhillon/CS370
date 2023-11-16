@@ -107,6 +107,10 @@
       <!-- Documents -->
       <div class="gridBox" id="about">
         <h2>My Files</h2>
+        <p>Document Name: {{user.studentprofile.documents}}</p>
+        {% if user.studentprofile.documents %}
+        <a href="{{ user.studentprofile.documents.url }}" target="_blank">Download Document</a>
+        {%endif%}
       </div>
 
       <!-- Courses -->

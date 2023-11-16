@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
@@ -35,10 +37,9 @@ urlpatterns = [
     path('matchedstudents/<str:pk>', views.matchedstudents, name='matchedstudents'),
     path('labprofile', views.labprofile, name='labprofile'),
     path('studentprofile', views.studentprofile, name='studentprofile'),
-
-
+    path('labpictureupdate', views.labpictureupdate, name='labpictureupdate'),
     path('profile/<str:pk>', views.profile, name='profile')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # path('skill/', views.skill, name='skill'),
     # path('skillsview/', views.skillsview, name='skillsview'),
     #path('skillsdisplay/', views.skillsdisplay, name='skillsdisplay'),
