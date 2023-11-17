@@ -46,7 +46,7 @@
           enctype="multipart/form-data"
         >
           {% csrf_token %} {{ form }}
-          <input class="matchButtons" type="submit" id="addSkill" value="Change Profile Picture" />
+          <input class="matchButtons" type="submit" value="Change Picture" />
         </form>
         </div>
         <!-- Skills -->
@@ -68,6 +68,15 @@
               <div class="child"> {{ i.strip }} </div>
             {% endfor %}
           </div>
+          <br>
+          <form
+          action="{% url 'labskillsupdate'%}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form }}
+          <input class="matchButtons" type="submit" value="Change Skills" />
+        </form>
         </div>
         <!-- Completed Courses -->
         <div
@@ -87,6 +96,15 @@
               <div class="child"> {{ i.strip }} </div>
             {% endfor %}
           </div>
+          <br>
+          <form
+          action="{% url 'labcourseupdate'%}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form }}
+          <input class="matchButtons" type="submit" value="Change Courses" />
+        </form>
         </div>
       </div>
 
@@ -94,18 +112,15 @@
       <div class="gridBox" id="about">
         <h2>About Our Lab</h2>
         <div class="Margins" id="target"></div>
-
-        <form class="Biographyform">
-          <p
-            id="bio"
-            name="biotext"
-            rows="8"
-            cols="20"
-            placeholder="Hello, I am..."
-          >
-            {{ user.studentprofile.biography}}
-          </p>
-        </form>
+        <p>{{ user.studentprofile.biography}}</p>
+        <form
+        action="{% url 'labbioupdate'%}"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %} {{ form }}
+        <input class="matchButtons" type="submit" value="Change Biography" />
+      </form>
       </div>
 
       <!-- Documents -->
@@ -115,6 +130,15 @@
         {% if user.studentprofile.documents %}
         <a href="{{ user.studentprofile.documents.url }}" target="_blank">Download Document</a>
         {%endif%}
+        <br>
+        <form
+        action="{% url 'labdocupdate'%}"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %} {{ form }}
+        <input class="matchButtons" type="submit" value="Change Document" />
+      </form>
       </div>
 
       <!-- Courses -->

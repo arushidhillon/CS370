@@ -18,9 +18,11 @@ from django.contrib.auth.models import User
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     matches = models.ManyToManyField("self", related_name='matched_by', symmetrical=False, blank=True)
+    picture_name=models.CharField(default="none", max_length=255)
     profile_pic = models.ImageField(default='default.png', upload_to='profile_pics')
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     gpa = models.FloatField(default=0)
+    document_name=models.CharField(default="none", max_length=255)
     documents = models.FileField(upload_to='documents')
     skill = models.CharField(max_length=255)
     course=models.CharField(max_length=255)

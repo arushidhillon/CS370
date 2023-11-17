@@ -33,7 +33,35 @@ class ProfileUpdateForm(forms.ModelForm):
 class Picform(forms.ModelForm):
     class Meta:
         model = StudentProfile
-        fields = ['profile_pic']
+        fields = ['picture_name','profile_pic']
+        # have to add a text input field for it to work
+
+class Skillform(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['skill']
+        help_texts = {
+            'skill': ('Separate skills with a comma.')
+        }
+        # have to add a text input field for it to work
+class Courseform(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['course']
+        help_texts = {
+            'course': ('Separate courses with a comma.')
+        }
+        # have to add a text input field for it to work
+class BioForm(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['biography']
+        # have to add a text input field for it to work
+class Docform(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['document_name','documents']
+        # have to add a text input field for it to work
     
 class LabUpdateForm(forms.ModelForm):
     class Meta:
