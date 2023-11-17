@@ -206,7 +206,7 @@ def lablogin(request):
                 if 'next' in request.POST:
                     return redirect(request.POST.get('next'))
                 else:
-                    myuser = user.get_username()
+                    myuser = user.studentprofile.get_user_name()
                     return redirect('/profile/'+myuser)
             
             else:
@@ -227,7 +227,7 @@ def lablogin(request):
 def signout(request):
     logout(request)
     messages.success(request, "Logged Out Successfully!")
-    return redirect('home')
+    return redirect('signup')
 
 @allowed_users(allowed_roles=['student'])
 def studenthomepage(request):
@@ -248,28 +248,18 @@ def matches(request, pk):
     user_object = User.objects.get(username=pk)
     user_profile = StudentProfile.objects.get(user=user_object)
 
-    matches = user_profile.matches.all()
-    for match in matches:
-        if match == request.user:
-            is_matching = True
-            break
-        else:
-            is_matching = False
 
     context = {
         'user_object': user_object,
         'user_profile': user_profile,
-        'is_matching': is_matching
     }
-
-    # if request.user.username is pk:
-
-    return render(request, 'matches.html', context)
+    return render(request, 'matches.html',context)
+    # myuser = request.user.get_username()
+    # if myuser is pk:
+    #     return render(request,'matches.html',context)
     # else:
     #     messages.error(request, ("That's not your Page."))
     #     return redirect('home')
-
-    # return render(request, 'matches.html', context)
 
 
 @allowed_users(allowed_roles=['lab'])
@@ -282,11 +272,20 @@ def labhomepage(request):
 
 @allowed_users(allowed_roles=['lab'])
 def students(request):
-    return render(request, "students.html")
+    return render(request, 'students.html')
 
 @allowed_users(allowed_roles=['lab'])
-def matchedstudents(request):
-    return render(request, "matchedstudents.html")
+def matchedstudents(request,pk):
+    pk += '@emory.edu'
+    user_object = User.objects.get(username=pk)
+    user_profile = StudentProfile.objects.get(user=user_object)
+
+
+    context = {
+        'user_object': user_object,
+        'user_profile': user_profile,
+    }
+    return render(request, "matchedstudents.html",context)
 
 # from .forms import SkillForm
 
@@ -294,6 +293,7 @@ from .models import StudentProfile
 
 @allowed_users(allowed_roles=['student'])
 def studentprofile(request):
+    myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, 
@@ -305,7 +305,7 @@ def studentprofile(request):
             u_form.save()
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('studenthomepage')
+            return redirect('profile/'+myuser)
 
 
     else:
@@ -321,6 +321,7 @@ def studentprofile(request):
 
 @allowed_users(allowed_roles=['lab'])
 def labprofile(request):
+     myuser = request.user.studentprofile.get_user_name()
      if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = LabUpdateForm(request.POST, 
@@ -334,7 +335,7 @@ def labprofile(request):
             u_form.save()
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('labhomepage')
+            return redirect('profile/'+myuser)
 
         else:
             u_form = UserUpdateForm(instance=request.user)
