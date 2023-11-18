@@ -370,6 +370,27 @@ def labpictureupdate(request):
         }
         return render(request, 'editprofilepic.html', context)
 
+def studentpictureupdate(request):
+    if request.method == 'POST':
+        p_form = Picform(request.POST, 
+                                   request.FILES, 
+                                   instance=request.user.studentprofile)
+       # if request.FILES.get('profile_pic') is None:
+    #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('studenthomepage')  
+        
+        else:
+            p_form = Picform(instance=request.user.studentprofile)
+
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+
 def labskillsupdate(request):
     if request.method == 'POST':
         p_form = Skillform(request.POST, 
@@ -380,6 +401,26 @@ def labskillsupdate(request):
             p_form.save()
             messages.success(request, f'Your account has been updated!')
             return redirect('labhomepage')  
+        
+        else:
+            p_form = Skillform(instance=request.user.studentprofile)
+
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+    
+def studentskillsupdate(request):
+    if request.method == 'POST':
+        p_form = Skillform(request.POST, 
+                                   instance=request.user.studentprofile)
+       # if request.FILES.get('profile_pic') is None:
+    #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('studenthomepage')  
         
         else:
             p_form = Skillform(instance=request.user.studentprofile)
@@ -410,6 +451,26 @@ def labcourseupdate(request):
         }
         return render(request, 'editprofilepic.html', context)
     
+def studentcourseupdate(request):
+    if request.method == 'POST':
+        p_form = Courseform(request.POST, 
+                                   instance=request.user.studentprofile)
+       # if request.FILES.get('profile_pic') is None:
+    #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('studenthomepage')  
+        
+        else:
+            p_form = Courseform(instance=request.user.studentprofile)
+
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+    
 def labbioupdate(request):
     if request.method == 'POST':
         p_form = BioForm(request.POST, 
@@ -420,6 +481,26 @@ def labbioupdate(request):
             p_form.save()
             messages.success(request, f'Your account has been updated!')
             return redirect('labhomepage')  
+        
+        else:
+            p_form = BioForm(instance=request.user.studentprofile)
+
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+
+def studentbioupdate(request):
+    if request.method == 'POST':
+        p_form = BioForm(request.POST, 
+                                   instance=request.user.studentprofile)
+       # if request.FILES.get('profile_pic') is None:
+    #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('studenthomepage')  
         
         else:
             p_form = BioForm(instance=request.user.studentprofile)
@@ -441,6 +522,27 @@ def labdocupdate(request):
             p_form.save()
             messages.success(request, f'Your account has been updated!')
             return redirect('labhomepage')  
+        
+        else:
+            p_form = Docform(instance=request.user.studentprofile)
+
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+
+def studentdocupdate(request):
+    if request.method == 'POST':
+        p_form = Docform(request.POST, 
+                                   request.FILES, 
+                                   instance=request.user.studentprofile)
+       # if request.FILES.get('profile_pic') is None:
+    #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('studenthomepage')  
         
         else:
             p_form = Docform(instance=request.user.studentprofile)
