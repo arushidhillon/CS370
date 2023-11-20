@@ -413,8 +413,7 @@ def labskillsupdate(request):
     
 def studentskillsupdate(request):
     if request.method == 'POST':
-        p_form = Skillform(request.POST, 
-                                   instance=request.user.studentprofile)
+        p_form = Skillform(request.POST, instance=request.user.studentprofile)
        # if request.FILES.get('profile_pic') is None:
     #     if pic_form.is_valid():
         if p_form.is_valid():

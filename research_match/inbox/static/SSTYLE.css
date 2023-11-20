@@ -308,6 +308,7 @@ textarea {
 }
 #conversation {
   background-color: #ccc;
+  height: 1fr;
   
 }
 #inbox_messages { 
@@ -316,12 +317,15 @@ textarea {
 #inbox_messages li:not(:last-child) {
   margin-bottom: 1rem;
 }
+#inbox_messages li {
+  max-width: 30rem;
+}
 .message {
   border-style: solid;
   border-color: var(--color-bg-1);
   background-color: #f8f8f8;
-  border-radius: 0.5rem;
-  padding: 0.25rem;
+  border-radius: 1rem;
+  padding: 0.5rem;
 }
 
 .conversation-head {
@@ -344,6 +348,10 @@ textarea {
 .message-head img {
   width: 1.5rem;
   height: 1.5rem;
+}
+.message-date {
+  font-size: smaller;
+  color: var(--color-subtitle);
 }
 .send-new-message {
   transition: 0.25s;
@@ -379,8 +387,8 @@ a {
   color: black; 
 }
 #conversations-list img {
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  height: 3rem;
 }
 #selected-conversation {
   background-color: var(--color-bg-1);
@@ -389,6 +397,26 @@ a {
 }
 #selected-conversation a div {
   color: white;
+}
+#user-list {
+  padding: 0;
+}
+.user-search {
+  display: flex;
+  gap: 1rem;
+}
+.user-search a {
+  display: flex;
+  gap:0.5rem;
+  align-items: center;
+}
+.user-search img {
+  width: 3rem;
+  height: 3rem;
+}
+.user-search span {
+  font-size: smaller;
+  color: var(--color-subtitle)
 }
 
 

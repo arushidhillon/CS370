@@ -1,6 +1,6 @@
 <ul id="user-list">
   {% for user in users %}
-  <li>
+  <li class="user-search">
     <a 
       hx-get="{% url 'inbox-newmessage' user.id %}"
       hx-target="#conversation"
