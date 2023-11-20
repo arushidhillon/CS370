@@ -28,5 +28,47 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = StudentProfile
+        fields = ['profile_pic', 'gpa', 'skill', 'course', 'biography','documents']
+
+class Picform(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['picture_name','profile_pic']
+        # have to add a text input field for it to work
+
+class Skillform(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['skill']
+        help_texts = {
+            'skill': ('Separate skills with a comma.')
+        }
+        # have to add a text input field for it to work
+class Courseform(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['course']
+        help_texts = {
+            'course': ('Separate courses with a comma.')
+        }
+        # have to add a text input field for it to work
+class BioForm(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['biography']
+        # have to add a text input field for it to work
+class Docform(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['document_name','documents']
+        # have to add a text input field for it to work
+    
+class LabUpdateForm(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
         fields = ['profile_pic', 'skill', 'course', 'biography','documents']
+        help_texts = {
+            'skill': ('Separate skills with a comma.'),
+            'course': ('Separate courses with a comma.'),
+        }
     
