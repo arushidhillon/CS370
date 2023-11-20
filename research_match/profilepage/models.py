@@ -19,6 +19,7 @@ from django.dispatch import receiver
     
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+
   #  email = models.EmailField(blank=True, unique=True)
     # email = User.email
     # firstname = models.CharField(max_length=70)
@@ -57,6 +58,10 @@ class StudentProfile(models.Model):
     def course_list(self):
         return self.course.split(',')
     
+    def get_fname(self):
+        return self.user.first_name
+
+
     def __str__(self):
         return f'{self.user.username} StudentProfile'
 
@@ -66,4 +71,3 @@ class Mentor(models.Model):
     biography = models.TextField()
     # def __str__(self):
     #     return self.objects
-

@@ -301,4 +301,3 @@ def studentprofile(request):
 #     } 
 
 #     return render(request, 'StudentMain.html', allskills)
-

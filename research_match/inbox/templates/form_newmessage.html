@@ -1,0 +1,19 @@
+<div>
+  <span>To:</span>
+  <div>
+    <img src="{{ recipient.studentprofile.profile_pic }}"/>
+    <div>
+      {{ recipient.studentprofile.first_name }}
+      <span>{{ recipient.username }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="newmessage">
+  <form method="POST" action="{% url 'inbox-newmessage' recipient.id %}">
+    {% csrf_token %} {{ new_message_form }}
+    <button type="submit">Submit Message</button>
+    <a href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+  </form>
+</div>

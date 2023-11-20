@@ -1,0 +1,53 @@
+<div id='conversation'>
+
+{% if conversation %}
+
+<div>
+    {% for participant in conversation.participants.all %}
+    {% if participant != request.user %}
+    
+    <div class="conversation-head">
+        <a href="{% url 'studenthomepage' %}">
+            <img src="{{ participant.studentprofile.profile_pic }}"/>
+        </a>
+        <div>
+            <h1 style="margin: 0;">{{ participant.first_name }} {{ participant.last_name }}</h1>
+            <p style="margin: 0;">{{ participant.username }}</p>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+<ul id='inbox_messages'>
+    {% for message in conversation.messages.all reversed %}
+    <li style="list-style-type: none; {% if participant != request.user %} padding-left:0;{% endif %}">
+        <div class="message">
+            <a class="message-head" href="{% url 'studenthomepage' %}">
+                <img src="{{ message.sender.studentprofile.profile_pic }}">
+                <span>{{ message.sender.first_name }}</span>
+            </a>
+            <div>
+                <div>{{ message.created }}</div>
+                <p>{{ message.body_decrypted }}</p>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+<div>
+    <a
+    hx-get="{% url 'inbox-newreply' conversation.id %}"
+    hx-target="this"
+    hx-swap="outerHTML scroll:#conversation:bottom" >
+        <div class="send-new-message">New Message</div>
+    </a>
+</div>
+
+{% else %}
+<div>
+    Select a conversation or create a new message
+</div>
+{% endif %}
+</div>

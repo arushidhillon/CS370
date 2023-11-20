@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from inbox import views as views_inbox
 from django.contrib.auth import views as auth_views
 
 
@@ -30,7 +31,8 @@ urlpatterns = [
     path('opportunities/', views.opportunities, name='opportunities'),
     path('settings/', views.settings, name='settings'),
     path('matches/', views.matches, name='matches'),
-    path('studentprofile', views.studentprofile, name='studentprofile')
+    path('studentprofile', views.studentprofile, name='studentprofile'),
+    path('inbox/', views_inbox.inbox_view, name='inbox')
     # path('skill/', views.skill, name='skill'),
     # path('skillsview/', views.skillsview, name='skillsview'),
     #path('skillsdisplay/', views.skillsdisplay, name='skillsdisplay'),
