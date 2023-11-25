@@ -1,8 +1,0 @@
-{% for profile in profiles %}
-    <div class="search-result-item">
-        <p>Name: {{ profile.firstname }} {{ profile.lastname }}</p>
-        <p>Lab: {{ profile.labname }}</p>
-    </div>
-{% empty %}
-    <p>No results found.</p>
-{% endfor %}
