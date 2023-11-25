@@ -3,11 +3,9 @@ from .views import *
 
 urlpatterns = [
     # URL for rendering the search page
-    path('search/',search, name='search_page'),
+    path('search-students/',search_students, name='search_students'),
 
     # URL for processing the search query and returning the results
-    path('search-profiles/', search_profiles, name='search_profiles'),
+    path('search-profiles/', search_labs, name='search_labs'),
 
-    # Assuming the detail view requires an 'id' parameter
-    path('profile/<int:id>/',profile_detail, name='profile_detail'),
 ]
