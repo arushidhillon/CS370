@@ -6,6 +6,6 @@ urlpatterns = [
     path('search-students/',search_students, name='search_students'),
 
     # URL for processing the search query and returning the results
-    path('search-profiles/', search_labs, name='search_labs'),
+    path('search-labs/', search_labs, name='search_labs'),
 
 ]
