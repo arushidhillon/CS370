@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>All Students</title>
+        <script src="https://unpkg.com/htmx.org"></script>
+    </head>
+    <body>
+        <h1>Student List</h1>
+        <form method="get" 
+            action="{% url 'all_students' %}" 
+            hx-get="{% url 'all_students' %}" 
+            hx-trigger="keyup changed delay:500ms" 
+            hx-target="#student-list" hx-indicator="#loading">
+            <input type="text" name="q" value="{{ search_query }}" placeholder="Search students...">
+            <!-- You can add a visual indicator that a search is being performed -->
+            <span id="loading" style="display:none;">Loading...</span>
+        </form>
+        <div id="student-list">
+            <!-- This is where the student list gets injected -->
+            <ul>
+                {% for student in students %}
+                    <li>{{ student.name }}</li>
+                    <!-- Add more student details you wish to display -->
+                {% empty %}
+                    <li>No students found.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+    </html>
