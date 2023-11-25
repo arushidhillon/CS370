@@ -25,11 +25,8 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('',include("profilepage.urls")),
-<<<<<<< Updated upstream
     path('',include("inbox.urls")),
-=======
     path('', include("search.urls")),
->>>>>>> Stashed changes
 ] 
 
 if settings.DEBUG:
