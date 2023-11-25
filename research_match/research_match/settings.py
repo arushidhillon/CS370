@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'profilepage',
+    'search',
     'crispy_forms',
     'inbox',
     'django_htmx',
