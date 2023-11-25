@@ -9,16 +9,16 @@
 <div id="search-container">
     <!-- Search form -->
     <form method="get" 
-        hx-get="/search/" 
-        hx-target="#search-results" 
+        hx-get="/search-profiles/" 
+        hx-target="#search-profiles" 
         hx-trigger="keyup changed delay:500ms">
-        <input type="search" name="search_user" placeholder="Search...">
+        <input type="search" name="q" placeholder="Search...">
         <input type="submit" value="Search">
     </form>
 </div>
 
 <!-- Results will be loaded into this div -->
-<div id="search-results">
+<div id="search-profiles">
     <!-- This is where the search results will be injected by HTMX after the AJAX call -->
 </div>
 

@@ -1,7 +1,7 @@
-{% for result in results %}
+{% for profile in profiles %}
     <div class="search-result-item">
-        <p>Name: {{ result.first_name }} {{ result.last_name }}</p>
-        <p>Lab: {{ result.labname }}</p>
+        <p>Name: {{ profile.firstname }} {{ profile.lastname }}</p>
+        <p>Lab: {{ profile.labname }}</p>
     </div>
 {% empty %}
     <p>No results found.</p>
