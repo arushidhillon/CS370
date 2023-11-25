@@ -24,8 +24,10 @@
     <div class="wrapper">
       <div class="pagetitle">
         <header>
-          {% if user.is_authenticated %}
-          <h3>Welcome Back, {{ user.first_name }}!</h3>
+          {% if user == user_object %}
+          <h3>Welcome Back, {{ user_object.first_name }}!</h3>
+          {% else %}
+          <h3>{{ user_object.first_name }} {{ user_object.last_name }}</h3>
           {%endif%}
         </header>
       </div>
@@ -34,12 +36,22 @@
       <div class="gridBox" style="justify-content: space-between;">
         <div class="Identityinfo">
           <img
-            src="{{ user.studentprofile.profile_pic.url }}"
+            src="{{ user_object.studentprofile.profile_pic.url }}"
             class="StudentPicture"
           />
-          <h2 class="StudentName">{{user.first_name }} {{user.last_name}}</h2>
+          <h2 class="StudentName">{{user_object.first_name }} {{user_object.last_name}}</h2>
           <!-- <p class="Headline">biology major at emory</p> -->
           <!-- <div class="child"> GPA: {{user.studentprofile.gpa}} </div> -->
+          {% if user == user_object %}
+          <form
+          action="{% url 'labpictureupdate'%}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form }}
+          <input class="matchButtons" type="submit" value="Change Picture" />
+        </form>
+        {%endif%}
         </div>
         <!-- Skills -->
         <div
@@ -55,11 +67,28 @@
           <h2 style="margin-top: 0;">Required Skills</h2>
           <div class="tagscluster">
             
+            <!-- Check if skills -->
+            {% if not user.studentprofile.skill %}
+              <p style="font-size: smaller; color: var(--color-subtitle); margin-top: 0;">Nothing here!</p>
+            {%else%}
             <!-- Split items in skill -->
             {% for i in user.studentprofile.skill_list %}
               <div class="child"> {{ i.strip }} </div>
             {% endfor %}
+             {%endif%}
           </div>
+         
+          <br>
+          {% if user == user_object %}
+          <form
+          action="{% url 'labskillsupdate'%}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form }}
+          <input class="matchButtons" type="submit" value="Change Skills" />
+        </form>
+        {%endif%}
         </div>
         <!-- Completed Courses -->
         <div
@@ -74,11 +103,26 @@
         >
           <h2 style="margin-top: 0;">Required Courses</h2>
           <div class="tagscluster">
+            {% if not user.studentprofile.course %}
+              <p style="font-size: smaller; color: var(--color-subtitle); margin-top: 0;">Nothing here!</p>
+            {%else%}
             <!-- Split items in courses -->
             {% for i in user.studentprofile.course_list %}
               <div class="child"> {{ i.strip }} </div>
             {% endfor %}
+            {%endif%}
           </div>
+          <br>
+          {% if user == user_object %}
+          <form
+          action="{% url 'labcourseupdate'%}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form }}
+          <input class="matchButtons" type="submit" value="Change Courses" />
+        </form>
+        {%endif%}
         </div>
       </div>
 
@@ -86,23 +130,45 @@
       <div class="gridBox" id="about">
         <h2>About Our Lab</h2>
         <div class="Margins" id="target"></div>
-
-        <form class="Biographyform">
-          <p
-            id="bio"
-            name="biotext"
-            rows="8"
-            cols="20"
-            placeholder="Hello, I am..."
-          >
-            {{ user.studentprofile.biography}}
-          </p>
-        </form>
+        {% if not user.studentprofile.biography %}
+          <p style="font-size: smaller; color: var(--color-subtitle); margin-top: 0;">Nothing here!</p>
+        {%else%}
+          <p>{{ user.studentprofile.biography}}</p>
+        {%endif%}
+        {% if user == user_object %}
+        <form
+        action="{% url 'labbioupdate'%}"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %} {{ form }}
+        <input class="matchButtons" type="submit" value="Change Biography" />
+      </form>
+      {%endif%}
       </div>
 
       <!-- Documents -->
       <div class="gridBox" id="about">
         <h2>My Files</h2>
+        {% if not user.studentprofile.documents %}
+          <p style="font-size: smaller; color: var(--color-subtitle); margin-top: 0;">Nothing here!</p>
+        {%else%}
+        <p>Document Name: {{user.studentprofile.documents}}</p>
+        {% if user.studentprofile.documents %}
+        <a href="{{ user.studentprofile.documents.url }}" target="_blank">Download Document</a>
+        {%endif%}
+        {%endif%}
+        <br>
+        {% if user == user_object %}
+        <form
+        action="{% url 'labdocupdate'%}"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %} {{ form }}
+        <input class="matchButtons" type="submit" value="Change Document" />
+      </form>
+      {%endif%}
       </div>
 
       <!-- Courses -->
@@ -128,7 +194,9 @@
         <input type="submit" id="addSkill" value="Edit My Profile"> -->
 
       <!-- Edit Profile -->
+      {% if user == user_object %}
       <div style="display: flex; justify-content: end">
+        
         <form
           action="{% url 'labprofile'%}"
           method="post"
@@ -137,7 +205,9 @@
           {% csrf_token %} {{ form }}
           <input class="matchButtons" type="submit" id="addSkill" value="Edit Profile" />
         </form>
+        
       </div>
+      {%endif%}
     </div>  
     
     <script src="{% static '/Profile.js' %}"></script>

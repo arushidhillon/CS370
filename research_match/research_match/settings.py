@@ -35,9 +35,10 @@ EMAIL_PORT = EMAIL_PORT
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-9h#qg6t@pxdf3&nypr1k%!a!8myas-g)26*&!bo#wy#3#-85)h'
 
+ENCRYPT_KEY = b'WIuRycBTSZ9VVevuPE4kXdnwVUlVrC7p1qZTDgFx-Sc='
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -51,16 +52,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'profilepage',
     'search',
+    'crispy_forms',
+    'inbox',
+    'django_htmx',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 ROOT_URLCONF = 'research_match.urls'
@@ -68,7 +73,7 @@ ROOT_URLCONF = 'research_match.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates"],
+        'DIRS': ["templates", "inbox/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

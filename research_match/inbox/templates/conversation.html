@@ -1,0 +1,53 @@
+<div id='conversation'>
+
+{% if conversation %}
+
+<div>
+    {% for participant in conversation.participants.all %}
+    {% if participant != request.user %}
+    
+    <div class="conversation-head">
+        <a href="{% if participant != request.user %}{% url 'profile' participant.studentprofile.get_user_name %}{% endif %}">
+            <img src="{{ participant.studentprofile.profile_pic }}"/>
+        </a>
+        <div>
+            <h1 style="margin: 0;">{{ participant.first_name }} {{ participant.last_name }}</h1>
+            <p style="margin: 0; color: var(--color-subtitle);">{{ participant.username }}</p>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+<ul id='inbox_messages' style="padding-left:0; display: flex; flex-direction: column; ">
+    {% for message in conversation.messages.all reversed %}
+    <li style="list-style-type: none;{% if message.sender != request.user %} align-self: start; {%else%} align-self: end;{% endif %}"> <!-- Left if not user, right if user -->
+        <div class="message">
+            <a class="message-head" href="{% url 'profile' request.user.studentprofile.get_user_name %}"> <!-- Message Sender -->
+                <img src="{{ message.sender.studentprofile.profile_pic }}">
+                <span>{{ message.sender.first_name }}</span>
+            </a>
+            <div>
+                <div class="message-date">{{ message.created }}</div> <!-- Message Date -->
+                <p>{{ message.body_decrypted }}</p> <!-- Message Text -->
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+<div>
+    <a
+    hx-get="{% url 'inbox-newreply' conversation.id %}"
+    hx-target="this"
+    hx-swap="outerHTML scroll:#conversation:bottom" >
+        <div class="send-new-message">New Message</div>
+    </a>
+</div>
+
+{% else %}
+<div>
+    Select a conversation or create a new message
+</div>
+{% endif %}
+</div>
