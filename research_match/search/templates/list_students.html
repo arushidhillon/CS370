@@ -1,11 +1,21 @@
-<div id="student-list">
-    <!-- This is where the student list gets injected -->
-         <ul>
-            {% for student in students %}
-                <li>{{ student.first_name }}</li>
-                    <!-- Add more student details you wish to display -->
-                {% empty %}
-                    <li>No students found.</li>
-                {% endfor %}
-         </ul>
-</div>
+{% for title in page.object_list %}
+    <div class="result">
+        ...
+    </div>
+{% endfor %}
+{% if page %}
+    <div id="load-more">
+        {% if page.has_next %}
+            <div class="load-more">
+                <button
+                    hx-get="{% url 'search_students' %}"
+                    hx-target="#load-more"
+                    hx-vals='{"q": "{{ request.GET.q }}", "page": "{{ page.next_page_number }}"}'
+                    hx-swap="outerHTML"
+                >
+                    Load More
+                </button>
+            </div>
+        {% endif %}
+    </div>
+{% endif %}
