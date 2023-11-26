@@ -1,13 +1,12 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404
-from django.db.models import Q
-from profilepage.models import StudentProfile
+from profilepage.models import User
 
 def search_students(request):
     if request.htmx:
         letters = request.GET.get('search_students')
         if len(letters) > 0:
-            students = StudentProfile.objects.filter(first_name__contains=letters).exclude(username=request.user)
+            students = User.StudentProfile.objects.filter(first_name__contains=letters, is_student=True).exclude(username=request.user)
             return render(request, 'list_searchuser.html', { 'students' : students })
         else:
             return HttpResponse('')
@@ -18,7 +17,7 @@ def search_labs(request):
     if request.htmx:
         letters = request.GET.get('search_labs')
         if len(letters) > 0:
-            labs = StudentProfile.objects.filter(labname__contains=letters).exclude(username=request.user)
+            labs = User.StudentProfile.objects.filter(labname__contains=letters).exclude(username=request.user)
             return render(request, 'list_searchuser.html', { 'labs' : labs })
         else:
             return HttpResponse('')
