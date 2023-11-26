@@ -1,10 +1,12 @@
-<form method="get" 
-      hx-get="{% url 'search_students' %}" 
-      hx-trigger="keyup delay:500ms" 
-      hx-target="#student-list">
-    <input type="text" 
-           name="q" 
-           placeholder="Search students..." 
-           value="{{ request.GET.q }}">
-    <button type="submit">Search</button>
-</form>
+<input name="q"
+       placeholder="Search students"
+       hx-get="{% url 'search-students' %}"
+       hx-target="#results"
+       hx-trigger="input delay:0.2s"
+>
+...
+<section id="results">
+    <div class="results">
+        {% include 'list_students.html' %}
+    </div>
+</section>
