@@ -1,12 +1,15 @@
-<input name="q"
-       placeholder="Search students"
-       hx-get="{% url 'search_students' %}"
-       hx-target="#results"
-       hx-trigger="input delay:0.2s"
->
-...
+<div class="search">
+    <input class="search-input"
+           name="q"
+           placeholder="Search students..."
+           hx-get="{% url 'search_students' %}"
+           hx-target="#results"
+           hx-trigger="input delay:0.2s"
+    >
+</div>
+</header>
+<main>
 <section id="results">
-    <div class="results">
-        {% include 'list_students.html' %}
-    </div>
+    {% include 'list_students.html' %}
 </section>
+</main>

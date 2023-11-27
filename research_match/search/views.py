@@ -1,17 +1,27 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404
 from profilepage.models import User
+from django.core.paginator import Paginator
 
 def search_students(request):
     if request.htmx:
-        letters = request.GET.get('search_students')
-        if len(letters) > 0:
-            students = User.StudentProfile.objects.filter(first_name__contains=letters, is_student=True).exclude(username=request.user)
-            return render(request, 'list_searchuser.html', { 'students' : students })
-        else:
-            return HttpResponse('')
-    else:
-        raise Http404()
+      search = request.GET.get('q')
+      page_num = request.GET.get('page', 1)
+
+      if search:
+          students = User.studentprofile.objects.filter(first_name__icontains=search)
+      else:
+          students = User.studentprofile.objects.none()
+      page = Paginator(object_list=students, per_page=5).get_page(page_num)
+
+      return render(
+          request=request,
+          template_name='partial_results.html',
+          context={
+              'page': page
+          }
+      )
+    return render(request, 'partial_search.html')
 
 def search_labs(request):
     if request.htmx:
