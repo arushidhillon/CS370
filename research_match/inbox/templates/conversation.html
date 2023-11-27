@@ -8,7 +8,7 @@
     
     <div class="conversation-head">
         <a href="{% if participant != request.user %}{% url 'profile' participant.studentprofile.get_user_name %}{% endif %}">
-            <img src="{{ participant.studentprofile.profile_pic }}"/>
+            <img src="{{ participant.studentprofile.profile_pic.url }}"/>
         </a>
         <div>
             <h1 style="margin: 0;">{{ participant.first_name }} {{ participant.last_name }}</h1>
@@ -24,7 +24,7 @@
     <li style="list-style-type: none;{% if message.sender != request.user %} align-self: start; {%else%} align-self: end;{% endif %}"> <!-- Left if not user, right if user -->
         <div class="message">
             <a class="message-head" href="{% url 'profile' request.user.studentprofile.get_user_name %}"> <!-- Message Sender -->
-                <img src="{{ message.sender.studentprofile.profile_pic }}">
+                <img src="{{ message.sender.studentprofile.profile_pic.url }}">
                 <span>{{ message.sender.first_name }}</span>
             </a>
             <div>
@@ -46,8 +46,8 @@
 </div>
 
 {% else %}
-<div>
-    Select a conversation or create a new message
+<div class="select-conversation">
+    <p>Select a conversation or create a new message</p>
 </div>
 {% endif %}
 </div>

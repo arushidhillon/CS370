@@ -6,7 +6,7 @@
       hx-target="#conversation"
       hx-swap="innerHTML"
     >
-      <img src="{{ user.studentprofile.profile_pic }}"/>
+      <img src="{{ user.studentprofile.profile_pic.url }}"/>
       <div class="btn">
         {{ user.first_name }} {{ user.last_name }}
         <span>{{ user.username }}</span>

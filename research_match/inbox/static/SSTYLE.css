@@ -285,14 +285,18 @@ textarea {
 }
 
 /* INBOX */
+input {
+  width: 100%;
+}
 .inbox {
   display: grid;
   height: 1fr;
+  gap: 1rem;
 }
-.inboxleft {
+.inbox-left {
   grid-column: 1;
-  width: 10rem;
   margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .inboxright {
@@ -302,14 +306,15 @@ textarea {
 .newmessage {
   grid-column: 2/6;
 }
-
+#modal-title {
+  margin: 0;
+}
 .btn {
   cursor: pointer;
 }
 #conversation {
-  background-color: #ccc;
+  background-color: whitesmoke;
   height: 1fr;
-  
 }
 #inbox_messages { 
   margin: 1rem;
@@ -323,9 +328,10 @@ textarea {
 .message {
   border-style: solid;
   border-color: var(--color-bg-1);
-  background-color: #f8f8f8;
+  background-color: white;
   border-radius: 1rem;
   padding: 0.5rem;
+  box-shadow: 4px 4px 10px gray;
 }
 
 .conversation-head {
@@ -333,6 +339,7 @@ textarea {
   background-color: var(--color-text1);
   gap: 1rem;
   align-items: center;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2); 
 }
 .conversation-head img {
   width: 3rem;
@@ -353,6 +360,7 @@ textarea {
   font-size: smaller;
   color: var(--color-subtitle);
 }
+
 .send-new-message {
   transition: 0.25s;
   height: 2rem;
@@ -370,8 +378,16 @@ textarea {
   color: white;
   background: var(--color-bg-1);
 }
-
+.select-conversation {
+  background-color: white;
+  height: 1vh;
+  margin-top: 4rem;
+  text-align: center;
+}
 /* INBOX - Active Conversations */
+img {
+  border-radius: 1rem;
+}
 li {
 list-style-type: none;
 }
@@ -381,6 +397,7 @@ list-style-type: none;
   align-items: center;
   text-decoration: none;
   color: black; 
+  padding: 0.25rem;
 }
 a {
   text-decoration: none;
