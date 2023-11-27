@@ -16,12 +16,12 @@ def search_students(request):
 
       return render(
           request=request,
-          template_name='partial_results.html',
+          template_name='form_searchstudents.html',
           context={
               'page': page
           }
       )
-    return render(request, 'partial_search.html')
+    return render(request, 'form_searchstudents.html')
 
 def search_labs(request):
     if request.htmx:
