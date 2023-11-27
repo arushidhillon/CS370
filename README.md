@@ -1,9 +1,4 @@
-# CS370
-
-CS 370 Project Repository
-# **Research Match**
-
-## Website Overview
+# **CS 370 Project - Research Match**
 
 ### Description 
 
@@ -25,12 +20,12 @@ Initial website design for student users:
 
 ## 🎥 Demo Video
 
-Here's a video that demos all of the app's implemented features:
+Here's a video that demos all of the website's implemented features:
 
 [Not yet available]
 
 ## Notes
-
+We created this website using Django, PostgreSQL, Heroku, and python. Thank you for visiting our website as we strive to bring more research opportunities to light for Emory students. 
 
 
 ## License
