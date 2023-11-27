@@ -14,6 +14,8 @@ Research Match is a website that connects Emory University students with researc
 
 ### Website Link 
 
+[Not yet available]
+
 ## 🎥 Demo Video
 
 Here's a video that demos all of the app's implemented features:
