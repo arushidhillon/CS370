@@ -10,6 +10,12 @@ CS 370 Project Repository
 Research Match is a website that connects Emory University students with research opportunities.
 
 ### Digital Wireframes & Mockups
+Initial website design for student users:
+<img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/Login%20Page.png" width=600>
+<img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/Match%20Page.png" width=600>
+<img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/My%20Research%20Roles%20Page.png" width=600>
+<img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/Opportunities%20Page.png" width=600>
+<img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/Profile%20Page.png" width=600>
 
 
 ### Website Link 
