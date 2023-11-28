@@ -1,0 +1,36 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+                   initial-scale=1.0"
+    />
+    {% if user.is_authenticated %} {%else%}
+    <meta http-equiv="refresh" content="0; /signup" />
+    {%endif%}
+    <title>LabProfile</title>
+    <link rel="stylesheet" href="{% static '/style.css' %}" />
+  </head>
+
+  <body>
+    {% block navbar%}
+    {% include 'navbar.html' %}
+    {% endblock navbar %}
+
+    <div id="matches-current">
+      <div class="pagetitle">
+        <h3>Current Students</h3>
+      </div>
+    </div>
+    <div id="matches-past">
+      <div class="pagetitle">
+        <h3>Past Students</h3>
+      </div>
+    </div>
+    <script src="{% static '/matchedstudents.js' %}"></script>
+  </body>
+</html>

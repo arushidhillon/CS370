@@ -1,0 +1,28 @@
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static '/form.css' %}" />
+
+<div class="container">
+    <form method="POST" enctype="multipart/form-data">
+      <fieldset>
+        <legend>Update Your Profile</legend>
+        {% csrf_token %}
+        {{ u_form.as_p }} 
+        {{ p_form.as_p }}
+        <button type="submit" class="btn btn-primary">Update</button>
+      </fieldset>
+    </form>
+</div>
+
+<!-- <form action="/profilepage/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+<form action="skill/" method="post">
+  {% csrf_token %} {{ form }}
+  <input type="submit" value="Submit" />
+</form> -->
+
