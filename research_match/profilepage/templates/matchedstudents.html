@@ -1,0 +1,88 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+                   initial-scale=1.0"
+    />
+    {% if user.is_authenticated %} {%else%}
+    <meta http-equiv="refresh" content="0; /signup" />
+    {%endif%}
+    <title>LabProfile</title>
+    <link rel="stylesheet" href="{% static '/style.css' %}" />
+  </head>
+
+  <body>
+    {% block navbar%}
+    {% include 'navbar.html' %}
+    {% endblock navbar %}
+
+    <div id="matches-current">
+      <div class="pagetitle">
+        <h3>Matched Students</h3>
+      </div>
+      {% for profile in user_profile.matches.all %}
+       <div class="gridBox" style="justify-content: space-between;">
+        <div class="Identityinfo">
+          <img
+            src="{{ profile.profile_pic.url }}"
+            class="StudentPicture"
+          />
+          <h2 class="StudentName">{{profile.get_first_name}} {{profile.get_last_name}}</h2>
+          <p class="Headline">{{profile.get_email}}</p>
+        </div>
+        <!-- Skills -->
+        <div
+          class="Identityinfo"
+          id="inputs"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            margin-left: 2rem;
+          "
+        >
+          <h2 style="margin-top: 0;">Skills </h2>
+          <div class="tagscluster">
+            
+            <!-- Split items in skill -->
+            {% for i in profile.skill_list %}
+              <div class="child"> {{ i.strip }} </div>
+            {% endfor %}
+          </div>
+        </div>
+        <!-- Completed Courses -->
+        <div
+          class="Identityinfo"
+          id="inputs"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            margin-left: 2rem;
+          "
+        >
+          <h2 style="margin-top: 0;">Courses </h2>
+          <div class="tagscluster">
+            <!-- Split items in courses -->
+            {% for i in profile.course_list %}
+              <div class="child"> {{ i.strip }} </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div> 
+
+      {% endfor %}
+    </div>
+    {% comment %} <div id="matches-past">
+      <div class="pagetitle">
+        <h3>Past Students</h3>
+      </div>
+    </div> {% endcomment %}
+    {% comment %} <script src="{% static '/matchedstudents.js' %}"></script> {% endcomment %}
+  </body>
+</html>
