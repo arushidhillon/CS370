@@ -1,9 +1,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
-#from django.contrib.auth.models import AbstractUser, UserManager as AbstractUserManager
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+
 
 
 # class Skill(models.Model):
@@ -16,18 +14,15 @@ from django.dispatch import receiver
 
 # class Skills(models.Model):
 #   skill = models.CharField(max_length=100)
-
     
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-  #  email = models.EmailField(blank=True, unique=True)
-    # email = User.email
-    # firstname = models.CharField(max_length=70)
-    # lastname = models.CharField(max_length=70)
-    
+    matches = models.ManyToManyField("self", related_name='matched_by', symmetrical=False, blank=True)
+    picture_name=models.CharField(default="none", max_length=255)
     profile_pic = models.ImageField(default='default.png', upload_to='profile_pics')
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     gpa = models.FloatField(default=0)
+    document_name=models.CharField(default="none", max_length=255)
     documents = models.FileField(upload_to='documents')
     skill = models.CharField(max_length=255)
     course=models.CharField(max_length=255)
@@ -58,19 +53,40 @@ class StudentProfile(models.Model):
     def course_list(self):
         return self.course.split(',')
     
+    def get_fname(self):
+        return self.user.first_name
+
+
     def __str__(self):
         return f'{self.user.username} StudentProfile'
 
     # These two properties will check if the user is a lab or student
     @property
     def is_student(self):
-        return self.groups.filter(name='student').exists()
+        return self.user.groups.filter(name='student').exists()
     
     @property
     def is_lab(self):
-        return self.groups.filter(name='lab').exists()
+        return self.user.groups.filter(name='lab').exists()
+    
+    #These functions get the user's information from Django's User model.
+    def get_user_name(self):
+        return self.user.email.split('@')[0]
+    def get_first_name(self):
+        return self.user.first_name
+    def get_last_name(self):
+        return self.user.last_name
+    def get_email(self):
+        return self.user.email
 
 
+
+# class Matched(models.Model):
+#     follower = models.CharField(max_length=100)
+#     user = models.CharField(max_length=100)
+
+#     def __str__(self):
+#         return self.user
 # class Mentor(models.Model):
 #     user2 = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
 #     biography = models.TextField()

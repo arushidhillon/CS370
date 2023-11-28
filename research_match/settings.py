@@ -19,7 +19,7 @@ from whitenoise.storage import CompressedManifestStaticFilesStorage
 BASE_DIR = Path(__file__).resolve().parent.parent
 SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-
+ENCRYPT_KEY = b'WIuRycBTSZ9VVevuPE4kXdnwVUlVrC7p1qZTDgFx-Sc='
 #EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 #EMAIL_PORT = EMAIL_PORT
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -47,7 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'crispy_forms',
+    'search',
+    'inbox',
+    'django_htmx',
 ]
+
 class WhiteNoiseStaticFilesStorage(CompressedManifestStaticFilesStorage):
     manifest_strict = False
 MIDDLEWARE = [
@@ -58,7 +62,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
 ]
+
+
+
 ROOT_URLCONF = 'research_match.urls'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -141,7 +149,7 @@ USE_TZ = True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["templates", "inbox/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

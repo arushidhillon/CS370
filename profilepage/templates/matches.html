@@ -23,14 +23,70 @@
    
     <div id="matches-current">
       <div class="pagetitle">
-        <h3>Current Labs</h3>
+        <h3>Matched Labs</h3>
       </div>
+      {% comment %} This for loop lists all users that match with the current user. {% endcomment %}
+      {% for profile in user_profile.matches.all %}
+       <div class="gridBox" style="justify-content: space-between;">
+        <div class="Identityinfo">
+          <img
+            src="{{ profile.profile_pic.url }}"
+            class="StudentPicture"
+          />
+          <h2 class="StudentName">{{profile.labname}}</h2>
+          <p class="Headline">{{profile.email}}</p>
+        </div>
+        <!-- Skills -->
+        <div
+          class="Identityinfo"
+          id="inputs"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            margin-left: 2rem;
+          "
+        >
+          <h2 style="margin-top: 0;">Skills Required</h2>
+          <div class="tagscluster">
+            
+            <!-- Split items in skill -->
+            {% for i in profile.skill_list %}
+              <div class="child"> {{ i.strip }} </div>
+            {% endfor %}
+          </div>
+        </div>
+        <!-- Completed Courses -->
+        <div
+          class="Identityinfo"
+          id="inputs"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            margin-left: 2rem;
+          "
+        >
+          <h2 style="margin-top: 0;">Courses Required</h2>
+          <div class="tagscluster">
+            <!-- Split items in courses -->
+            {% for i in profile.course_list %}
+              <div class="child"> {{ i.strip }} </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div> 
+
+      {% endfor %}
+    
     </div>
-    <div id="matches-past">
+      <div>
+    </div>
+    {% comment %} <div id="matches-past">
       <div class="pagetitle">
         <h3>Past Labs</h3>
-      </div>
+      </div> {% endcomment %}
     </div>
-    <script src="{% static '/Matches.js' %}"></script>
+    {% comment %} <script src="{% static '/Matches.js' %}"></script> {% endcomment %}
   </body>
 </html>
