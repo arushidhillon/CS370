@@ -6,6 +6,16 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 
 @login_required
+def all_students(request):
+    users_list = StudentProfile.objects.filter(background='S')  # Retrieve all users
+    paginator = Paginator(users_list, 5)  # Paginator, 10 users per page
+
+    page_number = request.GET.get('page')  # Get the page number from the request
+    page_obj = paginator.get_page(page_number)  # Get the page
+
+    return render(request, 'students.html', {'page_obj': page_obj})
+
+@login_required
 def search_students(request):
     if request.htmx:
         search = request.GET.get('q')
