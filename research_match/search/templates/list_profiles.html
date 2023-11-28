@@ -1,8 +1,0 @@
-{% for result in results %}
-    <div class="search-result-item">
-        <p>Name: {{ result.first_name }} {{ result.last_name }}</p>
-        <p>Lab: {{ result.labname }}</p>
-    </div>
-{% empty %}
-    <p>No results found.</p>
-{% endfor %}
