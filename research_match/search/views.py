@@ -34,10 +34,25 @@ def search_students(request):
 
         return render(
             request=request,
-            template_name='form_searchstudents.html',
+            template_name='list_students.html',
             context={'page': page}
         )
 
-    return render(request, 'form_searchstudents.html')
+    return render(request, 'list_students.html')
+
+@login_required
+def available_labs(request):
+    current_user = request.user
+    student_profile = StudentProfile.objects.get(user=current_user)
+    student_skills = set(student_profile.skill_list())
+    
+    all_labs = StudentProfile.objects.filter(background='M')
+    matching_labs = [lab for lab in all_labs if student_skills & set(lab.skills_list())]
+
+    paginator = Paginator(matching_labs, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'available_labs.html', {'page_obj': page_obj})
 
 
