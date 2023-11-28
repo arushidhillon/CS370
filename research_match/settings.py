@@ -10,7 +10,6 @@ from pathlib import Path
 import mimetypes
 mimetypes.add_type("text/css", ".css", True)
 from django.contrib.messages import constants as messages
-from . info import *
 import os
 import dj_database_url
 from sendgrid import SendGridAPIClient

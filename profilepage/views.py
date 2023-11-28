@@ -100,7 +100,7 @@ def signup(request):
         # Welcome Email
         subject = "Welcome to Research Match Login!"
         message = "Hello " + myuser.first_name + "! \n" + "Welcome to Research Match! \n Thank you for visiting our website. We hope you find the research opportunities you're looking for. \n We have also sent you a confirmation email, please confirm your email address in order to activate your account. This may be located in the spam folder. \n\n Thank you, \n Deadline Tech"
-        from_email = 'match.research@gmx.com'
+        from_email = 'deadline.tech@research-match.com'
         to_list = [myuser.email]
         send_mail(subject, message, from_email, to_list, fail_silently=True)
 
@@ -119,7 +119,7 @@ def signup(request):
         email = EmailMessage(
             email_subject,
             message2,
-            "match.research@gmx.com",
+            "deadline.tech@research-match.com",
             [myuser.email],
         )
         email.fail_silently = True
