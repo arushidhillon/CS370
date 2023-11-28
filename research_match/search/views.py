@@ -1,38 +1,35 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404
-from profilepage.models import User
+from profilepage.models import StudentProfile
+from django.db.models import Q
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def search_students(request):
     if request.htmx:
-      search = request.GET.get('q')
-      page_num = request.GET.get('page', 1)
+        search = request.GET.get('q')
+        page_num = request.GET.get('page', 1)
 
-      if search:
-          students = User.studentprofile.objects.filter(first_name__icontains=search)
-      else:
-          students = User.studentprofile.objects.none()
-      page = Paginator(object_list=students, per_page=5).get_page(page_num)
-
-      return render(
-          request=request,
-          template_name='form_searchstudents.html',
-          context={
-              'page': page
-          }
-      )
-    return render(request, 'form_searchstudents.html')
-
-def search_labs(request):
-    if request.htmx:
-        letters = request.GET.get('search_labs')
-        if len(letters) > 0:
-            labs = User.StudentProfile.objects.filter(labname__contains=letters).exclude(username=request.user)
-            return render(request, 'list_searchuser.html', { 'labs' : labs })
+        if search:
+            # Filter student profiles based on search query and is_student property
+            students = StudentProfile.objects.filter(
+                Q(first_name__icontains=search) | 
+                Q(last_name__icontains=search),
+                is_student=True
+            )
         else:
-            return HttpResponse('')
-    else:
-        raise Http404()
+            students = StudentProfile.objects.filter(is_student=True)
+
+        page = Paginator(object_list=students, per_page=5).get_page(page_num)
+
+        return render(
+            request=request,
+            template_name='form_searchstudents.html',
+            context={'page': page}
+        )
+
+    return render(request, 'form_searchstudents.html')
 
 #Function to display the details of the profile
 def profile_detail(request, id):
