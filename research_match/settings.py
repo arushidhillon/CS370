@@ -13,15 +13,22 @@ from django.contrib.messages import constants as messages
 from . info import *
 import os
 import dj_database_url
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from whitenoise.storage import CompressedManifestStaticFilesStorage
 BASE_DIR = Path(__file__).resolve().parent.parent
-EMAIL_BACKEN = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = EMAIL_USE_TLS
-EMAIL_HOST = EMAIL_HOST
-EMAIL_HOST_USER =  EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
-EMAIL_PORT = EMAIL_PORT
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+
+#EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+#EMAIL_PORT = EMAIL_PORT
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmx.com'  # GMX SMTP server
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'match.research@gmx.com'
+EMAIL_HOST_PASSWORD = os.getenv('GMX_KEY')
 EMAIL_DEBUG = True  
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 # SECURITY WARNING: keep the secret key used in production secret!
