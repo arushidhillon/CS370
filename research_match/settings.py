@@ -24,11 +24,11 @@ EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
 #EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 #EMAIL_PORT = EMAIL_PORT
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.gmx.com'  # GMX SMTP server
+EMAIL_HOST = 'smtp.ionos.com'  # IONOS SMTP server
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'match.research@gmx.com'
-EMAIL_HOST_PASSWORD = os.getenv('GMX_KEY')
+EMAIL_HOST_USER = 'deadline.tech@research-match.com'
+EMAIL_HOST_PASSWORD = os.getenv('IONOS_KEY')
 EMAIL_DEBUG = True  
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 # SECURITY WARNING: keep the secret key used in production secret!
