@@ -27,7 +27,7 @@
         {% if page.has_next %}
             <div class="load-more">
                 <button
-                    hx-get="{% url 'partial_search' %}"
+                    hx-get="{% url 'search_students' %}"
                     hx-target="#load-more"
                     hx-vals='{"q": "{{ request.GET.q }}", "page": "{{ page.next_page_number }}"}'
                     hx-swap="outerHTML"
