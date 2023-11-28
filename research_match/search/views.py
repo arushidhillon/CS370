@@ -1,5 +1,4 @@
-from django.http import Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from profilepage.models import StudentProfile
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -41,14 +40,4 @@ def search_students(request):
 
     return render(request, 'form_searchstudents.html')
 
-#Function to display the details of the profile
-def profile_detail(request, id):
-    StudentProfile = get_object_or_404(StudentProfile, id=id)
 
-    #Check the type of profile and redirect it accordingly
-    if StudentProfile.StudentProfile_BACKGROUND == "Student":
-        return render(request, 'profilepage/StudentMain.html', {'StudentProfile': StudentProfile})
-    elif StudentProfile.StudentProfile_BACKGROUND == "Mentor":
-        return render(request, 'profilepage/LabMain.html', {'StudentProfile': StudentProfile})
-    else: 
-        raise Http404()
