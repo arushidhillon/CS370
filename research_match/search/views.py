@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def all_students(request):
     users_list = StudentProfile.objects.filter(background='S')  # Retrieve all users
-    paginator = Paginator(users_list, 5)  # Paginator, 10 users per page
+    paginator = Paginator(users_list, 5)  # Paginator, 5 users per page
 
     page_number = request.GET.get('page')  # Get the page number from the request
     page_obj = paginator.get_page(page_number)  # Get the page
