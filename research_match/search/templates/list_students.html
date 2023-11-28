@@ -1,18 +1,13 @@
 {% for student in page.object_list %}
     <div class="result">
-        <!-- Profile Picture -->
         <div class="student-photo">
                 <img src="{{ user.studentprofile.profile_pic }}" alt="Profile Picture">
         </div>
 
-        <!-- Student Information -->
         <div class="result-info">
-            <!-- Student Name -->
             <div class="student-name">
                 <h2>{{ user.first_name }}{{ user.last_name }}</h2>
             </div>
-
-            <!-- Student Biography -->
             {% if student.biography %}
                 <div class="student-biography">
                     <p>{{ user.biography }}</p>
