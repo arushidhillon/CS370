@@ -89,7 +89,7 @@ def signup(request):
         myuser.is_active = False
 
         myuser.save()
-
+        print(request.POST)
         # Add group to user
         if 'stdbtn' in request.POST:
             group_name = 'student'
