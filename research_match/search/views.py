@@ -1,43 +1,58 @@
-from django.http import HttpResponse, Http404
-from django.shortcuts import render, get_object_or_404
-from django.db.models import Q
+from django.shortcuts import render
 from profilepage.models import StudentProfile
+from django.db.models import Q
+from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
-def search_profiles(request):
-    if request.headers.get('HX-Request'):  # Check for the HTMX request header
-        query = request.GET.get('q', '') 
+@login_required
+def all_students(request):
+    users_list = StudentProfile.objects.filter(background='S')  # Retrieve all users
+    paginator = Paginator(users_list, 5)  # Paginator, 5 users per page
 
-        if query:
-            # Search profiles by matching the query with first name, last name, or background fields
-            profiles = StudentProfile.objects.filter(
-                Q(firstname__icontains=query) | 
-                Q(lastname__icontains=query) | 
-                Q(background__icontains=query) |
-                Q(labname_icontains=query)
+    page_number = request.GET.get('page')  # Get the page number from the request
+    page_obj = paginator.get_page(page_number)  # Get the page
+
+    return render(request, 'students.html', {'page_obj': page_obj})
+
+@login_required
+def search_students(request):
+    if request.htmx:
+        search = request.GET.get('q')
+        page_num = request.GET.get('page', 1)
+
+        if search:
+            # Filter student profiles based on search query and is_student property
+            students = StudentProfile.objects.filter(
+                Q(first_name__icontains=search) | 
+                Q(last_name__icontains=search),
+                is_student=True
             )
-            # Render only the search results to a specific template for HTMX to swap in
-            return render(request, 'profiles/search.html', {'profiles': profiles})
         else:
-            # If query is empty, return an empty response to clear the results
-            return HttpResponse('')
+            students = StudentProfile.objects.filter(is_student=True)
 
-    else:
-        # If it's not an HTMX request, raise a 404
-        raise Http404('')
+        page = Paginator(object_list=students, per_page=5).get_page(page_num)
 
-#Function to list all profiles 
-def list_profiles(request):
-    StudentProfile = StudentProfile.objects.all()
-    return render(request, 'list_profiles.html', {'StudentProfile': StudentProfile})
+        return render(
+            request=request,
+            template_name='list_students.html',
+            context={'page': page}
+        )
 
-#Function to display the details of the profile
-def profile_detail(request):
-    StudentProfile = get_object_or_404(StudentProfile, id=id)
+    return render(request, 'list_students.html')
 
-    #Check the type of profile and redirect it accordingly
-    if StudentProfile.StudentProfile_BACKGROUND == "Student":
-        return render(request, 'StudentMain.html', {'StudentProfile': StudentProfile})
-    elif StudentProfile.StudentProfile_BACKGROUND == "Mentor":
-        return render(request, 'LabMain.html', {'StudentProfile': StudentProfile})
-    else: 
-        return Http404()
+@login_required
+def available_labs(request):
+    current_user = request.user
+    student_profile = StudentProfile.objects.get(user=current_user)
+    student_skills = set(student_profile.skill_list())
+    
+    all_labs = StudentProfile.objects.filter(background='M')
+    matching_labs = [lab for lab in all_labs if student_skills & set(lab.skills_list())]
+
+    paginator = Paginator(matching_labs, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'available_labs.html', {'page_obj': page_obj})
+
+
