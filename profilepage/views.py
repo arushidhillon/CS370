@@ -93,11 +93,11 @@ def signup(request):
         # Add group to user
         if 'stdbtn' in request.POST:
             group = Group.objects.get(name='student')
-            myuser.user_set.add(group)
+            group.user_set.add(myuser)
 
         if 'labbtn' in request.POST:
             group = Group.objects.get(name='lab')
-            myuser.user_set.add(group)
+            group.user_set.add(myuser)
 
         messages.success(request,
                          "Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
