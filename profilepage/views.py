@@ -90,20 +90,17 @@ def signup(request):
 
         myuser.save()
 
+        # Add group to user
         if 'stdbtn' in request.POST:
             group_name = 'student'
-            if not Group.objects.filter(name=group_name).exists():
-                # Create the group if it doesn't exist
-                Group.objects.create(name=group_name)
-            group = Group.objects.get(name=group_name)
+            group, created = Group.objects.get_or_create(name=group_name)
+            myuser.groups.set(group)
             myuser.groups.add(group)
 
         if 'labbtn' in request.POST:
             group_name = 'lab'
-            if not Group.objects.filter(name=group_name).exists():
-                # Create the group if it doesn't exist
-                Group.objects.create(name=group_name)
-            group = Group.objects.get(name=group_name)
+            group, created = Group.objects.get_or_create(name=group_name)
+            myuser.groups.set(group)
             myuser.groups.add(group)
 
         messages.success(request,

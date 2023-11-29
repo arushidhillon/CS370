@@ -1,7 +1,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.contrib.auth.models import Group
 
 
 # class Skill(models.Model):
@@ -80,6 +80,12 @@ class StudentProfile(models.Model):
         return self.user.email
 
 
+
+# Create a new group
+student_group = Group(name='student')
+student_group.save()
+lab_group = Group(name='lab')
+lab_group.save()
 
 # class Matched(models.Model):
 #     follower = models.CharField(max_length=100)
