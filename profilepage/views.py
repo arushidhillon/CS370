@@ -102,7 +102,7 @@ def signup(request):
             group, created = Group.objects.get_or_create(name=group_name)
             myuser.groups.set(group)
             myuser.groups.add(group)
-
+        myuser.save()
         messages.success(request,
                          "Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
 
