@@ -18,7 +18,7 @@ from sendgrid.helpers.mail import Mail
 from whitenoise.storage import CompressedManifestStaticFilesStorage
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-#EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+
 ENCRYPT_KEY = b'WIuRycBTSZ9VVevuPE4kXdnwVUlVrC7p1qZTDgFx-Sc='
 
 
