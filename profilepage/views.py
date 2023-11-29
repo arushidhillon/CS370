@@ -91,13 +91,14 @@ def signup(request):
         myuser.save()
         print(request.POST)
         # Add group to user
-        if 'stdbtn' in request.POST:
+        signup_type = request.POST.get('signup_type')
+        if signup_type == 'student':
             group_name = 'student'
             group, created = Group.objects.get_or_create(name=group_name)
             myuser.groups.add(group)
             messages.success(request,"STUDENT IS ASSIGNED")
 
-        if 'labbtn' in request.POST:
+        elif signup_type == 'lab':
             group_name = 'lab'
             group, created = Group.objects.get_or_create(name=group_name)
             myuser.groups.add(group)
