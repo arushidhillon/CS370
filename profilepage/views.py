@@ -242,7 +242,6 @@ def opportunities(request):
     return render(request, "Opportunities.html")
 
 
-@allowed_users(allowed_roles=['student'])
 def settings(request):
     return render(request, "Settings.html")
 
@@ -357,6 +356,7 @@ def labprofile(request):
 
 @allowed_users(allowed_roles=['lab'])
 def labpictureupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
         p_form = Picform(request.POST,
                          request.FILES,
@@ -366,7 +366,7 @@ def labpictureupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('labhomepage')
+            return redirect('profile/' + myuser)
 
         else:
             p_form = Picform(instance=request.user.studentprofile)
@@ -378,6 +378,7 @@ def labpictureupdate(request):
 
 
 def studentpictureupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
         p_form = Picform(request.POST,
                          request.FILES,
@@ -387,7 +388,7 @@ def studentpictureupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('studenthomepage')
+            return redirect('profile/' + myuser)
 
         else:
             p_form = Picform(instance=request.user.studentprofile)
@@ -399,6 +400,7 @@ def studentpictureupdate(request):
 
 
 def labskillsupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
         p_form = Skillform(request.POST,
                            instance=request.user.studentprofile)
@@ -407,7 +409,7 @@ def labskillsupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('labhomepage')
+            return redirect('profile/' + myuser)
 
         else:
             p_form = Skillform(instance=request.user.studentprofile)
@@ -419,6 +421,7 @@ def labskillsupdate(request):
 
 
 def studentskillsupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
         p_form = Skillform(request.POST, instance=request.user.studentprofile)
         # if request.FILES.get('profile_pic') is None:
@@ -426,8 +429,7 @@ def studentskillsupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            # TODO: apply to other forms
-            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
+            return redirect('profile/' + myuser)
 
         else:
             p_form = Skillform(instance=request.user.studentprofile)
@@ -439,6 +441,7 @@ def studentskillsupdate(request):
 
 
 def labcourseupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
         p_form = Courseform(request.POST,
                             instance=request.user.studentprofile)
@@ -447,7 +450,7 @@ def labcourseupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('labhomepage')
+            return redirect('profile/' + myuser)
 
         else:
             p_form = Courseform(instance=request.user.studentprofile)
@@ -459,6 +462,7 @@ def labcourseupdate(request):
 
 
 def studentcourseupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
         p_form = Courseform(request.POST,
                             instance=request.user.studentprofile)
@@ -467,7 +471,7 @@ def studentcourseupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')
+            return redirect('profile/' + myuser)
 
         else:
             p_form = Courseform(instance=request.user.studentprofile)
@@ -479,6 +483,7 @@ def studentcourseupdate(request):
 
 
 def labbioupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
         p_form = BioForm(request.POST,
                          instance=request.user.studentprofile)
@@ -487,7 +492,7 @@ def labbioupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('labhomepage')
+            return redirect('profile/' + myuser)
 
         else:
             p_form = BioForm(instance=request.user.studentprofile)
@@ -499,6 +504,7 @@ def labbioupdate(request):
 
 
 def studentbioupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
         p_form = BioForm(request.POST,
                          instance=request.user.studentprofile)
@@ -507,7 +513,7 @@ def studentbioupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('studenthomepage')
+            return redirect('profile/' + myuser)
 
         else:
             p_form = BioForm(instance=request.user.studentprofile)
@@ -519,6 +525,7 @@ def studentbioupdate(request):
 
 
 def labdocupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
         p_form = Docform(request.POST,
                          request.FILES,
@@ -528,7 +535,7 @@ def labdocupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('labhomepage')
+            return redirect('profile/' + myuser)
 
         else:
             p_form = Docform(instance=request.user.studentprofile)
@@ -540,6 +547,7 @@ def labdocupdate(request):
 
 
 def studentdocupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
         p_form = Docform(request.POST,
                          request.FILES,
@@ -549,7 +557,7 @@ def studentdocupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('studenthomepage')
+            return redirect('profile/' + myuser)
 
         else:
             p_form = Docform(instance=request.user.studentprofile)
@@ -632,55 +640,3 @@ def profile(request, pk):
 
 #     return render(request, 'opportunities.html', {'user_profile': user_profile})
 
-# def skill(request):
-#   if request.POST:
-#     form = SkillForm(request.POST) #form= and forsm.save will create a new student object.
-#     if form.is_valid():
-#         form.save()
-#         return redirect('studenthomepage')
-#   return render(request, 'skill.html', {'form': SkillForm})
-
-
-# from .models import *
-# from django.shortcuts import render
-
-# def skillsview(request):
-#     data = StudentProfile.objects.all()
-#     if data: print('working')
-#     return render(request, 'skillsdisplay.html', {'data': data})
-
-# def get_skill(request):
-#     # if this is a POST request we need to process the form data
-#     if request.method == "POST":
-#         # create a form instance and populate it with data from the request:
-#         form = SkillForm(request.POST)
-#         # check whether it's valid:
-#         # if form.is_valid():
-#             # process the data in form.cleaned_data as required
-#             # ...
-#             # redirect to a new URL:
-#         skill_input = form.cleaned_data['skill']
-#         p = Student(skill_input)
-#         p.save()
-
-#             # return HttpResponseRedirect("/thanks/")
-
-#     # if a GET (or any other method) we'll create a blank form
-#     else:
-#         form = SkillForm()
-
-#     return render(request, "skill.html", {"form": form})
-
-
-# def get_skills(request):
-
-#     all_Skills = Student.objects.all() #for all the records
-#     # one_data = userdetails.objects.get(pk=1) # 1 will return the first item change it depending on the data you want
-#     allskills={
-
-#       'skills':all_Skills,
-#     #   'one_data':one_data,
-
-#     }
-
-#     return render(request, 'StudentMain.html', allskills)
