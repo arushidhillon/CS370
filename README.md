@@ -14,10 +14,10 @@ Initial website design for student users:
 <img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/Profile%20Page.png" width=600>
 
 ### How-To 
-[] First, register your account as a student or lab with your emory email in the sign up page.
-[] Then, check for a confirmation email to activate your account *It might be located in your spam folder!*
-[] After confirming, log in with your newly created email under the student or lab login.
-[] Now, begin your search for research opportunities or students!
+- [ ] First, register your account as a student or lab with your emory email in the sign up page.
+- [ ] Then, check for a confirmation email to activate your account *It might be located in your spam folder!*
+- [ ] After confirming, log in with your newly created email under the student or lab login.
+- [ ] Now, begin your search for research opportunities or students!
 
 ### Website Link 
 
