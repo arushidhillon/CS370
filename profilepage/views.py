@@ -89,18 +89,18 @@ def signup(request):
         myuser.is_active = False
 
         myuser.save()
-
         # Add group to user
-        if 'stdbtn' in request.POST:
-            group = Group.objects.get(name='student')
-            myuser.groups.set(group)
+        signup_type = request.POST.get('signup_type')
+        if signup_type == 'student':
+            group_name = 'student'
+            group, created = Group.objects.get_or_create(name=group_name)
             myuser.groups.add(group)
 
-        if 'labbtn' in request.POST:
-            group = Group.objects.get(name='lab')
-            myuser.groups.set(group)
+        elif signup_type == 'lab':
+            group_name = 'lab'
+            group, created = Group.objects.get_or_create(name=group_name)
             myuser.groups.add(group)
-
+        myuser.save()
         messages.success(request,
                          "Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
 

@@ -17,11 +17,13 @@ from sendgrid.helpers.mail import Mail
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from whitenoise.storage import CompressedManifestStaticFilesStorage
 BASE_DIR = Path(__file__).resolve().parent.parent
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
-EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+
+
 ENCRYPT_KEY = b'WIuRycBTSZ9VVevuPE4kXdnwVUlVrC7p1qZTDgFx-Sc='
-#EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
-#EMAIL_PORT = EMAIL_PORT
+
+
+#Configure
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.ionos.com'  # IONOS SMTP server
 EMAIL_PORT = 587

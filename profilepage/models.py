@@ -1,7 +1,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.contrib.auth.models import Group
 
 
 # class Skill(models.Model):
@@ -78,6 +78,8 @@ class StudentProfile(models.Model):
         return self.user.last_name
     def get_email(self):
         return self.user.email
+
+
 
 
 
