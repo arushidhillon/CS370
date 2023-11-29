@@ -20,10 +20,10 @@
 <!-- Navbar goes here -->
  {% block content%}
    {% include 'navbar.html' %}
-   {% endblock content%}
+  <br>
 <div class="wrapper" style="height: 100dvh;">
   <inbox class="inbox">
-    <div class="inboxleft">
+    <div class="inbox-left">
       {% include 'form_searchuser.html' %}
       {% include 'my_conversations.html' %}
       <div id="open-conversations"></div>
@@ -34,6 +34,7 @@
   </inbox>
 </div>
 </body>
+{% endblock content%}
 <script>
   function scrollToBottom() {
     const container = document.getElementById("conversation");

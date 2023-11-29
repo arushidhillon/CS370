@@ -419,7 +419,8 @@ def studentskillsupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('studenthomepage')  
+            # TODO: apply to other forms
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
         
         else:
             p_form = Skillform(instance=request.user.studentprofile)
@@ -459,7 +460,7 @@ def studentcourseupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('studenthomepage')  
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  
         
         else:
             p_form = Courseform(instance=request.user.studentprofile)

@@ -258,6 +258,8 @@ main {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .tagscluster .child {
   color: #ececec;
