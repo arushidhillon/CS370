@@ -15,7 +15,7 @@ Initial website design for student users:
 
 ### How-To 
 - [ ] First, register your account as a student or lab with your emory email in the sign up page.
-- [ ] Then, check for a confirmation email to activate your account *It might be located in your spam folder!*
+- [ ] Then, check for a confirmation email to activate your account. ** *It might be located in your spam folder!* **
 - [ ] After confirming, log in with your newly created email under the student or lab login.
 - [ ] Now, begin your search for research opportunities or students!
 
