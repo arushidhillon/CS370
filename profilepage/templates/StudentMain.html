@@ -68,11 +68,11 @@
         >
           <h2 style="margin: 0;">Skills</h2>
           <div class="tagscluster">
-            {% if not user.studentprofile.skill %}
+            {% if not user_profile.skill %}
               <p style="font-size: smaller; color: var(--color-subtitle); margin-top: 0;">Nothing here!</p>
             {%else%}
             <!-- Split items in skill -->
-            {% for i in user_object.studentprofile.skill_list %}
+            {% for i in user_profile.skill_list %}
               <div class="child"> {{ i.strip }} </div>
             {% endfor %}
             {%endif%}
@@ -102,11 +102,11 @@
         >
           <h2 style="margin: 0;">Completed Courses</h2>
           <div class="tagscluster">
-            {% if not user.studentprofile.course %}
+            {% if not user_profile.course %}
               <p style="font-size: smaller; color: var(--color-subtitle); margin-top: 0;">Nothing here!</p>
             {%else%}
             <!-- Split items in courses -->
-            {% for i in user_object.studentprofile.course_list %}
+            {% for i in user_profile.course_list %}
               <div class="child"> {{ i.strip }} </div>
             {% endfor %}
             {%endif%}
@@ -131,7 +131,7 @@
       <div class="gridBox" id="about">
         <h2>About Me</h2>
         <div class="Margins" id="target"></div>
-        {% if not user.studentprofile.biography %}
+        {% if not user_profile.biography %}
           <p style="font-size: smaller; color: var(--color-subtitle); margin-top: 0;">Nothing here!</p>
         {%else%}
           
@@ -162,7 +162,7 @@
       <!-- Documents -->
       <div class="gridBox" id="about">
         <h2>My Files</h2>
-        {% if not user.studentprofile.biography %}
+        {% if not user_profile.biography %}
           <p style="font-size: smaller; color: var(--color-subtitle); margin-top: 0;">Nothing here!</p>
         {%else%}
         <p>Document Name: {{user_object.studentprofile.documents}}</p>
