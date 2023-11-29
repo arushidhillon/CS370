@@ -239,7 +239,7 @@ def studenthomepage(request):
 
 @allowed_users(allowed_roles=['student'])
 def opportunities(request):
-    return render(request, "Opportunities.html")
+    return render(request, "opportunities.html")
 
 
 def settings(request):
