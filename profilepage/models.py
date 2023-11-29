@@ -81,11 +81,7 @@ class StudentProfile(models.Model):
 
 
 
-# Create a new group
-student_group = Group(name='student')
-student_group.save()
-lab_group = Group(name='lab')
-lab_group.save()
+
 
 # class Matched(models.Model):
 #     follower = models.CharField(max_length=100)
