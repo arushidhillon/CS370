@@ -95,16 +95,16 @@ def signup(request):
             group_name = 'student'
             group, created = Group.objects.get_or_create(name=group_name)
             myuser.groups.add(group)
-            print('Success')
+            messages.success(request,"STUDENT IS ASSIGNED")
 
         if 'labbtn' in request.POST:
             group_name = 'lab'
             group, created = Group.objects.get_or_create(name=group_name)
             myuser.groups.add(group)
-            print('Success')
+            messages.success(request,"LAB IS ASSIGNED")
         myuser.save()
-        messages.success(request,
-                         "Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
+       # messages.success(request,
+        #                 "Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
 
         # Welcome Email
         # subject = "Welcome to Research Match Login!"
