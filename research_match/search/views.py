@@ -7,18 +7,19 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def all_students(request):
-    all = User.objects.all()
-    all_students = all.filter(group ='2')  # Retrieve all users
+    if request.htmx:
+        all = User.objects.all()
+        all_students = all.filter(groups__name ='student')  # Retrieve all users
 
-    return render(request, 'students.html', {'students': all_students})
+        return render(request, 'students.html', {'students': all_students})
 
 @login_required
 def search_students(request):
     if request.htmx:
         letters = request.GET.get('search_students')
         if len(letters) > 0:
-            profiles = User.objects.filter(first_name__contains=letters, group = '2').exclude(username=request.user)
-            return render(request, 'list_students.html', { 'users' : profiles })
+            students = User.objects.filter(first_name__contains=letters, groups__name = 'student').exclude(username=request.user)
+            return render(request, 'list_students.html', {'users' : students})
         else:
             return HttpResponse('')
     else:
