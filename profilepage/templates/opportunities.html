@@ -25,7 +25,7 @@
       <div class="pagetitle">
         <h3>Opportunities</h3>
       </div>
-      {% for suggestion in suggestions_username_profile_list %}
+      {% for suggestion in all_labs.studentprofile %}
       <div class="gridBox" style="justify-content: space-between;">
         <div class="Identityinfo">
           <img
@@ -33,7 +33,7 @@
             class="StudentPicture"
           />
           <h2 class="StudentName">{{suggestion.labname}}</h2>
-          <p class="Headline">{{suggestion.email}}</p>
+          <p class="Headline">{{suggestion.get_email}}</p>
         </div>
         <!-- Skills -->
         <div

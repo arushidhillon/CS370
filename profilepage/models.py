@@ -80,9 +80,6 @@ class StudentProfile(models.Model):
         return self.user.email
 
 
-
-
-
 # class Matched(models.Model):
 #     follower = models.CharField(max_length=100)
 #     user = models.CharField(max_length=100)
