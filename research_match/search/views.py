@@ -3,9 +3,9 @@ from django.http import HttpResponse, Http404
 from profilepage.models import User
 from django.db.models import Q
 from django.core.paginator import Paginator
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, allowed_users
 
-@login_required
+@allowed_users(allowed_roles=['lab'])
 def all_students(request):
     if request.htmx:
         all = User.objects.all()
@@ -13,7 +13,7 @@ def all_students(request):
 
         return render(request, 'students.html', {'students': all_students})
 
-@login_required
+@allowed_users(allowed_roles=['lab'])
 def search_students(request):
     if request.htmx:
         letters = request.GET.get('search_students')
