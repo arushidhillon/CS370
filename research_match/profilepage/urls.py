@@ -15,9 +15,7 @@ urlpatterns = [
     path('lablogin', views.lablogin, name="lablogin"),
     path('signout', views.signout, name ="signout"),
     path('activate/<uidb64>/<token>', views.activate, name="activate"),
-    path('studenthomepage/', views.studenthomepage, name='studenthomepage'),
-    path('labhomepage/',views.labhomepage, name='labhomepage'),
-
+    
     path('reset_password', auth_views.PasswordResetView.as_view(
         template_name="password-reset/password_reset.html"
         ), name="reset_password"),

@@ -25,14 +25,14 @@
       <div class="pagetitle">
         <h3>Opportunities</h3>
       </div>
-      {% for suggestion in suggestions_username_profile_list %}
+      {% for suggestion in all_labs %}
       <div class="gridBox" style="justify-content: space-between;">
         <div class="Identityinfo">
           <img
             src="{{ suggestion.profile_pic.url }}"
             class="StudentPicture"
           />
-          <h2 class="StudentName">{{suggestion.labname}}</h2>
+          <h2 class="StudentName">{{suggestion.studentprofile.labname}}</h2>
           <p class="Headline">{{suggestion.email}}</p>
         </div>
         <!-- Skills -->
@@ -50,7 +50,7 @@
           <div class="tagscluster">
             
             <!-- Split items in skill -->
-            {% for i in suggestion.skill_list %}
+            {% for i in suggestion.studentprofile.skill_list %}
               <div class="child"> {{ i.strip }} </div>
             {% endfor %}
           </div>
@@ -69,7 +69,7 @@
           <h2 style="margin-top: 0;">Completed Courses</h2>
           <div class="tagscluster">
             <!-- Split items in courses -->
-            {% for i in suggestion.course_list %}
+            {% for i in suggestion.studentprofile.course_list %}
               <div class="child"> {{ i.strip }} </div>
             {% endfor %}
           </div>

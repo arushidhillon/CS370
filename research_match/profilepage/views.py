@@ -230,13 +230,16 @@ def signout(request):
     return redirect('signup')
 
 @allowed_users(allowed_roles=['student'])
-def studenthomepage(request):
-    return render(request, "StudentMain.html")
-
-
-@allowed_users(allowed_roles=['student'])
 def opportunities(request):
-    return render(request, "Opportunities.html")
+    all = User.objects.all()
+    all_labs = all.filter(groups__name='lab')
+
+    context = {
+        'all': all,
+        'all_labs':all_labs,
+    }
+
+    return render(request, "opportunities.html", context)
 
 @allowed_users(allowed_roles=['student'])
 def settings(request):
@@ -253,7 +256,7 @@ def matches(request, pk):
         'user_object': user_object,
         'user_profile': user_profile,
     }
-    return render(request, 'matches.html',context)
+    return render(request, 'matches.html', context)
     # myuser = request.user.get_username()
     # if myuser is pk:
     #     return render(request,'matches.html',context)
@@ -265,10 +268,6 @@ def matches(request, pk):
 @allowed_users(allowed_roles=['lab'])
 def labpicedit(request):
     return render(request, "editprofilepic.html")
-
-@allowed_users(allowed_roles=['lab'])
-def labhomepage(request):
-    return render(request, "LabMain.html")
 
 @allowed_users(allowed_roles=['lab'])
 def students(request):
@@ -286,6 +285,23 @@ def matchedstudents(request,pk):
         'user_profile': user_profile,
     }
     return render(request, "matchedstudents.html",context)
+
+def profile(request, pk):
+    pk += '@emory.edu'
+    user_object = User.objects.get(username=pk)
+    user_profile = StudentProfile.objects.get(user=user_object)
+
+    context = {
+        'user_object': user_object,
+        'user_profile': user_profile,
+    }
+
+    if user_profile.is_student:
+        return render(request, 'StudentMain.html', context)
+    elif user_profile.is_lab:
+        return render(request, 'LabMain.html', context)
+    else:
+        return render(request, 'home.html', context)
 
 # from .forms import SkillForm
 
@@ -553,22 +569,6 @@ def studentdocupdate(request):
         }
         return render(request, 'editprofilepic.html', context)
 
-def profile(request, pk):
-    pk += '@emory.edu'
-    user_object = User.objects.get(username=pk)
-    user_profile = StudentProfile.objects.get(user=user_object)
-
-    context = {
-        'user_object': user_object,
-        'user_profile': user_profile,
-    }
-
-    if user_profile.is_student:
-        return render(request, 'StudentMain.html', context)
-    elif user_profile.is_lab:
-        return render(request, 'LabMain.html', context)
-    else:
-        return render(request, 'home.html', context)
 
 # def match(request):
 #     if request.method == 'POST':
