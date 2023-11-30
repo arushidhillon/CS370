@@ -40,8 +40,6 @@
             class="StudentPicture"
           />
           <h2 class="StudentName">{{user_object.first_name }} {{user_object.last_name}}</h2>
-          <!-- <p class="Headline">biology major at emory</p> -->
-          <!-- <div class="child"> GPA: {{user.studentprofile.gpa}} </div> -->
           {% if user == user_object %}
           <form
           action="{% url 'labpictureupdate'%}"

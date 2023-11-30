@@ -1,21 +1,10 @@
 
 from django.db import models
 from django.contrib.auth.models import User
-
-
-
-# class Skill(models.Model):
-#   #firstname = models.CharField(max_length=255)
-#   #lastname = models.CharField(max_length=255)
-#   skill=models.CharField(max_length=255)
-  
-#   def __str__(self):
-# 		  return self.skill
-
-# class Skills(models.Model):
-#   skill = models.CharField(max_length=100)
     
+# Thisis the profile model for each user who registers.
 class StudentProfile(models.Model):
+    
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     matches = models.ManyToManyField("self", related_name='matched_by', symmetrical=False, blank=True)
     picture_name=models.CharField(default="none", max_length=255)
@@ -53,8 +42,9 @@ class StudentProfile(models.Model):
     def course_list(self):
         return self.course.split(',')
     
-    def get_fname(self):
-        return self.user.first_name
+    # # This function returns the user's first name from the user model.
+    # def get_fname(self):
+    #     return self.user.first_name
 
 
     def __str__(self):
@@ -79,23 +69,4 @@ class StudentProfile(models.Model):
     def get_email(self):
         return self.user.email
 
-
-
-# class Matched(models.Model):
-#     follower = models.CharField(max_length=100)
-#     user = models.CharField(max_length=100)
-
-#     def __str__(self):
-#         return self.user
-# class Mentor(models.Model):
-#     user2 = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-#     biography = models.TextField()
-#     profile_pic = models.ImageField(default='default.png', upload_to='profile_pics')
-#     date_created = models.DateTimeField(auto_now_add=True, null=True)
-#     documents = models.FileField(upload_to='documents')
-#     labname=models.CharField(max_length=255)
-#     skill = models.CharField(max_length=255)
-#     requiredcourse=models.CharField(max_length=255)
-#     # def __str__(self):
-#     #     return self.objects
 
