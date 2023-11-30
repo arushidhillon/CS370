@@ -232,7 +232,8 @@ def signout(request):
 @allowed_users(allowed_roles=['student'])
 def opportunities(request):
     all = User.objects.all()
-    all_labs = all.filter(groups='2')
+    all_labs = all.filter(groups__name='lab')
+
     context = {
         'all': all,
         'all_labs':all_labs,
