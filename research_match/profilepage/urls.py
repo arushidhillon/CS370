@@ -31,8 +31,6 @@ urlpatterns = [
         template_name="password-reset/password_reset_done.html"
         ), name="password_reset_complete"),
 
-    path('opportunities/', views.opportunities, name='opportunities'),
-    path('students/', views.students, name='students'),
     path('settings/', views.settings, name='settings'),
     path('matches/<str:pk>', views.matches, name='matches'),
     path('matchedstudents/<str:pk>', views.matchedstudents, name='matchedstudents'),
