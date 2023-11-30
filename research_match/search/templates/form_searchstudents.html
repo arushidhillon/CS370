@@ -1,15 +1,11 @@
-<div class="search">
-    <input class="search-input"
-           name="q"
-           placeholder="Search students..."
-           hx-get="{% url 'search_students' %}"
-           hx-target="#results"
-           hx-trigger="input delay:0.2s"
-    >
+<div id="search">
+    <div>
+        <input placeholder="Search student ..." type="text" name="search_student"
+        hx-get="{% url 'search_students' %}"
+        hx-trigger="keyup changed"
+        hx-target="#search-results"
+        hx-swap="innerHTML" >
+    </div>
+    <div id="search-results">
+    </div>
 </div>
-</header>
-<main>
-<section id="results">
-    {% include 'list_students.html' %}
-</section>
-</main>

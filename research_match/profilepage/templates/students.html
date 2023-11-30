@@ -31,7 +31,7 @@
 
   <div class="student-profiles">
     <ul>
-      {% for student in page_obj %}
+      {% for student in students %}
         <li>{{ student.first_name }}{{ student.last_name }}</li>
       
       {% empty %}
@@ -39,17 +39,6 @@
       {% endfor %}
     </ul>
   </div>
-
-  <div>
-    {% if page_obj.has_previous %}
-      <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
-    {% endif %}
-    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-    {% if page_obj.has_next %}
-      <a href="?page={{ page_obj.next_page_number }}">Next</a>
-    {% endif %}
-  </div>
-</div>
 
 {% comment %} 
   <script src="{% static '/matchedstudents.js' %}"></script> {% endcomment %}

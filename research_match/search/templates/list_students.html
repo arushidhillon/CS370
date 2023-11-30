@@ -1,35 +1,17 @@
-{% for student in page.object_list %}
-    <div class="result">
-        <div class="student-photo">
-                <img src="{{ user.studentprofile.profile_pic }}" alt="Profile Picture">
+<ul id="user-list">
+    {% for user in users %}
+    <li class="user-search">
+      <a 
+        hx-get="{% url 'search_students' user.id %}"
+        hx-target="#search-results"
+        hx-swap="innerHTML"
+      >
+        <img src="{{ user.studentprofile.profile_pic }}"/>
+        <div class="btn">
+          {{ user.first_name }} {{ user.last_name }}
+          <span>{{ user.username }}</span>
         </div>
-
-        <div class="result-info">
-            <div class="student-name">
-                <h2>{{ user.first_name }}{{ user.last_name }}</h2>
-            </div>
-            {% if student.biography %}
-                <div class="student-biography">
-                    <p>{{ user.biography }}</p>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-{% endfor %}
-
-{% if page %}
-    <div id="load-more">
-        {% if page.has_next %}
-            <div class="load-more">
-                <button
-                    hx-get="{% url 'search_students' %}"
-                    hx-target="#load-more"
-                    hx-vals='{"q": "{{ request.GET.q }}", "page": "{{ page.next_page_number }}"}'
-                    hx-swap="outerHTML"
-                >
-                    Load More
-                </button>
-            </div>
-        {% endif %}
-    </div>
-{% endif %}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
