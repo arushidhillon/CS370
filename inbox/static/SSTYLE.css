@@ -21,7 +21,7 @@
 
 body {
   color: black;
-  background-color: white;
+  background-image: url('../static/images/background4.jpg');
   margin: 0;
   padding: 0;
 }
@@ -244,6 +244,7 @@ main {
   box-shadow: 8px 8px 20px rgb(128, 128, 128);
   padding: 2rem;
   overflow: hidden;
+  background-color: white;
 }
 #about {
   flex-direction: column;
