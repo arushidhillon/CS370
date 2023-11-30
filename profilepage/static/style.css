@@ -21,7 +21,7 @@
 
 body {
   color: black;
-  background: url('{% static "/images/background.jpg" %}') center center/cover no-repeat;
+  background: url('{% static "images/background.jpg" %}') center center/cover no-repeat;
   margin: 0;
   padding: 0;
 }
