@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404
 from profilepage.models import User
 from django.db.models import Q
 from django.core.paginator import Paginator
-from django.contrib.auth.decorators import login_required, allowed_users
+from profilepage.decorators import allowed_users
 
 @allowed_users(allowed_roles=['lab'])
 def all_students(request):
