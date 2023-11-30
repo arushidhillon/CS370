@@ -21,7 +21,7 @@
 
 body {
   color: black;
-  background-image: url('..static/images/background4.jpg');
+  background-image: url('../images/background4.jpg');
   margin: 0;
   padding: 0;
 }

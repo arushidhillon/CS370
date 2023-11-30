@@ -20,7 +20,7 @@ body {
   align-items: center;
   flex-direction: column;
   gap: 30px;
-  background-image:  url('../static/images/background1.jpg');
+  background-image:  url('../images/background1.jpg');
   overflow-x: hidden;
 }
 
