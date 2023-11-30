@@ -17,19 +17,3 @@
     </div>
 {% endfor %}
 
-{% if page %}
-    <div id="load-more">
-        {% if page.has_next %}
-            <div class="load-more">
-                <button
-                    hx-get="{% url 'search_students' %}"
-                    hx-target="#load-more"
-                    hx-vals='{"q": "{{ request.GET.q }}", "page": "{{ page.next_page_number }}"}'
-                    hx-swap="outerHTML"
-                >
-                    Load More
-                </button>
-            </div>
-        {% endif %}
-    </div>
-{% endif %}
