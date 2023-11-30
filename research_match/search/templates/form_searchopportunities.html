@@ -1,0 +1,11 @@
+<div id="new-message">
+    <div>
+        <input placeholder="Search..." type="text" name="search_user"
+        hx-get="{% url 'inbox-searchusers' %}"
+        hx-trigger="keyup changed"
+        hx-target="#search-results"
+        hx-swap="innerHTML" >
+    </div>
+    <div id="search-results">
+    </div>
+</div>

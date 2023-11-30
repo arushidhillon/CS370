@@ -71,7 +71,7 @@ ROOT_URLCONF = 'research_match.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates", "inbox/templates"],
+        'DIRS': ["templates", "inbox/templates", "search/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

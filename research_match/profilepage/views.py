@@ -11,7 +11,7 @@ from django.views.generic.list import ListView
 
 from email.message import EmailMessage
 import django
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import redirect, render
 from django.contrib import admin
 from django.urls import path, include, reverse
@@ -233,11 +233,6 @@ def signout(request):
 def studenthomepage(request):
     return render(request, "StudentMain.html")
 
-
-@allowed_users(allowed_roles=['student'])
-def opportunities(request):
-    return render(request, "Opportunities.html")
-
 @allowed_users(allowed_roles=['student'])
 def settings(request):
     return render(request, "Settings.html")
@@ -269,10 +264,6 @@ def labpicedit(request):
 @allowed_users(allowed_roles=['lab'])
 def labhomepage(request):
     return render(request, "LabMain.html")
-
-@allowed_users(allowed_roles=['lab'])
-def students(request):
-    return render(request, 'students.html')
 
 @allowed_users(allowed_roles=['lab'])
 def matchedstudents(request,pk):

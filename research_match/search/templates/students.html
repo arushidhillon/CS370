@@ -29,17 +29,6 @@
 
   </div>
 
-  <div class="student-search">
-    <ul>
-      {% for student in students %}
-        <li>{{ student.first_name }}{{ student.last_name }}</li>
-      
-      {% empty %}
-        <p>No students found.</p>
-      {% endfor %}
-    </ul>
-  </div>
-
 {% comment %} 
   <script src="{% static '/matchedstudents.js' %}"></script> {% endcomment %}
   <script src="{% static '/Navbar.js' %}"></script>
