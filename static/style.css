@@ -21,7 +21,7 @@
 
 body {
   color: black;
-  background-color: url('{{ STATIC_URL }}"/images/background.jpg" %') center center/cover no-repeat;
+  background-color: url('../images/background.jpg');
   margin: 0;
   padding: 0;
 }
