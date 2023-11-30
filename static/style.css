@@ -21,7 +21,7 @@
 
 body {
   color: black;
-  background-image: url('../images/background.jpg');
+  background-image: url('../static/images/background.jpg');
   margin: 0;
   padding: 0;
 }
