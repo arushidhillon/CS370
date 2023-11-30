@@ -20,7 +20,7 @@ body {
   align-items: center;
   flex-direction: column;
   gap: 30px;
-  background: url('{% static "/images/background.jpg" %}') center center/cover no-repeat;
+  background-color: white;
   overflow-x: hidden;
 }
 
