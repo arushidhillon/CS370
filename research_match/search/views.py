@@ -9,7 +9,7 @@ def students(request):
     return render(request, 'students.html')
 
 
-
+@allowed_users(allowed_roles=['lab'])
 def search_students(request):
     all = User.objects.all()
     all_students = all.filter(groups__name ='student')
@@ -17,7 +17,7 @@ def search_students(request):
     if request.htmx:
         letters = request.GET.get('search_students')
         if len(letters) > 0 :
-            profiles = User.objects.filter(first_name__contains=letters).exclude(username=request.user)
+            profiles = all_students.filter(first_name__contains=letters)
             return render(request, 'list_students.html', {'students' : profiles})
         else:
             return HttpResponse('')
