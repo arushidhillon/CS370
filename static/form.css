@@ -6,7 +6,7 @@
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 16px;
-    background-image: url('../images/background2.jpg');
+    background-image: url('../static/images/background2.jpg');
 }
 
 /* Style file inputs */
