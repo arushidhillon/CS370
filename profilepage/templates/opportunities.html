@@ -77,9 +77,32 @@
       </div>
 
       {% endfor %}
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const matchButtons = document.querySelectorAll('.matchButtons');
+      
+          matchButtons.forEach(button => {
+            button.addEventListener('click', function () {
+              const suggestionId = this.id.split('_')[1]; // Extract the suggestion ID
+              // Perform actions based on the button clicked and suggestion ID
+              if (this.id.startsWith('matchButton')) {
+                // Handle Match button click
+                console.log(`Match button clicked for suggestion ID ${suggestionId}`);
+              } else if (this.id.startsWith('messageButton')) {
+                // Handle Message button click
+                console.log(`Message button clicked for suggestion ID ${suggestionId}`);
+              } else if (this.id.startsWith('viewProfileButton')) {
+                // Handle View Full Profile button click
+                console.log(`View Full Profile button clicked for suggestion ID ${suggestionId}`);
+              }
+            });
+          });
+        });
+      </script>
+      
     </div>
 
-    <script src="{% static '/Opportunities.js' %}"></script>
+    <!--<script src="{% static '/Opportunities.js' %}"></script>-->
     <script src="{% static '/Navbar.js' %}"></script>
   </body>
 </html>
