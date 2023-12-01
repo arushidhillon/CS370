@@ -25,6 +25,8 @@
       <div class="pagetitle">
         <h3>Opportunities</h3>
       </div>
+
+      <!-- Labs -->
       {% for suggestion in all_labs %}
       <div class="gridBox" style="justify-content: space-between;">
         <div class="Identityinfo">
@@ -34,6 +36,8 @@
           />
           <h2 class="StudentName">{{suggestion.studentprofile.labname}}</h2>
           <p class="Headline">{{suggestion.email}}</p>
+          <button><a href="{% url 'profile' suggestion.studentprofile.get_user_name %}">View Profile</a></button>
+          <button><a href="{% url 'inbox-newmessage' suggestion.id %}">Send Message</a></button>
         </div>
         <!-- Skills -->
         <div
@@ -66,7 +70,7 @@
             margin-left: 2rem;
           "
         >
-          <h2 style="margin-top: 0;">Completed Courses</h2>
+          <h2 style="margin-top: 0;">Courses</h2>
           <div class="tagscluster">
             <!-- Split items in courses -->
             {% for i in suggestion.studentprofile.course_list %}
