@@ -3,9 +3,11 @@ from django.http import HttpResponse, Http404
 from profilepage.models import User
 from profilepage.decorators import allowed_users
 
+
 @allowed_users(allowed_roles=['lab'])
 def students(request):
     return render(request, 'students.html')
+
 
 @allowed_users(allowed_roles=['lab'])
 def search_students(request):
@@ -22,9 +24,11 @@ def search_students(request):
     else:
         raise Http404()
 
+
 @allowed_users(allowed_roles=['student'])
 def opportunities(request):
     return render(request, "opportunities.html")
+
 
 @allowed_users(allowed_roles=['student'])
 def search_opportunities(request): 
@@ -34,10 +38,9 @@ def search_opportunities(request):
     if request.htmx:
         letters = request.GET.get('search_labs')
         if len(letters) > 0:
-            labs = all_opportunities.filter(background__contains=letters | all_opportunities.filter(labname__contains=letters)).exclude(username=request.user)
+            labs = all_opportunities.filter(background__contains=letters | all_opportunities.filter(labname__contains=letters) | all_opportunities.filter(skills__contains=letters)).exclude(username=request.user)
             return render(request, 'list_opportunities.html', {'labs' : labs})
         else:
             return HttpResponse('')
     else:
         raise Http404()
-

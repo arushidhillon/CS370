@@ -1,15 +1,15 @@
-<ul id="user-list">
-    {% for user in users %}
+<ul id="labs-list">
+    {% for lab in labs %}
     <li class="user-search">
       <a 
-        hx-get="{% url 'inbox-newmessage' user.id %}"
-        hx-target="#conversation"
-        hx-swap="innerHTML"
+        hx-get="{% url 'search_students' %}"
+        hx-target="#search-results"
+        hx-swap="outerHTML"
       >
         <img src="{{ user.studentprofile.profile_pic.url }}"/>
         <div class="btn">
-          {{ user.first_name }} {{ user.last_name }}
-          <span>{{ user.username }}</span>
+          {{ lab.first_name }} {{ lab.last_name }}
+          <span>{{ lab.username }}</span>
         </div>
       </a>
     </li>
