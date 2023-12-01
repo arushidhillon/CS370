@@ -1,6 +1,6 @@
-<ul id="students-list">
-    {% for student in students %}
-    <li class="student-search">
+<ul id="users-list">
+    {% for user in users %}
+    <li class="user-search">
       <a 
         hx-get="{% url 'search_students' %}"
         hx-target="#search-results"
