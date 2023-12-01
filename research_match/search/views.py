@@ -17,7 +17,7 @@ def search_students(request):
     if request.htmx:
         letters = request.GET.get('search_students')
         if len(letters) > 0 :
-            profiles = all_students.filter(first_name__iexact=letters)
+            profiles = all_students.filter(first_name__icontains=letters)
             return render(request, 'list_students.html', {'students' : profiles})
         else:
             return HttpResponse('')
@@ -38,7 +38,7 @@ def search_opportunities(request):
     if request.htmx:
         letters = request.GET.get('search_labs')
         if len(letters) > 0:
-            labs = all_opportunities.filter(background__iexact=letters | all_opportunities.filter(labname__iexact=letters) | all_opportunities.filter(skills__iexact=letters))
+            labs = all_opportunities.filter(background__icontains=letters | all_opportunities.filter(labname__icontains=letters) | all_opportunities.filter(skills__icontains=letters))
             return render(request, 'list_opportunities.html', {'labs' : labs})
         else:
             return HttpResponse('')
