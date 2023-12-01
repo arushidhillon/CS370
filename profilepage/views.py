@@ -371,9 +371,16 @@ def labpictureupdate(request):
         # if request.FILES.get('profile_pic') is None:
         #     if pic_form.is_valid():
         if p_form.is_valid():
-            p_form.save()
+            instance = p_form.save(commit=False)
             messages.success(request, f'Your account has been updated!')
+            image_url = request.POST.get('Upload', None)
+            if image_url:
+                instance.image_url = image_url
+            instance.save()
             return redirect('profile/' + myuser)
+
+
+
 
         else:
             p_form = Picform(instance=request.user.studentprofile)
@@ -393,8 +400,12 @@ def studentpictureupdate(request):
         # if request.FILES.get('profile_pic') is None:
         #     if pic_form.is_valid():
         if p_form.is_valid():
-            p_form.save()
+            instance = p_form.save(commit=False)
             messages.success(request, f'Your account has been updated!')
+            image_url = request.POST.get('Upload', None)
+            if image_url:
+                instance.image_url = image_url
+            instance.save()
             return redirect('profile/' + myuser)
 
         else:

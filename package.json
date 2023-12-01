@@ -1,0 +1,25 @@
+{
+  "name": "cs370",
+  "version": "1.0.0",
+  "description": "\"CS 370 Project Repository\"",
+  "main": "\"index.js\"",
+  "dependencies": {
+    "ms": "^2.1.2",
+    "react": "^16.14.0",
+    "react-simple-file-upload": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arushidhillon/CS370.git"
+  },
+  "author": "Devin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arushidhillon/CS370/issues"
+  },
+  "homepage": "https://github.com/arushidhillon/CS370#readme"
+}
