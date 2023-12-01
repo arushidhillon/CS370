@@ -5,14 +5,14 @@
   <form method="POST" enctype="multipart/form-data">
     <fieldset>
       <legend>Update Your Profile</legend>
-      {% csrf_token %}
+      <!-- {% csrf_token %} -->
       {{ p_form.as_p }}
-      <button type="submit" class="btn btn-primary">Update</button>
+     <!-- <button type="submit" class="btn btn-primary">Update</button> -->
     </fieldset>
   </form>
 </div>
 
-<input id="uploader-preview-here-393" class="simple-file-upload" type="hidden" data-resize-width="225" data-resize-height="225" data-maxFileSize="5" data-accepted="image/*">
+<input id="image_url" class="simple-file-upload" type="hidden" data-resize-width="225" data-resize-height="225" data-maxFileSize="5" data-accepted="image/*">
 <!-- <form action="/profilepage/" method="post">
     {% csrf_token %}
     {{ form }}
