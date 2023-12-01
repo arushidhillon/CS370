@@ -565,3 +565,20 @@ textarea {
   border-radius: 1rem;
   cursor: pointer;
 }
+
+button {
+  transition: 0.25s;
+  width: 10rem;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--color-text1);
+  border: 3px solid transparent;
+  border-color: var(--color-bg-1);
+  border-radius: 1rem;
+  cursor: pointer;
+  text-align: center;
+  float: right;
+}
+button:hover {
+  color: white;
+  background: var(--color-bg-1);
+}

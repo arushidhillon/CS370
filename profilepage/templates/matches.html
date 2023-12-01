@@ -25,6 +25,7 @@
     <div class="pagetitle">
       <h3>Matched Labs</h3>
     </div>
+
     {% comment %} This for loop lists all users that match with the current user. {% endcomment %}
     {% for profile in user_profile.matched_by.all %}
     {% if profile not in user_profile.matches.all%}
@@ -36,6 +37,8 @@
         />
         <h2 class="StudentName">{{profile.labname}}</h2>
         <p class="Headline">{{profile.get_email}}</p>
+        <button><a href="{% url 'profile' suggestion.studentprofile.get_user_name %}">View Profile</a></button>
+          <button><a href="{% url 'inbox-newmessage' suggestion.id %}">Send Message</a></button>
       </div>
       <!-- Skills -->
       <div
@@ -85,8 +88,6 @@
 
     {% endfor %}
   
-   
-    <div id="matches-current">
       <div class="pagetitle">
         <h3>Current Labs</h3>
       </div>
@@ -101,6 +102,8 @@
           />
           <h2 class="StudentName">{{profile.labname}}</h2>
           <p class="Headline">{{profile.get_email}}</p>
+          <button><a href="{% url 'profile' suggestion.studentprofile.get_user_name %}">View Profile</a></button>
+          <button><a href="{% url 'inbox-newmessage' suggestion.id %}">Send Message</a></button>
         </div>
         <!-- Skills -->
         <div
@@ -149,8 +152,6 @@
       {%endif%}
 
       {% endfor %}
-    
-    </div>
       <div>
     </div>
     {% comment %} <div id="matches-past">

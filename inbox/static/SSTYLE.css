@@ -380,7 +380,6 @@ input {
   background: var(--color-bg-1);
 }
 .select-conversation {
-  background-color: white;
   height: 1vh;
   margin-top: 4rem;
   text-align: center;
