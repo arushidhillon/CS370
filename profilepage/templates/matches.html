@@ -39,7 +39,7 @@
         <h2 class="StudentName">{{profile.labname}}</h2>
         <p class="Headline">{{profile.get_email}}</p>
         <button><a href="{% url 'profile' profile.studentprofile.get_user_name %}">View Profile</a></button>
-          <button><a href="{% url 'inbox-newmessage' suggestion.id %}">Send Message</a></button>
+          <button><a href="{% url 'inbox-newmessage' profile.id %}">Send Message</a></button>
       </div>
       <!-- Skills -->
       <div
