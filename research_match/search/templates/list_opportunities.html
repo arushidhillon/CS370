@@ -4,7 +4,7 @@
       <a 
         hx-get="{% url 'search_students' %}"
         hx-target="#search-results"
-        hx-swap="outerHTML"
+        hx-swap="innerHTML"
       >
         <img src="{{ user.studentprofile.profile_pic.url }}"/>
         <div class="btn">
