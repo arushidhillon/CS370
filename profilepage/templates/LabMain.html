@@ -132,7 +132,7 @@
         {% if not user_profile.biography %}
           <p style="font-size: smaller; color: var(--color-subtitle); margin-top: 0;">Nothing here!</p>
         {%else%}
-          <p>{{ user.studentprofile.biography}}</p>
+          <p>{{ user_profile.biography}}</p>
         {%endif%}
         {% if user == user_object %}
         <form
