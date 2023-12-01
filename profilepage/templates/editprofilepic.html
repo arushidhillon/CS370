@@ -5,9 +5,9 @@
   <form method="POST" enctype="multipart/form-data">
     <fieldset>
       <legend>Update Your Profile</legend>
-      <!-- {% csrf_token %} -->
+      {% csrf_token %} 
       {{ p_form.as_p }}
-     <!-- <button type="submit" class="btn btn-primary">Update</button> -->
+     <button type="submit" class="btn btn-primary">Update</button>
     </fieldset>
   </form>
 </div>
