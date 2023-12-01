@@ -38,7 +38,7 @@ def search_users(request):
     if request.htmx:
         letters = request.GET.get('search_user')
         if len(letters) > 0:
-            profiles = User.objects.filter(first_name__contains=letters).exclude(username=request.user)
+            profiles = User.objects.filter(first_name__iexact=letters).exclude(username=request.user)
             return render(request, 'list_searchuser.html', { 'users' : profiles })
         else:
             return HttpResponse('')
