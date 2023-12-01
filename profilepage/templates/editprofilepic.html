@@ -1,23 +1,12 @@
-
 {% load static %}
 
-
-<link rel="stylesheet" href="{% static 'form.css' %}" />
+<link rel="stylesheet" href="{% static '/form.css' %}" />
 <div class="form-control">
   <form method="POST" enctype="multipart/form-data">
     <fieldset>
       <legend>Update Your Profile</legend>
       {% csrf_token %}
-      
-      <!-- Your existing form fields -->
-      {{ form.as_p }}
-      
-      <!-- Add a new input field for the image URL -->
-      <input type="hidden" id="id_image_url" name="image_url">
-
-      <!-- Your file upload input -->
-      <input id="Upload" class="simple-file-upload" type="hidden" data-resize-width="225" data-resize-height="225" data-maxFileSize="5" data-accepted="image/*">
-
+      {{ p_form.as_p }}
       <button type="submit" class="btn btn-primary">Update</button>
     </fieldset>
   </form>

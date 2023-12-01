@@ -427,8 +427,8 @@ def labskillsupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('profile/' + myuser)
-
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile 
+        
         else:
             p_form = Skillform(instance=request.user.studentprofile)
 
@@ -468,8 +468,8 @@ def labcourseupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('profile/' + myuser)
-
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
+        
         else:
             p_form = Courseform(instance=request.user.studentprofile)
 
@@ -510,8 +510,8 @@ def labbioupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('profile/' + myuser)
-
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
+        
         else:
             p_form = BioForm(instance=request.user.studentprofile)
 
@@ -531,8 +531,8 @@ def studentbioupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('profile/' + myuser)
-
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile  
+        
         else:
             p_form = BioForm(instance=request.user.studentprofile)
 
@@ -553,8 +553,8 @@ def labdocupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('profile/' + myuser)
-
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile  
+        
         else:
             p_form = Docform(instance=request.user.studentprofile)
 
@@ -575,8 +575,8 @@ def studentdocupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('profile/' + myuser)
-
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile  
+        
         else:
             p_form = Docform(instance=request.user.studentprofile)
 
