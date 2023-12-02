@@ -2,33 +2,66 @@
 
 ### Description 
 
-Research Match is a website that connects Emory University students with research opportunities.
-
-### Digital Wireframes & Mockups
-Initial website design for student users:
-
-<img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/Login%20Page.png" width=600>
-<img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/Match%20Page.png" width=600>
-<img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/My%20Research%20Roles%20Page.png" width=600>
-<img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/Opportunities%20Page.png" width=600>
-<img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/Profile%20Page.png" width=600>
-
-### How-To 
-- [ ] First, register your account as a student or lab with your emory email in the sign up page.
-- [ ] Then, check for a confirmation email to activate your account. ** *It might be located in your spam folder!* **
-- [ ] After confirming, log in with your newly created email under the student or lab login.
-- [ ] Now, begin your search for research opportunities or students!
-
-### Website Link 
-
-[Not yet available]
+The Emory Research Hub is a group project aimed at creating a sophisticated and user-friendly website that serves as a centralized platform connecting Emory University students with research labs on campus. This innovative tool facilitates seamless collaboration between students and faculty, streamlining the process of discovering and engaging in cutting-edge research opportunities within various disciplines.
 
 ## 🎥 Demo Video
 
 Here's a video that demos all of the website's implemented features:
 
-[Not yet available]
+[Coming Soon!]
 
-## Notes
-We created this website using Django, PostgreSQL, Heroku, and python. Thank you for visiting our website as we strive to bring more research opportunities to light for Emory students. 
+### How-To
+- [ ] First, register your account as a student or lab with your emory email in the sign up page.
+- [ ] Then, check for a confirmation email to activate your account. ** *It might be located in your spam folder!* **
+- [ ] After confirming, log in with your newly created email under the student or lab login.
+- [ ] Now, begin your search for research opportunities or students
+      
+### Website Link 
+Currently, our website is only functional on computers/laptops.
 
+[Coming Soon!]
+
+### Team Members
+**Current Members:** Yareli Gutierrez, Devin Gee, Adrian Valenica, Daniel Lee, Arushi Dhillon, Aditi Dhillon
+
+---
+
+**Member A: Yareli Gutierrez**  
+*Major:* Computer Science with Business Minor
+*Skills:* Java, Python, SQL, Kotlin
+*Interests:* Baking, Crocheting, and Bullet Journeling.
+
+---
+
+**Member B: Devin Gee**  
+*Major:* 
+*Skills:* 
+*Interests:*   
+
+---
+
+**Member C: Adrian Valencia**  
+*Major:*  
+*Skills:*  
+*Interests:* 
+
+---
+
+**Member D: Daniel Lee**  
+*Major:* 
+*Skills:* 
+*Interests:* 
+
+---
+
+**Member E: Arushi Dhillon**  
+*Major:* 
+*Skills:* 
+*Interests:* 
+
+---
+
+**Member F: Aditi Dhillon**  
+*Major:* 
+*Skills:* 
+*Interests:* 
