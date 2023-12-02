@@ -12,9 +12,16 @@ Here's a video that demos all of the website's implemented features:
 
 ### How-To
 - [ ] First, register your account as a student or lab with your emory email in the sign up page.
+<img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/RegisterUser.png" width=600>
+
 - [ ] Then, check for a confirmation email to activate your account. ** *It might be located in your spam folder!* **
+<img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/EmailConfirmation.png" width=600>
+
+      
 - [ ] After confirming, log in with your newly created email under the student or lab login.
-- [ ] Now, begin your search for research opportunities or students
+
+      
+- [ ] Now, begin your search for research opportunities or students.
       
 ### Website Link 
 Currently, our website is only functional on computers/laptops.
@@ -34,34 +41,34 @@ Currently, our website is only functional on computers/laptops.
 ---
 
 **Member B: Devin Gee**  
-*Major:* 
-*Skills:* 
-*Interests:*   
+*Major:*       
+*Skills:*       
+*Interests:*         
 
 ---
 
 **Member C: Adrian Valencia**  
-*Major:*  
+*Major:*       
 *Skills:*  
 *Interests:* 
 
 ---
 
 **Member D: Daniel Lee**  
-*Major:* 
-*Skills:* 
-*Interests:* 
+*Major:*       
+*Skills:*       
+*Interests:*       
 
 ---
 
 **Member E: Arushi Dhillon**  
-*Major:* 
-*Skills:* 
-*Interests:* 
+*Major:*       
+*Skills:*       
+*Interests:*       
 
 ---
 
 **Member F: Aditi Dhillon**  
-*Major:* 
-*Skills:* 
-*Interests:* 
+*Major:*       
+*Skills:*       
+*Interests:*       
