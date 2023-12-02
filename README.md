@@ -19,6 +19,8 @@ Here's a video that demos all of the website's implemented features:
 
       
 - [ ] After confirming, log in with your newly created email under the student or lab login.
+<img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/StudentLogin.png" width=300>
+<img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/LabLogin.png" width=300>
 
       
 - [ ] Now, begin your search for research opportunities or students.
@@ -29,7 +31,7 @@ Currently, our website is only functional on computers/laptops.
 [Coming Soon!]
 
 ### Team Members
-**Current Members:** Yareli Gutierrez, Devin Gee, Adrian Valenica, Daniel Lee, Arushi Dhillon, Aditi Dhillon
+**Current Members:** Yareli Gutierrez, Devin Gee, Adrian Valencia, Daniel Lee, Arushi Dhillon, Aditi Dhillon
 
 ---
 
