@@ -2,7 +2,7 @@
 
 ### Description 
 
-The Emory Research Hub is a group project aimed at creating a sophisticated and user-friendly website that serves as a centralized platform connecting Emory University students with research labs on campus. This innovative tool facilitates seamless collaboration between students and faculty, streamlining the process of discovering and engaging in cutting-edge research opportunities within various disciplines.
+The Emory Research is a group project aimed at creating a sophisticated and user-friendly website that serves as a centralized platform connecting Emory University students with research labs on campus. This innovative tool facilitates seamless collaboration between students and faculty, streamlining the process of discovering and engaging in cutting-edge research opportunities within various disciplines.
 
 ## 🎥 Demo Video
 
