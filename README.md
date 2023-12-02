@@ -35,7 +35,9 @@ Currently, our website is only functional on computers/laptops.
 
 **Member A: Yareli Gutierrez**  
 *Major:* Computer Science with Business Minor
+
 *Skills:* Java, Python, SQL, Kotlin
+
 *Interests:* Baking, Crocheting, and Bullet Journeling.
 
 ---
