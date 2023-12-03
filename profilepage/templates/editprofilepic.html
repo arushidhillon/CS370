@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{% static '/form.css' %}" />
 <div class="form-control">
   <form method="POST" enctype="multipart/form-data">
-    <input id="image_url" name = "image_url" class="simple-file-upload" type="hidden" data-resize-width="225" data-resize-height="225" data-maxFileSize="5" data-accepted="image/*">
+    <input id="image_url" name = "profile_pic" class="simple-file-upload" type="hidden" data-resize-width="225" data-resize-height="225" data-maxFileSize="5" data-accepted="image/*">
     <fieldset>
       <legend>Update Your Profile</legend>
       {% csrf_token %} 
