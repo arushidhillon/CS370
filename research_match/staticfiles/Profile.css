@@ -1,0 +1,147 @@
+.clkbtn {
+    height: 120%;
+    width: 90%;
+    border-radius: 50px;
+    background-image: linear-gradient(to right,
+            rgb(200, 200, 200),
+            rgb(255, 255, 255));
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.container {
+    height: 70px;
+    width: 100%;
+    background-color: rgb(84, 116, 243);
+    box-shadow: 8px 8px 20px rgb(128, 128, 128);
+    position: relative;
+    overflow: hidden;
+    align-items: center;
+}
+
+.topBar {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    margin-left: 150px;
+    font-size: 20px;
+    font: bolder;
+    padding: 0 20px 0 25px;
+    text-align: center;
+}
+
+.title {
+    padding: 0 50px 0 25px;
+}
+
+.logo {
+    position: absolute;
+    top: 30%;
+    font-size: 22px;
+    font: bolder;
+    padding: 0 20px 0 20px;
+    margin-right: 25px;
+}
+
+.StudentPicture {
+    border-radius: 50%;
+    padding: 0 25px 0 25px;
+    width: 80%;
+    height: 80%;
+}
+
+.StudentName {
+    padding: 0 25px 0 25px;
+}
+
+.Identity {
+    height: 90%;
+    width: 90%;
+    margin: 30px;
+    border: 1px darkblue;
+    font-family: 'Times New Roman', Times, serif;
+    box-shadow: 1px 1px 1px 1px rgb(228, 228, 228);
+    border-radius: 30px;
+    display:grid;
+    grid-template-columns: 30% 30%;
+}
+
+.tags{
+    padding: 0 25px 0 25px;
+   
+}
+
+#Course_item{
+list-style: none;
+padding: 0 25px 0 25px;
+margin-right: 25px;
+}
+
+#Skill_item, .tag, #Li {
+    list-style: none;
+    border-radius: 0px;
+    background-color: rgb(84, 116, 243);
+    font-size: 15px;
+    border:10px;
+    border-color: white;
+    cursor: pointer;
+    padding: 0 25px 0 25px;
+    width: fit-content;
+    height: fit-content;
+   
+}
+
+.Documents {
+    height: 90%;
+    width: 90%;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    border: 1px darkblue;
+    font-family: 'Times New Roman', Times, serif;
+    box-shadow: 1px 1px 1px 1px rgb(228, 228, 228);
+    border-radius: 30px;
+
+}
+
+.Biography {
+    height: 90%;
+    width: 90%;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    border: 1px darkblue;
+    font-family: 'Times New Roman', Times, serif;
+    box-shadow: 1px 1px 1px 1px rgb(228, 228, 228);
+    border-radius: 30px;
+}
+
+.bio, .course, .Margins{
+    padding: 0 25px 0 25px;
+    margin-right: 25px;
+}
+
+.Courses {
+    height: 90%;
+    width: 90%;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    border: 1px darkblue;
+    font-family: 'Times New Roman', Times, serif;
+    box-shadow: 1px 1px 1px 1px rgb(228, 228, 228);
+    border-radius: 30px;
+
+}
+
+.FourBoxLayout {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 50px;
+}
+
+.target{
+    width:1024px;
+    height:200px;
+}
+

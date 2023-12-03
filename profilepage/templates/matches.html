@@ -28,7 +28,7 @@
     {% comment %} This for loop lists all users that match with the current user. {% endcomment %}
     {% for profile in user_profile.matched_by.all %}
     {% if profile not in user_profile.matches.all%}
-    <form method=POST>
+
     <div class="gridBox" style="justify-content: space-between;">
       <div class="Identityinfo">
         <img
@@ -85,7 +85,7 @@
       </div>
     </div> 
 
-  </form>
+  
     {% elif profile not in user_profile.matched_by.all %}
     <h2> No Matched Labs  </h2>
     {%endif%}
