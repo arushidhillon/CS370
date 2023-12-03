@@ -23,6 +23,9 @@
   <div id="matches">
     <div class="pagetitle">
       <h3>All Students</h3>
+
+      {% include 'form_searchstudents.html' %}
+
        <!-- Labs -->
        {% for suggestion in final_suggestions_list %}
        <div class="gridBox" style="justify-content: space-between;">
