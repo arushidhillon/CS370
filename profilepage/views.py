@@ -393,7 +393,7 @@ def studentpictureupdate(request):
         if p_form.is_valid():
             instance = p_form.save(commit=False)
             messages.success(request, f'Your account has been updated!')
-            image_url = request.POST.get('Upload', None)
+            image_url = request.POST.get('image_url', None)
             if image_url:
                 instance.image_url = image_url
             instance.save()
