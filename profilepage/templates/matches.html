@@ -154,9 +154,9 @@
       </div> 
 
      
-      {% else %}
-      <h2> No Current Labs  </h2>
-      {%endif%}
+      {% elif profile not in user_profile.matched_by.all %}
+    <h2> No Current Labs  </h2>
+    {%endif%}
 
       {% endfor %}
       <div>
