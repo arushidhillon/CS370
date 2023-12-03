@@ -23,10 +23,104 @@
   <div id="matches">
     <div class="pagetitle">
       <h3>All Students</h3>
-      
+       <!-- Labs -->
+       {% for suggestion in final_suggestions_list %}
+       <div class="gridBox" style="justify-content: space-between;">
+         <div class="Identityinfo">
+           <img
+             src="{{ suggestion.studentprofile.image_url }}"
+             class="StudentPicture"
+           />
+           <h2 class="StudentName">{{suggestion.get_first_name}}</h2>
+           <p class="Headline">{{suggestion.get_email}}</p>
+         </div>
+         
+         <!-- Skills -->
+         <div
+           class="Identityinfo"
+           id="inputs"
+           style="
+             display: flex;
+             flex-direction: column;
+             justify-content: start;
+             margin-left: 2rem;
+           "
+         >
+           <h2 style="margin-top: 0;">Skills</h2>
+           <div class="tagscluster">
+             
+             <!-- Split items in skill -->
+             {% for i in suggestion.skill_list %}
+               <div class="child"> {{ i.strip }} </div>
+             {% endfor %}
+           </div>
+         </div>
+ 
+         <!-- Completed Courses -->
+         <div
+           class="Identityinfo"
+           id="inputs"
+           style="
+             display: flex;
+             flex-direction: column;
+             justify-content: start;
+             margin-left: 2rem;
+           "
+         >
+           <h2 style="margin-top: 0;">Courses</h2>
+           <div class="tagscluster">
+             <!-- Split items in courses -->
+             {% for i in suggestion.course_list %}
+               <div class="child"> {{ i.strip }} </div>
+             {% endfor %}
+           </div>
+         </div>
+ 
+         <!-- Buttons and Description -->
+         <div class="buttons-desc">
+           <!-- Buttons -->
+           <div class="opportunities-buttons">
+             <button><a href="{% url 'profile' suggestion.get_user_name %}">View Profile</a></button>
+             <button><a 
+               hx-get="{% url 'inbox-newmessage' suggestion.id %}"
+               hx-target="#conversation"
+               hx-swap="innerHTML">Send Message</a></button>
+             <button><a href="{% url 'match' suggestion.get_user_name%}">Match</a></button>
+           </div>
+           <!-- Lab Description -->
+           <div>
+             <p>{{suggestion.biography}}</p>
+           </div>
+         </div>
+       </div>
+ 
+       {% endfor %}
+       <script>
+         document.addEventListener('DOMContentLoaded', function () {
+           const matchButtons = document.querySelectorAll('.matchButtons');
+       
+           matchButtons.forEach(button => {
+             button.addEventListener('click', function () {
+               const suggestionId = this.id.split('_')[1]; // Extract the suggestion ID
+               // Perform actions based on the button clicked and suggestion ID
+               if (this.id.startsWith('matchButton')) {
+                 // Handle Match button click
+                 console.log(`Match button clicked for suggestion ID ${suggestionId}`);
+               } else if (this.id.startsWith('messageButton')) {
+                 // Handle Message button click
+                 console.log(`Message button clicked for suggestion ID ${suggestionId}`);
+               } else if (this.id.startsWith('viewProfileButton')) {
+                 // Handle View Full Profile button click
+                 console.log(`View Full Profile button clicked for suggestion ID ${suggestionId}`);
+               }
+             });
+           });
+         });
+       </script>
+       
+     </div>
+ 
     </div>
-
-  </div>
 {% comment %} 
   <script src="{% static '/matchedstudents.js' %}"></script> {% endcomment %}
   <script src="{% static '/Navbar.js' %}"></script>
