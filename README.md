@@ -50,9 +50,9 @@ Currently, our website is only functional on computers/laptops.
 ---
 
 **Member C: Adrian Valencia**  
-*Major:*       
-*Skills:*  
-*Interests:* 
+*Major:* Economics-Computer Science with Business Minor      
+*Skills:* Python, HTML, CSS, C 
+*Interests:* Cooking
 
 ---
 
