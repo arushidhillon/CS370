@@ -1,7 +1,11 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
 :root {
     --color1: rgb(63, 108, 255);
     --color2: rgb(63, 108, 255);
   }
+  
 .form-control {
     width: 100%;
     padding: 8px;

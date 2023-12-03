@@ -1,43 +1,48 @@
+from django.shortcuts import render
 from django.http import HttpResponse, Http404
-from django.shortcuts import render, get_object_or_404
-from django.db.models import Q
-from profilepage.models import StudentProfile
+from profilepage.models import User
+from profilepage.decorators import allowed_users
 
-def search_profiles(request):
-    if request.headers.get('HX-Request'):  # Check for the HTMX request header
-        query = request.GET.get('q', '') 
 
-        if query:
-            # Search profiles by matching the query with first name, last name, or background fields
-            profiles = StudentProfile.objects.filter(
-                Q(firstname__icontains=query) | 
-                Q(lastname__icontains=query) | 
-                Q(background__icontains=query) |
-                Q(labname_icontains=query)
-            )
-            # Render only the search results to a specific template for HTMX to swap in
-            return render(request, 'profiles/search.html', {'profiles': profiles})
+@allowed_users(allowed_roles=['lab'])
+def students(request):
+    return render(request, 'students.html')
+
+
+
+def search_students(request):
+    all = User.objects.all()
+    all_students = all.filter(groups__name ='student')
+
+    if request.htmx:
+        letters = request.GET.get('search_students')
+        if len(letters) > 0 :
+            profiles = User.objects.filter(first_name__contains=letters).exclude(username=request.user)
+            return render(request, 'list_students.html', {'students' : profiles})
         else:
-            # If query is empty, return an empty response to clear the results
             return HttpResponse('')
-
     else:
-        # If it's not an HTMX request, raise a 404
-        raise Http404('')
+        raise Http404()
 
-#Function to list all profiles 
-def list_profiles(request):
-    StudentProfile = StudentProfile.objects.all()
-    return render(request, 'list_profiles.html', {'StudentProfile': StudentProfile})
 
-#Function to display the details of the profile
-def profile_detail(request):
-    StudentProfile = get_object_or_404(StudentProfile, id=id)
+@allowed_users(allowed_roles=['student'])
+def opportunities(request):
+    return render(request, "opportunities.html")
 
-    #Check the type of profile and redirect it accordingly
-    if StudentProfile.StudentProfile_BACKGROUND == "Student":
-        return render(request, 'StudentMain.html', {'StudentProfile': StudentProfile})
-    elif StudentProfile.StudentProfile_BACKGROUND == "Mentor":
-        return render(request, 'LabMain.html', {'StudentProfile': StudentProfile})
-    else: 
-        return Http404()
+
+@allowed_users(allowed_roles=['student'])
+def search_opportunities(request): 
+    all = User.objects.all()
+    all_opportunities = all.filter(groups__name='lab')
+
+    if request.htmx:
+        letters = request.GET.get('search_labs')
+        if len(letters) > 0:
+            labs = all_opportunities.filter(background__contains=letters | all_opportunities.filter(labname__contains=letters) | all_opportunities.filter(skills__contains=letters)).exclude(username=request.user)
+            return render(request, 'list_opportunities.html', {'labs' : labs})
+        else:
+            return HttpResponse('')
+    else:
+        raise Http404()
+
+

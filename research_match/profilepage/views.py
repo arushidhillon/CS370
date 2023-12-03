@@ -230,13 +230,16 @@ def signout(request):
     return redirect('signup')
 
 @allowed_users(allowed_roles=['student'])
-def studenthomepage(request):
-    return render(request, "StudentMain.html")
-
-
-@allowed_users(allowed_roles=['student'])
 def opportunities(request):
-    return render(request, "Opportunities.html")
+    all = User.objects.all()
+    all_labs = all.filter(groups__name='lab')
+
+    context = {
+        'all': all,
+        'all_labs':all_labs,
+    }
+
+    return render(request, "opportunities.html", context)
 
 @allowed_users(allowed_roles=['student'])
 def settings(request):
@@ -253,7 +256,7 @@ def matches(request, pk):
         'user_object': user_object,
         'user_profile': user_profile,
     }
-    return render(request, 'matches.html',context)
+    return render(request, 'matches.html', context)
     # myuser = request.user.get_username()
     # if myuser is pk:
     #     return render(request,'matches.html',context)
@@ -265,10 +268,6 @@ def matches(request, pk):
 @allowed_users(allowed_roles=['lab'])
 def labpicedit(request):
     return render(request, "editprofilepic.html")
-
-@allowed_users(allowed_roles=['lab'])
-def labhomepage(request):
-    return render(request, "LabMain.html")
 
 @allowed_users(allowed_roles=['lab'])
 def students(request):
@@ -286,6 +285,23 @@ def matchedstudents(request,pk):
         'user_profile': user_profile,
     }
     return render(request, "matchedstudents.html",context)
+
+def profile(request, pk):
+    pk += '@emory.edu'
+    user_object = User.objects.get(username=pk)
+    user_profile = StudentProfile.objects.get(user=user_object)
+
+    context = {
+        'user_object': user_object,
+        'user_profile': user_profile,
+    }
+
+    if user_profile.is_student:
+        return render(request, 'StudentMain.html', context)
+    elif user_profile.is_lab:
+        return render(request, 'LabMain.html', context)
+    else:
+        return render(request, 'home.html', context)
 
 # from .forms import SkillForm
 
@@ -359,7 +375,7 @@ def labpictureupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('labhomepage')  
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
         
         else:
             p_form = Picform(instance=request.user.studentprofile)
@@ -380,7 +396,7 @@ def studentpictureupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('studenthomepage')  
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
         
         else:
             p_form = Picform(instance=request.user.studentprofile)
@@ -400,7 +416,7 @@ def labskillsupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('labhomepage')  
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile 
         
         else:
             p_form = Skillform(instance=request.user.studentprofile)
@@ -413,14 +429,14 @@ def labskillsupdate(request):
     
 def studentskillsupdate(request):
     if request.method == 'POST':
-        p_form = Skillform(request.POST, 
-                                   instance=request.user.studentprofile)
+        p_form = Skillform(request.POST, instance=request.user.studentprofile)
        # if request.FILES.get('profile_pic') is None:
     #     if pic_form.is_valid():
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('studenthomepage')  
+            # TODO: apply to other forms
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
         
         else:
             p_form = Skillform(instance=request.user.studentprofile)
@@ -440,7 +456,7 @@ def labcourseupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('labhomepage')  
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
         
         else:
             p_form = Courseform(instance=request.user.studentprofile)
@@ -460,7 +476,7 @@ def studentcourseupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('studenthomepage')  
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  
         
         else:
             p_form = Courseform(instance=request.user.studentprofile)
@@ -480,7 +496,7 @@ def labbioupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('labhomepage')  
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
         
         else:
             p_form = BioForm(instance=request.user.studentprofile)
@@ -500,7 +516,7 @@ def studentbioupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('studenthomepage')  
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile  
         
         else:
             p_form = BioForm(instance=request.user.studentprofile)
@@ -521,7 +537,7 @@ def labdocupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('labhomepage')  
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile  
         
         else:
             p_form = Docform(instance=request.user.studentprofile)
@@ -542,7 +558,7 @@ def studentdocupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('studenthomepage')  
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile  
         
         else:
             p_form = Docform(instance=request.user.studentprofile)
@@ -553,22 +569,6 @@ def studentdocupdate(request):
         }
         return render(request, 'editprofilepic.html', context)
 
-def profile(request, pk):
-    pk += '@emory.edu'
-    user_object = User.objects.get(username=pk)
-    user_profile = StudentProfile.objects.get(user=user_object)
-
-    context = {
-        'user_object': user_object,
-        'user_profile': user_profile,
-    }
-
-    if user_profile.is_student:
-        return render(request, 'StudentMain.html', context)
-    elif user_profile.is_lab:
-        return render(request, 'LabMain.html', context)
-    else:
-        return render(request, 'home.html', context)
 
 # def match(request):
 #     if request.method == 'POST':
@@ -677,4 +677,3 @@ def profile(request, pk):
 #     } 
 
 #     return render(request, 'StudentMain.html', allskills)
-

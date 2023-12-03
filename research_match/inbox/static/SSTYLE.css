@@ -223,241 +223,6 @@ main {
     max-width: 25em;
   }
 }
-.match {
-  grid-column-start: 1;
-  grid-column-end: 1;
-  display: grid;
-  overflow: hidden;
-  border-radius: 40px;
-  border-width: 0.25em;
-  border-style: solid;
-  border-color: var(--color-bg-1);
-  box-shadow: 8px 8px 20px rgb(128, 128, 128);
-  padding: 1rem;
-  padding-right: 3rem;
-  max-height: 35rem;
-}
-.thumbnail {
-  grid-row: 1;
-  grid-column: 1;
-  justify-self: center;
-  flex-shrink: 0;
-  min-width: 100%;
-  max-width: 100%;
-  border-radius: 40px;
-  border-width: 0.5em;
-  border-style: solid;
-  border-color: white;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  object-fit: cover;
-  width: 15rem;
-  height: 15rem;
-}
-.tagscluster {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-.tagscluster .child {
-  color: #ececec;
-  background-color: var(--color-bg-1);
-  border-radius: 0.5rem;
-  padding: 0.25rem;
-  user-select: none; /* prevent selection of text*/
-}
-.matchButtonsDiv {
-  grid-row: 2;
-  grid-column: 1;
-  display: grid;
-  gap: 0.5em;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  justify-content: center;
-  max-height: 8rem;
-}
-.matchButtons {
-  transition: 0.25s;
-  height: 2rem;
-  width: 10rem;
-  font-family: "Poppins", sans-serif;
-  background-color: var(--bg-color);
-  border: 3px solid transparent;
-  border-color: var(--color-bg-1);
-  border-radius: 1rem; /*linear-gradient(45deg, var(--color-accent), var(--color-bg-1)) 1;*/
-  cursor: pointer;
-}
-
-.matchButtons:hover {
-  color: white;
-  background: var(--color-bg-1);
-}
-.matchTitle {
-  grid-row: span 2;
-  grid-column: 2;
-  padding-left: 1rem;
-}
-.matchTitle h1 {
-  font-size: 3em;
-  align-self: left;
-  margin-bottom: 0;
-  line-height: 1;
-}
-.matchTitle h2 {
-  font-size: 1em;
-  font-style: italic;
-  align-self: center;
-  margin-top: 0;
-  color: var(--color-subtitle);
-}
-.matchInfo {
-  align-self: center;
-  word-wrap: break-word;
-  overflow: hidden;
-  padding-top: 0;
-  max-height: 20rem;
-}
-.matchText {
-  margin-top: 1rem;
-  position: relative;
-  z-index: -1;
-}
-.matchText:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(0deg, white, rgba(255, 255, 255, 0));
-}
-
-/* Profile CSS */
-.FourBoxLayout {
-  padding-top: 5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-.ProfileBox {
-  width: 80%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 40px;
-  border-width: 0.25em;
-  border-style: solid;
-  border-color: var(--color-bg-1);
-  box-shadow: 8px 8px 20px rgb(128, 128, 128);
-  padding: 0rem 2rem 2rem 2rem;
-  margin: 0;
-  margin-right: 5%;
-  margin-left: 5%;
-  overflow: hidden;
-}
-.ProfileBox h2 {
-  margin: 0;
-  margin-top: 2rem;
-}
-#Skill_item {
-  display: flex;
-}
-#Skill_item li {
-  width: 100%;
-}
-.Identityinfo {
-  width: 25rem;
-  min-height: 20rem;
-}
-.IdentityInfo #inputs {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 25rem;
-  min-height: 20rem;
-}
-.StudentPicture {
-  width: 10rem;
-  border-radius: 50;
-}
-.FourBoxLayout {
-  /*For the student page*/
-  display: grid;
-  grid-template-columns: 50% 50%;
-  gap: 1rem;
-}
-.StudentName {
-  margin-bottom: 0.5rem;
-}
-.Headline {
-  margin-top: 0;
-}
-
-/* Roles */
-.MatchesFlex {
-  padding-top: 5rem;
-  display: flex;
-  flex-direction: column;
-}
-.Labinfo {
-  max-height: 15rem;
-}
-.Labinfo #desc {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-}
-.Labinfo img {
-  object-fit: cover;
-  width: 10rem;
-  height: 10rem;
-}
-.Labinfo .Info {
-  display: flex;
-  flex-direction: column;
-  word-wrap: break-word;
-  overflow: hidden;
-}
-.tag {
-  color: var(--color-text1);
-  background-color: var(--color-bg-1);
-  font-size: 1rem;
-  padding: 0 10px 0 10px;
-}
-
-/* Student Main */
-.main {
-  margin: 0;
-  padding: 0;
-  display: grid;
-}
-.main h1 {
-  grid-row: 2;
-}
-.identity {
-  grid-row: 3;
-  grid-column: 1;
-  max-width: 1fr;
-}
-.documents {
-  grid-row: 3;
-  grid-column: 2;
-  max-width: 1fr;
-}
-
-/* Lab */
-.lab {
-  display: grid;
-  margin-right: 5rem;
-  margin-left: 5rem;
-}
-.lab .name {
-  margin-top: 5rem;
-  grid-row: 1;
-}
 
 /* Trying out new style */
 .wrapper {
@@ -519,74 +284,156 @@ textarea {
   resize: none;
 }
 
-/* Settings */
-.settings {
-  display: grid;
-  margin-right: 5rem;
-  margin-left: 5rem;
+/* INBOX */
+input {
+  width: 100%;
 }
-.settings-wrapper {
-  margin-left: 2rem;
-  margin-right: 2rem;
+.inbox {
   display: grid;
+  height: 1fr;
   gap: 1rem;
 }
-
-.settings-wrapper #notifications {
-  display: none;
+.inbox-left {
+  grid-column: 1;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
-/* Landing Page */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.inboxright {
+  grid-column: 2/6;
 }
-.homeTitle {
-  text-align: center;
-  font-size: 5rem;
-  animation: fadeIn 1.5s;
-  opacity: 1;
+
+.newmessage {
+  grid-column: 2/6;
 }
-.homeButtonsWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+#modal-title {
+  margin: 0;
 }
-.homeButtonsWrapper button {
-  width: 10rem;
-  font-family: "Poppins", sans-serif;
-  background-color: var(--bg-color);
-  border: 3px solid transparent;
-  border-color: var(--color-bg-1);
-  border-radius: 1rem;
+.btn {
   cursor: pointer;
-  background-color: white;
 }
-a {
+#conversation {
+  background-color: whitesmoke;
+  height: 1fr;
+}
+#inbox_messages { 
+  margin: 1rem;
+}
+#inbox_messages li:not(:last-child) {
+  margin-bottom: 1rem;
+}
+#inbox_messages li {
+  max-width: 30rem;
+}
+.message {
+  border-style: solid;
+  border-color: var(--color-bg-1);
+  background-color: white;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  box-shadow: 4px 4px 10px gray;
+}
+
+.conversation-head {
+  display: flex;
+  background-color: var(--color-text1);
+  gap: 1rem;
+  align-items: center;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2); 
+}
+.conversation-head img {
+  width: 3rem;
+  height: 3rem;
+}
+.message-head {
+  display: flex;
+  gap:0.5rem;
+  align-items: center;
   text-decoration: none;
   color: black;
 }
-/* Parallax scrolling effect */
-.parallax {
-  z-index: -1;
-  background-image: url("img_parallax.jpg");
-
-  /* Set a specific height */
-  min-height: 500px;
-
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.message-head img {
+  width: 1.5rem;
+  height: 1.5rem;
 }
- /* Turn off parallax scrolling for all tablets and phones. Increase/decrease the pixels if needed */
-@media only screen and (max-device-width: 1366px) {
-  .parallax {
-    background-attachment: scroll;
-  }
-} 
+.message-date {
+  font-size: smaller;
+  color: var(--color-subtitle);
+}
+
+.send-new-message {
+  transition: 0.25s;
+  height: 2rem;
+  width: 10rem;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--color-text1);
+  border: 3px solid transparent;
+  border-color: var(--color-bg-1);
+  border-radius: 1rem; /*linear-gradient(45deg, var(--color-accent), var(--color-bg-1)) 1;*/
+  cursor: pointer;
+  text-align: center;
+  float: right;
+}
+.send-new-message:hover {
+  color: white;
+  background: var(--color-bg-1);
+}
+.select-conversation {
+  background-color: white;
+  height: 1vh;
+  margin-top: 4rem;
+  text-align: center;
+}
+/* INBOX - Active Conversations */
+img {
+  border-radius: 1rem;
+}
+li {
+list-style-type: none;
+}
+#conversations-list li a {
+  display: flex;
+  gap:0.5rem;
+  align-items: center;
+  text-decoration: none;
+  color: black; 
+  padding: 0.25rem;
+}
+a {
+  text-decoration: none;
+  color: black; 
+}
+#conversations-list img {
+  width: 3rem;
+  height: 3rem;
+}
+#selected-conversation {
+  background-color: var(--color-bg-1);
+  border-radius: 1rem;
+  
+}
+#selected-conversation a div {
+  color: white;
+}
+#user-list {
+  padding: 0;
+}
+.user-search {
+  display: flex;
+  gap: 1rem;
+}
+.user-search a {
+  display: flex;
+  gap:0.5rem;
+  align-items: center;
+}
+.user-search img {
+  width: 3rem;
+  height: 3rem;
+}
+.user-search span {
+  font-size: smaller;
+  color: var(--color-subtitle)
+}
+
+

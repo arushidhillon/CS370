@@ -22,10 +22,24 @@
   <div id="matches">
     <div class="pagetitle">
       <h3>All Students</h3>
+
+      {% include 'form_searchstudents.html' %}
       
     </div>
 
   </div>
+
+  <div class="student-profiles">
+    <ul>
+      {% for student in students %}
+        <li>{{ student.first_name }}{{ student.last_name }}</li>
+      
+      {% empty %}
+        <p>No students found.</p>
+      {% endfor %}
+    </ul>
+  </div>
+
 {% comment %} 
   <script src="{% static '/matchedstudents.js' %}"></script> {% endcomment %}
   <script src="{% static '/Navbar.js' %}"></script>

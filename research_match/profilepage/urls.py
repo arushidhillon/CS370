@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from . import views
+from inbox import views as views_inbox
 from django.contrib.auth import views as auth_views
 
 
@@ -14,9 +15,7 @@ urlpatterns = [
     path('lablogin', views.lablogin, name="lablogin"),
     path('signout', views.signout, name ="signout"),
     path('activate/<uidb64>/<token>', views.activate, name="activate"),
-    path('studenthomepage/', views.studenthomepage, name='studenthomepage'),
-    path('labhomepage/',views.labhomepage, name='labhomepage'),
-
+    
     path('reset_password', auth_views.PasswordResetView.as_view(
         template_name="password-reset/password_reset.html"
         ), name="reset_password"),
@@ -37,6 +36,7 @@ urlpatterns = [
     path('matchedstudents/<str:pk>', views.matchedstudents, name='matchedstudents'),
     path('labprofile', views.labprofile, name='labprofile'),
     path('studentprofile', views.studentprofile, name='studentprofile'),
+    path('inbox/', views_inbox.inbox_view, name='inbox'),
     path('labpictureupdate', views.labpictureupdate, name='labpictureupdate'),
     path('labskillsupdate', views.labskillsupdate, name='labskillsupdate'),
     path('labcourseupdate', views.labcourseupdate, name='labcourseupdate'),

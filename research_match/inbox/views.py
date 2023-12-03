@@ -3,12 +3,18 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
 from django.db.models import Q
 from profilepage.models import User
+from django.contrib.auth import get_user_model
 from cryptography.fernet import Fernet
 from django.conf import settings
 from .forms import InboxNewMessageForm
 from .models import *
 
 f = Fernet(settings.ENCRYPT_KEY)
+
+def get_all_users(request):
+    users = User.objects.all()
+    context = {'users':users}
+    return render(users, 'users.html', context)
 
 @login_required
 def inbox_view(request, conversation_id=None):
@@ -25,19 +31,15 @@ def inbox_view(request, conversation_id=None):
         'conversation': conversation,
         'my_conversations': my_conversations
     }
-    return render(request, 'inbox/inbox.html', context)
+    return render(request, 'inbox.html', context)
 
 
 def search_users(request):
     if request.htmx:
         letters = request.GET.get('search_user')
         if len(letters) > 0:
-            profiles = User.objects.filter(firstname__icontains=letters)
-            users_id = profiles.values_list('user', flat=True)
-            users = User.objects.filter(
-                Q(username__icontains=letters) | Q(id__in=users_id)
-            ).exclude(username=request.user.username)
-            return render(request, 'inbox/list_searchuser.html', { 'users' : users })
+            profiles = User.objects.filter(first_name__icontains=letters).exclude(username=request.user)
+            return render(request, 'list_searchuser.html', { 'users' : profiles })
         else:
             return HttpResponse('')
     else:
@@ -62,16 +64,18 @@ def new_message(request, recipient_id):
             message.body = message_decoded
             
             message.sender = request.user
-            
             my_conversations = request.user.conversations.all()
-            for c in my_conversations:
-                if recipient in c.participants.all():
-                    message.conversation = c
-                    message.save()
-                    c.lastmessage_created = timezone.now()
-                    c.is_seen = False
-                    c.save()
-                    return redirect('inbox', c.id)
+            try:
+                for c in my_conversations:
+                    if recipient in c.participants.all():
+                        message.conversation = c
+                        message.save()
+                        c.lastmessage_created = timezone.now()
+                        c.is_seen = False
+                        c.save()
+                        return redirect('inbox', c.id)
+            except:
+                print("oops")
             new_conversation = Conversation.objects.create()
             new_conversation.participants.add(request.user, recipient)
             new_conversation.save()
@@ -83,7 +87,7 @@ def new_message(request, recipient_id):
         'recipient': recipient,
         'new_message_form': new_message_form
     }
-    return render(request, 'inbox/form_newmessage.html', context)
+    return render(request, 'form_newmessage.html', context)
 
 
 @login_required
@@ -116,7 +120,7 @@ def new_reply(request, conversation_id):
         'new_message_form': new_message_form,
         'conversation' : conversation
     }
-    return render(request, 'inbox/form_newreply.html', context)
+    return render(request, 'form_newreply.html', context)
 
 
 
@@ -124,7 +128,7 @@ def notify_newmessage(request, conversation_id):
     conversation = get_object_or_404(Conversation, id=conversation_id)
     latest_message = conversation.messages.first()
     if conversation.is_seen == False and latest_message.sender != request.user:
-        return render(request, 'inbox/notify_icon.html')
+        return render(request, 'notify_icon.html')
     else:
         return HttpResponse('') 
     
@@ -134,5 +138,5 @@ def notify_inbox(request):
     for c in my_conversations:
         latest_message = c.messages.first()
         if latest_message.sender != request.user:
-            return render(request, 'inbox/notify_icon.html')
+            return render(request, 'notify_icon.html')
     return HttpResponse('') 
