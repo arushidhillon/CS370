@@ -1,0 +1,17 @@
+<ul id="student-list">
+    {% for student in students %}
+    <li class="student-search">
+      <a 
+        hx-get="{% url 'search_students' %}"
+        hx-target="#search-results"
+        hx-swap="innerHTML"
+      >
+        <img src="{{ student.studentprofile.profile_pic }}"/>
+        <div class="btn">
+          {{ student.first_name }} {{ student.last_name }}
+          <span>{{ student.username }}</span>
+        </div>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>

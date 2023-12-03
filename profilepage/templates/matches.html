@@ -25,10 +25,10 @@
     <div class="pagetitle">
       <h3>Matched Labs</h3>
     </div>
-
     {% comment %} This for loop lists all users that match with the current user. {% endcomment %}
     {% for profile in user_profile.matched_by.all %}
     {% if profile not in user_profile.matches.all%}
+
     <div class="gridBox" style="justify-content: space-between;">
       <div class="Identityinfo">
         <img
@@ -37,8 +37,12 @@
         />
         <h2 class="StudentName">{{profile.labname}}</h2>
         <p class="Headline">{{profile.get_email}}</p>
+        {% comment %} This button leads a user to a lab's profile {% endcomment %}
         <button><a href="{% url 'profile' profile.get_user_name %}">View Profile</a></button>
+        {% comment %} This button leads the user to a new or old conversation with a lab. {% endcomment %}
           <button><a href="{% url 'inbox-newmessage' profile.id %}">Send Message</a></button>
+          {% comment %} This button allows the user to match with a lab. {% endcomment %}
+          <button> <a href="{% url 'match' profile.get_user_name %}">Match</a></button>
       </div>
       <!-- Skills -->
       <div
@@ -81,7 +85,7 @@
       </div>
     </div> 
 
-    
+  
     {% elif profile not in user_profile.matched_by.all %}
     <h2> No Matched Labs  </h2>
     {%endif%}
@@ -150,9 +154,9 @@
       </div> 
 
      
-      {% else %}
-      <h2> No Current Labs  </h2>
-      {%endif%}
+      {% elif profile not in user_profile.matches.all %}
+    <h2> No Current Labs  </h2>
+    {%endif%}
 
       {% endfor %}
       <div>
