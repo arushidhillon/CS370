@@ -257,6 +257,7 @@ def settings(request):
 @allowed_users(allowed_roles=['student'])
 def matches(request, pk):
     pk += '@emory.edu'
+
     user_object = User.objects.get(username=pk)
     user_profile = StudentProfile.objects.get(user=user_object)
 
@@ -265,13 +266,6 @@ def matches(request, pk):
         'user_profile': user_profile,
     }
     return render(request, 'matches.html', context)
-    # myuser = request.user.get_username()
-    # if myuser is pk:
-    #     return render(request,'matches.html',context)
-    # else:
-    #     messages.error(request, ("That's not your Page."))
-    #     return redirect('home')
-
 
 @allowed_users(allowed_roles=['lab'])
 def labpicedit(request):
@@ -598,19 +592,20 @@ def profile(request, pk):
     else:
         return render(request, 'home.html', context)
 
-# # Creates match
-# def match(request):
-#     if request.method == 'POST':
-#         follower = request.POST['follower']
-#         user = request.POST['user']        
-#         if matches.objects.filter(follower=follower, user=user).first():
-#             delete_follower = matches.objects.get(follower=follower, user=user)
-#             delete_follower.delete()
-#             return redirect('/profile/'+user)
-#         else:
-#             new_follower = matches.objects.create(follower=follower, user=user)
-#             new_follower.save()
-#             return redirect('profile/'+user)    
+# # Creates match between a student and a lab and vice versa.
+def match(request, pk):
+    pk += '@emory.edu'
+    user_object = User.objects.get(username=pk)
+    user_profile = StudentProfile.objects.get(user=user_object)
+
+    request.user.studentprofile.matches.add(user_profile)
+    request.user.studentprofile.save()
+    if user_profile.is_lab():
+        messages.success(request, (f"You Have Successfully Matched With a Lab!"))
+    else:
+        messages.success(request, (f"You Have Successfully Matched With a Student"))
+
+    return redirect(request.META.get("HTTP_REFERER"))
 
 
 # def index(request):
