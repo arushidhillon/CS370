@@ -480,6 +480,7 @@ main {
   box-shadow: 8px 8px 20px rgb(128, 128, 128);
   padding: 2rem;
   overflow: hidden;
+  flex-wrap: wrap;
 }
 #about {
   flex-direction: column;
