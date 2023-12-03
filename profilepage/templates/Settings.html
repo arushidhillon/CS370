@@ -1,0 +1,69 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+                   initial-scale=1.0"
+    />
+    {% if user.is_authenticated %} {%else%}
+    <meta http-equiv="refresh" content="0; /signup" />
+    {%endif%}
+    <title>Settings</title>
+    <link rel="stylesheet" href="{% static '/style.css' %}" />
+    <script src="https://app.simplefileupload.com/buckets/93fbd68b9250f42d26b2a4c9b1f48617.js"></script>
+  </head>
+
+  <body>
+    {% block content%}
+   {% include 'navbar.html' %}
+   {% endblock content%}.
+   
+    <div class="wrapper">
+      <div class="account">
+        <h1>Account Settings</h1>
+        <form class="settings-wrapper">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="fname" /><br />
+          <label for="mname">Middle Name (optional)</label>
+          <input type="text" id="mname" name="mname" /><br />
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lname" /><br />
+          <label for="lname">School Year</label>
+          <select name="school-year" id="school-year">
+            <option value="fyear">Freshman</option>
+            <option value="syear">Sophomore</option>
+            <option value="jyear">Junior</option>
+            <option value="syear">Senior</option></select
+          ><br />
+          <br />
+        </form>
+      </div>
+      <br />
+      <div class="notifications">
+        <h1>Notification Settings</h1>
+        <form class="settings-wrapper">
+          <div>
+            <label for="email_notifications">Messages </label>
+            <input
+              type="checkbox"
+              id="email_notifications"
+              name="email_notifications"
+            />
+          </div>
+          <div>
+            <label for="email_notifications">Matches </label>
+            <input
+              type="checkbox"
+              id="email_notifications"
+              name="email_notifications"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
