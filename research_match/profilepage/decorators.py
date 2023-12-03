@@ -9,6 +9,9 @@ def unauthenticated_user(view_func):
     
     return wrapper_func
 
+# This function allows pages to only be viewed by allowed groups. Only students can see a student page, and only labs can see a labs page. 
+# Otherwise, they will only see a pre-made Django 404 Error Page.
+
 def allowed_users(allowed_roles=[]):
     def decorator(view_func):
         def wrapper_func(request, *args, **kwargs):
