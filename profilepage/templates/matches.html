@@ -42,7 +42,7 @@
         {% comment %} This button leads the user to a new or old conversation with a lab. {% endcomment %}
           <button><a href="{% url 'inbox-newmessage' profile.id %}">Send Message</a></button>
           {% comment %} This button allows the user to match with a lab. {% endcomment %}
-          <button> <a href='{% url 'match' profile.get_user_name %}'>Match</a></button>
+          <button> <a href="{% url 'match' profile.get_user_name %}">Match</a></button>
       </div>
       <!-- Skills -->
       <div
