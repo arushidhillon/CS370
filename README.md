@@ -18,7 +18,7 @@ Here's a video that demos all of the website's implemented features:
 <img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/EmailConfirmation.png" width=600>
 
       
-- [ ] After confirming, log in with your newly created email under the student or lab login.
+- [ ] After confirming, log in with your newly created email under the student or lab login.      
 <img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/StudentLogin.png" width=300> <img src="https://github.com/arushidhillon/CS370/blob/main/Research%20Match%20Wireframe/LabLogin.png" width=300>
 
       
