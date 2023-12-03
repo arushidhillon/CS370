@@ -43,7 +43,7 @@ def home(request):
     return render(request, "home.html")
 
 
-# This function registers the user and stores their information.
+# This function registers the user and stores their information. The user can choose to either sign up as a student or a lab.
 def signup(request):
     if request.method == "POST":
         # Requests information inputted
@@ -72,6 +72,7 @@ def signup(request):
                 validate_password(pass1)
             except ValidationError as e:
 
+                # If the password is not strong, the errors will display why.
                 for error in e.error_list:
                     messages.error(request, error)
                 if e.error_list is not None:
@@ -82,7 +83,7 @@ def signup(request):
             messages.error(request, "Passwords didn't match!")
             return redirect('signup')
 
-        # stores information in django using create_user function
+        # stores information in database using create_user function
         myuser = User.objects.create_user(email, email, pass1)
         myuser.first_name = firstname
         myuser.last_name = lastname
@@ -111,7 +112,7 @@ def signup(request):
         # to_list = [myuser.email]
         # send_mail(subject, message, from_email, to_list, fail_silently=True)
 
-        # Email Address Confirmation Email
+        # Email Address Confirmation and Welcome Email
 
         current_site = get_current_site(request)
         email_subject = "Welcome to Research Match! Please Confirm your email to Login!"
@@ -156,7 +157,7 @@ def activate(request, uidb64, token):
         return render(request, 'activation_failed.html')
 
 
-# This function logs the user in after they activate their account.
+# This function logs the student user in after they activate their account.
 @allowed_users(allowed_roles=['student'])
 def studentlogin(request):
     if 'studentlog' in request.POST:
@@ -341,10 +342,8 @@ def labprofile(request):
         p_form = LabUpdateForm(request.POST,
                                request.FILES,
                                instance=request.user.studentprofile)
-        # if request.FILES.get('profile_pic') is None:
 
         if u_form.is_valid() and p_form.is_valid():
-            # if p_form.is_valid():
             u_form.save()
             p_form.save()
             messages.success(request, f'Your account has been updated!')
@@ -397,8 +396,6 @@ def studentpictureupdate(request):
         p_form = Picform(request.POST,
                          request.FILES,
                          instance=request.user.studentprofile)
-        # if request.FILES.get('profile_pic') is None:
-        #     if pic_form.is_valid():
         if p_form.is_valid():
             instance = p_form.save(commit=False)
             messages.success(request, f'Your account has been updated!')
@@ -422,12 +419,10 @@ def labskillsupdate(request):
     if request.method == 'POST':
         p_form = Skillform(request.POST,
                            instance=request.user.studentprofile)
-        # if request.FILES.get('profile_pic') is None:
-        #     if pic_form.is_valid():
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile 
+            return redirect('profile/'+myuser)  # Send back to profile 
         
         else:
             p_form = Skillform(instance=request.user.studentprofile)
@@ -468,7 +463,7 @@ def labcourseupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
+            return redirect('profile/'+myuser)  # Send back to profile
         
         else:
             p_form = Courseform(instance=request.user.studentprofile)
@@ -510,7 +505,7 @@ def labbioupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
+            return redirect('profile/'+myuser)  # Send back to profile
         
         else:
             p_form = BioForm(instance=request.user.studentprofile)
@@ -531,7 +526,7 @@ def studentbioupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile  
+            return redirect('profile/'+myuser)  # Send back to profile  
         
         else:
             p_form = BioForm(instance=request.user.studentprofile)
@@ -553,7 +548,7 @@ def labdocupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile  
+            return redirect(f'profile/'+myuser)  # Send back to profile  
         
         else:
             p_form = Docform(instance=request.user.studentprofile)
@@ -575,7 +570,7 @@ def studentdocupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile  
+            return redirect('profile/'+myuser)  # Send back to profile  
         
         else:
             p_form = Docform(instance=request.user.studentprofile)
@@ -603,19 +598,19 @@ def profile(request, pk):
     else:
         return render(request, 'home.html', context)
 
-# Creates match
-def match(request):
-    if request.method == 'POST':
-        follower = request.POST['follower']
-        user = request.POST['user']        
-        if matches.objects.filter(follower=follower, user=user).first():
-            delete_follower = matches.objects.get(follower=follower, user=user)
-            delete_follower.delete()
-            return redirect('/profile/'+user)
-        else:
-            new_follower = matches.objects.create(follower=follower, user=user)
-            new_follower.save()
-            return redirect('profile/'+user)    
+# # Creates match
+# def match(request):
+#     if request.method == 'POST':
+#         follower = request.POST['follower']
+#         user = request.POST['user']        
+#         if matches.objects.filter(follower=follower, user=user).first():
+#             delete_follower = matches.objects.get(follower=follower, user=user)
+#             delete_follower.delete()
+#             return redirect('/profile/'+user)
+#         else:
+#             new_follower = matches.objects.create(follower=follower, user=user)
+#             new_follower.save()
+#             return redirect('profile/'+user)    
 
 
 # def index(request):
