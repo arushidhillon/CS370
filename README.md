@@ -57,9 +57,9 @@ Currently, our website is only functional on computers/laptops.
 ---
 
 **Member D: Daniel Lee**  
-*Major:*       
-*Skills:*       
-*Interests:*       
+*Major:* Quantitative Sciences Major on the Informatics Track     
+*Skills:* Java, Python, R      
+*Interests:* Gaming, Sports     
 
 ---
 
