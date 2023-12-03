@@ -603,22 +603,19 @@ def profile(request, pk):
     else:
         return render(request, 'home.html', context)
 
-# def match(request):
-#     if request.method == 'POST':
-#         follower = request.POST['follower']
-#         user = request.POST['user']
-
-#         if Matched.objects.filter(follower=follower, user=user).first():
-#             delete_follower = Matched.objects.get(follower=follower, user=user)
-#             delete_follower.delete()
-#             return redirect('/profile/'+user)
-#         else:
-#             new_follower = Matched.objects.create(follower=follower, user=user)
-#             new_follower.save()
-#             return redirect('profile/'+user)
-
-#     else:
-#         return redirect('/')
+# Creates match
+def match(request):
+    if request.method == 'POST':
+        follower = request.POST['follower']
+        user = request.POST['user']        
+        if matches.objects.filter(follower=follower, user=user).first():
+            delete_follower = matches.objects.get(follower=follower, user=user)
+            delete_follower.delete()
+            return redirect('/profile/'+user)
+        else:
+            new_follower = matches.objects.create(follower=follower, user=user)
+            new_follower.save()
+            return redirect('profile/'+user)    
 
 
 # def index(request):

@@ -20,7 +20,8 @@
 }
 
 body {
-  color: black;
+  color: white;
+  opacity: 0.5;
   background: url('{% static "images/background.jpg" %}') center center/cover no-repeat;
   margin: 0;
   padding: 0;
@@ -566,19 +567,23 @@ textarea {
   cursor: pointer;
 }
 
-button {
-  transition: 0.25s;
+/* Opportunities */
+.buttons-desc {
+  display: flex;
+}
+
+.opportunities-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.opportunities-buttons button a{
   width: 10rem;
   font-family: "Poppins", sans-serif;
-  background-color: var(--color-text1);
+  background-color: var(--bg-color);
   border: 3px solid transparent;
   border-color: var(--color-bg-1);
   border-radius: 1rem;
   cursor: pointer;
-  text-align: center;
-  float: right;
 }
-button:hover {
-  color: white;
-  background: var(--color-bg-1);
-}
+

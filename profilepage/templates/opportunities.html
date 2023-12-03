@@ -36,8 +36,6 @@
           />
           <h2 class="StudentName">{{suggestion.studentprofile.labname}}</h2>
           <p class="Headline">{{suggestion.email}}</p>
-          <button><a href="{% url 'profile' suggestion.studentprofile.get_user_name %}">View Profile</a></button>
-          <button><a href="{% url 'inbox-newmessage' suggestion.id %}">Send Message</a></button>
         </div>
         <!-- Skills -->
         <div
@@ -76,6 +74,21 @@
             {% for i in suggestion.studentprofile.course_list %}
               <div class="child"> {{ i.strip }} </div>
             {% endfor %}
+          </div>
+        </div>
+        <div class="buttons-desc">
+          <!-- Buttons -->
+          <div class="opportunities-buttons">
+            <button><a href="{% url 'profile' profile.get_user_name %}">View Profile</a></button>
+            <button><a 
+              hx-get="{% url 'inbox-newmessage' profile.id %}"
+              hx-target="#conversation"
+              hx-swap="innerHTML">Send Message</a></button>
+            <button><a href="{% url 'match' %}">Match</a></button>
+          </div>
+          <!-- Lab Description -->
+          <div>
+            <p>{{suggestion.studentprofile.biography}}</p>
           </div>
         </div>
       </div>
