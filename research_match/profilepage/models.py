@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
     
-# Thisis the profile model for each user who registers.
+# This is the profile model for each user who registers.
 class StudentProfile(models.Model):
     
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
