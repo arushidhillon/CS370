@@ -598,9 +598,11 @@ def match(request, pk):
     user_object = User.objects.get(username=pk)
     user_profile = StudentProfile.objects.get(user=user_object)
 
-    request.user.studentprofile.matches.add(user_profile)
-    request.user.studentprofile.save()
-    if user_profile.is_lab():
+    if (user_profile.is_lab and request.user.studentprofile.is_student) or (user_profile.is_student and request.user.studentprofile.is_lab):
+        request.user.studentprofile.matches.add(user_profile)
+        request.user.studentprofile.save()
+
+    if user_profile.is_lab:
         messages.success(request, (f"You Have Successfully Matched With a Lab!"))
     else:
         messages.success(request, (f"You Have Successfully Matched With a Student"))
