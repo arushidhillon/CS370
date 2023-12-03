@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     # URL for rendering the search page
-    path('students/', students, name='students'),
-    path('search_students/',search_students, name='search_students'),
+    path('search/', views.search, name='search_page'),
+    # URL for processing the search query and returning the results
+    path('search-profiles/', views.list_profiles, name='search_profiles'),
 ]
