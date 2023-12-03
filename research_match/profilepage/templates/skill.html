@@ -1,4 +1,8 @@
 
+{% load static %}
+
+<link rel="stylesheet" href="{% static '/form.css' %}" />
+
 <div class="container">
     <form method="POST" enctype="multipart/form-data">
       <fieldset>
@@ -10,15 +14,4 @@
       </fieldset>
     </form>
 </div>
-
-<!-- <form action="/profilepage/" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-</form>
-
-<form action="skill/" method="post">
-  {% csrf_token %} {{ form }}
-  <input type="submit" value="Submit" />
-</form> -->
 

@@ -6,7 +6,6 @@ from cryptography.fernet import Fernet
 from django.conf import settings
 import uuid
 
-
 class InboxMessage(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sent_messages")
     conversation = models.ForeignKey('Conversation', on_delete=models.CASCADE, related_name="messages")

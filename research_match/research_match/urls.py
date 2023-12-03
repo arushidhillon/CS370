@@ -25,6 +25,8 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('',include("profilepage.urls")),
+    path('',include("inbox.urls")),
+    path('', include("search.urls")),
 ] 
 
 if settings.DEBUG:
