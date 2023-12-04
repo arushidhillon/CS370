@@ -1,0 +1,21 @@
+
+{% load static %}
+<head>
+
+  <script src="https://app.simplefileupload.com/buckets/93fbd68b9250f42d26b2a4c9b1f48617.js"></script>
+</head>
+<link rel="stylesheet" href="{% static '/form.css' %}" />
+
+<div class="container">
+    <form method="POST" enctype="multipart/form-data">
+      <fieldset>
+        <legend>Update Your Profile</legend>
+        {% csrf_token %}
+        {{ u_form.as_p }} 
+        {{ p_form.as_p }}
+        <input id="uploader-preview-here-2060" class="simple-file-upload" type="hidden" data-maxFileSize="5" data-accepted=".pdf,.doc">
+        <button type="submit" class="btn btn-primary">Update</button>
+      </fieldset>
+    </form>
+</div>
+

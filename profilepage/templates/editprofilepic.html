@@ -1,8 +1,5 @@
 {% load static %}
-<head>
 
-  <script src="https://app.simplefileupload.com/buckets/93fbd68b9250f42d26b2a4c9b1f48617.js"></script>
-</head>
 <link rel="stylesheet" href="{% static '/form.css' %}" />
 <div class="form-control">
   <form method="POST" enctype="multipart/form-data">
@@ -12,7 +9,7 @@
       {% csrf_token %} 
       
       {{ p_form.as_p }} 
-      <input id="profile_pic" name="profile_pic" class="simple-file-upload" type="hidden" data-resize-width="225" data-resize-height="225" data-maxFileSize="5" data-accepted="image/*">
+     
      <button type="submit" name= "image_pic" class="btn btn-primary">Update</button>
     </fieldset>
   </form>
