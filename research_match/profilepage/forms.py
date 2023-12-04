@@ -36,6 +36,11 @@ class Picform(forms.ModelForm):
         fields = ['picture_name','profile_pic']
         # have to add a text input field for it to work
 
+class Nameform(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['name']
+
 class Skillform(forms.ModelForm):
     class Meta:
         model = StudentProfile
@@ -61,7 +66,7 @@ class GpaForm(forms.ModelForm):
     class Meta:
         model = StudentProfile
         fields = ['gpa']
-        
+
 class Docform(forms.ModelForm):
     class Meta:
         model = StudentProfile

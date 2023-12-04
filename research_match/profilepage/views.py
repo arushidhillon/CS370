@@ -31,7 +31,7 @@ from .forms import UserUpdateForm, ProfileUpdateForm
 from .decorators import allowed_users, unauthenticated_user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
-from .forms import UserUpdateForm, ProfileUpdateForm, LabUpdateForm, Picform, Skillform, Courseform, Docform, BioForm, GpaForm
+from .forms import UserUpdateForm, ProfileUpdateForm, LabUpdateForm, Picform, Skillform, Courseform, Docform, BioForm, GpaForm, Nameform
 from django.views.generic import ListView
 import random
 
@@ -363,6 +363,46 @@ def labprofile(request):
             'p_form': p_form
         }
         return render(request, 'mentoredit.html', context)
+
+def labnameupdate(request):
+    if request.method == 'POST':
+        p_form = Nameform(request.POST, 
+                                   instance=request.user.studentprofile)
+       # if request.FILES.get('profile_pic') is None:
+    #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile 
+        
+        else:
+            p_form = Nameform(instance=request.user.studentprofile)
+
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+    
+def studentnameupdate(request):
+    if request.method == 'POST':
+        p_form = Nameform(request.POST, instance=request.user.studentprofile)
+       # if request.FILES.get('profile_pic') is None:
+    #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            # TODO: apply to other forms
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
+        
+        else:
+            p_form = Nameform(instance=request.user.studentprofile)
+
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
      
 @allowed_users(allowed_roles=['lab'])
 def labpictureupdate(request):
@@ -446,6 +486,8 @@ def studentskillsupdate(request):
             'p_form': p_form
         }
         return render(request, 'editprofilepic.html', context)
+
+
 
 def labgpaupdate(request):
     if request.method == 'POST':

@@ -16,7 +16,7 @@ class StudentProfile(models.Model):
     skill = models.CharField(max_length=255)
     course=models.CharField(max_length=255)
     biography=models.CharField(max_length=500)
-    labname=models.CharField(max_length=255)
+    name=models.CharField(max_length=255)
 
     BACKGROUND = [
         ("S","Student"),

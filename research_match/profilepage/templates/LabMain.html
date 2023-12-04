@@ -35,7 +35,7 @@
       <!-- Identity -->
       <div class="gridBox" style="justify-content: space-between;">
         <div class="Identityinfo">
-          {% if user == user_object %}
+          <!-- {% if user == user_object %}
           <form
           action="{% url 'labgpaupdate'%}"
           method="post"
@@ -44,12 +44,22 @@
           {% csrf_token %} {{ form }}
           <input class="matchButtons" type="submit" value="Change GPA" />
         </form>
-        {%endif%}
+        {%endif%} -->
           <img
             src="{{ user_object.studentprofile.profile_pic.url }}"
             class="StudentPicture"
           />
           <h2 class="StudentName">{{user_object.first_name }} {{user_object.last_name}}</h2>
+          {% if user == user_object %}
+          <form
+          action="{% url 'labnameupdate'%}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form }}
+          <input class="matchButtons" type="submit" value="Change GPA" />
+        </form>
+        {%endif%}
           {% if user == user_object %}
           <form
           action="{% url 'labpictureupdate'%}"
