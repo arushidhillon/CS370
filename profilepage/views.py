@@ -1,10 +1,14 @@
+from datetime import timezone
 from itertools import chain
 from django.forms import ValidationError
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from django.template import loader
 from django.views import View
+
+from inbox.forms import InboxNewMessageForm
+from inbox.models import Conversation
 from .models import StudentProfile
 from django.views.generic.list import ListView
 
@@ -729,3 +733,49 @@ def studentgpaupdate(request):
             'p_form': p_form
         }
         return render(request, 'editprofilepic.html', context)
+
+# View to handle creation of new messages
+@login_required     
+def new_message_match(request, recipient_id):
+    recipient = get_object_or_404( User, id=recipient_id) # Get the recipient user object
+    new_message_form = InboxNewMessageForm() # Instantiate a new message form
+    
+    if request.method == 'POST':
+        form = InboxNewMessageForm(request.POST)
+        if form.is_valid(): # Validate the form
+            message = form.save(commit=False)
+
+            # encrypt message
+            message_original = form.cleaned_data['body']
+            message_bytes = message_original.encode('utf-8')
+            message_encrypted = f.encrypt(message_bytes)
+            message_decoded = message_encrypted.decode('utf-8')
+            message.body = message_decoded
+            
+            message.sender = request.user # Set the sender of the message
+            my_conversations = request.user.conversations.all()
+            try:
+                # Check if a conversation already exists with the recipient
+                for c in my_conversations:
+                    if recipient in c.participants.all():
+                        message.conversation = c
+                        message.save()
+                        c.lastmessage_created = timezone.now()
+                        c.is_seen = False
+                        c.save()
+                        return redirect('inbox', c.id) # Redirect to the conversation
+            except:
+                print("oops")
+            # Create a new conversation if none exists
+            new_conversation = Conversation.objects.create()
+            new_conversation.participants.add(request.user, recipient)
+            new_conversation.save()
+            message.conversation = new_conversation
+            message.save() 
+            return redirect('inbox', new_conversation.id)
+    
+    context = {
+        'recipient': recipient,
+        'new_message_form': new_message_form
+    }
+    return render(request, 'form_newmessage_match.html', context)  # Render the new message form

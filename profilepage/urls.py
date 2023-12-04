@@ -39,6 +39,7 @@ urlpatterns = [
     path('labprofile', views.labprofile, name='labprofile'),
     path('studentprofile', views.studentprofile, name='studentprofile'),
     path('inbox/', views_inbox.inbox_view, name='inbox'),
+    path('new_message_match/<recipient_id>/', views.new_message_match, name="inbox-newmessage-match"),
     path('labpictureupdate', views.labpictureupdate, name='labpictureupdate'),
     path('labskillsupdate', views.labskillsupdate, name='labskillsupdate'),
     path('labgpaupdate', views.labgpaupdate, name='labgpaupdate'),

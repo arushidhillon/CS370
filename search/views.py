@@ -7,7 +7,6 @@ from profilepage.decorators import allowed_users
 def students(request):
     return render(request, 'students.html')
 
-
 @allowed_users(allowed_roles=['lab'])
 def search_students(request):
     all = User.objects.all()
