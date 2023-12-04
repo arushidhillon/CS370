@@ -384,7 +384,7 @@ def studentpictureupdate(request):
             messages.success(request, f'Your account has been updated!')
             image_url = request.POST.get('profile_pic', None)
             val = URLValidator(message="Please add a valid url!")
-            if  val(image_url) :
+            if  len(image_url) > 0 :
                 instance.image_url = image_url
             else:
                 instance.image_url = 'https://static.thenounproject.com/png/5034901-200.png'
