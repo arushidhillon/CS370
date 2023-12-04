@@ -15,12 +15,12 @@
   </head>
 
   <body>
-
+{% comment %} 
   {% if user.is_authenticated %}
   {% block content%}
    {% include 'navbar.html' %}
    {% endblock content%}
-   {%endif%}
+   {%endif%} {% endcomment %}
 
     <div class="wrapper">
       <div class="pagetitle">
