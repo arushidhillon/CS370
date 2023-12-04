@@ -35,6 +35,7 @@ from django.views.generic import ListView
 import random
 
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.core.validators import URLValidator
 
 
 @ensure_csrf_cookie
@@ -382,8 +383,11 @@ def studentpictureupdate(request):
             instance = p_form.save(commit=False)
             messages.success(request, f'Your account has been updated!')
             image_url = request.POST.get('profile_pic', None)
-
-            instance.image_url = image_url
+            val = URLValidator(verify_exists=True)
+            if  val(image_url) :
+                instance.image_url = image_url
+            else:
+                instance.image_url = 'https://static.thenounproject.com/png/5034901-200.png'
             instance.save()
             return redirect('profile/' + myuser)
 
