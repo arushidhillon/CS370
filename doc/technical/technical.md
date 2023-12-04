@@ -5,7 +5,7 @@ Our Django project, research_match, is separated into three different apps: prof
 
 ---
 ## Profilepage - Main app
-- admin.py registers StudentProfile model
+[admin.py] registers StudentProfile model
 - apps.py is a configuration file
 - decorators.py restricts access to views or "pages" in accordance to which group user is in.
 - forms.py stores all form code.
