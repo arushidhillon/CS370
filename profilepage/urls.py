@@ -52,6 +52,7 @@ urlpatterns = [
     path('profile/<str:pk>', views.profile, name='profile'),
     path('match/<str:pk>', views.match, name='match'),
     path('unmatch/<str:pk>', views.unmatch, name='unmatch'),
+    path('remove', views.remove, name='remove'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

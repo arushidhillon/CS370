@@ -621,6 +621,8 @@ def unmatch(request, pk):
 
     return redirect(request.META.get("HTTP_REFERER"))
 
+        
+
 # This function will serve as the matching algorithm for both lab and students.
 # It will match them through their registered skill, course, and gpa.
 def MatchAlgorithm(request):
@@ -659,10 +661,21 @@ def MatchAlgorithm(request):
         'user_profile': user_profile,
         'final_suggestions_list': final_suggestions_list,
         }
-    
+
         return render(request, 'students.html', context)
+    
+# This function allows a lab to delete all it's matches in order to start over as a new lab.
+def remove(request):
+    all_matches = StudentProfile.matches.all()
+    all_matched = StudentProfile.matched_by.all()
 
+    request.user.studentprofile.remove(all_matches)
+    request.user.studentprofile.remove(all_matched)
+    request.user.studentprofile.save()
 
+    messages.success(request, (f"You Have Successfully UnMatched All Students"))
+    return redirect(request.META.get("HTTP_REFERER"))
+        
 
 
 # def index(request):
