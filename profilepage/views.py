@@ -372,7 +372,7 @@ def labpictureupdate(request):
         }
         return render(request, 'editprofilepic.html', context)
 
-
+@allowed_users(allowed_roles=['student'])
 def studentpictureupdate(request):
     myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
@@ -398,7 +398,7 @@ def studentpictureupdate(request):
         }
         return render(request, 'editprofilepic.html', context)
 
-
+@allowed_users(allowed_roles=['lab'])
 def labskillsupdate(request):
     myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
@@ -417,7 +417,7 @@ def labskillsupdate(request):
         }
         return render(request, 'editprofilepic.html', context)
 
-
+@allowed_users(allowed_roles=['student'])
 def studentskillsupdate(request):
     myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
@@ -437,7 +437,7 @@ def studentskillsupdate(request):
         }
         return render(request, 'editprofilepic.html', context)
 
-
+@allowed_users(allowed_roles=['lab'])
 def labcourseupdate(request):
     myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
@@ -458,7 +458,7 @@ def labcourseupdate(request):
         }
         return render(request, 'editprofilepic.html', context)
 
-
+@allowed_users(allowed_roles=['student'])
 def studentcourseupdate(request):
     myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
@@ -479,7 +479,7 @@ def studentcourseupdate(request):
         }
         return render(request, 'editprofilepic.html', context)
 
-
+@allowed_users(allowed_roles=['lab'])
 def labbioupdate(request):
     myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
@@ -500,7 +500,7 @@ def labbioupdate(request):
         }
         return render(request, 'editprofilepic.html', context)
 
-
+@allowed_users(allowed_roles=['student'])
 def studentbioupdate(request):
     myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
@@ -521,7 +521,7 @@ def studentbioupdate(request):
         }
         return render(request, 'editprofilepic.html', context)
 
-
+@allowed_users(allowed_roles=['lab'])
 def labdocupdate(request):
     myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
@@ -547,7 +547,7 @@ def labdocupdate(request):
         }
         return render(request, 'editprofilepic.html', context)
 
-
+@allowed_users(allowed_roles=['student'])
 def studentdocupdate(request):
     myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
@@ -665,6 +665,7 @@ def MatchAlgorithm(request):
         return render(request, 'students.html', context)
     
 # This function allows a lab to delete all it's matches in order to start over as a new lab.
+@allowed_users(allowed_roles=['lab'])
 def remove(request):
     all_matches = StudentProfile.matches.all()
     all_matched = StudentProfile.matched_by.all()
@@ -676,42 +677,3 @@ def remove(request):
     messages.success(request, (f"You Have Successfully UnMatched All Students"))
     return redirect(request.META.get("HTTP_REFERER"))
         
-
-
-# def index(request):
-#     myuser = User.objects.get(email=request.user.email)
-#     user_profile = StudentProfile.objects.get(user=myuser)
-
-#     user_matching_list = []
-#     matchLabs = []
-
-#     user_matching = Matched.objects.filter(follower=request.user.username)
-
-
-#     # lab suggestion starts
-#     all_labs = User.objects.all()
-#     user_matching_all = []
-
-#     for user in user_matching_list:
-#         user_list = User.objects.get(username=user.user)
-#         user_matching_all.append(user_list)
-
-#     new_suggestions_list = [ x for x in list(all_labs) if (x not in list(user_matching_all()))]
-#     current_user = User.objects.filter(username=request.user.username)
-#     final_suggestions_list =[ x for x in list(new_suggestions_list) if (x not in list(current_user)) ]
-#     random.shuffle(final_suggestions_list)
-
-#     username_profile = []
-#     username_profile_list = []
-
-#     for users in final_suggestions_list:
-#         username_profile.append(users.id)
-
-#     for ids in username_profile:
-#         profile_lists = StudentProfile.objects.filter(id_user=ids)
-#         username_profile_list.append(profile_lists)
-
-#     suggestions_username_profile_lists = list(chain(*username_profile_list))
-
-#     return render(request, 'opportunities.html', {'user_profile': user_profile})
-
