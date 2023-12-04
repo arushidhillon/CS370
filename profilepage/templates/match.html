@@ -1,5 +1,5 @@
 
-<!-- Loads all matches on opportunities page -->
+<!-- Loads all matches on opportunities/all students page -->
 
 {% for suggestion in final_suggestions_list %}
 <div class="gridBox-match" id="match_lab">
@@ -35,14 +35,11 @@
           <!-- Buttons -->
           <div class="opportunities-buttons">
             <button><a href="{% url 'profile' suggestion.get_user_name %}">View Profile</a></button>
-            <button><a 
-              hx-get="{% url 'inbox-newmessage' suggestion.id %}"
-              hx-target="#conversation"
-              hx-swap="innerHTML">Send Message</a></button>
+            <button><a href="{% url 'inbox-newmessage-match' suggestion.id %}">Send Message</a></button>
             <button><a href="{% url 'match' suggestion.get_user_name%}">Match</a></button>
           </div>
           <!-- Lab Description -->
-          <p>{{suggestion.biography}}</p>
+          <p id="bio">{{suggestion.biography}}</p>
     </div>
 </div>
 {% endfor %}

@@ -86,10 +86,11 @@
             {% comment %} This button leads a user to a lab's profile {% endcomment %}
               <button><a href="{% url 'profile' profile.get_user_name %}">View Profile</a></button>
               {% comment %} This button leads the user to a new or old conversation with a lab. {% endcomment %}
-              <button><a 
+              <a 
                 hx-get="{% url 'inbox-newmessage' profile.id %}"
-                hx-target="#conversation"
-                hx-swap="innerHTML">Send Message</a></button>
+                hx-target="this"
+                hx-swap="innerHTML"
+                style="cursor: pointer;">Send Message</a>
               {% comment %} This button allows the user to match with a lab. {% endcomment %}
               <button> <a href="{% url 'match' profile.get_user_name %}">Match</a></button>
             </div>
