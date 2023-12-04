@@ -641,3 +641,24 @@ a {
 .opportunities-buttons button:hover a {
   color: white;
 }
+
+.send-message-buttons button {
+  width: 10rem;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-color);
+  border: 3px solid transparent;
+  border-color: var(--color-bg-1);
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.send-message-buttons button:hover {
+  background: var(--color-bg-1);
+}
+.send-message-buttons button:hover {
+  color: white;
+}
+
+#id_body {
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+}
