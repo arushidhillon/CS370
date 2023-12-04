@@ -9,15 +9,20 @@ from django.conf import settings
 from .forms import InboxNewMessageForm
 from .models import *
 
+# Encryption key for message encryption
 f = Fernet(settings.ENCRYPT_KEY)
 
+# View to retrieve and display all users
 def get_all_users(request):
-    users = User.objects.all()
+    users = User.objects.all() # Query all users from the database
     context = {'users':users}
     return render(users, 'users.html', context)
 
+
+# View for displaying the user's inbox and conversations
 @login_required
 def inbox_view(request, conversation_id=None):
+    # Get all conversations involving the logged-in user
     my_conversations = Conversation.objects.filter(participants=request.user)
     if conversation_id:
         conversation = get_object_or_404(my_conversations, id=conversation_id)
