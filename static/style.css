@@ -258,6 +258,7 @@ main {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+  margin-bottom: 0.5rem;
 }
 .tagscluster .child {
   color: #ececec;
@@ -366,14 +367,14 @@ main {
   width: 100%;
 }
 .Identityinfo {
-  width: 25rem;
-  min-height: 20rem;
+  width: 21rem;
+  min-height: 10rem;
 }
 .IdentityInfo #inputs {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 25rem;
+  
   min-height: 20rem;
 }
 .StudentPicture {
@@ -468,7 +469,6 @@ main {
 }
 .gridBox {
   display: flex;
-  align-items: center;
   gap: 1rem;
   border-radius: 40px;
   border-width: 0.25em;
@@ -478,6 +478,27 @@ main {
   padding: 2rem;
   overflow: hidden;
   background-color: white; 
+}
+.gridBox-match {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 40px;
+  border-width: 0.25em;
+  border-style: solid;
+  border-color: var(--color-bg-1);
+  box-shadow: 8px 8px 20px rgb(128, 128, 128);
+  padding: 2rem;
+  overflow: hidden;
+  background-color: white; 
+}
+.top-row {
+  display: flex;
+  gap: 1rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 #about {
   flex-direction: column;
@@ -589,3 +610,34 @@ a {
     background-attachment: scroll;
   }
 } 
+
+/* Opportunities */
+.buttons-desc {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+.buttons-desc p {
+  margin-top: 0;
+}
+
+.opportunities-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.opportunities-buttons button {
+  width: 10rem;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-color);
+  border: 3px solid transparent;
+  border-color: var(--color-bg-1);
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.opportunities-buttons button:hover {
+  background: var(--color-bg-1);
+}
+.opportunities-buttons button:hover a {
+  color: white;
+}
