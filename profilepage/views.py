@@ -35,6 +35,7 @@ from django.views.generic import ListView
 import random
 
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.core.validators import URLValidator
 
 
 @ensure_csrf_cookie
@@ -381,9 +382,11 @@ def studentpictureupdate(request):
         if p_form.is_valid():
             instance = p_form.save(commit=False)
             messages.success(request, f'Your account has been updated!')
-            image_url = request.POST.get('dropped_images', None)
-            if image_url:
+            image_url = request.POST.get('profile_pic', None)
+            if image_url is not None :
                 instance.image_url = image_url
+            else:
+                instance.image_url = 'https://static.thenounproject.com/png/5034901-200.png'
             instance.save()
             return redirect('profile/' + myuser)
 
@@ -530,6 +533,10 @@ def labdocupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
+            doc_url = request.POST.get('dropped_images', None)
+            if doc_url:
+                instance.doc_url = doc_url
+            instance.save()
             return redirect(f'profile/'+myuser)  # Send back to profile  
         
         else:
@@ -603,17 +610,18 @@ def opportunities(request):
     user_profile = request.user.studentprofile
     user_matching_list = user_profile.matches.all()
 
-    matching_by_skill = user_profile.skill.all()
-    matching_by_course = user_profile.course.all()
+    matching_by_skill = user_profile.skill
+    matching_by_course = user_profile.course
     matching_by_gpa = user_profile.gpa
 
-    all_users = User.objects.all
-    if user_profile.is_student:
-        all_labs = all_users.filter(groups__name='lab')
-        lab_req_c = all_labs.studentprofile.filter(name__contains=matching_by_course)
-        lab_req_s = all_labs.studentprofile.filter(name__contains=matching_by_skill)
-        lab_req_g = all_labs.studentprofile.filter(name__contains=matching_by_gpa)
+    all_users = StudentProfile.objects.all()
 
+    if user_profile.is_student:
+        lab_req_c = all_users.filter(course__in=matching_by_course)
+        lab_req_s = all_users.filter(skill__in=matching_by_skill)
+        lab_req_g = all_users.filter(gpa__lte=matching_by_gpa)
+
+        all_labs = [ x for x in all_users if (x.is_lab)]
         new_suggestions_list = [ x for x in all_labs if (x not in user_matching_list)]
         final_suggestions_list = [x for x in new_suggestions_list if (x in lab_req_c or x in lab_req_s or x in lab_req_g)]
 
@@ -623,11 +631,11 @@ def opportunities(request):
         }
         return render(request, 'opportunities.html', context)
     else:
-        all_students = all_users.filter(groups__name='student')
-        lab_req_c = all_students.studentprofile.filter(name__contains=matching_by_course)
-        lab_req_s = all_students.studentprofile.filter(name__contains=matching_by_skill)
-        lab_req_g = all_students.studentprofile.filter(name__contains=matching_by_gpa)
+        lab_req_c = all_users.filter(course__in=matching_by_course)
+        lab_req_s = all_users.filter(skill__in=matching_by_skill)
+        lab_req_g = all_users.filter(gpa__gte=matching_by_gpa)
 
+        all_students = [ x for x in all_users if (x.is_student)]
         new_suggestions_list = [ x for x in all_students if (x not in user_matching_list)]
         final_suggestions_list = [x for x in new_suggestions_list if (x in lab_req_c or x in lab_req_s or x in lab_req_g)]
         context = {
