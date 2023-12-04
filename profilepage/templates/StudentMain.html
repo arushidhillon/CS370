@@ -169,7 +169,7 @@
         {%else%}
         <p>Document Name: {{user_object.studentprofile.documents}}</p>
         {% if user_object.studentprofile.documents %}
-        <a href="{{ user_object.studentprofile.documents.url }}" target="_blank">Download Document</a>
+        <a href="{{ user_object.studentprofile.document_url }}" target="_blank">Download Document</a>
         {%endif%}
         {%endif%}
         <br>
@@ -221,7 +221,7 @@
       </div>
 {%endif%}
     </div>  
-    <script src="https://app.simplefileupload.com/buckets/93fbd68b9250f42d26b2a4c9b1f48617.js"></script>
+    
     <!-- <script src="{% static '/Profile.js' %}"></script> -->
   </body>
 </html>
