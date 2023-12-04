@@ -46,7 +46,7 @@ def search_users(request):
         letters = request.GET.get('search_user') # Get the search term
         if len(letters) > 0:
             # Filter users based on first name
-            profiles = User.objects.filter(first_name__contains=letters).exclude(username=request.user)
+            profiles = User.objects.filter(first_name__icontains=letters).exclude(username=request.user)
             return render(request, 'list_searchuser.html', { 'users' : profiles })
         else:
             return HttpResponse('') # Return empty response for empty search term
