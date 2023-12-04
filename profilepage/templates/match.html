@@ -5,8 +5,12 @@
 <div class="gridBox-match" id="match_lab">
     <div class="top-row">
         <div class="Identityinfo">
-          <img src="{{ suggestion.studentprofile.image_url }}" class="StudentPicture"/>
+          <img src="{{ suggestion.image_url }}" class="StudentPicture"/>
+          {% if request.user.studentprofile.is_student%}
           <h2 class="StudentName">{{suggestion.labname}}</h2>
+          {% else %}
+          <h2 class="StudentName">{{suggestion.get_first_name}} {{suggestion.get_last_name}} </h2>
+          {% endif %}
           <p class="Headline">{{suggestion.get_email}}</p>
         </div>
          <!-- Skills -->
