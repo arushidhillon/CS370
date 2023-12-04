@@ -35,6 +35,16 @@
       <!-- Identity -->
       <div class="gridBox" style="justify-content: space-between;">
         <div class="Identityinfo">
+          {% if user == user_object %}
+          <form
+          action="{% url 'labgpaupdate'%}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form }}
+          <input class="matchButtons" type="submit" value="Change GPA" />
+        </form>
+        {%endif%}
           <img
             src="{{ user_object.studentprofile.profile_pic.url }}"
             class="StudentPicture"
