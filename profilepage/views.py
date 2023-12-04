@@ -382,8 +382,8 @@ def studentpictureupdate(request):
             instance = p_form.save(commit=False)
             messages.success(request, f'Your account has been updated!')
             image_url = request.POST.get('profile_pic', None)
-            if image_url:
-                instance.image_url = image_url
+
+            instance.image_url = image_url
             instance.save()
             return redirect('profile/' + myuser)
 
