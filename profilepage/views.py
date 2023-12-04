@@ -676,4 +676,3 @@ def remove(request):
 
     messages.success(request, (f"You Have Successfully UnMatched All Students"))
     return redirect(request.META.get("HTTP_REFERER"))
-        

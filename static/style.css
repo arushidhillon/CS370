@@ -372,10 +372,10 @@ main {
 }
 .IdentityInfo #inputs {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  
+  flex-direction: column;
   min-height: 20rem;
+  margin-left: 2rem;
 }
 .StudentPicture {
   width: 10rem;
