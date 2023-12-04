@@ -1,4 +1,3 @@
-
 from itertools import chain
 from django.forms import ValidationError
 from django.http import HttpResponseRedirect
@@ -25,7 +24,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_str, force_bytes
-from . tokens import generate_token
+from .tokens import generate_token
 from django.contrib.auth.password_validation import validate_password
 from .forms import UserUpdateForm, ProfileUpdateForm
 from .decorators import allowed_users, unauthenticated_user
@@ -36,15 +35,17 @@ from django.views.generic import ListView
 import random
 
 from django.views.decorators.csrf import ensure_csrf_cookie
-@ensure_csrf_cookie
+from django.core.validators import URLValidator
 
+
+@ensure_csrf_cookie
 # This function leads the user to the homepage of Research Match.
 def home(request):
     return render(request, "home.html")
 
-# This function registers the user and stores their information.
-def signup(request):
 
+# This function registers the user and stores their information. The user can choose to either sign up as a student or a lab.
+def signup(request):
     if request.method == "POST":
         # Requests information inputted
         firstname = request.POST['firstname']
@@ -52,69 +53,72 @@ def signup(request):
         email = request.POST['email']
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
-        
 
-        #Tests if email is @emory.edu
+        # Tests if email is @emory.edu
         mail = email.lower()
-        at_index = mail.find('@')+1
+        at_index = mail.find('@') + 1
         domain = mail[at_index:]
         if domain != 'emory.edu':
             messages.error(request, "Please enter @emory.edu email")
             return redirect('signup')
 
-        #checks for email duplicates in system
+        # checks for email duplicates in system
         if User.objects.filter(email=email).exists():
             messages.error(request, "Email already exists! Please try some other email")
             return redirect('signup')
-        
-        #checks to make sure password is 8 characters long, not entirely numerical/alphabetical, or too common
+
+        # checks to make sure password is 8 characters long, not entirely numerical/alphabetical, or too common
         if pass1 is not None:
             try:
                 validate_password(pass1)
             except ValidationError as e:
-    
+
+                # If the password is not strong, the errors will display why.
                 for error in e.error_list:
                     messages.error(request, error)
                 if e.error_list is not None:
                     return redirect('signup')
 
-        #makes sure password and confirmation password match
+        # makes sure password and confirmation password match
         if pass1 != pass2:
             messages.error(request, "Passwords didn't match!")
             return redirect('signup')
-        
-        
-        # stores information in django using create_user function
+
+        # stores information in database using create_user function
         myuser = User.objects.create_user(email, email, pass1)
         myuser.first_name = firstname
         myuser.last_name = lastname
         myuser.is_active = False
 
         myuser.save()
-
-        if 'stdbtn' in request.POST:
-            group = Group.objects.get(name='student')
+        # Add group to user
+        signup_type = request.POST.get('signup_type')
+        if signup_type == 'student':
+            group_name = 'student'
+            group, created = Group.objects.get_or_create(name=group_name)
             myuser.groups.add(group)
 
-        if 'labbtn' in request.POST:
-            group = Group.objects.get(name='lab')
+        elif signup_type == 'lab':
+            group_name = 'lab'
+            group, created = Group.objects.get_or_create(name=group_name)
             myuser.groups.add(group)
-
-        messages.success(request,"Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
+        myuser.save()
+        messages.success(request,
+                         "Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
 
         # Welcome Email
-        subject = "Welcome to Research Match Login!"
-        message = "Hello " + myuser.first_name + "! \n" + "Welcome to Research Match! \n Thank you for visiting our website. We hope you find the research opportunities you're looking for. \n We have also sent you a confirmation email, please confirm your email address in order to activate your account. This may be located in the spam folder. \n\n Thank you, \n Deadline Tech"
-        from_email = 'researchmatchdemo@gmail.com'
-        to_list = [myuser.email]
-        send_mail(subject, message, from_email, to_list, fail_silently=True)
+        # subject = "Welcome to Research Match Login!"
+        # message = "Hello " + myuser.first_name + "! \n" + "Welcome to Research Match! \n Thank you for visiting our website. We hope you find the research opportunities you're looking for. \n We have also sent you a confirmation email, please confirm your email address in order to activate your account. This may be located in the spam folder. \n\n Thank you, \n Deadline Tech"
+        # from_email = 'deadline.tech@research-match.com'
+        # to_list = [myuser.email]
+        # send_mail(subject, message, from_email, to_list, fail_silently=True)
 
-        # Email Address Confirmation Email
+        # Email Address Confirmation and Welcome Email
 
         current_site = get_current_site(request)
-        email_subject = "Confirm your email @ Research Match Login!"
-        message2 = render_to_string('email_confirmation.html',{
-            
+        email_subject = "Welcome to Research Match! Please Confirm your email to Login!"
+        message2 = render_to_string('email_confirmation.html', {
+
             'name': myuser.first_name,
             'domain': current_site.domain,
             'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
@@ -124,7 +128,7 @@ def signup(request):
         email = EmailMessage(
             email_subject,
             message2,
-            "researchdemo@gmail.com",
+            "deadline.tech@research-match.com",
             [myuser.email],
         )
         email.fail_silently = True
@@ -132,9 +136,8 @@ def signup(request):
 
         return redirect('studentlogin')
 
-
-
     return render(request, "registration/loginpage.html")
+
 
 # This function activates a user's registered account by using a customized token that verifies the user's email address.
 def activate(request, uidb64, token):
@@ -150,20 +153,20 @@ def activate(request, uidb64, token):
         myuser.save()
         login(request, myuser)
         return redirect('studentlogin')
-    
-    else: 
+
+    else:
         return render(request, 'activation_failed.html')
-    
-# This function logs the user in after they activate their account.
+
+
+# This function logs the student user in after they activate their account.
 @allowed_users(allowed_roles=['student'])
 def studentlogin(request):
-
     if 'studentlog' in request.POST:
         email = request.POST['email']
         password = request.POST['password']
 
         user = authenticate(username=email, password=password)
-       
+
         if user is not None:
             if user.is_active:
                 login(request, user)
@@ -172,8 +175,8 @@ def studentlogin(request):
                     return redirect(request.POST.get('next'))
                 else:
                     myuser = user.studentprofile.get_user_name()
-                    return redirect('/profile/'+myuser)
-            
+                    return redirect('/profile/' + myuser)
+
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
                 return redirect('studentlogin')
@@ -183,16 +186,16 @@ def studentlogin(request):
                 messages.error(request, "The Password you entered is incorrect. Please try again or reset password.")
                 return redirect('studentlogin')
             else:
-                messages.error(request, "The email you entered does not match our records. Please double-check and try again.")
+                messages.error(request,
+                               "The email you entered does not match our records. Please double-check and try again.")
                 return redirect('studentlogin')
-
 
     return render(request, "registration/loginpage.html")
 
-#same code as student login, doesn't lead to lab profile page or stores in different table for now
+
+# same code as student login, doesn't lead to lab profile page or stores in different table for now
 @allowed_users(allowed_roles=['lab'])
 def lablogin(request):
-
     if 'lablog' in request.POST:
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -207,8 +210,8 @@ def lablogin(request):
                     return redirect(request.POST.get('next'))
                 else:
                     myuser = user.studentprofile.get_user_name()
-                    return redirect('/profile/'+myuser)
-            
+                    return redirect('/profile/' + myuser)
+
             else:
                 messages.error(request, "User account is not confirmed. Please check your email for confirmation link.")
                 return redirect('lablogin')
@@ -218,20 +221,411 @@ def lablogin(request):
                 messages.error(request, "The Password you entered is incorrect. Please try again or reset password.")
                 return redirect('lablogin')
             else:
-                messages.error(request, "The email you entered does not match our records. Please double-check and try again.")
+                messages.error(request,
+                               "The email you entered does not match our records. Please double-check and try again.")
                 return redirect('lablogin')
 
-
     return render(request, "registration/loginpage.html")
+
 
 def signout(request):
     logout(request)
     messages.success(request, "Logged Out Successfully!")
     return redirect('signup')
 
+
+@allowed_users(allowed_roles=['student'])
+def studenthomepage(request):
+    return render(request, "StudentMain.html")
+
+
+def settings(request):
+    return render(request, "Settings.html")
+
+
+@allowed_users(allowed_roles=['student'])
+def matches(request, pk):
+    pk += '@emory.edu'
+
+    user_object = User.objects.get(username=pk)
+    user_profile = StudentProfile.objects.get(user=user_object)
+
+    context = {
+        'user_object': user_object,
+        'user_profile': user_profile,
+    }
+    return render(request, 'matches.html', context)
+
+@allowed_users(allowed_roles=['lab'])
+def labpicedit(request):
+    return render(request, "editprofilepic.html")
+
+
+@allowed_users(allowed_roles=['lab'])
+def labhomepage(request):
+    return render(request, "LabMain.html")
+
+
+@allowed_users(allowed_roles=['lab'])
+def students(request):
+    return render(request, 'students.html')
+
+
+@allowed_users(allowed_roles=['lab'])
+def matchedstudents(request, pk):
+    pk += '@emory.edu'
+    user_object = User.objects.get(username=pk)
+    user_profile = StudentProfile.objects.get(user=user_object)
+
+    context = {
+        'user_object': user_object,
+        'user_profile': user_profile,
+    }
+    return render(request, "matchedstudents.html", context)
+
+
+# from .forms import SkillForm
+
+from .models import StudentProfile
+
+
+@allowed_users(allowed_roles=['student'])
+def studentprofile(request):
+    myuser = request.user.studentprofile.get_user_name()
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,
+                                   request.FILES,
+                                   instance=request.user.studentprofile)
+
+        if u_form.is_valid() and p_form.is_valid():
+            # if p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile/' + myuser)
+
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.studentprofile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'skill.html', context)
+
+
+@allowed_users(allowed_roles=['lab'])
+def labprofile(request):
+    myuser = request.user.studentprofile.get_user_name()
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = LabUpdateForm(request.POST,
+                               request.FILES,
+                               instance=request.user.studentprofile)
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile/' + myuser)
+
+        else:
+            u_form = UserUpdateForm(instance=request.user)
+            p_form = LabUpdateForm(instance=request.user.studentprofile)
+
+        context = {
+            'u_form': u_form,
+            'p_form': p_form
+        }
+        return render(request, 'mentoredit.html', context)
+
+
+@allowed_users(allowed_roles=['lab'])
+def labpictureupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
+    if request.method == 'POST':
+        p_form = Picform(request.POST,
+                         request.FILES,
+                         instance=request.user.studentprofile)
+        # if request.FILES.get('profile_pic') is None:
+        #     if pic_form.is_valid():
+        if p_form.is_valid():
+            instance = p_form.save(commit=False)
+            messages.success(request, f'Your account has been updated!')
+            image_url = request.POST.get('Upload', None)
+            if image_url:
+                instance.image_url = image_url
+            instance.save()
+            return redirect('profile/' + myuser)
+
+
+
+
+        else:
+            p_form = Picform(instance=request.user.studentprofile)
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+
+@allowed_users(allowed_roles=['student'])
+def studentpictureupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
+    if request.method == 'POST':
+        p_form = Picform(request.POST,
+                         request.FILES,
+                         instance=request.user.studentprofile)
+        if p_form.is_valid():
+            instance = p_form.save(commit=False)
+            messages.success(request, f'Your account has been updated!')
+            image_url = request.POST.get('profile_pic', None)
+            if image_url is not None :
+                instance.image_url = image_url
+            else:
+                instance.image_url = 'https://static.thenounproject.com/png/5034901-200.png'
+            instance.save()
+            return redirect('profile/' + myuser)
+
+        else:
+            p_form = Picform(instance=request.user.studentprofile)
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+
+@allowed_users(allowed_roles=['lab'])
+def labskillsupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
+    if request.method == 'POST':
+        p_form = Skillform(request.POST,
+                           instance=request.user.studentprofile)
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile/'+myuser)  # Send back to profile 
+        
+        else:
+            p_form = Skillform(instance=request.user.studentprofile)
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+
+@allowed_users(allowed_roles=['student'])
+def studentskillsupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
+    if request.method == 'POST':
+        p_form = Skillform(request.POST, instance=request.user.studentprofile)
+        # if request.FILES.get('profile_pic') is None:
+        #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile/' + myuser)
+
+        else:
+            p_form = Skillform(instance=request.user.studentprofile)
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+
+@allowed_users(allowed_roles=['lab'])
+def labcourseupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
+    if request.method == 'POST':
+        p_form = Courseform(request.POST,
+                            instance=request.user.studentprofile)
+        # if request.FILES.get('profile_pic') is None:
+        #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile/'+myuser)  # Send back to profile
+        
+        else:
+            p_form = Courseform(instance=request.user.studentprofile)
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+
+@allowed_users(allowed_roles=['student'])
+def studentcourseupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
+    if request.method == 'POST':
+        p_form = Courseform(request.POST,
+                            instance=request.user.studentprofile)
+        # if request.FILES.get('profile_pic') is None:
+        #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile/' + myuser)
+
+        else:
+            p_form = Courseform(instance=request.user.studentprofile)
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+
+@allowed_users(allowed_roles=['lab'])
+def labbioupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
+    if request.method == 'POST':
+        p_form = BioForm(request.POST,
+                         instance=request.user.studentprofile)
+        # if request.FILES.get('profile_pic') is None:
+        #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile/'+myuser)  # Send back to profile
+        
+        else:
+            p_form = BioForm(instance=request.user.studentprofile)
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+
+@allowed_users(allowed_roles=['student'])
+def studentbioupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
+    if request.method == 'POST':
+        p_form = BioForm(request.POST,
+                         instance=request.user.studentprofile)
+        # if request.FILES.get('profile_pic') is None:
+        #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile/'+myuser)  # Send back to profile  
+        
+        else:
+            p_form = BioForm(instance=request.user.studentprofile)
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+
+@allowed_users(allowed_roles=['lab'])
+def labdocupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
+    if request.method == 'POST':
+        p_form = Docform(request.POST,
+                         request.FILES,
+                         instance=request.user.studentprofile)
+        # if request.FILES.get('profile_pic') is None:
+        #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            doc_url = request.POST.get('dropped_images', None)
+            if doc_url:
+                instance.doc_url = doc_url
+            instance.save()
+            return redirect(f'profile/'+myuser)  # Send back to profile  
+        
+        else:
+            p_form = Docform(instance=request.user.studentprofile)
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+
+@allowed_users(allowed_roles=['student'])
+def studentdocupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
+    if request.method == 'POST':
+        p_form = Docform(request.POST,
+                         request.FILES,
+                         instance=request.user.studentprofile)
+        # if request.FILES.get('profile_pic') is None:
+        #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile/'+myuser)  # Send back to profile  
+        
+        else:
+            p_form = Docform(instance=request.user.studentprofile)
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+
+
+def profile(request, pk):
+    pk += '@emory.edu'
+    user_object = User.objects.get(username=pk)
+    user_profile = StudentProfile.objects.get(user=user_object)
+
+    context = {
+        'user_object': user_object,
+        'user_profile': user_profile,
+    }
+
+    if user_profile.is_student:
+        return render(request, 'StudentMain.html', context)
+    elif user_profile.is_lab:
+        return render(request, 'LabMain.html', context)
+    else:
+        return render(request, 'home.html', context)
+
+# # Creates match between a student and a lab and vice versa.
+def match(request, pk):
+    pk += '@emory.edu'
+    user_object = User.objects.get(username=pk)
+    user_profile = StudentProfile.objects.get(user=user_object)
+
+    if (user_profile.is_lab and request.user.studentprofile.is_student) or (user_profile.is_student and request.user.studentprofile.is_lab):
+        request.user.studentprofile.matches.add(user_profile)
+        request.user.studentprofile.save()
+
+    if user_profile.is_lab:
+        messages.success(request, (f"You Have Successfully Matched With a Lab!"))
+    else:
+        messages.success(request, (f"You Have Successfully Matched With a Student"))
+
+    return redirect(request.META.get("HTTP_REFERER"))
+
+# Allows labs and students to unmatch each other.
+def unmatch(request, pk):
+    pk += '@emory.edu'
+    user_object = User.objects.get(username=pk)
+    user_profile = StudentProfile.objects.get(user=user_object)
+
+    if (user_profile.is_lab and request.user.studentprofile.is_student) or (user_profile.is_student and request.user.studentprofile.is_lab):
+        request.user.studentprofile.matches.remove(user_profile)
+        request.user.studentprofile.save()
+
+    if user_profile.is_lab:
+        messages.success(request, (f"You Have Successfully Unmatched With a Lab!"))
+    else:
+        messages.success(request, (f"You Have Successfully Unmatched With a Student"))
+
+    return redirect(request.META.get("HTTP_REFERER"))
+
+        
+
 # This function will serve as the matching algorithm for both lab and students.
 # It will match them through their registered skill, course, and gpa.
-def opportunities(request):
+def MatchAlgorithm(request):
     user_profile = request.user.studentprofile
     user_matching_list = user_profile.matches.all()
 
@@ -256,276 +650,30 @@ def opportunities(request):
         }
         return render(request, 'opportunities.html', context)
     else:
-        all_students = all_users.filter(groups__name='student')
-        lab_req_c = all_students.studentprofile.filter(name__contains=matching_by_course)
-        lab_req_s = all_students.studentprofile.filter(name__contains=matching_by_skill)
-        lab_req_g = all_students.studentprofile.filter(name__contains=matching_by_gpa)
+        lab_req_c = all_users.filter(course__in=matching_by_course)
+        lab_req_s = all_users.filter(skill__in=matching_by_skill)
+        lab_req_g = all_users.filter(gpa__gte=matching_by_gpa)
 
+        all_students = [ x for x in all_users if (x.is_student)]
         new_suggestions_list = [ x for x in all_students if (x not in user_matching_list)]
         final_suggestions_list = [x for x in new_suggestions_list if (x in lab_req_c or x in lab_req_s or x in lab_req_g)]
         context = {
         'user_profile': user_profile,
         'final_suggestions_list': final_suggestions_list,
         }
-    
+
         return render(request, 'students.html', context)
-
-@allowed_users(allowed_roles=['student'])
-def settings(request):
-    return render(request, "Settings.html")
-
-@allowed_users(allowed_roles=['student'])
-def matches(request, pk):
-    pk += '@emory.edu'
-    user_object = User.objects.get(username=pk)
-    user_profile = StudentProfile.objects.get(user=user_object)
-
-
-    context = {
-        'user_object': user_object,
-        'user_profile': user_profile,
-    }
-    return render(request, 'matches.html', context)
-    # myuser = request.user.get_username()
-    # if myuser is pk:
-    #     return render(request,'matches.html',context)
-    # else:
-    #     messages.error(request, ("That's not your Page."))
-    #     return redirect('home')
-
-
-@allowed_users(allowed_roles=['lab'])
-def labpicedit(request):
-    return render(request, "editprofilepic.html")
-
-@allowed_users(allowed_roles=['lab'])
-def students(request):
-    return render(request, 'students.html')
-
-@allowed_users(allowed_roles=['lab'])
-def matchedstudents(request,pk):
-    pk += '@emory.edu'
-    user_object = User.objects.get(username=pk)
-    user_profile = StudentProfile.objects.get(user=user_object)
-
-
-    context = {
-        'user_object': user_object,
-        'user_profile': user_profile,
-    }
-    return render(request, "matchedstudents.html",context)
-
-def profile(request, pk):
-    pk += '@emory.edu'
-    user_object = User.objects.get(username=pk)
-    user_profile = StudentProfile.objects.get(user=user_object)
-
-    context = {
-        'user_object': user_object,
-        'user_profile': user_profile,
-    }
-
-    if user_profile.is_student:
-        return render(request, 'StudentMain.html', context)
-    elif user_profile.is_lab:
-        return render(request, 'LabMain.html', context)
-    else:
-        return render(request, 'home.html', context)
-
-# from .forms import SkillForm
-
-from .models import StudentProfile
-
-@allowed_users(allowed_roles=['student'])
-def studentprofile(request):
-    myuser = request.user.studentprofile.get_user_name()
-    if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, 
-                                   request.FILES, 
-                                   instance=request.user.studentprofile)
-        
-        if u_form.is_valid() and p_form.is_valid():
-       # if p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, f'Your account has been updated!')
-            return redirect('profile/'+myuser)
-
-
-    else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.studentprofile)
-
-
-    context = {
-        'u_form': u_form,
-        'p_form': p_form
-    }
-    return render(request, 'skill.html', context)
-
-@allowed_users(allowed_roles=['lab'])
-def labprofile(request):
-     myuser = request.user.studentprofile.get_user_name()
-     if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = LabUpdateForm(request.POST, 
-                                   request.FILES, 
-                                   instance=request.user.studentprofile)
-       # if request.FILES.get('profile_pic') is None:
-
-
-        if u_form.is_valid() and p_form.is_valid():
-       # if p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, f'Your account has been updated!')
-            return redirect('profile/'+myuser)
-
-        else:
-            u_form = UserUpdateForm(instance=request.user)
-            p_form = LabUpdateForm(instance=request.user.studentprofile)
-
-
-        context = {
-            'u_form': u_form,
-            'p_form': p_form
-        }
-        return render(request, 'mentoredit.html', context)
-     
-@allowed_users(allowed_roles=['lab'])
-def labpictureupdate(request):
-    if request.method == 'POST':
-        p_form = Picform(request.POST, 
-                                   request.FILES, 
-                                   instance=request.user.studentprofile)
-       # if request.FILES.get('profile_pic') is None:
-    #     if pic_form.is_valid():
-        if p_form.is_valid():
-            p_form.save()
-            messages.success(request, f'Your account has been updated!')
-            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
-        
-        else:
-            p_form = Picform(instance=request.user.studentprofile)
-
-
-    context = {
-        'user_object': user_object,
-        'user_profile': user_profile,
-    }
-
-    if user_profile.is_student:
-        return render(request, 'StudentMain.html', context)
-    elif user_profile.is_lab:
-        return render(request, 'LabMain.html', context)
-    else:
-        return render(request, 'home.html', context)
-
-# def match(request):
-#     if request.method == 'POST':
-#         follower = request.POST['follower']
-#         user = request.POST['user']
-
-#         if Matched.objects.filter(follower=follower, user=user).first():
-#             delete_follower = Matched.objects.get(follower=follower, user=user)
-#             delete_follower.delete()
-#             return redirect('/profile/'+user)
-#         else:
-#             new_follower = Matched.objects.create(follower=follower, user=user)
-#             new_follower.save()
-#             return redirect('profile/'+user)
-
-#     else:
-#         return redirect('/')
-
-
-# def index(request):
-#     myuser = User.objects.get(email=request.user.email)
-#     user_profile = StudentProfile.objects.get(user=myuser)
-
-#     user_matching_list = []
-#     matchLabs = []
-
-#     user_matching = Matched.objects.filter(follower=request.user.username)
-
-
-#     # lab suggestion starts
-#     all_labs = User.objects.all()
-#     user_matching_all = []
-
-#     for user in user_matching_list:
-#         user_list = User.objects.get(username=user.user)
-#         user_matching_all.append(user_list)
-
-#     new_suggestions_list = [ x for x in list(all_labs) if (x not in list(user_matching_all()))]
-#     current_user = User.objects.filter(username=request.user.username)
-#     final_suggestions_list =[ x for x in list(new_suggestions_list) if (x not in list(current_user)) ]
-#     random.shuffle(final_suggestions_list)
-
-#     username_profile = []
-#     username_profile_list = []
-
-#     for users in final_suggestions_list:
-#         username_profile.append(users.id)
-
-#     for ids in username_profile:
-#         profile_lists = StudentProfile.objects.filter(id_user=ids)
-#         username_profile_list.append(profile_lists)
-
-#     suggestions_username_profile_lists = list(chain(*username_profile_list))
-
-#     return render(request, 'opportunities.html', {'user_profile': user_profile})
-
-# def skill(request):
-#   if request.POST:
-#     form = SkillForm(request.POST) #form= and forsm.save will create a new student object.
-#     if form.is_valid():
-#         form.save()
-#         return redirect('studenthomepage')
-#   return render(request, 'skill.html', {'form': SkillForm})
-
-
-# from .models import *
-# from django.shortcuts import render
-
-# def skillsview(request):
-#     data = StudentProfile.objects.all()
-#     if data: print('working')
-#     return render(request, 'skillsdisplay.html', {'data': data})
-
-# def get_skill(request):
-#     # if this is a POST request we need to process the form data
-#     if request.method == "POST":
-#         # create a form instance and populate it with data from the request:
-#         form = SkillForm(request.POST)
-#         # check whether it's valid:
-#         # if form.is_valid():
-#             # process the data in form.cleaned_data as required
-#             # ...
-#             # redirect to a new URL:
-#         skill_input = form.cleaned_data['skill']
-#         p = Student(skill_input)
-#         p.save()
-
-#             # return HttpResponseRedirect("/thanks/")
-
-#     # if a GET (or any other method) we'll create a blank form
-#     else:
-#         form = SkillForm()
-
-#     return render(request, "skill.html", {"form": form})
-
-
-# def get_skills(request):
-
-#     all_Skills = Student.objects.all() #for all the records 
-#     # one_data = userdetails.objects.get(pk=1) # 1 will return the first item change it depending on the data you want 
-#     allskills={
-       
-#       'skills':all_Skills,
-#     #   'one_data':one_data,
     
-#     } 
+# This function allows a lab to delete all it's matches in order to start over as a new lab.
+@allowed_users(allowed_roles=['lab'])
+def remove(request):
+    all_matches = StudentProfile.matches.all()
+    all_matched = StudentProfile.matched_by.all()
 
-#     return render(request, 'StudentMain.html', allskills)
+    request.user.studentprofile.remove(all_matches)
+    request.user.studentprofile.remove(all_matched)
+    request.user.studentprofile.save()
+
+    messages.success(request, (f"You Have Successfully UnMatched All Students"))
+    return redirect(request.META.get("HTTP_REFERER"))
+        
