@@ -381,7 +381,7 @@ def studentpictureupdate(request):
         if p_form.is_valid():
             instance = p_form.save(commit=False)
             messages.success(request, f'Your account has been updated!')
-            image_url = request.POST.get('dropped_images', None)
+            image_url = request.POST.get('profile_pic', None)
             if image_url:
                 instance.image_url = image_url
             instance.save()
@@ -530,6 +530,10 @@ def labdocupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
+            doc_url = request.POST.get('dropped_images', None)
+            if doc_url:
+                instance.doc_url = doc_url
+            instance.save()
             return redirect(f'profile/'+myuser)  # Send back to profile  
         
         else:
