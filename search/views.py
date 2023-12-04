@@ -11,12 +11,12 @@ def students(request):
 @allowed_users(allowed_roles=['lab'])
 def search_students(request):
     all = User.objects.all()
-    all_students = all.filter(groups__name ='student')
 
     if request.htmx:
         letters = request.GET.get('search_students')
         if len(letters) > 0 :
-            profiles = all_students.filter(first_name__icontains=letters)
+            allprofiles = all.filter(first_name__icontains=letters)
+            profiles = [ x for x in allprofiles if (x.studentprofile.is_student)]
             return render(request, 'list_students.html', {'students' : profiles})
         else:
             return HttpResponse('')
