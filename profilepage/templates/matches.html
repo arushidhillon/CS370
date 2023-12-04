@@ -90,9 +90,9 @@
                 hx-get="{% url 'inbox-newmessage' profile.id %}"
                 hx-target="this"
                 hx-swap="innerHTML"
-                style="cursor: pointer;">Send Message</a>
+                style="cursor: pointer;">Send Message</a></button>
               {% comment %} This button allows the user to match with a lab. {% endcomment %}
-              <button> <a href="{% url 'match' profile.get_user_name %}">Match</a></button>
+              <button><a href="{% url 'match' profile.get_user_name %}">Match</a></button>
             </div>
             <p>{{profile.biography}}</p>
           </div>
