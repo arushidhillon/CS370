@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 if LOCAL_DEBUG:
     # Debug Keys
@@ -41,7 +41,7 @@ else:
     # Keys
     SECRET_KEY = os.environ.get('SECRET_KEY')
     ENCRYPT_KEY = os.environ.get('ENCRYPT_KEY')
-
+    ENCRYPT_KEY = b'WIuRycBTSZ9VVevuPE4kXdnwVUlVrC7p1qZTDgFx-Sc='
     DATABASES = {'default': dj_database_url.config(default=os.environ['DATABASE_URL'])}
     db_from_env = dj_database_url.config(conn_max_age=600)
     DATABASES['default'].update(db_from_env)
