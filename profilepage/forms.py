@@ -63,8 +63,11 @@ class BioForm(forms.ModelForm):
         model = StudentProfile
         fields = ['biography']
         # have to add a text input field for it to work
-
-
+class GpaForm(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['gpa']
+        
 class Docform(forms.ModelForm):
     class Meta:
         model = StudentProfile

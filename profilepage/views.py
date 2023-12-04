@@ -30,7 +30,7 @@ from .forms import UserUpdateForm, ProfileUpdateForm
 from .decorators import allowed_users, unauthenticated_user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
-from .forms import UserUpdateForm, ProfileUpdateForm, LabUpdateForm, Picform, Skillform, Courseform, Docform, BioForm
+from .forms import UserUpdateForm, ProfileUpdateForm, LabUpdateForm, Picform, Skillform, Courseform, Docform, BioForm, GpaForm
 from django.views.generic import ListView
 import random
 
