@@ -383,7 +383,7 @@ def studentpictureupdate(request):
             instance = p_form.save(commit=False)
             messages.success(request, f'Your account has been updated!')
             image_url = request.POST.get('profile_pic', None)
-            val = URLValidator(max_length=500,message="Please add a valid url!")
+            val = URLValidator(message="Please add a valid url!")
             if  val(image_url) :
                 instance.image_url = image_url
             else:
