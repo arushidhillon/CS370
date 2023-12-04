@@ -27,15 +27,15 @@
       </div>
 
       <!-- Labs -->
-      {% for suggestion in all_labs %}
+      {% for suggestion in final_suggestions_list %}
       <div class="gridBox" style="justify-content: space-between;">
         <div class="Identityinfo">
           <img
             src="{{ suggestion.studentprofile.image_url }}"
             class="StudentPicture"
           />
-          <h2 class="StudentName">{{suggestion.studentprofile.labname}}</h2>
-          <p class="Headline">{{suggestion.email}}</p>
+          <h2 class="StudentName">{{suggestion.labname}}</h2>
+          <p class="Headline">{{suggestion.get_email}}</p>
         </div>
         
         <!-- Skills -->
@@ -53,7 +53,7 @@
           <div class="tagscluster">
             
             <!-- Split items in skill -->
-            {% for i in suggestion.studentprofile.skill_list %}
+            {% for i in suggestion.skill_list %}
               <div class="child"> {{ i.strip }} </div>
             {% endfor %}
           </div>
@@ -73,7 +73,7 @@
           <h2 style="margin-top: 0;">Courses</h2>
           <div class="tagscluster">
             <!-- Split items in courses -->
-            {% for i in suggestion.studentprofile.course_list %}
+            {% for i in suggestion.course_list %}
               <div class="child"> {{ i.strip }} </div>
             {% endfor %}
           </div>
@@ -83,16 +83,16 @@
         <div class="buttons-desc">
           <!-- Buttons -->
           <div class="opportunities-buttons">
-            <button><a href="{% url 'profile' suggestion.studentprofile.get_user_name %}">View Profile</a></button>
+            <button><a href="{% url 'profile' suggestion.get_user_name %}">View Profile</a></button>
             <button><a 
               hx-get="{% url 'inbox-newmessage' suggestion.id %}"
               hx-target="#conversation"
               hx-swap="innerHTML">Send Message</a></button>
-            <button><a href="{% url 'match' suggestion.studentprofile.get_user_name%}">Match</a></button>
+            <button><a href="{% url 'match' suggestion.get_user_name%}">Match</a></button>
           </div>
           <!-- Lab Description -->
           <div>
-            <p>{{suggestion.studentprofile.biography}}</p>
+            <p>{{suggestion.biography}}</p>
           </div>
         </div>
       </div>
