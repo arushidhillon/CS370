@@ -587,7 +587,7 @@ def profile(request, pk):
     else:
         return render(request, 'home.html', context)
 
-# # Creates match between a student and a lab and vice versa.
+# Creates match between a student and a lab and vice versa.
 def match(request, pk):
     pk += '@emory.edu'
     user_object = User.objects.get(username=pk)
