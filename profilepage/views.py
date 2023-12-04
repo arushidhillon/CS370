@@ -579,7 +579,7 @@ def studentdocupdate(request):
         context = {
             'p_form': p_form
         }
-        return render(request, 'document.html', context)
+        return render(request, 'editprofilepic.html', context)
 
 
 def profile(request, pk):
