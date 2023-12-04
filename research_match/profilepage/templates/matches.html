@@ -25,17 +25,25 @@
     <div class="pagetitle">
       <h3>Matched Labs</h3>
     </div>
+    <button> <a href="{% url 'remove' %}">Remove All</a></button>
     {% comment %} This for loop lists all users that match with the current user. {% endcomment %}
     {% for profile in user_profile.matched_by.all %}
     {% if profile not in user_profile.matches.all%}
+
     <div class="gridBox" style="justify-content: space-between;">
       <div class="Identityinfo">
         <img
-          src="{{ profile.profile_pic.url }}"
+          src="{{ profile.image_url }}"
           class="StudentPicture"
         />
         <h2 class="StudentName">{{profile.labname}}</h2>
         <p class="Headline">{{profile.get_email}}</p>
+        {% comment %} This button leads a user to a lab's profile {% endcomment %}
+        <button><a href="{% url 'profile' profile.get_user_name %}">View Profile</a></button>
+        {% comment %} This button leads the user to a new or old conversation with a lab. {% endcomment %}
+          <button><a href="{% url 'inbox-newmessage' profile.id %}">Send Message</a></button>
+          {% comment %} This button allows the user to match with a lab. {% endcomment %}
+          <button> <a href="{% url 'match' profile.get_user_name %}">Match</a></button>
       </div>
       <!-- Skills -->
       <div
@@ -78,15 +86,86 @@
       </div>
     </div> 
 
-    
-    {% elif profile not in user_profile.matched_by.all %}
+  
+    {% elif user_profile.matched_by.all is None %}
     <h2> No Matched Labs  </h2>
     {%endif%}
 
     {% endfor %}
-  
-   
+
+
+    {% comment %} This block of code is for labs who you have matched with that haven't connected you back. {% endcomment %}
     <div id="matches-current">
+      <div class="pagetitle">
+        <h3>Awaiting Connection</h3>
+      </div>
+      {% comment %} This for loop lists all users that match with the current user. {% endcomment %}
+      {% for profile in user_profile.matches.all %}
+      {% if profile not in user_profile.matched_by.all%}
+  
+      <div class="gridBox" style="justify-content: space-between;">
+        <div class="Identityinfo">
+          <img
+            src="{{ profile.image_url }}"
+            class="StudentPicture"
+          />
+          <h2 class="StudentName">{{profile.labname}}</h2>
+          <p class="Headline">{{profile.get_email}}</p>
+          {% comment %} This button leads a user to a lab's profile {% endcomment %}
+          <button><a href="{% url 'profile' profile.get_user_name %}">View Profile</a></button>
+          {% comment %} This button leads the user to a new or old conversation with a lab. {% endcomment %}
+            <button><a href="{% url 'inbox-newmessage' profile.id %}">Send Message</a></button>
+            {% comment %} This button allows the user to match with a lab. {% endcomment %}
+            <button> <a href="{% url 'unmatch' profile.get_user_name %}">Unmatch</a></button>
+        </div>
+        <!-- Skills -->
+        <div
+          class="Identityinfo"
+          id="inputs"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            margin-left: 2rem;
+          "
+        >
+          <h2 style="margin-top: 0;">Skills Required</h2>
+          <div class="tagscluster">
+            
+            <!-- Split items in skill -->
+            {% for i in profile.skill_list %}
+              <div class="child"> {{ i.strip }} </div>
+            {% endfor %}
+          </div>
+        </div>
+        <!-- Completed Courses -->
+        <div
+          class="Identityinfo"
+          id="inputs"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            margin-left: 2rem;
+          "
+        >
+          <h2 style="margin-top: 0;">Courses Required</h2>
+          <div class="tagscluster">
+            <!-- Split items in courses -->
+            {% for i in profile.course_list %}
+              <div class="child"> {{ i.strip }} </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div> 
+  
+    
+      {% elif user_profile.matches.all is None %}
+      <h2> No Matched Labs  </h2>
+      {%endif%}
+  
+      {% endfor %}
+  
       <div class="pagetitle">
         <h3>Current Labs</h3>
       </div>
@@ -96,12 +175,18 @@
        <div class="gridBox" style="justify-content: space-between;">
         <div class="Identityinfo">
           <img
-            src="{{ profile.profile_pic.url }}"
+            src="{{ profile.image_url }}"
             class="StudentPicture"
           />
           <h2 class="StudentName">{{profile.labname}}</h2>
           <p class="Headline">{{profile.get_email}}</p>
+          <button><a href="{% url 'profile' profile.get_user_name %}">View Profile</a></button>
+          <button><a 
+            hx-get="{% url 'inbox-newmessage' profile.id %}"
+            hx-target="#conversation"
+            hx-swap="innerHTML">Send Message</a></button>
         </div>
+        <button><a href="{% url 'unmatch' profile.get_user_name%}">Unmatch</a></button>
         <!-- Skills -->
         <div
           class="Identityinfo"
@@ -144,13 +229,12 @@
       </div> 
 
      
-      {% else %}
-      <h2> No Current Labs  </h2>
-      {%endif%}
+      {% elif user_profile.matches.all is None %}
+    <h2> No Current Labs  </h2>
+    {%endif%}
 
       {% endfor %}
-    
-    </div>
+
       <div>
     </div>
     {% comment %} <div id="matches-past">

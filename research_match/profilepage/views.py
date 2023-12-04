@@ -665,7 +665,7 @@ def MatchAlgorithm(request):
         return render(request, 'students.html', context)
     
 # This function allows a lab to delete all it's matches in order to start over as a new lab.
-@allowed_users(allowed_roles=['lab'])
+# @allowed_users(allowed_roles=['lab'])
 def remove(request):
     all_matches = StudentProfile.matches.all()
     all_matched = StudentProfile.matched_by.all()
