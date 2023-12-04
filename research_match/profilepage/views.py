@@ -384,7 +384,7 @@ def labpictureupdate(request):
         context = {
             'p_form': p_form
         }
-        return render(request, 'editprofilepic.html', context)
+        return render(request, 'picture.html', context)
 
 def studentpictureupdate(request):
     if request.method == 'POST':
@@ -405,7 +405,7 @@ def studentpictureupdate(request):
         context = {
             'p_form': p_form
         }
-        return render(request, 'editprofilepic.html', context)
+        return render(request, 'picture.html', context)
 
 def labskillsupdate(request):
     if request.method == 'POST':
@@ -586,7 +586,7 @@ def labdocupdate(request):
         context = {
             'p_form': p_form
         }
-        return render(request, 'editprofilepic.html', context)
+        return render(request, 'document.html', context)
 
 def studentdocupdate(request):
     if request.method == 'POST':
@@ -607,7 +607,7 @@ def studentdocupdate(request):
         context = {
             'p_form': p_form
         }
-        return render(request, 'editprofilepic.html', context)
+        return render(request, 'document.html', context)
 
 
 # def match(request):
