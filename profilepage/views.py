@@ -609,7 +609,7 @@ def match(request, pk):
         request.user.studentprofile.matches.add(user_profile)
         request.user.studentprofile.save()
 
-    if user_profile.is_lab:
+    if user_profile.is_student:
         messages.success(request, (f"You Have Successfully Matched With a Lab!"))
     else:
         messages.success(request, (f"You Have Successfully Matched With a Student"))
@@ -622,11 +622,10 @@ def unmatch(request, pk):
     user_object = User.objects.get(username=pk)
     user_profile = StudentProfile.objects.get(user=user_object)
 
-    if (user_profile.is_lab and request.user.studentprofile.is_student) or (user_profile.is_student and request.user.studentprofile.is_lab):
-        request.user.studentprofile.matches.remove(user_profile)
-        request.user.studentprofile.save()
+    request.user.studentprofile.matches.remove(user_profile)
+    request.user.studentprofile.save()
 
-    if user_profile.is_lab:
+    if user_profile.is_student:
         messages.success(request, (f"You Have Successfully Unmatched With a Lab!"))
     else:
         messages.success(request, (f"You Have Successfully Unmatched With a Student"))
@@ -687,8 +686,8 @@ def remove(request):
         request.user.studentprofile.save()
     
     for y in all_matched:
-        request.user.studentprofile.remove(all_matched)
-        request.user.studentprofile.save()
+        y.remove(request.user.studentprofile)
+        y.save()
 
     messages.success(request, (f"You Have Successfully UnMatched All Students"))
     return redirect(request.META.get("HTTP_REFERER"))

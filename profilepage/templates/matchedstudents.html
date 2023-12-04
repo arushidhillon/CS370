@@ -22,7 +22,7 @@
    {% endblock content%}
 
    <button> <a href="{% url 'remove' %}">Remove All Students</a></button>
-   
+
    <div id="matches-current">
     <div class="pagetitle">
       <h3>Matched Students</h3>
@@ -186,8 +186,8 @@
             hx-get="{% url 'inbox-newmessage' profile.id %}"
             hx-target="#conversation"
             hx-swap="innerHTML">Send Message</a></button>
-        </div>
         <button><a href="{% url 'unmatch' profile.get_user_name%}">Unmatch</a></button>
+      </div>
         <!-- Skills -->
         <div
           class="Identityinfo"
