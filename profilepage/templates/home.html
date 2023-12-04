@@ -31,7 +31,7 @@
           <p>Welcome back, {{user.first_name}}!</p>
             {% if user.studentprofile.is_student %}
               <button >
-                <p><a href="{% url 'opportunities' %}">Find Research Opportunities</a></p>
+                <p><a href="{% url 'MatchAlgorithm' %}">Find Research Opportunities</a></p>
               </button>
             {% else %}
               <button >
