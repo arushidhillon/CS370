@@ -43,9 +43,9 @@ Currently, our website is only functional on computers/laptops.
 ---
 
 **Member B: Devin Gee**  
-*Major:*Informatics and Biology       
-*Skills:*Python,R,SQL       
-*Interests:*Video Games, Animals, Cooking         
+*Major:* Informatics and Biology       
+*Skills:* Python, R, SQL       
+*Interests:* Video Games, Animals, Cooking         
 
 ---
 
