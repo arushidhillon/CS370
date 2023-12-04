@@ -601,9 +601,26 @@ def match(request, pk):
 
     return redirect(request.META.get("HTTP_REFERER"))
 
+# Allows labs and students to unmatch each other.
+def unmatch(request, pk):
+    pk += '@emory.edu'
+    user_object = User.objects.get(username=pk)
+    user_profile = StudentProfile.objects.get(user=user_object)
+
+    if (user_profile.is_lab and request.user.studentprofile.is_student) or (user_profile.is_student and request.user.studentprofile.is_lab):
+        request.user.studentprofile.matches.remove(user_profile)
+        request.user.studentprofile.save()
+
+    if user_profile.is_lab:
+        messages.success(request, (f"You Have Successfully Unmatched With a Lab!"))
+    else:
+        messages.success(request, (f"You Have Successfully Unmatched With a Student"))
+
+    return redirect(request.META.get("HTTP_REFERER"))
+
 # This function will serve as the matching algorithm for both lab and students.
 # It will match them through their registered skill, course, and gpa.
-def opportunities(request):
+def MatchAlgorithm(request):
     user_profile = request.user.studentprofile
     user_matching_list = user_profile.matches.all()
 

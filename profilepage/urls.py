@@ -31,7 +31,7 @@ urlpatterns = [
         template_name="password-reset/password_reset_done.html"
         ), name="password_reset_complete"),
 
-    path('opportunities/', views.opportunities, name='opportunities'),
+    path('MatchAlgorithm/', views.MatchAlgorithm, name='MatchAlgorithm'),
     path('students/', views.students, name='students'),
     path('settings/', views.settings, name='settings'),
     path('matches/<str:pk>', views.matches, name='matches'),
@@ -50,7 +50,10 @@ urlpatterns = [
     path('studentbioupdate', views.studentbioupdate, name='studentbioupdate'),
     path('studentdocupdate', views.studentdocupdate, name='studentdocupdate'),
     path('profile/<str:pk>', views.profile, name='profile'),
-    path('match/<str:pk>', views.match, name='match')
+    path('match/<str:pk>', views.match, name='match'),
+    path('unmatch/<str:pk>', views.unmatch, name='unmatch'),
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # path('skill/', views.skill, name='skill'),
     # path('skillsview/', views.skillsview, name='skillsview'),
