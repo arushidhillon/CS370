@@ -262,7 +262,7 @@ def matches(request, pk):
 
 @allowed_users(allowed_roles=['lab'])
 def labpicedit(request):
-    return render(request, "editprofilepic.html")
+    return render(request, "picture.html")
 
 
 @allowed_users(allowed_roles=['lab'])
