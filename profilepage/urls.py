@@ -4,7 +4,7 @@ from django.urls import path
 from . import views
 from inbox import views as views_inbox
 from django.contrib.auth import views as auth_views
-
+from search import views as views_search
 
 
 
@@ -41,11 +41,13 @@ urlpatterns = [
     path('inbox/', views_inbox.inbox_view, name='inbox'),
     path('labpictureupdate', views.labpictureupdate, name='labpictureupdate'),
     path('labskillsupdate', views.labskillsupdate, name='labskillsupdate'),
+    path('labgpaupdate', views.labgpaupdate, name='labgpaupdate'),
     path('labcourseupdate', views.labcourseupdate, name='labcourseupdate'),
     path('labbioupdate', views.labbioupdate, name='labbioupdate'),
     path('labdocupdate', views.labdocupdate, name='labdocupdate'),
     path('studentpictureupdate', views.studentpictureupdate, name='studentpictureupdate'),
     path('studentskillsupdate', views.studentskillsupdate, name='studentskillsupdate'),
+    path('studentgpaupdate', views.studentgpaupdate, name='studentgpaupdate'),
     path('studentcourseupdate', views.studentcourseupdate, name='studentcourseupdate'),
     path('studentbioupdate', views.studentbioupdate, name='studentbioupdate'),
     path('studentdocupdate', views.studentdocupdate, name='studentdocupdate'),
@@ -53,8 +55,9 @@ urlpatterns = [
     path('match/<str:pk>', views.match, name='match'),
     path('unmatch/<str:pk>', views.unmatch, name='unmatch'),
     path('remove', views.remove, name='remove'),
-
-
+    path('students/',views_search.students, name='students'),
+    # URL for processing the search query and returning the results
+    path('search-students/',views_search.search_students, name='search_students'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # path('skill/', views.skill, name='skill'),
     # path('skillsview/', views.skillsview, name='skillsview'),

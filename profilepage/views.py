@@ -30,7 +30,7 @@ from .forms import UserUpdateForm, ProfileUpdateForm
 from .decorators import allowed_users, unauthenticated_user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
-from .forms import UserUpdateForm, ProfileUpdateForm, LabUpdateForm, Picform, Skillform, Courseform, Docform, BioForm
+from .forms import UserUpdateForm, ProfileUpdateForm, LabUpdateForm, Picform, Skillform, Courseform, Docform, BioForm, GpaForm
 from django.views.generic import ListView
 import random
 
@@ -676,4 +676,42 @@ def remove(request):
 
     messages.success(request, (f"You Have Successfully UnMatched All Students"))
     return redirect(request.META.get("HTTP_REFERER"))
-        
+
+def labgpaupdate(request):
+    if request.method == 'POST':
+        p_form = GpaForm(request.POST,
+                         instance=request.user.studentprofile)
+        # if request.FILES.get('profile_pic') is None:
+        #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
+
+        else:
+            p_form = GpaForm(instance=request.user.studentprofile)
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+
+
+def studentgpaupdate(request):
+    if request.method == 'POST':
+        p_form = GpaForm(request.POST, instance=request.user.studentprofile)
+        # if request.FILES.get('profile_pic') is None:
+        #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            # TODO: apply to other forms
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
+
+        else:
+            p_form = GpaForm(instance=request.user.studentprofile)
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)

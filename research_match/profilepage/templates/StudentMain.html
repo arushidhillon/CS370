@@ -154,15 +154,58 @@
             {% csrf_token %}
             <label for="Skill_input">Skills: </label>
 
-            <div id="Skill_item"></div>
-          </form>
-          <div style="justify-self: last">
-            <!-- <form action="/studenthomepage/" method="post">
-          {% csrf_token %}
-          <label for="Skill_input">Skills: </label>
-        <input type='text' id='Skill_input' />
-        <input type="submit" id="addSkill" value="Add New Interest">
-      </form> -->
+      <!-- Identity -->
+      <div class="gridBox" style="justify-content: space-between;">
+        <div class="Identityinfo">
+          {% if user == user_object %}
+          <form
+          action="{% url 'studentgpaupdate'%}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form }}
+          <input class="matchButtons" type="submit" value="Change GPA" />
+        </form>
+        {%endif%}
+          <img
+            src="{{ user_object.studentprofile.profile_pic.url }}"
+            class="StudentPicture"
+          />
+          <h2 class="StudentName">{{user_object.first_name }} {{user_object.last_name}}</h2>
+          <!-- <p class="Headline">biology major at emory</p>
+          <div class="child"> GPA: {{user.studentprofile.gpa}} </div> -->
+          {% if user == user_object %}
+          <form
+          action="{% url 'studentpictureupdate'%}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form }}
+          <input class="matchButtons" type="submit" value="Change Picture" />
+        </form>
+        {%endif%}
+        </div>
+        <!-- Skills -->
+        <div
+          class="Identityinfo"
+          id="inputs"
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            margin-left: 2rem;
+          "
+        >
+          <h2 style="margin: 0;">Skills</h2>
+          <div class="tagscluster">
+            {% if not user.studentprofile.skill %}
+              <p style="font-size: smaller; color: var(--color-subtitle); margin-top: 0;">Nothing here!</p>
+            {%else%}
+            <!-- Split items in skill -->
+            {% for i in user_object.studentprofile.skill_list %}
+              <div class="child"> {{ i.strip }} </div>
+            {% endfor %}
+            {%endif%}
           </div>
         </div>
       </div>
