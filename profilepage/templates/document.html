@@ -13,7 +13,7 @@
         {% csrf_token %}
         {{ u_form.as_p }} 
         {{ p_form.as_p }}
-        <input id="uploader-preview-here-2060" class="simple-file-upload" type="hidden" data-maxFileSize="5" data-accepted=".pdf,.doc">
+        <input id="uploader-preview-here-2060" name="document_up" class="simple-file-upload" type="hidden" data-maxFileSize="5" data-accepted=".pdf,.doc">
         <button type="submit" class="btn btn-primary">Update</button>
       </fieldset>
     </form>

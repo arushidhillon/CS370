@@ -355,9 +355,11 @@ def labpictureupdate(request):
         if p_form.is_valid():
             instance = p_form.save(commit=False)
             messages.success(request, f'Your account has been updated!')
-            image_url = request.POST.get('Upload', None)
-            if image_url:
+            image_url = request.POST.get('profile_pic', None)
+            if image_url is not None :
                 instance.image_url = image_url
+            else:
+                instance.image_url = 'https://static.thenounproject.com/png/5034901-200.png'
             instance.save()
             return redirect('profile/' + myuser)
 
@@ -370,7 +372,7 @@ def labpictureupdate(request):
         context = {
             'p_form': p_form
         }
-        return render(request, 'editprofilepic.html', context)
+        return render(request, 'picture.html', context)
 
 @allowed_users(allowed_roles=['student'])
 def studentpictureupdate(request):
@@ -396,7 +398,7 @@ def studentpictureupdate(request):
         context = {
             'p_form': p_form
         }
-        return render(request, 'editprofilepic.html', context)
+        return render(request, 'picture.html', context)
 
 @allowed_users(allowed_roles=['lab'])
 def labskillsupdate(request):
@@ -531,10 +533,11 @@ def labdocupdate(request):
         # if request.FILES.get('profile_pic') is None:
         #     if pic_form.is_valid():
         if p_form.is_valid():
+            instance = p_form.save(commit=False)
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            doc_url = request.POST.get('dropped_images', None)
-            if doc_url:
+            doc_url = request.POST.get('document_url', None)
+            if doc_url is not None :
                 instance.doc_url = doc_url
             instance.save()
             return redirect(f'profile/'+myuser)  # Send back to profile  
@@ -545,7 +548,7 @@ def labdocupdate(request):
         context = {
             'p_form': p_form
         }
-        return render(request, 'editprofilepic.html', context)
+        return render(request, 'document.html', context)
 
 @allowed_users(allowed_roles=['student'])
 def studentdocupdate(request):
@@ -557,8 +560,13 @@ def studentdocupdate(request):
         # if request.FILES.get('profile_pic') is None:
         #     if pic_form.is_valid():
         if p_form.is_valid():
+            instance = p_form.save(commit=False)
             p_form.save()
             messages.success(request, f'Your account has been updated!')
+            doc_url = request.POST.get('document_url', None)
+            if doc_url is not None :
+                instance.doc_url = doc_url
+            instance.save()
             return redirect('profile/'+myuser)  # Send back to profile  
         
         else:
@@ -567,7 +575,7 @@ def studentdocupdate(request):
         context = {
             'p_form': p_form
         }
-        return render(request, 'editprofilepic.html', context)
+        return render(request, 'document.html', context)
 
 
 def profile(request, pk):
