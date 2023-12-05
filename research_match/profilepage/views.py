@@ -364,6 +364,7 @@ def labprofile(request):
         }
         return render(request, 'mentoredit.html', context)
 
+#allows for a lab to edit their name under the users model.
 def labnameupdate(request):
     if request.method == 'POST':
         p_form = Nameform(request.POST, 
@@ -383,7 +384,8 @@ def labnameupdate(request):
             'p_form': p_form
         }
         return render(request, 'editprofilepic.html', context)
-    
+
+#allows for a student to edit their name under the users model.
 def studentnameupdate(request):
     if request.method == 'POST':
         p_form = Nameform(request.POST, instance=request.user.studentprofile)
@@ -403,7 +405,8 @@ def studentnameupdate(request):
             'p_form': p_form
         }
         return render(request, 'editprofilepic.html', context)
-     
+
+#allows for a lab to edit their picture.
 @allowed_users(allowed_roles=['lab'])
 def labpictureupdate(request):
     if request.method == 'POST':
@@ -426,6 +429,7 @@ def labpictureupdate(request):
         }
         return render(request, 'picture.html', context)
 
+#allows for a student to edit their picture.
 def studentpictureupdate(request):
     if request.method == 'POST':
         p_form = Picform(request.POST, 
@@ -447,6 +451,7 @@ def studentpictureupdate(request):
         }
         return render(request, 'picture.html', context)
 
+#allows for a lab to edit their skills.
 def labskillsupdate(request):
     if request.method == 'POST':
         p_form = Skillform(request.POST, 
@@ -466,7 +471,8 @@ def labskillsupdate(request):
             'p_form': p_form
         }
         return render(request, 'editprofilepic.html', context)
-    
+
+#allows for a student to edit their skills.
 def studentskillsupdate(request):
     if request.method == 'POST':
         p_form = Skillform(request.POST, instance=request.user.studentprofile)
@@ -487,8 +493,7 @@ def studentskillsupdate(request):
         }
         return render(request, 'editprofilepic.html', context)
 
-
-
+#allows for a lab to edit their gpa.
 def labgpaupdate(request):
     if request.method == 'POST':
         p_form = GpaForm(request.POST, 
@@ -508,7 +513,8 @@ def labgpaupdate(request):
             'p_form': p_form
         }
         return render(request, 'editprofilepic.html', context)
-    
+
+#allows for a student to edit their gpa.
 def studentgpaupdate(request):
     if request.method == 'POST':
         p_form = GpaForm(request.POST, instance=request.user.studentprofile)
@@ -528,7 +534,8 @@ def studentgpaupdate(request):
             'p_form': p_form
         }
         return render(request, 'editprofilepic.html', context)
-    
+
+#allows for a lab to edit their courses.
 def labcourseupdate(request):
     if request.method == 'POST':
         p_form = Courseform(request.POST, 
@@ -548,7 +555,8 @@ def labcourseupdate(request):
             'p_form': p_form
         }
         return render(request, 'editprofilepic.html', context)
-    
+
+#allows for a student to edit their courses.
 def studentcourseupdate(request):
     if request.method == 'POST':
         p_form = Courseform(request.POST, 
@@ -568,7 +576,8 @@ def studentcourseupdate(request):
             'p_form': p_form
         }
         return render(request, 'editprofilepic.html', context)
-    
+
+#allows for a lab to edit their biography.
 def labbioupdate(request):
     if request.method == 'POST':
         p_form = BioForm(request.POST, 
@@ -589,6 +598,7 @@ def labbioupdate(request):
         }
         return render(request, 'editprofilepic.html', context)
 
+#allows for a student to edit their biography.
 def studentbioupdate(request):
     if request.method == 'POST':
         p_form = BioForm(request.POST, 
@@ -608,7 +618,8 @@ def studentbioupdate(request):
             'p_form': p_form
         }
         return render(request, 'editprofilepic.html', context)
-    
+
+#allows for a lab to edit their documents.
 def labdocupdate(request):
     if request.method == 'POST':
         p_form = Docform(request.POST, 
@@ -630,6 +641,7 @@ def labdocupdate(request):
         }
         return render(request, 'document.html', context)
 
+#allows for a student to edit their documents.
 def studentdocupdate(request):
     if request.method == 'POST':
         p_form = Docform(request.POST, 
@@ -650,112 +662,3 @@ def studentdocupdate(request):
             'p_form': p_form
         }
         return render(request, 'document.html', context)
-
-
-# def match(request):
-#     if request.method == 'POST':
-#         follower = request.POST['follower']
-#         user = request.POST['user']
-
-#         if Matched.objects.filter(follower=follower, user=user).first():
-#             delete_follower = Matched.objects.get(follower=follower, user=user)
-#             delete_follower.delete()
-#             return redirect('/profile/'+user)
-#         else:
-#             new_follower = Matched.objects.create(follower=follower, user=user)
-#             new_follower.save()
-#             return redirect('profile/'+user)
-
-#     else:
-#         return redirect('/')
-
-
-# def index(request):
-#     myuser = User.objects.get(email=request.user.email)
-#     user_profile = StudentProfile.objects.get(user=myuser)
-
-#     user_matching_list = []
-#     matchLabs = []
-
-#     user_matching = Matched.objects.filter(follower=request.user.username)
-
-
-#     # lab suggestion starts
-#     all_labs = User.objects.all()
-#     user_matching_all = []
-
-#     for user in user_matching_list:
-#         user_list = User.objects.get(username=user.user)
-#         user_matching_all.append(user_list)
-
-#     new_suggestions_list = [ x for x in list(all_labs) if (x not in list(user_matching_all()))]
-#     current_user = User.objects.filter(username=request.user.username)
-#     final_suggestions_list =[ x for x in list(new_suggestions_list) if (x not in list(current_user)) ]
-#     random.shuffle(final_suggestions_list)
-
-#     username_profile = []
-#     username_profile_list = []
-
-#     for users in final_suggestions_list:
-#         username_profile.append(users.id)
-
-#     for ids in username_profile:
-#         profile_lists = StudentProfile.objects.filter(id_user=ids)
-#         username_profile_list.append(profile_lists)
-
-#     suggestions_username_profile_lists = list(chain(*username_profile_list))
-
-#     return render(request, 'opportunities.html', {'user_profile': user_profile})
-
-# def skill(request):
-#   if request.POST:
-#     form = SkillForm(request.POST) #form= and forsm.save will create a new student object.
-#     if form.is_valid():
-#         form.save()
-#         return redirect('studenthomepage')
-#   return render(request, 'skill.html', {'form': SkillForm})
-
-
-# from .models import *
-# from django.shortcuts import render
-
-# def skillsview(request):
-#     data = StudentProfile.objects.all()
-#     if data: print('working')
-#     return render(request, 'skillsdisplay.html', {'data': data})
-
-# def get_skill(request):
-#     # if this is a POST request we need to process the form data
-#     if request.method == "POST":
-#         # create a form instance and populate it with data from the request:
-#         form = SkillForm(request.POST)
-#         # check whether it's valid:
-#         # if form.is_valid():
-#             # process the data in form.cleaned_data as required
-#             # ...
-#             # redirect to a new URL:
-#         skill_input = form.cleaned_data['skill']
-#         p = Student(skill_input)
-#         p.save()
-
-#             # return HttpResponseRedirect("/thanks/")
-
-#     # if a GET (or any other method) we'll create a blank form
-#     else:
-#         form = SkillForm()
-
-#     return render(request, "skill.html", {"form": form})
-
-
-# def get_skills(request):
-
-#     all_Skills = Student.objects.all() #for all the records 
-#     # one_data = userdetails.objects.get(pk=1) # 1 will return the first item change it depending on the data you want 
-#     allskills={
-       
-#       'skills':all_Skills,
-#     #   'one_data':one_data,
-    
-#     } 
-
-#     return render(request, 'StudentMain.html', allskills)

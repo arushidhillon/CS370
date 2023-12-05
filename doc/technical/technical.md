@@ -19,32 +19,31 @@ Our Django project, research_match, is separated into two different apps: profil
 ## Templates/HTML files
 
 - `activation_failed.html`: Activation Failed Page
-- `document.html`: 
-- `editprofilepic.html`:
+- `document.html`: Displays the form for users to add a document. 
+- `editprofilepic.html`: Displays the form for users to edit their profile name, skill, biography, and courses.
 - `email_confirmation.html`: Welcome and Confirmation Email to newly registered Users
 - `form_new_message_match`:
-- `get_skills.html`:
 - `home.html`: Home Page
-- `LabMain.html`: Lab Profile Page
+- `LabMain.html`: Lab Profile Page. Displays the profile page that the lab sees which includes name, skills, courses, etc.
 - `match_profile.html`:
 - `match.html`: All Students page for Labs and Opportunities Page for Students
 - `matchedstudents.html`:
-- `mentoredit.html`:
+- `mentoredit.html`: Displays the form for labs to edit all their information at once.
 - `navbar.html`: Navigation Bar
-- `picture.html`:
+- `picture.html`: Displays the form for users to add a picture.
 - `Settings.html`: Settings Page
-- `skill.html`:
-- `StudentMain.html`: Student Profile Page
+- `skill.html`: Displays the form for students to edit all their information at once.
+- `StudentMain.html`: Student Profile Page. Displays the profile page that the student sees which includes name, skills, courses, etc.
 - `test.html`:
 
-## Password-reset
-- `password_reset.html`: This allows users to enter email to reset password  
-- `password_reset_sent.html`: This displays text that email has been sent.  
-- `ChangePassword.html`:This allows users to reset their password. 
-- `password_reset_done.html`:This allows displays text that password is reset, and the user can log in.
+- ## /password-reset
+    - `password_reset.html`: This allows users to enter email to reset password  
+    - `password_reset_sent.html`: This displays text that email has been sent.  
+    - `ChangePassword.html`:This allows users to reset their password. 
+    - `password_reset_done.html`:This allows displays text that password is reset, and the user can log in.
 
-## Registration
-- `loginpage.html`: Login/Sign up Page
+- ## /registration
+    - `loginpage.html`: Login/Sign up Page
   
 ## Static
 -`style.css`:
@@ -67,6 +66,9 @@ Our Django project, research_match, is separated into two different apps: profil
 - `list_searchuser.html`: Displays the list of users as search results
 - `my_conversations.html`: Shows the user's conversations list
 - `notify_icon.html`: Notification icon component
+
+
+
 
 ## Static
 -`SSTYLE.css`: style for all html files in Inbox
