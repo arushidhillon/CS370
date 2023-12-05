@@ -55,6 +55,10 @@ urlpatterns = [
     path('unmatch/<str:pk>', views.unmatch, name='unmatch'),
     path('remove', views.remove, name='remove'),
     path('students/',views_search.students, name='students'),
+    path('labnameupdate', views.labnameupdate, name='labnameupdate'),
+    path('labgpaupdate', views.labgpaupdate, name='labgpaupdate'),
+    path('studentnameupdate', views.studentnameupdate, name='studentnameupdate'),
+    path('studentgpaupdate', views.studentgpaupdate, name='studentgpaupdate'),
     # URL for processing the search query and returning the results
     path('search-students/',views_search.search_students, name='search_students'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Ths stores the documents/images in a Media file

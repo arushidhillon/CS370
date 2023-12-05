@@ -83,3 +83,8 @@ class LabUpdateForm(forms.ModelForm):
             'skill': ('Separate skills with a comma.'),
             'course': ('Separate courses with a comma.'),
         }
+
+class GpaForm(forms.ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['gpa']

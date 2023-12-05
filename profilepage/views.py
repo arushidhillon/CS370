@@ -759,3 +759,43 @@ def new_message_match(request, recipient_id):
         'new_message_form': new_message_form
     }
     return render(request, 'form_newmessage_match.html', context)  # Render the new message form
+
+def labnameupdate(request):
+    if request.method == 'POST':
+        p_form = UserUpdateForm(request.POST, 
+                                   instance=request.user.studentprofile)
+       # if request.FILES.get('profile_pic') is None:
+    #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile 
+        
+        else:
+            p_form = UserUpdateForm(instance=request.user.studentprofile)
+
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)
+    
+def studentnameupdate(request):    
+    if request.method == 'POST':
+        p_form = UserUpdateForm(request.POST, instance=request.user.studentprofile)
+       # if request.FILES.get('profile_pic') is None:
+    #     if pic_form.is_valid():
+        if p_form.is_valid():
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            # TODO: apply to other forms
+            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
+        
+        else:
+            p_form = UserUpdateForm(instance=request.user.studentprofile)
+
+
+        context = {
+            'p_form': p_form
+        }
+        return render(request, 'editprofilepic.html', context)

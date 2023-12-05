@@ -44,8 +44,17 @@
             class="StudentPicture"
           />
           <h2 class="StudentName">{{user_object.first_name }} {{user_object.last_name}}</h2>
-          <!-- <p class="Headline">biology major at emory</p>
-          <div class="child"> GPA: {{user.studentprofile.gpa}} </div> -->
+          <div class="child"> GPA: {{user.studentprofile.gpa}} </div>
+          {% if user == user_object %}
+          <form
+          action="{% url 'studentnameupdate'%}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form }}
+          <input class="matchButtons" type="submit" value="Change Name" />
+        </form>
+        {%endif%}
           {% if user == user_object %}
           <form
           action="{% url 'studentpictureupdate'%}"
@@ -56,6 +65,15 @@
           <input class="matchButtons" type="submit" value="Change Picture" />
         </form>
         {%endif%}
+        {% if user == user_object %}
+          <form
+          action="{% url 'studentgpaupdate'%}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form }}
+          <input class="matchButtons" type="submit" value="Change GPA" />
+        </form>
         </div>
         <!-- Skills -->
         <div
