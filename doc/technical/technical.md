@@ -12,8 +12,59 @@ Our Django project, research_match, is separated into three different apps: prof
 - `forms.py` stores all form code.
 - `models.py` stores the StudentProfile model for labs and students.
 - `signals.py` sets up signal handlers for the User model. When a new User instance is created, it automatically creates a corresponding StudentProfile instance (create_profile function) and saves it (save_profile function).
-- `tokens.py`holds TokenGenerator. This creates a one time token that is generate for every newly created users, which is unique and static.
+- `tokens.py` holds TokenGenerator. This creates a one time token that is generate for every newly created users, which is unique and static.
 - `urls.py` holds the paths to matching functions in views.py
 - `views.py` holds views where views are Python functions or classes that receive a web request and return a web response. This file holds functions of user registration, log in, update user profile, matching/unmatching, and a matching algorithm.
+
+##Templates/HTML files
+
+  ##/password-reset
+    -`password_reset.html`: This allows users to enter email to reset password
+    -`password_reset_sent.html`: This displays text that email has been sent.
+    -`ChangePassword.html`:This allows users to reset their password.
+    -`password_reset_done.html`:This allows displays text that password is reset, and the user can log in.
+
+  ##/registration
+    -`loginpage.html`: Login/Sign up Page
+-`activation_failed.html`: Activation Failed Page
+-`document.html`:
+-`editprofilepic.html`:
+-`email_confirmation.html`: Welcome and Confirmation Email to newly registered Users
+-`form_new_message_match`:
+-`get_skills.html`:
+-`home.html`:
+-`LabMain.html`:
+-`match_profile.html`:
+-`match.html`:
+-`matchedstudents.html`:
+-`mentoredi.html`:
+-`navbar.html`:
+-`picture.html`:
+-`Settings.html`:
+-`skill.html`:
+-`StudentMain.html`:
+-`test.html`:
+
+##static
+-`style.css`:
+
+
+---
+## Inbox
+
+- `admin.py` registers InboxMessage and Conversation model
+- `forms.py` stores all form code.
+- `models.py` stores the InboxMessage and Conversation model for users.
+- `urls.py` holds the paths to matching functions in views.py
+- `views.py` holds views where views are Python functions or classes that receive a web request and return a web response. This file holds functions of searching for users and messaging them.
+
+---
+## Search
+- `admin.py` registers SearchQuery and SearchQueryAdmin model
+- `forms.py` stores all form code.
+- `models.py` stores the SearchQuery model for users.
+- `urls.py` holds the paths to matching functions in views.py
+- `views.py` holds views where views are Python functions or classes that receive a web request and return a web response.
+
 
 
