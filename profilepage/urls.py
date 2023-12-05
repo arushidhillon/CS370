@@ -15,9 +15,8 @@ urlpatterns = [
     path('lablogin', views.lablogin, name="lablogin"),
     path('signout', views.signout, name ="signout"),
     path('activate/<uidb64>/<token>', views.activate, name="activate"),
-    path('studenthomepage/', views.studenthomepage, name='studenthomepage'),
-    path('labhomepage/',views.labhomepage, name='labhomepage'),
 
+    #These urls use Django's built in Reset Password function. Here we only change the templates used.
     path('reset_password', auth_views.PasswordResetView.as_view(
         template_name="password-reset/password_reset.html"
         ), name="reset_password"),
@@ -32,7 +31,6 @@ urlpatterns = [
         ), name="password_reset_complete"),
 
     path('MatchAlgorithm/', views.MatchAlgorithm, name='MatchAlgorithm'),
-    path('students/', views.students, name='students'),
     path('settings/', views.settings, name='settings'),
     path('matches/<str:pk>', views.matches, name='matches'),
     path('matchedstudents/<str:pk>', views.matchedstudents, name='matchedstudents'),
@@ -59,7 +57,4 @@ urlpatterns = [
     path('students/',views_search.students, name='students'),
     # URL for processing the search query and returning the results
     path('search-students/',views_search.search_students, name='search_students'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    # path('skill/', views.skill, name='skill'),
-    # path('skillsview/', views.skillsview, name='skillsview'),
-    #path('skillsdisplay/', views.skillsdisplay, name='skillsdisplay'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Ths stores the documents/images in a Media file
