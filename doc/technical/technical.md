@@ -1,4 +1,4 @@
-### Technical Documentation For Developers
+# Technical Documentation For Developers
 
 ## Folder Structure
 Our Django project, research_match, is separated into three different apps: profilepage, inbox, and search. Each of the Frontend is stored in the static and template folders of each app. The static folder holds css files, and the template folder holds html files.
