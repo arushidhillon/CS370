@@ -1,0 +1,57 @@
+<div class="gridBox-match" id="match_lab">
+    <div class="top-row">
+      <div class="Identityinfo">
+      <img
+        src="{{ profile.image_url }}"
+        class="StudentPicture"
+      />
+      <h2 class="StudentName">{{profile.labname}}</h2>
+      <p class="Headline">{{profile.get_email}}</p>
+      <!-- Buttons and Description -->
+    </div>
+    <!-- Skills -->
+    <div
+      class="Identityinfo"
+      id="inputs"
+    >
+      <h2 style="margin-top: 0;">Skills Required</h2>
+      <div class="tagscluster">
+        
+        <!-- Split items in skill -->
+        {% for i in profile.skill_list %}
+          <div class="child"> {{ i.strip }} </div>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- Completed Courses -->
+    <div
+      class="Identityinfo"
+      id="inputs">
+      <h2 style="margin-top: 0;">Courses Required</h2>
+        <div class="tagscluster">
+        <!-- Split items in courses -->
+        {% for i in profile.course_list %}
+          <div class="child"> {{ i.strip }} </div>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="buttons-desc">
+        <!-- Buttons -->
+        <div class="opportunities-buttons">
+        {% comment %} This button leads a user to a lab's profile {% endcomment %}
+          <button><a href="{% url 'profile' profile.get_user_name %}">View Profile</a></button>
+          {% comment %} This button leads the user to a new or old conversation with a lab. {% endcomment %}
+          <button><a href="{% url 'inbox-newmessage-match' profile.id %}" style="cursor: pointer;">Send Message</a></button>
+          {% comment %} This button allows the user to match with a lab. {% endcomment %}
+        {% if unmatch %}
+            <button><a href="{% url 'unmatch' profile.get_user_name %}">Unmatch</a></button>   
+        {%else%}
+            <button><a href="{% url  'match' profile.get_user_name %}">Match</a></button>
+        {%endif%}
+        
+        </div>
+        <p>{{profile.biography}}</p>
+    </div>
+    </div> 
+</div>
