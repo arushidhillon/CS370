@@ -59,14 +59,14 @@ Our Django project, research_match, is separated into two different apps: profil
 - `views.py` holds views where views are Python functions or classes that receive a web request and return a web response. This file holds functions of searching for users and messaging them.
 
 ## Templates/HTML files
-- `conversation.html`:
-- `form_newmessage.html`:
-- `form_newreply.html`:
-- `form_searchuser.html`:
-- `inbox.html`:
-- `list_searchuser.html`:
-- `my_conversations.html`:
-- `notify_icon.html`:
+- `conversation.html`: Interface for displaying a specific conversation thread
+- `form_newmessage.html`: Form for creating and sending a new message
+- `form_newreply.html`: Form for replying to an existing message in a conversation
+- `form_searchuser.html`: Search form for finding users within the platform
+- `inbox.html`: Main inbox view, showing a list of all conversations
+- `list_searchuser.html`: Displays the list of users as search results
+- `my_conversations.html`: Shows the user's conversations list
+- `notify_icon.html`: Notification icon component
 
 ## static
 -`SSTYLE.css`: style for all html files in Inbox
