@@ -18,14 +18,14 @@ Our Django project, research_match, is separated into three different apps: prof
 
 ## Templates/HTML files
 
-  ## /password-reset
+- ## /password-reset
     - `password_reset.html`: This allows users to enter email to reset password  
     - `password_reset_sent.html`: This displays text that email has been sent.  
     - `ChangePassword.html`:This allows users to reset their password. 
     - `password_reset_done.html`:This allows displays text that password is reset, and the user can log in.
 
-  ## /registration3
-  - `loginpage.html`: Login/Sign up Page
+- ## /registration
+    - `loginpage.html`: Login/Sign up Page
 - `activation_failed.html`: Activation Failed Page
 - `document.html`:
 - `editprofilepic.html`:
