@@ -72,12 +72,6 @@ Our Django project, research_match, is separated into three different apps: prof
 -`SSTYLE.css`: style for all html files in Inbox
 
 ---
-## Search
-- `admin.py` registers SearchQuery and SearchQueryAdmin model
-- `forms.py` stores all form code.
-- `models.py` stores the SearchQuery model for users.
-- `urls.py` holds the paths to matching functions in views.py
-- `views.py` holds views where views are Python functions or classes that receive a web request and return a web response.
 
 ## media/documents
 In the database, this is where the documents will be stored.
