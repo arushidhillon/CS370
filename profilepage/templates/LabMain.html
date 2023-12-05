@@ -172,12 +172,12 @@
       <!-- Documents -->
       <div class="gridBox" id="about">
         <h2>My Files</h2>
-        {% if not user_profile.studentprofile.document_url %}
+        {% if not user_profile.document_url %}
           <p style="font-size: smaller; color: var(--color-subtitle); margin-top: 0;">Nothing here!</p>
         {%else%}
-        <p>Document Name: {{user_object.studentprofile.document_name}}</p>
+        <p>Document Name: {{user_profile.document_name}}</p>
         <div style="display: flex; flex-direction: column; gap: 0.25rem;">
-          {% if user_object.studentprofile.document_url %}
+          {% if user_profile.document_url %}
         <button class="matchButtons" style="width: 15rem;"><a href="{{ user_profile.document_url }}" target="_blank">Download Document</a></button>
         {%endif%}
         {%endif%}
