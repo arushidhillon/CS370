@@ -18,14 +18,6 @@ Our Django project, research_match, is separated into three different apps: prof
 
 ## Templates/HTML files
 
-- ## /password-reset
-    - `password_reset.html`: This allows users to enter email to reset password  
-    - `password_reset_sent.html`: This displays text that email has been sent.  
-    - `ChangePassword.html`:This allows users to reset their password. 
-    - `password_reset_done.html`:This allows displays text that password is reset, and the user can log in.
-
-- ## /registration
-    - `loginpage.html`: Login/Sign up Page
 - `activation_failed.html`: Activation Failed Page
 - `document.html`:
 - `editprofilepic.html`:
@@ -45,9 +37,17 @@ Our Django project, research_match, is separated into three different apps: prof
 - `StudentMain.html`:
 - `test.html`:
 
+- ## /password-reset
+    - `password_reset.html`: This allows users to enter email to reset password  
+    - `password_reset_sent.html`: This displays text that email has been sent.  
+    - `ChangePassword.html`:This allows users to reset their password. 
+    - `password_reset_done.html`:This allows displays text that password is reset, and the user can log in.
+
+- ## /registration
+    - `loginpage.html`: Login/Sign up Page
+  
 ## static
 -`style.css`:
-
 
 ---
 ## Inbox
@@ -79,5 +79,10 @@ Our Django project, research_match, is separated into three different apps: prof
 - `urls.py` holds the paths to matching functions in views.py
 - `views.py` holds views where views are Python functions or classes that receive a web request and return a web response.
 
+## media/documents
+In the database, this is where the documents will be stored.
+
+## media/profile_pics
+In the database, this is where the profile pictures of the users will be stored.
 
 
