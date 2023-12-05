@@ -110,13 +110,6 @@ def signup(request):
         messages.success(request,
                          "Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
 
-        # Welcome Email
-        # subject = "Welcome to Research Match Login!"
-        # message = "Hello " + myuser.first_name + "! \n" + "Welcome to Research Match! \n Thank you for visiting our website. We hope you find the research opportunities you're looking for. \n We have also sent you a confirmation email, please confirm your email address in order to activate your account. This may be located in the spam folder. \n\n Thank you, \n Deadline Tech"
-        # from_email = 'deadline.tech@research-match.com'
-        # to_list = [myuser.email]
-        # send_mail(subject, message, from_email, to_list, fail_silently=True)
-
         # Email Address Confirmation and Welcome Email
 
         current_site = get_current_site(request)
