@@ -168,7 +168,7 @@
       <!-- Documents -->
       <div class="gridBox" id="about">
         <h2>My Files</h2>
-        {% if not user_profile.biography %}
+        {% if not user_profile.studentprofile.document_url %}
           <p style="font-size: smaller; color: var(--color-subtitle); margin-top: 0;">Nothing here!</p>
         {%else%}
         <p>Document Name: {{user_object.studentprofile.document_name}}</p>
