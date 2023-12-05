@@ -46,7 +46,7 @@ Our Django project, research_match, is separated into two different apps: profil
     - `loginpage.html`: Login/Sign up Page
   
 ## Static
--`style.css`:
+-`style.css`: Styling over all html pages
 
 ---
 ## Inbox
