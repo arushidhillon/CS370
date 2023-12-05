@@ -285,7 +285,7 @@ main {
   background-color: var(--bg-color);
   border: 3px solid transparent;
   border-color: var(--color-bg-1);
-  border-radius: 1rem; /*linear-gradient(45deg, var(--color-accent), var(--color-bg-1)) 1;*/
+  border-radius: 1rem;
   cursor: pointer;
   background:white;
 }
@@ -459,7 +459,9 @@ main {
   grid-row: 1;
 }
 
-/* Trying out new style */
+/* Trying out new style: wrapper goes around all
+  elements to keep the margins even throughout the 
+  entire website */
 .wrapper {
   display: grid;
   padding-top: 5rem;
@@ -468,6 +470,12 @@ main {
   gap: 2rem;
   margin-bottom: 5rem;
 }
+
+/* Profile boxes, used in profile, opportunities, and matches */
+/* gridBox is composed of two flexboxes, one on top and one on 
+the bottom. Inside the top box there are three additional boxes
+and on the bottom theres two. Keep the flex-directions as is or the
+gridBox will break! */
 .gridBox {
   display: flex;
   gap: 1rem;
@@ -493,7 +501,7 @@ main {
   overflow: hidden;
   background-color: white; 
 }
-.top-row {
+.top-row {  
   display: flex;
   gap: 1rem;
   flex-direction: row;
@@ -527,7 +535,6 @@ main {
 .tags-wrapper p {
   margin: 0;
 }
-
 textarea {
   width: 100%;
   min-width: 30rem;
@@ -538,23 +545,6 @@ textarea {
   border-radius: 4px;
   background-color: #f8f8f8;
   resize: none;
-}
-
-/* Settings */
-.settings {
-  display: grid;
-  margin-right: 5rem;
-  margin-left: 5rem;
-}
-.settings-wrapper {
-  margin-left: 2rem;
-  margin-right: 2rem;
-  display: grid;
-  gap: 1rem;
-}
-
-.settings-wrapper #notifications {
-  display: none;
 }
 
 /* Landing Page */
@@ -591,26 +581,6 @@ a {
   text-decoration: none;
   color: black;
 }
-/* Parallax scrolling effect */
-.parallax {
-  z-index: -1;
-  background-image: url("img_parallax.jpg");
-
-  /* Set a specific height */
-  min-height: 500px;
-
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
- /* Turn off parallax scrolling for all tablets and phones. Increase/decrease the pixels if needed */
-@media only screen and (max-device-width: 1366px) {
-  .parallax {
-    background-attachment: scroll;
-  }
-} 
 
 /* Opportunities */
 .buttons-desc {
@@ -622,6 +592,7 @@ a {
   margin-top: 0;
 }
 
+/* Bottom box inside gridBox */
 .opportunities-buttons {
   display: flex;
   flex-direction: column;
@@ -643,6 +614,7 @@ a {
   color: white;
 }
 
+/* Separate styling for buttons in send message from opportunities page*/
 .send-message-buttons button {
   width: 10rem;
   font-family: "Poppins", sans-serif;
