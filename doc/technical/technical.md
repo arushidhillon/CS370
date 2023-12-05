@@ -37,13 +37,13 @@ Our Django project, research_match, is separated into two different apps: profil
 - `StudentMain.html`: Student Profile Page
 - `test.html`:
 
-- ## /password-reset
+- ## Password-reset
     - `password_reset.html`: This allows users to enter email to reset password  
     - `password_reset_sent.html`: This displays text that email has been sent.  
     - `ChangePassword.html`:This allows users to reset their password. 
     - `password_reset_done.html`:This allows displays text that password is reset, and the user can log in.
 
-- ## /registration
+- ## Registration
     - `loginpage.html`: Login/Sign up Page
   
 ## Static
