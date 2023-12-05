@@ -37,15 +37,15 @@ Our Django project, research_match, is separated into three different apps: prof
 - `match_profile.html`:
 - `match.html`:
 - `matchedstudents.html`:
-- `mentoredi.html`:
-- `navbar.html`:
+- `mentoredit.html`:
+- `navbar.html`: Navigation Bar Page
 - `picture.html`:
 - `Settings.html`:
 - `skill.html`:
 - `StudentMain.html`:
 - `test.html`:
 
-##static
+## static
 -`style.css`:
 
 
@@ -57,6 +57,19 @@ Our Django project, research_match, is separated into three different apps: prof
 - `models.py` stores the InboxMessage and Conversation model for users.
 - `urls.py` holds the paths to matching functions in views.py
 - `views.py` holds views where views are Python functions or classes that receive a web request and return a web response. This file holds functions of searching for users and messaging them.
+
+## Templates/HTML files
+- `conversation.html`:
+- `form_newmessage.html`:
+- `form_newreply.html`:
+- `form_searchuser.html`:
+- `inbox.html`:
+- `list_searchuser.html`:
+- `my_conversations.html`:
+- `notify_icon.html`:
+
+## static
+-`SSTYLE.css`: style for all html files in Inbox
 
 ---
 ## Search
