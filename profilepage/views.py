@@ -761,6 +761,7 @@ def new_message_match(request, recipient_id):
     return render(request, 'form_newmessage_match.html', context)  # Render the new message form
 
 def labnameupdate(request):
+    myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
         p_form = UserUpdateForm(request.POST, 
                                    instance=request.user.studentprofile)
@@ -769,7 +770,7 @@ def labnameupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile 
+            return redirect(f'profile/'+myuser)  # Send back to profile 
         
         else:
             p_form = UserUpdateForm(instance=request.user.studentprofile)
@@ -781,6 +782,7 @@ def labnameupdate(request):
         return render(request, 'editprofilepic.html', context)
     
 def studentnameupdate(request):    
+    myuser = request.user.studentprofile.get_user_name()
     if request.method == 'POST':
         p_form = UserUpdateForm(request.POST, instance=request.user.studentprofile)
        # if request.FILES.get('profile_pic') is None:
@@ -789,7 +791,7 @@ def studentnameupdate(request):
             p_form.save()
             messages.success(request, f'Your account has been updated!')
             # TODO: apply to other forms
-            return redirect(f'profile/{request.user.studentprofile.user.email.split("@")[0]}')  # Send back to profile
+            return redirect(f'profile/'+myuser)  # Send back to profile
         
         else:
             p_form = UserUpdateForm(instance=request.user.studentprofile)
