@@ -34,7 +34,7 @@ class ProfileUpdateForm(forms.ModelForm):
 class Picform(forms.ModelForm):
     class Meta:
         model = StudentProfile
-        fields = ['picture_name','image_url']
+        fields = ['picture_name']
         # have to add a text input field for it to work
 
 
@@ -71,7 +71,7 @@ class GpaForm(forms.ModelForm):
 class Docform(forms.ModelForm):
     class Meta:
         model = StudentProfile
-        fields = ['document_name','document_url']
+        fields = ['document_name']
         # have to add a text input field for it to work
 
 
