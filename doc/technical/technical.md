@@ -22,19 +22,19 @@ Our Django project, research_match, is separated into two different apps: profil
 - `document.html`: Displays the form for users to add a document. 
 - `editprofilepic.html`: Displays the form for users to edit their profile name, skill, biography, and courses.
 - `email_confirmation.html`: Welcome and Confirmation Email to newly registered Users
-- `form_new_message_match`:
+- `form_new_message_match`: New Messages Page
 - `home.html`: Home Page
 - `LabMain.html`: Lab Profile Page. Displays the profile page that the lab sees which includes name, skills, courses, etc.
-- `match_profile.html`:
+- `match_profile.html`: Lab Profile if shown under matches.html
 - `match.html`: All Students page for Labs and Opportunities Page for Students
-- `matchedstudents.html`:
+- `matchedstudents.html`: Matched Students Page
 - `mentoredit.html`: Displays the form for labs to edit all their information at once.
 - `navbar.html`: Navigation Bar
 - `picture.html`: Displays the form for users to add a picture.
 - `Settings.html`: Settings Page
 - `skill.html`: Displays the form for students to edit all their information at once.
 - `StudentMain.html`: Student Profile Page. Displays the profile page that the student sees which includes name, skills, courses, etc.
-- `test.html`:
+- `test.html`: Inbox page
 
 - ## /password-reset
     - `password_reset.html`: This allows users to enter email to reset password  
