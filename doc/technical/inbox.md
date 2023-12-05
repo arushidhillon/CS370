@@ -18,7 +18,7 @@ The inbox function is integrated within the Django application, following the Mo
    - `created`: Timestamp of message creation.
    - `body_decrypted`: A method to decrypt the message body for viewing.
 
-2. **Conversation**: Manages conversation threads.
+2. **Conversation**: Manages conversation threads. Key fields include: 
    - `id`: A unique identifier for each conversation.
    - `participants`: A ManyToManyField linking to the User model. This field represents the users who are part of the conversation,
      allowing for group conversations.
