@@ -565,7 +565,7 @@ def studentdocupdate(request):
         context = {
             'p_form': p_form
         }
-        return render(request, 'editprofilepic.html', context)
+        return render(request, 'document.html', context)
 
 #This is the profile page of a certain user according to its username. This can be accessed by either a lab or a student.
 def profile(request, pk):
