@@ -154,8 +154,9 @@
           <p style="font-size: smaller; color: var(--color-subtitle); margin-top: 0;">Nothing here!</p>
         {%else%}
         <p>Document Name: {{user_object.studentprofile.documents}}</p>
+        <div style="display: flex; flex-direction: column; gap: 0.25rem;">
         {% if user_object.studentprofile.documents %}
-        <a href="{{ user_object.studentprofile.document_url }}" target="_blank">Download Document</a>
+        <button class="matchButtons" style="width: 15rem;"><a href="{{ user_object.studentprofile.document_url }}" target="_blank">Download Document</a></button>
         {%endif%}
         {%endif%}
         <br>
@@ -166,9 +167,10 @@
         enctype="multipart/form-data"
       >
         {% csrf_token %} {{ form }}
-        <input class="matchButtons" type="submit" value="Change Document" />
+        <input class="matchButtons" style="width: 15rem;" type="submit" value="Change Document" />
       </form>
       {%endif%}
+      </div>
       </div>
 
       <!-- Courses -->
@@ -202,7 +204,7 @@
           enctype="multipart/form-data"
         >
           {% csrf_token %} {{ form }}
-          <input class="matchButtons" type="submit" id="addSkill" value="Edit Profile" />
+          <input class="matchButtons" type="submit" id="addSkill" value="Edit Profile"/>
         </form>
       </div>
 {%endif%}
