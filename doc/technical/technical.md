@@ -46,7 +46,7 @@ Our Django project, research_match, is separated into two different apps: profil
 - ## /registration
     - `loginpage.html`: Login/Sign up Page
   
-## static
+## Static
 -`style.css`:
 
 ---
@@ -68,15 +68,15 @@ Our Django project, research_match, is separated into two different apps: profil
 - `my_conversations.html`: Shows the user's conversations list
 - `notify_icon.html`: Notification icon component
 
-## static
+## Static
 -`SSTYLE.css`: style for all html files in Inbox
 
 ---
 
-## media/documents
+## Media/Documents
 In the database, this is where the documents will be stored.
 
-## media/profile_pics
+## Media/Profile_pics
 In the database, this is where the profile pictures of the users will be stored.
 
 
