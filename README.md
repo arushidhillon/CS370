@@ -64,9 +64,9 @@ Currently, our website is only functional on computers/laptops.
 ---
 
 **Member E: Arushi Dhillon**  
-*Major:*       
-*Skills:*       
-*Interests:*       
+*Major:* Chemistry and Computer Science   
+*Skills:* Java, Matlab, R      
+*Interests:* Video Games, Crocheting, Reading       
 
 ---
 
