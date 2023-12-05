@@ -16,15 +16,15 @@ Our Django project, research_match, is separated into three different apps: prof
 - `urls.py` holds the paths to matching functions in views.py
 - `views.py` holds views where views are Python functions or classes that receive a web request and return a web response. This file holds functions of user registration, log in, update user profile, matching/unmatching, and a matching algorithm.
 
-##Templates/HTML files
+## Templates/HTML files
 
   ##/password-reset
-    -`password_reset.html`: This allows users to enter email to reset password
-    -`password_reset_sent.html`: This displays text that email has been sent.
-    -`ChangePassword.html`:This allows users to reset their password.
+    -`password_reset.html`: This allows users to enter email to reset password  
+    -`password_reset_sent.html`: This displays text that email has been sent.  
+    -`ChangePassword.html`:This allows users to reset their password. 
     -`password_reset_done.html`:This allows displays text that password is reset, and the user can log in.
 
-  ##/registration
+  ## /registration
     -`loginpage.html`: Login/Sign up Page
 -`activation_failed.html`: Activation Failed Page
 -`document.html`:
