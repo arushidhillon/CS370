@@ -8,7 +8,7 @@ The Emory Research is a group project aimed at creating a sophisticated and user
 
 Here's a video that demos all of the website's implemented features:
 
-[Watch the Video Here!](https://youtu.be/FFZR9zwCU6w?si=7ozS_mBXAK9PvD-O)
+[![Watch Video Here](https://img.youtube.com/vi/FFZR9zwCU6w/0.jpg)](https://www.youtube.com/watch?v=FFZR9zwCU6w)
 
 ### How-To
 - [ ] First, register your account as a student or lab with your emory email in the sign up page.
