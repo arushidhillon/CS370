@@ -32,5 +32,6 @@ If you haven't created an account, please go back to the [readme](https://github
 - Adrian Valencia
 - Arushi Dhillon
 - Aditi Dhillon
+- Daniel Lee
 
 ## Thank you for choosing Research Match!
