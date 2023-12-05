@@ -18,7 +18,12 @@ The inbox function is integrated within the Django application, following the Mo
    - `created`: Timestamp of message creation.
    - `body_decrypted`: A method to decrypt the message body for viewing.
 
-2. **Conversation**: Manages conversation threads. 
+2. **Conversation**: Manages conversation threads.
+   - `id`: A unique identifier for each conversation.
+   - `participants`: A ManyToManyField linking to the User model. This field represents the users who are part of the conversation,
+     allowing for group conversations.
+   - `lastmessage_created`: A DateTimeField that records when the last message in the conversation was created.
+   - `is_seen`: A BooleanField that indicates whether the conversation has been seen by the participants.
 
 ### Views
 1. **get_all_users**: Retrieves all users to facilitate new conversations. Renders a user list in the 'users.html' template.
