@@ -61,8 +61,6 @@
           {% csrf_token %} {{ form }}
           <input class="matchButtons" type="submit" value="Change Picture" />
         </form>
-        
-          {% if user == user_object %}
         {%endif%}
         {% if user == user_object %}
         <form
@@ -72,7 +70,6 @@
       >
         {% csrf_token %} {{ form }}
         <input class="matchButtons" type="submit" value="Change GPA" />
-        
       </form>
       {%endif%}
         </div>
