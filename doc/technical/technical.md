@@ -69,7 +69,7 @@ Our Django project, research_match, is separated into two different apps: profil
 - `notify_icon.html`: Notification icon component
 
 ## Static
--`SSTYLE.css`: style for all html files in Inbox
+    -`SSTYLE.css`: style for all html files in Inbox
 
 ---
 
