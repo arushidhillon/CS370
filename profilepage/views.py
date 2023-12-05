@@ -110,13 +110,6 @@ def signup(request):
         messages.success(request,
                          "Your Account has been successfully created. We have sent you a confirmation email, please confirm your email in order to activate your account. You may need to look in the spam folder.")
 
-        # Welcome Email
-        # subject = "Welcome to Research Match Login!"
-        # message = "Hello " + myuser.first_name + "! \n" + "Welcome to Research Match! \n Thank you for visiting our website. We hope you find the research opportunities you're looking for. \n We have also sent you a confirmation email, please confirm your email address in order to activate your account. This may be located in the spam folder. \n\n Thank you, \n Deadline Tech"
-        # from_email = 'deadline.tech@research-match.com'
-        # to_list = [myuser.email]
-        # send_mail(subject, message, from_email, to_list, fail_silently=True)
-
         # Email Address Confirmation and Welcome Email
 
         current_site = get_current_site(request)
@@ -231,22 +224,17 @@ def lablogin(request):
 
     return render(request, "registration/loginpage.html")
 
-
+#This function logs out the user.
 def signout(request):
     logout(request)
     messages.success(request, "Logged Out Successfully!")
     return redirect('signup')
 
 
-@allowed_users(allowed_roles=['student'])
-def studenthomepage(request):
-    return render(request, "StudentMain.html")
-
-
 def settings(request):
     return render(request, "Settings.html")
 
-
+# This function allows students to see all their matches in matches.html
 @allowed_users(allowed_roles=['student'])
 def matches(request, pk):
     pk += '@emory.edu'
@@ -260,19 +248,10 @@ def matches(request, pk):
     }
     return render(request, 'matches.html', context)
 
+
 @allowed_users(allowed_roles=['lab'])
 def labpicedit(request):
     return render(request, "picture.html")
-
-
-@allowed_users(allowed_roles=['lab'])
-def labhomepage(request):
-    return render(request, "LabMain.html")
-
-
-@allowed_users(allowed_roles=['lab'])
-def students(request):
-    return render(request, 'students.html')
 
 
 @allowed_users(allowed_roles=['lab'])
@@ -579,9 +558,9 @@ def studentdocupdate(request):
         context = {
             'p_form': p_form
         }
-        return render(request, 'editprofilepic.html', context)
+        return render(request, 'document.html', context)
 
-
+#This is the profile page of a certain user according to its username. This can be accessed by either a lab or a student.
 def profile(request, pk):
     pk += '@emory.edu'
     user_object = User.objects.get(username=pk)
@@ -591,7 +570,7 @@ def profile(request, pk):
         'user_object': user_object,
         'user_profile': user_profile,
     }
-
+    #depending on if the user is a lab or a student, this if statement will take them to the right html file.
     if user_profile.is_student:
         return render(request, 'StudentMain.html', context)
     elif user_profile.is_lab:
@@ -599,12 +578,13 @@ def profile(request, pk):
     else:
         return render(request, 'home.html', context)
 
-# Creates match between a student and a lab and vice versa.
+# Creates match between a student and a lab and vice versa. This functions like a follower/following system.
 def match(request, pk):
     pk += '@emory.edu'
     user_object = User.objects.get(username=pk)
     user_profile = StudentProfile.objects.get(user=user_object)
 
+    #This allows matching only between students and labs. No student can match another student and vice versa.
     if (user_profile.is_lab and request.user.studentprofile.is_student) or (user_profile.is_student and request.user.studentprofile.is_lab):
         request.user.studentprofile.matches.add(user_profile)
         request.user.studentprofile.save()
@@ -622,6 +602,7 @@ def unmatch(request, pk):
     user_object = User.objects.get(username=pk)
     user_profile = StudentProfile.objects.get(user=user_object)
 
+    # This removes specific user from matches
     request.user.studentprofile.matches.remove(user_profile)
     request.user.studentprofile.save()
 
@@ -659,7 +640,7 @@ def MatchAlgorithm(request):
         'user_profile': user_profile,
         'final_suggestions_list': final_suggestions_list,
         }
-        return render(request, 'opportunities.html', context)
+        return render(request, 'match.html', context)
     else:
         lab_req_c = all_users.filter(course__in=matching_by_course)
         lab_req_s = all_users.filter(skill__in=matching_by_skill)
@@ -673,7 +654,7 @@ def MatchAlgorithm(request):
         'final_suggestions_list': final_suggestions_list,
         }
 
-        return render(request, 'students.html', context)
+        return render(request, 'match.html', context)
     
 # This function allows a lab to delete all it's matches in order to start over as a new lab.
 @allowed_users(allowed_roles=['lab'])

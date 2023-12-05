@@ -1,5 +1,6 @@
 from django.urls import path
-from views import *
+from search import views
+from search.views import students, search_students
 
 urlpatterns = [
     # URL for rendering the search page
