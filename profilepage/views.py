@@ -241,7 +241,7 @@ def signout(request):
 def settings(request):
     return render(request, "Settings.html")
 
-
+# This function allows students to see all their matches in matches.html
 @allowed_users(allowed_roles=['student'])
 def matches(request, pk):
     pk += '@emory.edu'
@@ -255,19 +255,10 @@ def matches(request, pk):
     }
     return render(request, 'matches.html', context)
 
+
 @allowed_users(allowed_roles=['lab'])
 def labpicedit(request):
     return render(request, "picture.html")
-
-
-@allowed_users(allowed_roles=['lab'])
-def labhomepage(request):
-    return render(request, "LabMain.html")
-
-
-@allowed_users(allowed_roles=['lab'])
-def students(request):
-    return render(request, 'students.html')
 
 
 @allowed_users(allowed_roles=['lab'])
@@ -594,7 +585,7 @@ def profile(request, pk):
     else:
         return render(request, 'home.html', context)
 
-# Creates match between a student and a lab and vice versa.
+# Creates match between a student and a lab and vice versa. This functions like a follower/following system.
 def match(request, pk):
     pk += '@emory.edu'
     user_object = User.objects.get(username=pk)
