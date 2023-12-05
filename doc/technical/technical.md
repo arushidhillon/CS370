@@ -19,22 +19,22 @@ Our Django project, research_match, is separated into three different apps: prof
 ## Templates/HTML files
 
 - `activation_failed.html`: Activation Failed Page
-- `document.html`:
+- `document.html`: 
 - `editprofilepic.html`:
 - `email_confirmation.html`: Welcome and Confirmation Email to newly registered Users
 - `form_new_message_match`:
 - `get_skills.html`:
-- `home.html`:
-- `LabMain.html`:
+- `home.html`: Home Page
+- `LabMain.html`: Lab Profile Page
 - `match_profile.html`:
-- `match.html`:
+- `match.html`: All Students page for Labs and Opportunities Page for Students
 - `matchedstudents.html`:
 - `mentoredit.html`:
-- `navbar.html`: Navigation Bar Page
+- `navbar.html`: Navigation Bar
 - `picture.html`:
-- `Settings.html`:
+- `Settings.html`: Settings Page
 - `skill.html`:
-- `StudentMain.html`:
+- `StudentMain.html`: Student Profile Page
 - `test.html`:
 
 - ## /password-reset
