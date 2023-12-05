@@ -1,7 +1,7 @@
 # README: Student Search Function for Lab Users
 
 ## Introduction
-This document details the student search function in a Django web application, designed for lab users to search for and view student profiles.
+This document details the student search function in our Django web application, designed for lab users to search for and view student profiles.
 
 ## Dependencies
 - **Django**: The primary Python web framework used for development.
@@ -23,12 +23,11 @@ Represents individual student profiles. Key fields include:
 
 ### 2. `search_students`
 - **Purpose**: Handles dynamic searching of student profiles.
-- **Access Control**: Intended for 'lab' role users (implied from `views.py`).
+- **Access Control**: Intended for 'lab' role users.
 - **Functionality**:
   - **Profile Retrieval**: Fetches all entries from the `StudentProfile` model.
   - **Search Filter**: Applies user-input criteria to filter student profiles.
   - **Dynamic Updating**: Employs HTMX for responsive updating of search results.
-- **Error Handling**: Raises HTTP 404 error for requests not made via HTMX.
 
 ## Security and Permissions
 - The search functionality is secured by role-based access control, limiting usage to authorized 'lab' users. This ensures that student data is accessed responsibly and confidentially.
