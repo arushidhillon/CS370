@@ -5,7 +5,7 @@
 ### Setting Up Profile
 If you haven't created an account, please go back to the [readme](https://github.com/arushidhillon/CS370#readme).
 
-1. Go to [Research Match](Coming soon).
+1. Go to [Research Match](https://research-match-c2c44e3d1621.herokuapp.com/).
    
 3. Fill in your details on your profile.
 <img width="600" alt="image" src="">
