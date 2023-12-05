@@ -8,7 +8,7 @@ The Emory Research is a group project aimed at creating a sophisticated and user
 
 Here's a video that demos all of the website's implemented features:
 
-[Coming Soon!]
+[![Watch Video Here](https://img.youtube.com/vi/FFZR9zwCU6w/0.jpg)](https://www.youtube.com/watch?v=FFZR9zwCU6w)
 
 ### How-To
 - [ ] First, register your account as a student or lab with your emory email in the sign up page.
@@ -64,13 +64,13 @@ Currently, our website is only functional on computers/laptops.
 ---
 
 **Member E: Arushi Dhillon**  
-*Major:* Chemistry and Computer Science   
-*Skills:* Java, Matlab, R      
-*Interests:* Video Games, Crocheting, Reading       
+*Major:*       
+*Skills:*       
+*Interests:*       
 
 ---
 
 **Member F: Aditi Dhillon**  
-*Major:*       
-*Skills:*       
-*Interests:*       
+*Major:* Chemistry with Computer Science Minor      
+*Skills:* Java, Python, CSS, HTML, C      
+*Interests:* Fostering Kittens, Skin Care, Travel      
