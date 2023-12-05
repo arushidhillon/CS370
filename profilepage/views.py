@@ -683,7 +683,7 @@ def labgpaupdate(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect(f'profile'+myuser)  # Send back to profile
+            return redirect(f'profile/'+myuser)  # Send back to profile
 
         else:
             p_form = GpaForm(instance=request.user.studentprofile)
@@ -704,7 +704,7 @@ def studentgpaupdate(request):
             p_form.save()
             messages.success(request, f'Your account has been updated!')
             # TODO: apply to other forms
-            return redirect(f'profile'+myuser)  # Send back to profile
+            return redirect(f'profile/'+myuser)  # Send back to profile
 
         else:
             p_form = GpaForm(instance=request.user.studentprofile)
