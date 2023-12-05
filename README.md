@@ -71,6 +71,6 @@ Currently, our website is only functional on computers/laptops.
 ---
 
 **Member F: Aditi Dhillon**  
-*Major:*       
-*Skills:*       
-*Interests:*       
+*Major:* Chemistry with Computer Science Minor      
+*Skills:* Java, Python, CSS, HTML, C      
+*Interests:* Fostering Kittens, Skin Care, Travel      
