@@ -19,31 +19,31 @@ Our Django project, research_match, is separated into three different apps: prof
 ## Templates/HTML files
 
   ## /password-reset
-    -`password_reset.html`: This allows users to enter email to reset password  
-    -`password_reset_sent.html`: This displays text that email has been sent.  
-    -`ChangePassword.html`:This allows users to reset their password. 
-    -`password_reset_done.html`:This allows displays text that password is reset, and the user can log in.
+    - `password_reset.html`: This allows users to enter email to reset password  
+    - `password_reset_sent.html`: This displays text that email has been sent.  
+    - `ChangePassword.html`:This allows users to reset their password. 
+    - `password_reset_done.html`:This allows displays text that password is reset, and the user can log in.
 
   ## /registration3
-  -`loginpage.html`: Login/Sign up Page
--`activation_failed.html`: Activation Failed Page
--`document.html`:
--`editprofilepic.html`:
--`email_confirmation.html`: Welcome and Confirmation Email to newly registered Users
--`form_new_message_match`:
--`get_skills.html`:
--`home.html`:
--`LabMain.html`:
--`match_profile.html`:
--`match.html`:
--`matchedstudents.html`:
--`mentoredi.html`:
--`navbar.html`:
--`picture.html`:
--`Settings.html`:
--`skill.html`:
--`StudentMain.html`:
--`test.html`:
+  - `loginpage.html`: Login/Sign up Page
+- `activation_failed.html`: Activation Failed Page
+- `document.html`:
+- `editprofilepic.html`:
+- `email_confirmation.html`: Welcome and Confirmation Email to newly registered Users
+- `form_new_message_match`:
+- `get_skills.html`:
+- `home.html`:
+- `LabMain.html`:
+- `match_profile.html`:
+- `match.html`:
+- `matchedstudents.html`:
+- `mentoredi.html`:
+- `navbar.html`:
+- `picture.html`:
+- `Settings.html`:
+- `skill.html`:
+- `StudentMain.html`:
+- `test.html`:
 
 ##static
 -`style.css`:
