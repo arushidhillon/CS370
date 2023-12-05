@@ -1,7 +1,7 @@
 # README: Inbox Function 
 
 ## Introduction
-This document provides a comprehensive overview of the inbox function developed in Django, enabling students and principal investigators to communicate securely within a web platform.
+This document provides a comprehensive overview of the inbox function developed in Django, enabling students and principal investigators to communicate securely within our web platform.
 
 ## Dependencies
 - **Django**: The primary Python web framework used.
