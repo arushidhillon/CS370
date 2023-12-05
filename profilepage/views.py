@@ -519,7 +519,7 @@ def labdocupdate(request):
             instance = p_form.save(commit=False)
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            doc_url = request.POST.get('document_url', None)
+            doc_url = request.POST.get('document_up', None)
             if doc_url is not None :
                 instance.doc_url = doc_url
             instance.save()
@@ -546,9 +546,9 @@ def studentdocupdate(request):
             instance = p_form.save(commit=False)
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            doc_url = request.POST.get('document_url', None)
+            doc_url = request.POST.get('document_up', None)
             if doc_url is not None :
-                instance.doc_url = doc_url
+                instance.document_url = doc_url
             instance.save()
             return redirect('profile/'+myuser)  # Send back to profile  
         
