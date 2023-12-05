@@ -28,7 +28,7 @@ For a more detailed user guide, go [here](https://github.com/arushidhillon/CS370
 ### Website Link 
 Currently, our website is only functional on computers/laptops.
 
-[Coming Soon!]
+[Research Match](https://research-match-c2c44e3d1621.herokuapp.com/)
 
 ### Team Members
 **Current Members:** Yareli Gutierrez, Devin Gee, Adrian Valencia, Daniel Lee, Arushi Dhillon, Aditi Dhillon
