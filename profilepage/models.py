@@ -20,6 +20,21 @@ class StudentProfile(models.Model):
     course=models.CharField(max_length=255)
     biography=models.CharField(max_length=500)
     labname=models.CharField(max_length=255)
+    BACKGROUND = [
+        ("S","Student"),
+        ("M","Mentor")
+    ]
+    background = models.CharField(max_length=1, choices=BACKGROUND)
+    SUBJECT = [
+        ("BIOL", "Biology"),
+        ("CHEM", "Chemistry"),
+        ("PHYS", "Physics"),
+        ("MATH", "Mathematics"),
+        ("COMP", "Computer Science"),
+        ("PSYC", "Psychology"),
+        ("HIST", "History"),
+        ("OTHE", "Other")
+    ]
 
     # Splits Student Profile tags with comma for display in profile page
     def skill_list(self):
